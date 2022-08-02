@@ -8,6 +8,7 @@ public class ProductDTO {
 	private String productCategory;
 	private String saveFileName;
 	private String originalFileName;
+	
 	private int categorySize;
 	private String categoryColor;
 
