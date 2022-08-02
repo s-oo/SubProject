@@ -8,9 +8,49 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Product list</title>
+
+<link rel="stylesheet" type="text/css" href="<%=cp %>/product/data/style.css"/>
+
 </head>
 <body>
+
+<div id="content" align="center">
+	<div id="productList">
+		<ul class="listView">
+			<c:forEach var="dto" items="${lists }">
+				<li id="listBox" class="item" style="list-style: none;width: 300px;display: inline-block;">
+					<div class="box_wrap" style="display: inline-block;font-size: 10pt;color: #555555;">
+						<div class="image">
+							<a href="">
+								<%-- <img src="${imagePath }/${dto.saveFileName }" width="300px"> --%>
+								<img src="<%=cp %>/product/image/${dto.saveFileName }" width="300px"/>
+							</a>
+						</div>
+						<div class="productName">
+							<a href="">
+								<span>${dto.productName }</span>
+							</a>	
+						</div>
+						<div class="productPrice">
+							<ul>
+								<li style="list-style: none;">
+									<span>${dto.productPrice }</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</li>
+			</c:forEach>
+		</ul>
+	</div>
+	
+	<div id="paging">
+		<p>
+			<c:if test="${dataCount!=0 }">${pageIndexList }</c:if>
+		</p>
+	</div>
+</div>
 
 </body>
 </html>

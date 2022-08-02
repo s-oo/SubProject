@@ -65,9 +65,8 @@ public class MyPage {
 
 			if (page == currentPage) {
 
-				sb.append("<font color=\"Fuchsia\">" + page + "</font>&nbsp;");
+				sb.append("<font color=\"#484848\">" + page + "</font>&nbsp;");
 				// <font color="Fuchsia">9</font>
-
 			} else {
 
 				sb.append("<a href=\"" + listUrl + "pageNum=" + page + "\">" + page + "</a>&nbsp;");

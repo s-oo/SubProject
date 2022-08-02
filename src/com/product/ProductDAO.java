@@ -155,7 +155,7 @@ public class ProductDAO {
 			sql = "select * from (";
 			sql+= "select rownum rnum,data.* from(";
 			sql+= "select productNum,productName,productPrice,productCategory,";
-			sql+= "saveFileName,originalFileName,categorySize,categoryColor ";
+			sql+= "saveFileName,originalFileName ";
 			sql+= "from product where " + searchKey;
 			sql+= " like ? order by productNum desc) data) ";
 			sql+= "where rnum>=? and rnum<=?";
@@ -178,8 +178,6 @@ public class ProductDAO {
 				dto.setProductCategory(rs.getString("productCategory"));
 				dto.setSaveFileName(rs.getString("saveFileName"));
 				dto.setOriginalFileName(rs.getString("originalFileName"));
-				dto.setCategorySize(rs.getInt("categorySize"));
-				dto.setCategoryColor(rs.getString("categoryColor"));
 				
 				lists.add(dto);
 				
