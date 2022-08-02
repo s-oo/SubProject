@@ -8,6 +8,10 @@ public class OrdersDTO {
 	private int productQuantity;
 	private String progress;
 
+	private String productName;
+	private int productPrice;
+	private String saveFileName;
+
 	public int getOrderNum() {
 		return orderNum;
 	}
@@ -46,6 +50,30 @@ public class OrdersDTO {
 
 	public void setProgress(String progress) {
 		this.progress = progress;
+	}
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	public int getProductPrice() {
+		return productPrice;
+	}
+
+	public void setProductPrice(int productPrice) {
+		this.productPrice = productPrice;
+	}
+
+	public String getSaveFileName() {
+		return saveFileName;
+	}
+
+	public void setSaveFileName(String saveFileName) {
+		this.saveFileName = saveFileName;
 	}
 
 }

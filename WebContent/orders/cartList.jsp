@@ -12,5 +12,13 @@
 </head>
 <body>
 
+${dto.productNum }<br/>
+${dto.productName }<br/>
+${dto.productQuantity }<br/>
+${dto.productPrice }<br/>
+
+
+
+
 </body>
 </html>
