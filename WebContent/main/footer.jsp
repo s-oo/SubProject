@@ -10,15 +10,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	
-</body>
+
+<link rel="stylesheet" type="text/css" href="footer.css">
+
+<script type="text/javascript" src=".js"></script>
+
+</head>
+<body>
+
 </html>
