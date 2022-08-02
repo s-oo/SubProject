@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<table>></table>
+<table></table>
 
 </body>
 </html>
