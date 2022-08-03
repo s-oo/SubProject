@@ -23,7 +23,7 @@
 	<div>
 		<input type="button" value=" 장바구니 " class="btn2" onclick="location.href='<%=cp%>/shop/orders/cartList.do';"/> 
 		<input type="reset" value=" 회원정보수정 " class="btn2" onclick="location.href='<%=cp%>/shop/member/update.do';"/> 
-		<input type="button" value=" 로그아웃 " class="btn2" onclick="location.href='<%=cp%>/shop/member/main.do';"/>
+		<input type="button" value=" 로그아웃 " class="btn2" onclick="location.href='<%=cp%>/shop/main/main.do';"/>
 		<input type="button" value=" 로그인하기 " class="btn2" onclick="location.href='<%=cp%>/shop/member/login.do';"/> 
 	</div>
 </body>

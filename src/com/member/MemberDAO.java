@@ -132,7 +132,8 @@ public class MemberDAO {
 		String sql;
 
 		try {
-			sql = "select * from member where userid=?";
+			sql = "select userId,userPwd,userName,userGender,to_char(userBirth,'YYYY-MM-DD') userBirth,";
+			sql+= "address1,address2,address3,address4,userEmail,userTel from member where userId=?";
 
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
