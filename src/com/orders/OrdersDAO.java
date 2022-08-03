@@ -134,7 +134,7 @@ public class OrdersDAO {
 
 		try {
 
-			sql = "SELECT O.*, PRODUCTNAME, PRODUCTPRICE, SAVEFILENAME ";
+			sql = "SELECT ORDERNUM, USERID, P.PRODUCTNUM, PRODUCTQUANTITY, PROGRESS, PRODUCTNAME, PRODUCTPRICE, SAVEFILENAME ";
 			sql += "FROM ORDERS O, PRODUCT P ";
 			sql += "WHERE O.PRODUCTNUM = P.PRODUCTNUM AND USERID = ? AND PROGRESS = ?";
 
@@ -143,7 +143,7 @@ public class OrdersDAO {
 			pstmt.setString(2, progress);
 
 			rs = pstmt.executeQuery();
-
+			
 			while (rs.next()) {
 
 				OrdersDTO dto = new OrdersDTO();
@@ -152,7 +152,7 @@ public class OrdersDAO {
 				dto.setProductNum(rs.getInt("PRODUCTNUM"));
 				dto.setProductQuantity(rs.getInt("PRODUCTQUANTITY"));
 				dto.setProgress(rs.getString("PROGRESS"));
-				
+
 				dto.setProductName(rs.getString("PRODUCTNAME"));
 				dto.setProductPrice(rs.getInt("PRODUCTPRICE"));
 				dto.setSaveFileName(rs.getString("SAVEFILENAME"));
