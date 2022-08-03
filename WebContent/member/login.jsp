@@ -42,7 +42,7 @@
 <br><br>
 
 <form action="" method="post" name="myForm">
-<table width="260" cellpadding="0" cellspacing="0" style="margin: auto;"> 
+<table width="400" cellpadding="0" cellspacing="0" style="margin: auto;"> 
 
 <tr height="2"><td colspan="2" bgcolor="#cccccc"></td></tr>
 
@@ -55,7 +55,7 @@
 <tr height="25">
 	<td width="80" bgcolor="#e6e4e6" align="center">아이디</td>
 	<td width="120" style="padding-left: 5px;">
-	<input type="text" name="userId" maxlength="10" size="15"/>
+	<input width="150" type="text" name="userId" maxlength="10" size="15"/>
 	</td> 
 </tr>
 
@@ -76,21 +76,21 @@
 	<input type="button" value=" 취소 " class="btn2" onclick="location='<%=cp%>';"/>
 	<input type="button" value=" 회원정보수정 " class="btn2" onclick="location='<%=cp%>/shop/member/update.do';"/>
 	</td>
-</tr>
-
-
-
-
-
-
+	
+	
+	<tr height="30">
+	<td colspan="2" align="center">
+	<font color="red"><b> ${message }</b></font>
+	</td>
+</tr>	
 </table>
+
 <table style="margin: auto;">
 <tr height="2"><td colspan="2" bgcolor="#cccccc"></td></tr>
 
 	<tr height="30">
-		<td colspan="2" align="center">
-			<a href="<%=cp%>/shop/member/find.do" ></a>
-		</td>
+		<td colspan="2" align="center">	
+	<a href="<%=cp%>/shop/member/find.do" ><b>${searchpw }</b></a> 
 	</tr>
 <tr height="2"><td colspan="2" bgcolor="#cccccc"></td></tr>	
 </table>
