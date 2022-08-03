@@ -15,64 +15,75 @@
 </head>
 <body background="">
 						<div>
-<img src="./img/사진.jpg" width="700px;" height="700px;">
+<img src="<%=cp%>/main/img/사진.jpg" width="700px;" height="700px;">
 </div>
 <div id="header" class="txt">
 	<div id="header_bg"></div>
 	<div class="cboth">
 		<div class="left_area">
-			<a href="#none" id="cate_btn" class="on"><b>PRODUCT</b></a>
+			<b>PRODUCT</b>
 			<div id="cate_wrap" class="on">
 				<div id="cate_inner" class="xans-element- xans-layout xans-layout-category">
-					<a href="/product/list.html?cate_no=44" class="xans-record-">ALL</a><br/>
-					<a href="/product/list.html?cate_no=47" class="xans-record-">OUTER</a><br/>
-					<a href="/product/list.html?cate_no=49" class="xans-record-">TOP</a><br/>
-					<a href="/product/list.html?cate_no=50" class="xans-record-">PANTS</a><br/>
+					<a href="/sup/shop/product/list.do" class="xans-record-">ALL</a><br/>
+					<a href="/sup/shop/product/list.do?productCategory=outer" class="xans-record-">OUTER</a><br/>
+					<a href="/sup/shop/product/list.do?productCategory=top" class="xans-record-">TOP</a><br/>
+					<a href="/sup/shop/product/list.do?productCategory=pants" class="xans-record-">PANTS</a><br/>
 				</div>
 			</div>
 			<br/><br/>
 			
-			<a href="/shopinfo/company.html"><b>IDENTITY</b></a>
+			<b>borad</b>
 			<div id="cate_wrap" class="on">
 				<div id="cate_inner" class="xans-element- xans-layout xans-layout-category">
 				
-				<a href="/sub/shop/boards/list.do">Q/A</a><br/>
-				<a href="/contact.html?no=72&amp;board_no=2">NOTICE</a><br/>
-				<a href="/contact.html?no=72&amp;board_no=2">CONTACT</a><br/>
+				<a href="/sub/shop/boards/list.do?community=QnA">Q/A</a><br/>
+				<a href="/sub/shop/boards/list.do?community=notice">NOTICE</a><br/>
+				<a href="//sub/shop/boards/list.do?community=review">REVIEW</a><br/>
 				
 				</div>
 			</div>
 			<br/><br/>
 			
-			<a href="#none" id="search_btn">SEARCH</a>
+			<!-- <a href="#none" id="search_btn">SEARCH</a>
 			<form id="searchBarForm" name="" action="/product/search.html"
 				method="get" target="_self" enctype="multipart/form-data">
 				<input id="banner_action" name="banner_action" value="" type="hidden">
 				<div id="search_inner" class="xans-element- xans-layout xans-layout-searchheader ">
-					<!-- $product_page=/product/detail.html $category_page=/product/list.html -->
-					<!-- <fieldset>////보류////
+					$product_page=/product/detail.html $category_page=/product/list.html
+					<fieldset>////보류////
 						<legend>검색</legend>
 						<label class="ePlaceholder" title="">
 							<input id="keyword" name="keyword" fw-filter="" fw-label="검색어" fw-msg=""
 							class="inputTypeText" placeholder=""
 							onmousedown="SEARCH_BANNER.clickSearchForm(this)" value="" type="text">
 						</label>
-					</fieldset> -->
+					</fieldset>
 				</div>
-			</form>
+			</form> -->
+			
+			
 		</div>
 		
 
 	
 		
 		<div class="right_area">
-			<a href="/sub/shop/member/login.do" class="xans-element- xans-layout xans-layout-statelogoff ">LOGIN</a>&nbsp;&nbsp;
-			<a href="/sub/shop/member/join.do" class="xans-element- xans-layout xans-layout-statelogoff ">JOIN</a>&nbsp;&nbsp;
-			<a href="/order/basket.html" class="xans-element- xans-layout xans-layout-statelogoff ">BAG
-				<span class="count displaynone">
+			<c:choose>
+				<c:when test="${empty userId }">
+					<a href="/sub/shop/member/login.do" class="xans-element- xans-layout xans-layout-statelogoff ">LOGIN</a>&nbsp;&nbsp;
+					<a href="/sub/shop/member/join.do" class="xans-element- xans-layout xans-layout-statelogoff ">JOIN</a>&nbsp;&nbsp;
+				</c:when>
+				<c:when test="${!empty userId }">
+					<a href="/sub/shop/member/mypage.do" class="xans-element- xans-layout xans-layout-statelogoff ">MYPAGE</a>&nbsp;&nbsp;
+					<a href="/sub/shop/member/logout_ok.do" class="xans-element- xans-layout xans-layout-statelogoff ">LOGOUT</a>&nbsp;&nbsp;
+					<a href="/sub/shop/orders/cartList.do" class="xans-element- xans-layout xans-layout-statelogoff ">BAG</a>
+				</c:when>
+			</c:choose>
+			
+				<!-- <span class="count displaynone">
 					<span></span>
-				</span>
-			</a>
+				</span> -->
+		
 		</div>
 		<!-- //right_area -->
 	</div>
