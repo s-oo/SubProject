@@ -17,28 +17,24 @@
 	function sendIt() {
 		var f = document.searchForm;
 		
-		f.action = "<%=cp%>/shop/boards/list.do"
+		f.action = "<%=cp%>/shop/list.do"
 		f.submit();
 		
 	}
 </script>
 
 </head>
-<body bgcolor="green">
-
-
+<body bgcolor="blue">
 
 <div id="header" class="txt">
 	<div id="header_bg"></div>
 	<div class="cboth">
 		<div class="left_area">
-		
-			<a href="/sub/main/main.jsp" id="cate_btn" class="on"><b>Main</b></a>
+			<a href="#none" id="cate_btn" class="on"><b>Review</b></a>
 			<div id="cate_wrap" class="on">
 				<div id="cate_inner" class="xans-element- xans-layout xans-layout-category">
-					<a href="/sub/boards/Review.jsp" class="xans-record-">Q/A</a><br/>
-					<a href="/sub/boards/Review.jsp" class="xans-record-">REVIEW</a><br/>
-					<a href="/product/list.html?cate_no=47" class="xans-record-">NOTICE</a><br/>
+					<a href="/sub/boards/list.jsp" class="xans-record-">Q/A</a><br/>
+					<a href="/sub/boards/notice.jsp" class="xans-record-">NOTICE</a><br/>
 				
 
 				</div>
@@ -50,10 +46,10 @@
 	<div id="bbsList">
 	
 	
-
 	
 	
-		<div id="bbsList_title"><a> </a> QA    </div>
+	
+		<div id="bbsList_title"><a> </a> 상품 REVIEW    </div>
 			
 
 			
@@ -71,7 +67,7 @@
 					</form>
 				</div>
 				<div id="rightHeader">
-					<input type="button" value="글올리기" class="btn2" onclick="javascript:location.href='<%=cp%>/shop/boards/write.do';">
+					<input type="button" value="글올리기" class="btn2" onclick="javascript:location.href='<%=cp%>/shop/write.do';">
 				</div>
 			</div>
 	
@@ -100,10 +96,9 @@
 			</div>
 			<div id="footer">
 			
-				<div>
+							<div>
 <img src="./img/사진.jpg">
 </div>
-			
 				<p>
 					<c:if test="${dataCount != 0 }">
 						${pageIndexList }
