@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 import com.util.DBConn;
 
 public class MemberServlet extends HttpServlet {
@@ -71,7 +72,10 @@ public class MemberServlet extends HttpServlet {
 				dto.setUserName(req.getParameter("userName"));
 				dto.setUserGender(req.getParameter("userGender"));
 				dto.setUserBirth(req.getParameter("userBirth"));
-				dto.setUserAddress(req.getParameter("userAddress"));
+				dto.setAddress1(req.getParameter("address1"));
+				dto.setAddress2(req.getParameter("address2"));
+				dto.setAddress3(req.getParameter("address3"));
+				dto.setAddress4(req.getParameter("address4"));
 				dto.setUserEmail(req.getParameter("userEmail"));
 				dto.setUserTel(req.getParameter("userTel"));
 				
@@ -81,7 +85,7 @@ public class MemberServlet extends HttpServlet {
 				if (result == 0) {
 
 					out.print("<script>");
-					out.print("alert('가입실패');");
+					out.print("alert('로그인실패');");
 					out.print("history.back()");
 					out.print("</script>");
 
@@ -110,14 +114,21 @@ public class MemberServlet extends HttpServlet {
 
 					out.print("<script>");
 					out.print("alert('로그인실패');");
-					out.print("history.back()");
+					out.print("location.href='cp/shop/member/login.do';");
 					out.print("</script>");
-
+					
+					req.setAttribute("message", "아이디 또는 패스워드를 정확히 입력하세요.");
+					req.setAttribute("searchpw", "비밀번호 찾기");
+					url = "/shop/member/login.do";
+					forward(req, resp, url);
+					return;
+					
+					
 				} else {
 
 					req.getSession().setAttribute("userId", userId);
 
-					url = cp ;
+					url = cp + "/shop/main/main.do";
 					resp.sendRedirect(url);
 
 				}
@@ -127,11 +138,10 @@ public class MemberServlet extends HttpServlet {
 
 				out.print("<script>");
 				out.print("alert('잘못된 접근 : 로그인을 해주세요');");
-				out.print("locasion:href='" + cp + "/member/login.jsp';");
+				out.print("location.href='cp/shop/member/login.do';");
 				out.print("</script>");
 				
 			}
-
 		// 로그인 상태
 		} else {
 
@@ -143,7 +153,7 @@ public class MemberServlet extends HttpServlet {
 				session.removeAttribute("userId");
 				session.invalidate();
 
-				url = cp + "/shop/member/main.do";
+				url = cp + "/shop/main/main.do";
 				resp.sendRedirect(url);
 
 			// 회원정보 화면
@@ -159,6 +169,7 @@ public class MemberServlet extends HttpServlet {
 			// 회원정보수정 화면
 			} else if (uri.indexOf("update.do") != -1) {
 
+				
 				MemberDTO dto = dao.getReadData(userId);
 
 				req.setAttribute("dto", dto);
@@ -167,21 +178,26 @@ public class MemberServlet extends HttpServlet {
 				forward(req, resp, url);
 
 			// 회원정보수정 실행
-			} else if (uri.indexOf("update_ok.do") != -1) {
+			} else if (uri.indexOf("update_ok.do")!=-1) {
 
+				
 				MemberDTO dto = dao.getReadData(userId);
-
+				
+				dto.setUserId(userId);
 				dto.setUserPwd(req.getParameter("userPwd"));
 				dto.setUserName(req.getParameter("userName"));
 				dto.setUserGender(req.getParameter("userGender"));
 				dto.setUserBirth(req.getParameter("userBirth"));
-				dto.setUserAddress(req.getParameter("userAddress"));
+				dto.setAddress1(req.getParameter("address1"));
+				dto.setAddress2(req.getParameter("address2"));
+				dto.setAddress3(req.getParameter("address3"));
+				dto.setAddress4(req.getParameter("address4"));
 				dto.setUserEmail(req.getParameter("userEmail"));
 				dto.setUserTel(req.getParameter("userTel"));				
 				
 				dao.update(dto);
 
-				url = cp + "/shop/member/myPage.do";
+				url = cp + "/shop/main/main.do";
 				resp.sendRedirect(url);
 
 			// 탈퇴 실행
@@ -195,7 +211,7 @@ public class MemberServlet extends HttpServlet {
 				session.removeAttribute("userId");
 				session.invalidate();
 
-				url = cp + "/shop/member/main.do";
+				url = cp + "/shop/main/main.do";
 				resp.sendRedirect(url);
 
 			// 오류
@@ -210,6 +226,8 @@ public class MemberServlet extends HttpServlet {
 
 		}
 
-	}
+		}
 
 }
+
+
