@@ -16,7 +16,7 @@ public class OrdersDAO {
 		this.conn = conn;
 	}
 
-	public int getMaxnum() {
+	public int getMaxNum() {
 
 		int result = 0;
 		PreparedStatement pstmt;
@@ -42,7 +42,7 @@ public class OrdersDAO {
 
 	}
 
-	public int insetData(OrdersDTO dto) {
+	public int insertData(OrdersDTO dto) {
 
 		int result = 0;
 		PreparedStatement pstmt;

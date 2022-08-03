@@ -11,14 +11,19 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-${dto.productNum }<br/>
-${dto.productName }<br/>
-${dto.productQuantity }<br/>
-${dto.productPrice }<br/>
-
-
-
-
+	<c:set var="sum" value="0"/>
+	<c:forEach var="dto" items="${list }">
+		productNum : ${dto.productNum }<br/>
+		productName : ${dto.productName }<br/>
+		productQuantity : ${dto.productQuantity }<br/>
+		productPrice : ${dto.productPrice }<br/>
+		<c:set var="sum" value="${sum } + ${dto.productQuantity } * ${dto.productPrice }"/>
+	</c:forEach><br/>
+	<c:if test="${sum != 0}">
+		sum : ${sum }
+	</c:if>
+	<c:if test="${list == null }">
+		등록된 상품이 없음
+	</c:if>
 </body>
 </html>
