@@ -68,7 +68,7 @@ public class BoardsServlet extends HttpServlet {
 			
 			
 			
-		url = "/boards/write.jsp";
+		url = "/member/login.jsp";
 			forward(req, resp, url);
 
 		} else if (uri.indexOf("write_ok.do") != -1) {
