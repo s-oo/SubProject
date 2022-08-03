@@ -71,7 +71,10 @@ public class MemberServlet extends HttpServlet {
 				dto.setUserName(req.getParameter("userName"));
 				dto.setUserGender(req.getParameter("userGender"));
 				dto.setUserBirth(req.getParameter("userBirth"));
-				dto.setUserAddress(req.getParameter("userAddress"));
+				dto.setAddress1(req.getParameter("address1"));
+				dto.setAddress2(req.getParameter("address2"));
+				dto.setAddress3(req.getParameter("address3"));
+				dto.setAddress4(req.getParameter("address4"));
 				dto.setUserEmail(req.getParameter("userEmail"));
 				dto.setUserTel(req.getParameter("userTel"));
 				
@@ -117,7 +120,7 @@ public class MemberServlet extends HttpServlet {
 
 					req.getSession().setAttribute("userId", userId);
 
-					url = cp ;
+					url = cp + "/shop/main/main.do";
 					resp.sendRedirect(url);
 
 				}
@@ -171,11 +174,17 @@ public class MemberServlet extends HttpServlet {
 
 				MemberDTO dto = dao.getReadData(userId);
 
+				
+				
+				dto.setUserId(userId);
 				dto.setUserPwd(req.getParameter("userPwd"));
 				dto.setUserName(req.getParameter("userName"));
 				dto.setUserGender(req.getParameter("userGender"));
 				dto.setUserBirth(req.getParameter("userBirth"));
-				dto.setUserAddress(req.getParameter("userAddress"));
+				dto.setAddress1(req.getParameter("address1"));
+				dto.setAddress2(req.getParameter("address2"));
+				dto.setAddress3(req.getParameter("address3"));
+				dto.setAddress4(req.getParameter("address4"));
 				dto.setUserEmail(req.getParameter("userEmail"));
 				dto.setUserTel(req.getParameter("userTel"));				
 				
