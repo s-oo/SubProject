@@ -66,8 +66,8 @@
 	
 		
 		<div class="right_area">
-			<a href="/member/login.html" class="xans-element- xans-layout xans-layout-statelogoff ">LOGIN</a>&nbsp;&nbsp;
-			<a href="/member/join.html" class="xans-element- xans-layout xans-layout-statelogoff ">JOIN</a>&nbsp;&nbsp;
+			<a href="/sub/shop/member/login.do" class="xans-element- xans-layout xans-layout-statelogoff ">LOGIN</a>&nbsp;&nbsp;
+			<a href="/sub/shop/member/join.do" class="xans-element- xans-layout xans-layout-statelogoff ">JOIN</a>&nbsp;&nbsp;
 			<a href="/order/basket.html" class="xans-element- xans-layout xans-layout-statelogoff ">BAG
 				<span class="count displaynone">
 					<span></span>
