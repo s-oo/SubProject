@@ -1,111 +1,123 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-     
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  </head>
-  <body>
-  <!--   <img src="./img/1.jfif" style="width: 25%; min-width: 25%;" /> -->
-  <nav class="navbar navbar-dark bg-dark fixed-top">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#"><p>홍과함께 쇼핑몰</p></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">ALL</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">로그인</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">BOARD</a>
-          </li>
-          
-           <li class="nav-item">
-            <a class="nav-link" href="#">주문내역</a>
-          </li>
-          
-           <li class="nav-item">
-            <a class="nav-link" href="#">장바구니</a>
-          </li>
-          
-           <li class="nav-item">
-            <a class="nav-link" href="#">찜목록</a>
-          </li>
-          
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              MEN
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark">
-              <li><a class="dropdown-item" href="#">CROP SLIM</a></li>
-              <li><a class="dropdown-item" href="#">CROP STARAIGHT</a></li>
-              <li><a class="dropdown-item" href="#">REGULAR STRAIGHT</a></li>
-              <li><a class="dropdown-item" href="#">BOOTS CUT</a></li>
-              <li><a class="dropdown-item" href="#">LOOSE TAPERED</a></li>
-              <li><a class="dropdown-item" href="#">WIDE STRAIGHT</a></li>
-              <li><a class="dropdown-item" href="#">NEW STRAIGHT</a></li>
-              <li><a class="dropdown-item" href="#">INTERNATIONAL DENIM</a></li>
-                <li><a class="dropdown-item" href="#">OUTER/INNER</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="#">할인 상품</a></li>
-            </ul>
-          </li>
-          
-          <!--  -->
-          
-          
-          
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              WOMEN
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark">
-              <li><a class="dropdown-item" href="#">옷</a></li>
-             <li><a class="dropdown-item" href="#">CROP SLIM</a></li>
-              <li><a class="dropdown-item" href="#">CROP STARAIGHT</a></li>
-              <li><a class="dropdown-item" href="#">REGULAR STRAIGHT</a></li>
-              <li><a class="dropdown-item" href="#">BOOTS CUT</a></li>
-              <li><a class="dropdown-item" href="#">LOOSE TAPERED</a></li>
-              <li><a class="dropdown-item" href="#">WIDE STRAIGHT</a></li>
-              <li><a class="dropdown-item" href="#">NEW STRAIGHT</a></li>
-              <li><a class="dropdown-item" href="#">INTERNATIONAL DENIM</a></li>
-                <li><a class="dropdown-item" href="#">OUTER/INNER</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="#">할인상품</a></li>
-            </ul>
-          </li>
-        </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-success" type="submit">Search</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</nav>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Main Page</title>
+
+<link rel="stylesheet" type="text/css" href="<%=cp %>/main/css/stylemain.css"/>
+
+</head>
+<body background="">
+						<div>
+<img src="<%=cp%>/main/img/사진.jpg" width="700px;" height="700px;">
+</div>
+<div id="header" class="txt">
+	<div id="header_bg"></div>
+	<div class="cboth">
+		<div class="left_area">
+			<b>PRODUCT</b>
+			<div id="cate_wrap" class="on">
+				<div id="cate_inner" class="xans-element- xans-layout xans-layout-category">
+					<a href="/sup/shop/product/list.do" class="xans-record-">ALL</a><br/>
+					<a href="/sup/shop/product/list.do?productCategory=outer" class="xans-record-">OUTER</a><br/>
+					<a href="/sup/shop/product/list.do?productCategory=top" class="xans-record-">TOP</a><br/>
+					<a href="/sup/shop/product/list.do?productCategory=pants" class="xans-record-">PANTS</a><br/>
+				</div>
+			</div>
+			<br/><br/>
+			
+			<b>borad</b>
+			<div id="cate_wrap" class="on">
+				<div id="cate_inner" class="xans-element- xans-layout xans-layout-category">
+				
+				<a href="/sub/shop/boards/list.do?community=QnA">Q/A</a><br/>
+				<a href="/sub/shop/boards/list.do?community=notice">NOTICE</a><br/>
+				<a href="//sub/shop/boards/list.do?community=review">REVIEW</a><br/>
+				
+				</div>
+			</div>
+			<br/><br/>
+			
+			<!-- <a href="#none" id="search_btn">SEARCH</a>
+			<form id="searchBarForm" name="" action="/product/search.html"
+				method="get" target="_self" enctype="multipart/form-data">
+				<input id="banner_action" name="banner_action" value="" type="hidden">
+				<div id="search_inner" class="xans-element- xans-layout xans-layout-searchheader ">
+					$product_page=/product/detail.html $category_page=/product/list.html
+					<fieldset>////보류////
+						<legend>검색</legend>
+						<label class="ePlaceholder" title="">
+							<input id="keyword" name="keyword" fw-filter="" fw-label="검색어" fw-msg=""
+							class="inputTypeText" placeholder=""
+							onmousedown="SEARCH_BANNER.clickSearchForm(this)" value="" type="text">
+						</label>
+					</fieldset>
+				</div>
+			</form> -->
+			
+			
+		</div>
+		
+
+	
+		
+		<div class="right_area">
+			<c:choose>
+				<c:when test="${empty userId }">
+					<a href="/sub/shop/member/login.do" class="xans-element- xans-layout xans-layout-statelogoff ">LOGIN</a>&nbsp;&nbsp;
+					<a href="/sub/shop/member/join.do" class="xans-element- xans-layout xans-layout-statelogoff ">JOIN</a>&nbsp;&nbsp;
+				</c:when>
+				<c:when test="${!empty userId }">
+					<a href="/sub/shop/member/mypage.do" class="xans-element- xans-layout xans-layout-statelogoff ">MYPAGE</a>&nbsp;&nbsp;
+					<a href="/sub/shop/member/logout_ok.do" class="xans-element- xans-layout xans-layout-statelogoff ">LOGOUT</a>&nbsp;&nbsp;
+					<a href="/sub/shop/orders/cartList.do" class="xans-element- xans-layout xans-layout-statelogoff ">BAG</a>
+				</c:when>
+			</c:choose>
+			
+				<!-- <span class="count displaynone">
+					<span></span>
+				</span> -->
+		
+		</div>
+		<!-- //right_area -->
+	</div>
+	<!-- //lrmargin5 -->
+</div>
 
 
+<div id="footer">
+	<div class="xans-element- xans-layout xans-layout-footer cboth bt_backbg ">
+		<div class="bt_shopinfo2">
+			<span>EMAIL: GOOAOFFICIAL@NAVER.COM</span><br>
+			<span>CUSTOMER SERVICES: 070-7954-3714</span><br>
+			<span>ADDRESS: 21 DASANJUNGANG-RO 19 GIL NAMYANGJU-SI<br>
+			GYEONGGI-DO REPUBLIC OF KOREA
+			</span>
+		</div>
+		<div class="bt_shopinfo">
+			<span>COMPANY: GOOA</span><br>
+			<span>OWNER: HEE SU LEE</span>
+			<span> REGISTRATION: 898-38-00550</span><br>
+			<span>MAIL ORDER LICENSE: 2021-DASAN-0629</span><br>
+			<span>BANK ACCOUNT: SHINHAN 110-526-775262 GOOA</span>
+		</div>
+		<div class="bt_cs">
+			<a href="/shopinfo/company.html"> </a><br>
+			<a href="/member/agreement.html"> </a><br>
+			<a href="/member/privacy.html"> </a>
+		</div>
+		<!-- div class="bt_cs">OPENING HOURS<br/>
+			MON - FRI 13:00 ~ 17:00<br/>
+			WEEKEND/HOLIDAY OFF</div -->
+	</div>
+	<!-- //bt_backbg -->
+</div>
 
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
-</html> 
+</body>
+</html>
