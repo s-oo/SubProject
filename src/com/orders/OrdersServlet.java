@@ -11,15 +11,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 import com.member.MemberDAO;
 import com.member.MemberDTO;
-import com.product.ProductDAO;
-import com.product.ProductDTO;
 import com.util.DBConn;
-import com.util.MyPage;
 
 public class OrdersServlet extends HttpServlet {
 
@@ -38,7 +33,7 @@ public class OrdersServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		
 		req.setCharacterEncoding("UTF-8");
 		resp.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = resp.getWriter();
@@ -48,9 +43,7 @@ public class OrdersServlet extends HttpServlet {
 
 		Connection conn = DBConn.getConnection();
 		OrdersDAO dao = new OrdersDAO(conn);
-
-		MyPage myPage = new MyPage();
-
+		
 		String sessionUserId = (String) req.getSession().getAttribute("userId");
 		String userId = null;
 
@@ -61,19 +54,21 @@ public class OrdersServlet extends HttpServlet {
 		if (userId == null) {
 			out.print("<script>");
 			out.print("alert('로그인을 해주세요');");
-			out.print("locasion:href='" + cp + "/member/login.jsp';");
+//			out.print("locasion:href='/sub/shop/member/login.do';");
 			out.print("</script>");
+			
+			url = "/sub/shop/member/login.do";
+			resp.sendRedirect(url);
+			
 			return;
 		}
 		
 		// 추가
 		if (uri.indexOf("addList.do") != -1) {
 
-			int orderNum = dao.getMaxnum();
-			String progress = req.getParameter("progress");
-			
+			int orderNum = dao.getMaxNum();
 			int productNum = Integer.parseInt(req.getParameter("productNum"));
-			ProductDTO productDTO = new ProductDAO(conn).getReadData(productNum);
+			String progress = req.getParameter("progress");
 			
 			String quantity = req.getParameter("productQuantity");
 			int productQuantity = 0;
@@ -89,28 +84,51 @@ public class OrdersServlet extends HttpServlet {
 			dto.setProductQuantity(productQuantity);
 			dto.setProgress(progress);
 			
-			dto.setProductName(productDTO.getProductName());
-			dto.setProductPrice(productPrice);
-			dto.setSaveFileName(saveFileName);
+			int result = dao.insertData(dto);
 			
+			out.print("<script>");
+			if (result == 0) {
+				out.print("alert('오류');");
+			}
+			out.print("history.back()");
+			out.print("</script>");
 			
+		} else if (uri.indexOf("modifyList.do") != -1) {
+
+			int orderNum = Integer.parseInt(req.getParameter("orderNum"));
+			String progress = req.getParameter("progress");
 			
+			String quantity = req.getParameter("productQuantity");
+			int productQuantity = 0;
+			if (quantity != null && progress.equals("wishList") ) {
+				productQuantity = Integer.parseInt(quantity);
+			}
 			
+			OrdersDTO dto = new OrdersDTO();
+
+			dto.setOrderNum(orderNum);
+			dto.setProductQuantity(productQuantity);
+			dto.setProgress(progress);
 			
+			int result = dao.updateData(dto);
 			
-			
+			out.print("<script>");
+			if (result == 0) {
+				out.print("alert('오류');");
+			}
+			out.print("history.back()");
+			out.print("</script>");
 			
 		// 장바구니 목록
 		} else if (uri.indexOf("cartList.do") != -1) {
 			
+			userId = "auserId";
 			String progress = "cartList";
-			List<OrdersDTO> list = new ArrayList<>();
-			
-			list = dao.getList(userId, progress);
+			List<OrdersDTO> list = dao.getList(userId, progress);
 			
 			req.setAttribute("list", list);
 			
-			url = "/sub/orders/cartList.jsp";
+			url = "/orders/cartList.jsp";
 			forward(req, resp, url);
 
 		// 찜 목록
@@ -123,7 +141,7 @@ public class OrdersServlet extends HttpServlet {
 			
 			req.setAttribute("list", list);
 			
-			url = "/sub/orders/wishList.jsp";
+			url = "/orders/wishList.jsp";
 			forward(req, resp, url);
 
 		// 주문/결제
@@ -141,9 +159,14 @@ public class OrdersServlet extends HttpServlet {
 			req.setAttribute("list", list);
 			req.setAttribute("memberDTO", memberDTO);
 			
-			url = "/sub/orders/orderPayment.jsp";
+			url = "/orders/orderPayment.jsp";
 			forward(req, resp, url);
 
+		// 결제 처리
+		} else if (uri.indexOf("orderPayment_ok.do") != -1) {
+			
+			
+			
 		// 주문 완료
 		} else if (uri.indexOf("orderComplete.do") != -1) {
 
@@ -153,6 +176,9 @@ public class OrdersServlet extends HttpServlet {
 			
 			req.setAttribute("sum", sum);
 			req.setAttribute("memberDTO", memberDTO);
+
+			url = "/orders/orderComplete.jsp";
+			forward(req, resp, url);
 
 		// 주문 목록
 		} else if (uri.indexOf("orderList.do") != -1) {
@@ -177,9 +203,9 @@ public class OrdersServlet extends HttpServlet {
 			
 			req.setAttribute("list", list);
 			
-			url = "/sub/orders/cancelList.jsp";
+			url = "/orders/cancelList.jsp";
 			forward(req, resp, url);
-			
+
 		}
 
 	}

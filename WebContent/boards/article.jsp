@@ -12,7 +12,6 @@
 
 <link rel="stylesheet" type="text/css" href="<%=cp%>/boards/css/style.css"/>
 <link rel="stylesheet" type="text/css" href="<%=cp%>/boards/css/article.css"/>
-
 </head>
 <body>
 
@@ -29,7 +28,7 @@
 		<div class="bbsArticle_bottomLine">
 			<dl>
 				<dt>작성자</dt>
-				<dd>${dto.name }</dd>
+				<dd>${dto.userId }</dd>
 				<dt>줄수</dt>
 				<dd>${lineSu }</dd>
 			</dl>		
@@ -70,7 +69,7 @@
  		</div>
  		<div id="rightFooter">
 			<input type="button" value=" 리스트 " class="btn2" 
-			onclick="javascript:location.href='<%=cp%>/bbs/list.do?${params }';"/>
+			onclick="javascript:location.href='<%=cp%>/shop/list.do?${params }';"/>
  		</div>
  	</div>
 
