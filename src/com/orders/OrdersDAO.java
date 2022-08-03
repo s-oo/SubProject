@@ -3,6 +3,8 @@ package com.orders;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.util.DBConn;
 
@@ -78,15 +80,13 @@ public class OrdersDAO {
 
 		try {
 
-			sql = "UPDATE ORDERS SET USERID = ?, PRODUCTNUM = ?, PRODUCTQUANTITY = ?, PROGRESS = ?)";
+			sql = "UPDATE ORDERS SET PRODUCTQUANTITY = ?, PROGRESS = ?)";
 			sql += "WHERE ORDERNUM = ?";
 
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, dto.getUserId());
-			pstmt.setInt(2, dto.getProductNum());
-			pstmt.setInt(3, dto.getProductQuantity());
-			pstmt.setString(4, dto.getProgress());
-			pstmt.setInt(5, dto.getOrderNum());
+			pstmt.setInt(1, dto.getProductQuantity());
+			pstmt.setString(2, dto.getProgress());
+			pstmt.setInt(3, dto.getOrderNum());
 
 			result = pstmt.executeUpdate();
 
@@ -125,32 +125,40 @@ public class OrdersDAO {
 
 	}
 
-	public OrdersDTO getList(int orderNum) {
+	public List<OrdersDTO> getList(String userId, String progress) {
 
-		OrdersDTO dto = null;
+		List<OrdersDTO> list = new ArrayList<>();
 		PreparedStatement pstmt;
 		ResultSet rs;
 		String sql;
 
 		try {
 
-			sql = "SELECT ORDERNUM, USERID, PRODUCTNUM, PRODUCTQUANTITY, PROGRESS ";
-			sql += "FROM ORDERS WHERE ORDERNUM = ?";
+			sql = "SELECT O.*, PRODUCTNAME, PRODUCTPRICE, SAVEFILENAME ";
+			sql += "FROM ORDERS O, PRODUCT P ";
+			sql += "WHERE O.PRODUCTNUM = P.PRODUCTNUM AND USERID = ? AND PROGRESS = ?";
 
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, orderNum);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, progress);
 
 			rs = pstmt.executeQuery();
 
-			if (rs.next()) {
+			while (rs.next()) {
 
-				dto = new OrdersDTO();
+				OrdersDTO dto = new OrdersDTO();
 				dto.setOrderNum(rs.getInt("ORDERNUM"));
 				dto.setUserId(rs.getString("USERID"));
 				dto.setProductNum(rs.getInt("PRODUCTNUM"));
 				dto.setProductQuantity(rs.getInt("PRODUCTQUANTITY"));
 				dto.setProgress(rs.getString("PROGRESS"));
+				
+				dto.setProductName(rs.getString("PRODUCTNAME"));
+				dto.setProductPrice(rs.getInt("PRODUCTPRICE"));
+				dto.setSaveFileName(rs.getString("SAVEFILENAME"));
 
+				list.add(dto);
+				
 			}
 
 			rs.close();
@@ -160,7 +168,62 @@ public class OrdersDAO {
 			System.out.println(e.toString());
 		}
 
-		return dto;
+		return list;
+
+	}
+	
+	public List<OrdersDTO> getList(String[] orderNum) {
+
+		List<OrdersDTO> list = new ArrayList<>();
+		PreparedStatement pstmt;
+		ResultSet rs;
+		String sql;
+
+		try {
+
+			int n = orderNum.length;
+			String str = "";
+			
+			for (int i = 0; i < n; i ++) {
+				if (i != 0)
+					str = ", ";
+				str += orderNum[i];
+			}
+			
+			sql = "SELECT O.*, PRODUCTNAME, PRODUCTPRICE, SAVEFILENAME ";
+			sql += "FROM ORDERS O, PRODUCT P ";
+			sql += "WHERE O.PRODUCTNUM = P.PRODUCTNUM AND ORDERNUM IN (?)";
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, str);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				OrdersDTO dto = new OrdersDTO();
+				dto.setOrderNum(rs.getInt("ORDERNUM"));
+				dto.setUserId(rs.getString("USERID"));
+				dto.setProductNum(rs.getInt("PRODUCTNUM"));
+				dto.setProductQuantity(rs.getInt("PRODUCTQUANTITY"));
+				dto.setProgress(rs.getString("PROGRESS"));
+				
+				dto.setProductName(rs.getString("PRODUCTNAME"));
+				dto.setProductPrice(rs.getInt("PRODUCTPRICE"));
+				dto.setSaveFileName(rs.getString("SAVEFILENAME"));
+
+				list.add(dto);
+				
+			}
+
+			rs.close();
+			pstmt.close();
+
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+
+		return list;
 
 	}
 
