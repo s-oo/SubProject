@@ -22,6 +22,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원정보수정</title>
+<link rel="stylesheet" type="text/css"href="<%=cp%>/css/shopStyle.css" />
 <style type="text/css">
 body{
 	font-size: 9pt;
@@ -110,7 +111,12 @@ td{
 
 </head>
 <body>
-
+  <jsp:include page="../main/header.jsp"/>
+   
+   <div id="content" align="center">
+   
+      
+   
 <table width="500" cellpadding="0" cellspacing="3" align="center" bgcolor="#e4e4e4">
 <tr height="50">
 	<td bgcolor="#ffffff" style="padding-left: 10px;">
@@ -220,6 +226,8 @@ td{
 
 </form>
 
-
+</div>
+   
+<jsp:include page="../main/footer.jsp"/>
 </body>
 </html>
