@@ -53,7 +53,7 @@ public class ProductDAO {
 		try {
 			
 			sql = "insert into Product (productNum,productName,productPrice,productCategory,";
-			sql+= "saveFileName1,originalFileName1,categorySize,categoryColor) ";
+			sql+= "saveFileName1,originalFileName1) ";
 			sql+= "values (?,?,?,?)";
 			
 			pstmt = conn.prepareStatement(sql);
@@ -64,8 +64,6 @@ public class ProductDAO {
 			pstmt.setString(4, dto.getProductCategory());
 			pstmt.setString(5, dto.getSaveFileName1());
 			pstmt.setString(6, dto.getOriginalFileName1());
-			pstmt.setInt(7, dto.getCategorySize());
-			pstmt.setString(8, dto.getCategoryColor());
 			
 			result = pstmt.executeUpdate();
 			
@@ -88,7 +86,7 @@ public class ProductDAO {
 		try {
 			
 			sql = "update product set productNum=?,productName=?,productPrice=?,productCategory=?,";
-			sql+= "saveFileName1=?,originalFileName1=?,categorySize=?,categoryColor=? ";
+			sql+= "saveFileName1=?,originalFileName1=? ";
 			sql+= "where productNum=?";
 			
 			pstmt = conn.prepareStatement(sql);
@@ -99,8 +97,6 @@ public class ProductDAO {
 			pstmt.setString(4, dto.getProductCategory());
 			pstmt.setString(5, dto.getSaveFileName1());
 			pstmt.setString(6, dto.getOriginalFileName1());
-			pstmt.setInt(7, dto.getCategorySize());
-			pstmt.setString(8, dto.getCategoryColor());
 			
 			result = pstmt.executeUpdate();
 			
@@ -203,7 +199,7 @@ public class ProductDAO {
 		
 		try {
 			
-			sql = "select p.productNum,productName,productPrice,productCategory,categorySize,categoryColor,";
+			sql = "select p.productNum,productName,productPrice,productCategory,";
 			sql+= "p.saveFileName1,saveFileName2,saveFileName3,saveFileName4,saveFileName5 ";
 			sql+= "from product p, image i ";
 			sql+= "where p.productNum = i.productNum and p.productNum=?";
@@ -222,8 +218,6 @@ public class ProductDAO {
 				dto.setProductName(rs.getString("productName"));
 				dto.setProductPrice(rs.getInt("productPrice"));
 				dto.setProductCategory(rs.getString("productCategory"));
-				dto.setCategorySize(rs.getInt("categorySize"));
-				dto.setCategoryColor(rs.getString("categoryColor"));
 				
 				dto.setSaveFileName1(rs.getString("saveFileName1"));
 				dto.setSaveFileName2(rs.getString("saveFileName2"));
