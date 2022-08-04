@@ -64,8 +64,10 @@ public class OrdersServlet extends HttpServlet {
 //		}
 		
 		// 추가
-		if (uri.indexOf("addList.do") != -1) {
+		if (uri.indexOf("addList_ok.do") != -1) {
 
+			String referer = (String) req.getHeader("REFERER");
+			
 			int orderNum = dao.getMaxNum();
 			int productNum = Integer.parseInt(req.getParameter("productNum"));
 			String progress = req.getParameter("progress");
@@ -86,21 +88,27 @@ public class OrdersServlet extends HttpServlet {
 			
 			int result = dao.insertData(dto);
 			
-			out.print("<script>");
 			if (result == 0) {
+				out.print("<script>");
 				out.print("alert('오류');");
+				out.print("history.back()");
+				out.print("</script>");
 			}
-			out.print("history.back()");
-			out.print("</script>");
-			
-		} else if (uri.indexOf("modifyList.do") != -1) {
 
+			resp.sendRedirect(referer);
+			
+		// 수정
+		} else if (uri.indexOf("modifyList_ok.do") != -1) {
+			
+			String referer = (String) req.getHeader("REFERER");
+			int result = 0;
+			
 			int orderNum = Integer.parseInt(req.getParameter("orderNum"));
 			String progress = req.getParameter("progress");
 			
 			String quantity = req.getParameter("productQuantity");
 			int productQuantity = 0;
-			if (quantity != null && progress.equals("wishList") ) {
+			if (quantity != null && !progress.equals("wishList") ) {
 				productQuantity = Integer.parseInt(quantity);
 			}
 			
@@ -110,14 +118,40 @@ public class OrdersServlet extends HttpServlet {
 			dto.setProductQuantity(productQuantity);
 			dto.setProgress(progress);
 			
-			int result = dao.updateData(dto);
-			
-			out.print("<script>");
-			if (result == 0) {
-				out.print("alert('오류');");
+			if (dto.getProductQuantity() == 0) {
+				result = dao.deleteData(orderNum);
+			} else {
+				result = dao.updateData(dto);
 			}
-			out.print("history.back()");
-			out.print("</script>");
+			
+			if (result == 0) {
+				out.print("<script>");
+				out.print("alert('오류');");
+				out.print("history.back()");
+				out.print("</script>");
+				return;
+			}
+
+			resp.sendRedirect(referer);
+			
+		// 삭제
+		} else if (uri.indexOf("delete_ok.do") != -1) {
+
+			String referer = (String) req.getHeader("REFERER");
+			
+			int orderNum = Integer.parseInt(req.getParameter("orderNum"));
+			
+			int result = dao.deleteData(orderNum);
+
+			if (result == 0) {
+				out.print("<script>");
+				out.print("alert('오류');");
+				out.print("history.back()");
+				out.print("</script>");
+				return;
+			}
+
+			resp.sendRedirect(referer);
 			
 		// 장바구니 목록
 		} else if (uri.indexOf("cartList.do") != -1) {
@@ -127,7 +161,6 @@ public class OrdersServlet extends HttpServlet {
 			List<OrdersDTO> list = dao.getList(userId, progress);
 
 			req.setAttribute("list", list);
-			
 			req.setAttribute("userId", userId);
 				
 			url = "/orders/cartList.jsp";

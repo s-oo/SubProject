@@ -2,6 +2,7 @@ package com.member;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.sql.Connection;
 
 import javax.servlet.RequestDispatcher;
@@ -90,12 +91,22 @@ public class MemberServlet extends HttpServlet {
 					out.print("</script>");
 
 				} else {
-
-					url = cp +"/main/main.jsp";
+				
+					url = cp + "/shop/member/join_result.do?userName=" +URLEncoder.encode(dto.getUserName(), "UTF-8");
 					resp.sendRedirect(url);
 
 				}
+
+			// 회원가입 결과화면
+			} else if (uri.indexOf("join_result.do") != -1) {
+				
+				String userName = req.getParameter("userName");
 			
+				req.setAttribute("userName", userName);
+				url = "/member/join_result.jsp";
+				forward(req, resp, url);
+				
+				
 			// 로그인 화면
 			} else if (uri.indexOf("login.do") != -1) {
 
@@ -126,13 +137,44 @@ public class MemberServlet extends HttpServlet {
 					
 				} else {
 
-					req.getSession().setAttribute("userId", userId);
+					
 
-					url = cp + "/shop/main/main.do";
+					url = cp + "/main/main.jsp";
 					resp.sendRedirect(url);
 
 				}
-
+				///비밀번호 찾기
+			}else if(uri.indexOf("find.do")!=-1) {
+				url =  "/member/find.jsp";
+				forward(req, resp, url);
+				
+			}else if(uri.indexOf("find_ok.do")!=-1) {
+				userId = req.getParameter("userId");
+				String userTel = req.getParameter("userTel");
+				
+				
+				MemberDTO dto = dao.getReadData(userId);
+				
+				if(dto==null||!dto.getUserTel().equals(userTel)) {
+					
+					out.print("<script>");
+					out.print("alert('로그인실패');");
+					out.print("location.href='cp/shop/member/login.do';");
+					out.print("</script>");
+					
+					//아이디가 틀리거나 또는 패스워드가 틀리면
+					req.setAttribute("message", "회원정보가 존재하지 않습니다.");
+					
+					url =  "/shop/member/find.do";
+					forward(req, resp, url);
+					//아이디 패스워드가 틀리면 실행되지않게 막아줌	
+					return;
+				}else {
+				req.setAttribute("message", "비밀번호는 ["+ dto.getUserPwd() + "] 입니다.");
+				req.setAttribute("lego", "로그인 하러 가기");
+				url = "/shop/member/find.do";
+				forward(req, resp, url);
+				}
 			// 오류
 			} else {
 
@@ -156,8 +198,9 @@ public class MemberServlet extends HttpServlet {
 				url = cp + "/shop/main/main.do";
 				resp.sendRedirect(url);
 
-			// 회원정보 화면
-			} else if (uri.indexOf("myPage.do") != -1) {
+			
+				// 회원정보 화면
+			}else if (uri.indexOf("myPage.do") != -1) {
 
 				MemberDTO dto = dao.getReadData(userId);
 
