@@ -53,7 +53,7 @@ public class ProductDAO {
 		try {
 			
 			sql = "insert into Product (productNum,productName,productPrice,productCategory,";
-			sql+= "saveFileName,originalFileName,categorySize,categoryColor) ";
+			sql+= "saveFileName1,originalFileName1,categorySize,categoryColor) ";
 			sql+= "values (?,?,?,?)";
 			
 			pstmt = conn.prepareStatement(sql);
@@ -62,8 +62,8 @@ public class ProductDAO {
 			pstmt.setString(2, dto.getProductName());
 			pstmt.setInt(3, dto.getProductPrice());
 			pstmt.setString(4, dto.getProductCategory());
-			pstmt.setString(5, dto.getSaveFileName());
-			pstmt.setString(6, dto.getOriginalFileName());
+			pstmt.setString(5, dto.getSaveFileName1());
+			pstmt.setString(6, dto.getOriginalFileName1());
 			pstmt.setInt(7, dto.getCategorySize());
 			pstmt.setString(8, dto.getCategoryColor());
 			
@@ -88,7 +88,7 @@ public class ProductDAO {
 		try {
 			
 			sql = "update product set productNum=?,productName=?,productPrice=?,productCategory=?,";
-			sql+= "saveFileName=?,originalFileName=?,categorySize=?,categoryColor=? ";
+			sql+= "saveFileName1=?,originalFileName1=?,categorySize=?,categoryColor=? ";
 			sql+= "where productNum=?";
 			
 			pstmt = conn.prepareStatement(sql);
@@ -97,8 +97,8 @@ public class ProductDAO {
 			pstmt.setString(2, dto.getProductName());
 			pstmt.setInt(3, dto.getProductPrice());
 			pstmt.setString(4, dto.getProductCategory());
-			pstmt.setString(5, dto.getSaveFileName());
-			pstmt.setString(6, dto.getOriginalFileName());
+			pstmt.setString(5, dto.getSaveFileName1());
+			pstmt.setString(6, dto.getOriginalFileName1());
 			pstmt.setInt(7, dto.getCategorySize());
 			pstmt.setString(8, dto.getCategoryColor());
 			
@@ -155,7 +155,7 @@ public class ProductDAO {
 			sql = "select * from (";
 			sql+= "select rownum rnum,data.* from(";
 			sql+= "select productNum,productName,productPrice,productCategory,";
-			sql+= "saveFileName,originalFileName ";
+			sql+= "saveFileName1,originalFileName1 ";
 			sql+= "from product where " + searchKey;
 			sql+= " like ? order by productNum desc) data) ";
 			sql+= "where rnum>=? and rnum<=?";
@@ -176,8 +176,8 @@ public class ProductDAO {
 				dto.setProductName(rs.getString("productName"));
 				dto.setProductPrice(rs.getInt("productPrice"));
 				dto.setProductCategory(rs.getString("productCategory"));
-				dto.setSaveFileName(rs.getString("saveFileName"));
-				dto.setOriginalFileName(rs.getString("originalFileName"));
+				dto.setSaveFileName1(rs.getString("saveFileName1"));
+				dto.setOriginalFileName1(rs.getString("originalFileName1"));
 				
 				lists.add(dto);
 				
@@ -203,9 +203,10 @@ public class ProductDAO {
 		
 		try {
 			
-			sql = "select productNum,productName,productPrice,productCategory,";
-			sql+= "saveFileName,originalFileName,categorySize,categoryColor ";
-			sql+= "from product where productNum=?";
+			sql = "select p.productNum,productName,productPrice,productCategory,categorySize,categoryColor,";
+			sql+= "p.saveFileName1,saveFileName2,saveFileName3,saveFileName4,saveFileName5 ";
+			sql+= "from product p, image i ";
+			sql+= "where p.productNum = i.productNum and p.productNum=?";
 			
 			pstmt = conn.prepareStatement(sql);
 			
@@ -217,14 +218,18 @@ public class ProductDAO {
 				
 				dto = new ProductDTO();
 				
-				dto.setProductNum(rs.getInt("productNum"));
+				dto.setProductNum(rs.getInt("productNum"));//select해오는 것들 중 첫번째것을 가져옴
 				dto.setProductName(rs.getString("productName"));
 				dto.setProductPrice(rs.getInt("productPrice"));
 				dto.setProductCategory(rs.getString("productCategory"));
-				dto.setSaveFileName(rs.getString("saveFileName"));
-				dto.setOriginalFileName(rs.getString("originalFileName"));
 				dto.setCategorySize(rs.getInt("categorySize"));
 				dto.setCategoryColor(rs.getString("categoryColor"));
+				
+				dto.setSaveFileName1(rs.getString("saveFileName1"));
+				dto.setSaveFileName2(rs.getString("saveFileName2"));
+				dto.setSaveFileName3(rs.getString("saveFileName3"));
+				dto.setSaveFileName4(rs.getString("saveFileName4"));
+				dto.setSaveFileName5(rs.getString("saveFileName5"));
 				
 			}
 			
