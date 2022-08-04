@@ -64,7 +64,7 @@ public class OrdersServlet extends HttpServlet {
 //		}
 		
 		// 추가
-		if (uri.indexOf("addList.do") != -1) {
+		if (uri.indexOf("addList_ok.do") != -1) {
 
 			int orderNum = dao.getMaxNum();
 			int productNum = Integer.parseInt(req.getParameter("productNum"));
@@ -92,8 +92,9 @@ public class OrdersServlet extends HttpServlet {
 			}
 			out.print("history.back()");
 			out.print("</script>");
-			
-		} else if (uri.indexOf("modifyList.do") != -1) {
+		
+		// 수정
+		} else if (uri.indexOf("modifyList_ok.do") != -1) {
 
 			int orderNum = Integer.parseInt(req.getParameter("orderNum"));
 			String progress = req.getParameter("progress");
@@ -118,6 +119,17 @@ public class OrdersServlet extends HttpServlet {
 			}
 			out.print("history.back()");
 			out.print("</script>");
+
+		// 삭제
+		} else if (uri.indexOf("delete_ok.do") != -1) {
+			
+			
+			
+			
+			
+			
+			
+			
 			
 		// 장바구니 목록
 		} else if (uri.indexOf("cartList.do") != -1) {
@@ -127,7 +139,6 @@ public class OrdersServlet extends HttpServlet {
 			List<OrdersDTO> list = dao.getList(userId, progress);
 
 			req.setAttribute("list", list);
-			
 			req.setAttribute("userId", userId);
 				
 			url = "/orders/cartList.jsp";
