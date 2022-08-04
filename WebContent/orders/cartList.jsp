@@ -10,49 +10,57 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>cart list</title>
 
-<link rel="stylesheet" type="text/css" href="<%=cp %>/product/data/style.css"/>
+<link rel="stylesheet" type="text/css"href="<%=cp%>/css/shopStyle.css" />
 
 </head>
 <body>
 	<jsp:include page="../main/header.jsp"/>
-	
-	<div id="content" align="center" style="margin-top: 100px;">
+	${dto.userId }
+	<div id="content" align="center">
 		<div id="contentList">
-			<ul class="listView">
-				<li>
-					
-				</li>
-				<c:forEach var="dto" items="${list }">
-					<li id="listBox" class="item" style="list-style: none; width: 300px; pading: 10em;">
-						<span class="box_wrap" style="display: inline-block; font-size: 10pt; color: #555555;">
-							${dto.orderNum }
-						</span>
-						<span class="box_wrap" style="display: inline-block; font-size: 10pt; color: #555555;">
-							${dto.userId }
-						</span>
-						<span class="box_wrap" style="display: inline-block; font-size: 10pt; color: #555555;">
-							${dto.productNum }
-						</span>
-						<span class="box_wrap" style="display: inline-block; font-size: 10pt; color: #555555;">
-							${dto.productName }
-						</span>
-						<span class="box_wrap" style="display: inline-block; font-size: 10pt; color: #555555;">
-							${dto.productQuantity }
-						</span>
-						<span class="box_wrap" style="display: inline-block; font-size: 10pt; color: #555555;">
-							${dto.productPrice }
-						</span>
-					</li>
-				</c:forEach>
-				
-				<c:if test="${empty list }">
-					<li id="listBox" class="item" style="list-style: none;width: 300px;display: inline-block;">
-						<div class="box_wrap" style="display: inline-block;font-size: 10pt;color: #555555;">
-							등록된 상품이 없음
-						</div>
-					</li>
-				</c:if>
-			</ul>
+			<table class="listView">
+				<tbody>
+					<colgroup>
+						<col>
+						<col>
+					</colgroup>
+					<c:forEach var="dto" items="${list }">
+						<tr>
+							<td id="saveFileName">
+								<img src="<%=cp %>/product/img/${dto.saveFileName }">
+							</td>
+							<td id="productName">
+								${dto.productName }
+							</td>
+							<td id="productPrice">
+								${dto.productPrice }
+							</td>
+							<td id="productQuantity">
+								${dto.productQuantity }&nbsp;&nbsp;&nbsp;
+								<a href="<%=cp%>/shop/orders/delete.do?orderNum=${dto.orderNum }&productQuantity=${dto.productQuantity + 1 }&progress=${dto.progress }">
+									+</a>&nbsp;
+								<a href="<%=cp%>/shop/orders/delete.do?orderNum=${dto.orderNum }&productQuantity=${dto.productQuantity + 1 }&progress=${dto.progress }">
+									-</a>
+							</td>
+							<td id="totalProductPrice">
+								${dto.productPrice * dto.productQuantity }
+							</td>
+							<td id="delete">
+								<a href="<%=cp%>/shop/orders/delete.do?orderNum=${dto.orderNum }">X</a>
+							</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+				<tfoot>
+					<tr id="listBox" class="item" style="list-style: none;width: 300px;display: inline-block;">
+						<td class="box_wrap" style="display: inline-block;font-size: 10pt;color: #555555;">
+							<c:if test="${empty list }">
+										등록된 상품이 없음
+							</c:if>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
 		</div>
 	</div>
 	
