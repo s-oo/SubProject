@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
@@ -22,16 +23,18 @@
 			<div class="detail">
 				<div class="productImage">
 					<div>
-						<img src="<%=cp %>/product/image/top/${dto.saveFileName1 }"
-							width="600px" style="margin-bottom: 22px;" /> <img
-							src="<%=cp %>/product/image/top/${dto.saveFileName2 }"
-							width="600px" style="margin-bottom: 22px;" /> <img
-							src="<%=cp %>/product/image/top/${dto.saveFileName3 }"
-							width="600px" style="margin-bottom: 22px;" /> <img
-							src="<%=cp %>/product/image/top/${dto.saveFileName4 }"
-							width="600px" style="margin-bottom: 22px;" /> <img
-							src="<%=cp %>/product/image/top/${dto.saveFileName5 }"
+						<c:forEach var="i" begin="0" end="${saveLength-1}" step="1">
+							<img src="<%=cp %>/product/image/top/${dto.saveFileName[i] }"
 							width="600px" style="margin-bottom: 22px;" />
+						</c:forEach>
+						<%-- <img src="<%=cp %>/product/image/top/${dto.saveFileName2 }"
+						width="600px" style="margin-bottom: 22px;" />
+						<img src="<%=cp %>/product/image/top/${dto.saveFileName3 }"
+						width="600px" style="margin-bottom: 22px;" />
+						<img src="<%=cp %>/product/image/top/${dto.saveFileName4 }"
+						width="600px" style="margin-bottom: 22px;" />
+						<img src="<%=cp %>/product/image/top/${dto.saveFileName5 }"
+						width="600px" style="margin-bottom: 22px;" /> --%>
 					</div>
 				</div>
 				<div class="productMenu" align="center">
@@ -52,7 +55,9 @@
 									<td><select name="option1" class="options">
 											<option value="*" selected="selected">[필수] COLOR 선택</option>
 											<option value="**" disabled="disabled">-------------------</option>
-											<option value="WHITE">WHITE</option>
+											<c:forEach var="i" begin="0" end="${colorLength-1}" step="1">
+												<option value="WHITE">${dto.productColor[i] }</option>
+											</c:forEach>
 									</select></td>
 								</tr>
 							</tbody>
@@ -62,9 +67,9 @@
 									<td><select name="option2" class="options">
 											<option value="*" selected="selected">[필수] SIZE 선택</option>
 											<option value="**" disabled="disabled">-------------------</option>
-											<option value="WHITE">SMALL</option>
-											<option value="WHITE">MEDIUM</option>
-											<option value="WHITE">LARGE</option>
+											<c:forEach var="i" begin="0" end="${sizeLength-1}" step="1">
+												<option value="WHITE">${dto.productSize[i] }</option>
+											</c:forEach>
 									</select></td>
 								</tr>
 							</tbody>
