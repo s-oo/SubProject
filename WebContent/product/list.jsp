@@ -25,7 +25,7 @@
 					<div class="box_wrap" style="display: inline-block;font-size: 10pt;color: #555555;">
 						<div class="image">
 							<a href="<%=cp %>/shop/product/detail.do?productNum=${dto.productNum }">
-								<img src="<%=cp %>/product/image/top/${dto.saveFileName1 }" width="300px"/>
+								<img src="<%=cp %>/product/image/top/${dto.saveFileName[0] }" width="300px"/>
 							</a>
 						</div>
 						<div class="productBrief" align="center">
