@@ -123,16 +123,21 @@ public class ProductServlet extends HttpServlet{
 			String searchKey = req.getParameter("searchKey");
 			String searchValue = req.getParameter("searchValue");
 			
+			String imagePath = cp + "/image/top";
+			
 			if(searchValue!=null && !searchValue.equals("")) {
 				searchValue = URLDecoder.decode(searchValue, "UTF-8");
 			}
 			
 			ProductDTO dto = dao.getReadData(productNum);
-			
-			if(dto==null) {
+
+			System.out.println(dto);
+			/*if(dto==null) {
 				url = cp + "/shop/product/list.do";
 				resp.sendRedirect(url);
-			}
+				
+				return;
+			}*/
 			
 			String param = "pageNum=" + pageNum;
 			
@@ -146,6 +151,7 @@ public class ProductServlet extends HttpServlet{
 			req.setAttribute("dto", dto);
 			req.setAttribute("params", param);
 			req.setAttribute("pageNum", pageNum);
+			req.setAttribute("imagePath", imagePath);
 			
 			url = "/product/detail.jsp";
 			forward(req, resp, url);

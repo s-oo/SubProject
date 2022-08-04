@@ -15,6 +15,8 @@
 </head>
 <body>
 
+<jsp:include page="../main/header.jsp"/>
+
 <div id="content" align="center">
 	<div id="productList">
 		<ul class="listView">
@@ -22,22 +24,23 @@
 				<li id="listBox" class="item" style="list-style: none;width: 300px;display: inline-block;">
 					<div class="box_wrap" style="display: inline-block;font-size: 10pt;color: #555555;">
 						<div class="image">
-							<a href="">
-								<%-- <img src="${imagePath }/${dto.saveFileName }" width="300px"> --%>
-								<img src="<%=cp %>/product/image/${dto.saveFileName }" width="300px"/>
+							<a href="<%=cp %>/shop/product/detail.do?productNum=${dto.productNum }">
+								<img src="<%=cp %>/product/image/top/${dto.saveFileName1 }" width="300px"/>
 							</a>
 						</div>
-						<div class="productName">
-							<a href="">
-								<span>${dto.productName }</span>
-							</a>	
-						</div>
-						<div class="productPrice">
-							<ul>
-								<li style="list-style: none;">
-									<span>${dto.productPrice }</span>
-								</li>
-							</ul>
+						<div class="productBrief" align="center">
+							<div class="productName">
+								<a href="<%=cp %>/shop/product/detail.do?productNum=${dto.productNum }">
+									<span>${dto.productName }</span>
+								</a>	
+							</div>
+							<div class="productPrice">
+								<ul>
+									<li style="list-style: none;">
+										<span>${dto.productPrice }</span>
+									</li>
+								</ul>
+							</div>
 						</div>
 					</div>
 				</li>
@@ -51,6 +54,8 @@
 		</p>
 	</div>
 </div>
+
+<jsp:include page="../main/footer.jsp"/>
 
 </body>
 </html>
