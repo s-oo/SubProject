@@ -29,7 +29,7 @@
 		}
 		f.subject.value = str;
 		
-		str = f.name.value;
+		/* str = f.name.value;
 		str = str.trim();
 		if(!str){
 			alert("\n이름을 입력하세요.");
@@ -37,11 +37,11 @@
 			return;
 		}
 		
-		/* if(!isValidKorean(str)){
+		 if(!isValidKorean(str)){
 			alert("\n이름을 정확히 입력하세요.");
 			f.name.focus();
 			return;
-		}		 */
+		}		 
 		
 		f.name.value = str;
 		
@@ -69,7 +69,7 @@
 			f.pwd.focus();
 			return;
 		}
-		f.pwd.value = str;
+		f.pwd.value = str; */
 		
 		f.action = "<%=cp%>/shop/boards/write_ok.do";  /* do는기본확장자명 */
 		f.submit();
@@ -101,24 +101,17 @@
 		
 		<div class="bbsCreated_bottomLine">
 			<dl>
-				<dt>작성자</dt>
+				<dt>회원&nbsp;&nbsp;ID</dt>
 				<dd>
-					<input type="text" name="name" size="35" 
+					<input type="text" name="userId" size="35" 
 					maxlength="20" class="boxTF"
-					value="${sessionScope.memberDTO.userName }"/>
+					value="${sessionScope.userId }"/>
 				</dd>
 			</dl>		
 		</div>
 		
-		<div class="bbsCreated_bottomLine">
-			<dl>
-				<dt>E-Mail</dt>
-				<dd>
-					<input type="text" name="email" size="35" 
-					maxlength="50" class="boxTF"/>
-				</dd>
-			</dl>		
-		</div>
+		
+		
 		
 		<div id="bbsCreated_content">
 			<dl>
@@ -129,15 +122,7 @@
 			</dl>		
 		</div>
 		
-		<div class="bbsCreated_noLine">
-			<dl>
-				<dt>패스워드</dt>
-				<dd>
-					<input type="password" name="pwd" size="35" 
-					maxlength="7" class="boxTF"/>&nbsp;(게시물 수정 및 삭제시 필요!!)
-				</dd>
-			</dl>		
-		</div>	
+		
 	
 	</div>
 	
