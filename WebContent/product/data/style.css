@@ -99,10 +99,18 @@ div{
 }
 /*  */
 
+/* list */
+
+.productPrice{
+	
+}
+
+/* detail? */
 
 .detail_wrap{
 	width: 80%;
 	margin: 106px auto 0;
+	
 }
 
 .detail{
