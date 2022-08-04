@@ -14,7 +14,7 @@ body{
 a{
 	text-decoration: none;
 	color: #484848;
-	font-size: 9pt;
+	font-size: 10pt;
 }
 
 div{
@@ -216,6 +216,7 @@ tbody{
 
 /* board(Review, Q&A) */
 .board{
+	max-width: calc(100% - 300px);
 }
 
 .board_warp{
@@ -233,3 +234,27 @@ tbody{
 	margin-bottom: 10px;
 }
 
+.boardTitle{
+	height: 10pt;
+	margin-bottom: 10px;
+}
+
+.boardContent{
+	border-top: 0.5px solid;
+	border-bottom: 0.5px solid;
+	border-color: #484848;
+}
+
+.boardContent tr{
+	border-bottom: 0.5px solid;
+	border-color: #484848;
+}
+
+.boardContent th{
+	font-size: 9pt;
+	font-weight: normal;
+}
+
+.boardContent tbody{
+	text-align: center;
+}

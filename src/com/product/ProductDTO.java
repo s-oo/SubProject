@@ -7,8 +7,8 @@ public class ProductDTO {
 	private String productName;
 	private int productPrice;
 	private String productCategory;
-	private int categorySize;
-	private String categoryColor;
+	/*private int productSize;
+	private String productColor;*/
 	private String saveFileName1;
 	private String originalFileName1;
 	
@@ -46,18 +46,18 @@ public class ProductDTO {
 	public void setProductCategory(String productCategory) {
 		this.productCategory = productCategory;
 	}
-	public int getCategorySize() {
-		return categorySize;
+	/*public int getProductSize() {
+		return productSize;
 	}
-	public void setCategorySize(int categorySize) {
-		this.categorySize = categorySize;
+	public void setProductSize(int productSize) {
+		this.productSize = productSize;
 	}
-	public String getCategoryColor() {
-		return categoryColor;
+	public String getProductColor() {
+		return productColor;
 	}
-	public void setCategoryColor(String categoryColor) {
-		this.categoryColor = categoryColor;
-	}
+	public void setProductColor(String productColor) {
+		this.productColor = productColor;
+	}*/
 	public String getSaveFileName1() {
 		return saveFileName1;
 	}
@@ -118,5 +118,5 @@ public class ProductDTO {
 	public void setOriginalFileName5(String originalFileName5) {
 		this.originalFileName5 = originalFileName5;
 	}
-
+	
 }
