@@ -51,17 +51,17 @@ public class OrdersServlet extends HttpServlet {
 			userId = sessionUserId;
 		}
 
-		if (userId == null) {
-			out.print("<script>");
-			out.print("alert('로그인을 해주세요');");
-//			out.print("locasion:href='/sub/shop/member/login.do';");
-			out.print("</script>");
-			
-			url = "/sub/shop/member/login.do";
-			resp.sendRedirect(url);
-			
-			return;
-		}
+//		if (userId == null) {
+//			out.print("<script>");
+//			out.print("alert('로그인을 해주세요');");
+////			out.print("locasion:href='/sub/shop/member/login.do';");
+//			out.print("</script>");
+//			
+//			url = "/sub/shop/member/login.do";
+//			resp.sendRedirect(url);
+//			
+//			return;
+//		}
 		
 		// 추가
 		if (uri.indexOf("addList.do") != -1) {
@@ -122,12 +122,14 @@ public class OrdersServlet extends HttpServlet {
 		// 장바구니 목록
 		} else if (uri.indexOf("cartList.do") != -1) {
 			
-			userId = "auserId";
+			userId = "asd";
 			String progress = "cartList";
 			List<OrdersDTO> list = dao.getList(userId, progress);
-			
+
 			req.setAttribute("list", list);
 			
+			req.setAttribute("userId", userId);
+				
 			url = "/orders/cartList.jsp";
 			forward(req, resp, url);
 
@@ -138,7 +140,7 @@ public class OrdersServlet extends HttpServlet {
 			List<OrdersDTO> list = new ArrayList<>();
 			
 			list = dao.getList(userId, progress);
-			
+
 			req.setAttribute("list", list);
 			
 			url = "/orders/wishList.jsp";
