@@ -80,7 +80,7 @@ public class OrdersDAO {
 
 		try {
 
-			sql = "UPDATE ORDERS SET PRODUCTQUANTITY = ?, PROGRESS = ?)";
+			sql = "UPDATE ORDERS SET PRODUCTQUANTITY = ?, PROGRESS = ?";
 			sql += "WHERE ORDERNUM = ?";
 
 			pstmt = conn.prepareStatement(sql);
@@ -134,28 +134,32 @@ public class OrdersDAO {
 
 		try {
 
-			sql = "SELECT ORDERNUM, USERID, P.PRODUCTNUM, PRODUCTQUANTITY, PROGRESS, PRODUCTNAME, PRODUCTPRICE, PRODUCTCATEGORY, SAVEFILENAME ";
+			sql = "SELECT O.*, PRODUCTNAME, PRODUCTPRICE, PRODUCTCATEGORY, PRODUCTSIZE, PRODUCTCOLOR, SAVEFILENAME1 ";
 			sql += "FROM ORDERS O, PRODUCT P ";
 			sql += "WHERE O.PRODUCTNUM = P.PRODUCTNUM AND USERID = ? AND PROGRESS = ?";
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
 			pstmt.setString(2, progress);
-
+			
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
 
 				OrdersDTO dto = new OrdersDTO();
+				
 				dto.setOrderNum(rs.getInt("ORDERNUM"));
 				dto.setUserId(rs.getString("USERID"));
-				dto.setProductNum(rs.getInt("PRODUCTNUM"));
+				dto.setProductNum(rs.getInt(3));
 				dto.setProductQuantity(rs.getInt("PRODUCTQUANTITY"));
 				dto.setProgress(rs.getString("PROGRESS"));
 
 				dto.setProductName(rs.getString("PRODUCTNAME"));
 				dto.setProductPrice(rs.getInt("PRODUCTPRICE"));
-				dto.setSaveFileName(rs.getString("SAVEFILENAME"));
+				dto.setProductCategory(rs.getString("PRODUCTCATEGORY"));
+				dto.setProductSize(rs.getString("PRODUCTSIZE"));
+				dto.setProductColor(rs.getString("PRODUCTCOLOR"));
+				dto.setSaveFileName1(rs.getString("SAVEFILENAME1"));
 
 				list.add(dto);
 				
@@ -190,7 +194,7 @@ public class OrdersDAO {
 				str += orderNum[i];
 			}
 			
-			sql = "SELECT O.*, PRODUCTNAME, PRODUCTPRICE, SAVEFILENAME ";
+			sql = "SELECT O.*, PRODUCTNAME, PRODUCTPRICE, PRODUCTCATEGORY, PRODUCTSIZE, PRODUCTCOLOR, SAVEFILENAME1 ";
 			sql += "FROM ORDERS O, PRODUCT P ";
 			sql += "WHERE O.PRODUCTNUM = P.PRODUCTNUM AND ORDERNUM IN (?)";
 
@@ -207,10 +211,13 @@ public class OrdersDAO {
 				dto.setProductNum(rs.getInt("PRODUCTNUM"));
 				dto.setProductQuantity(rs.getInt("PRODUCTQUANTITY"));
 				dto.setProgress(rs.getString("PROGRESS"));
-				
+
 				dto.setProductName(rs.getString("PRODUCTNAME"));
 				dto.setProductPrice(rs.getInt("PRODUCTPRICE"));
-				dto.setSaveFileName(rs.getString("SAVEFILENAME"));
+				dto.setProductCategory(rs.getString("PRODUCTCATEGORY"));
+				dto.setProductSize(rs.getString("PRODUCTSIZE"));
+				dto.setProductColor(rs.getString("PRODUCTCOLOR"));
+				dto.setSaveFileName1(rs.getString("SAVEFILENAME1"));
 
 				list.add(dto);
 				
