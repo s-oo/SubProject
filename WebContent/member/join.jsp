@@ -67,6 +67,8 @@
 	}
     
 </script>
+    
+
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     function sample6_execDaumPostcode() {
@@ -119,16 +121,20 @@
 </script>
 </head>
 <body>
+ <jsp:include page="../main/header.jsp"/>
+   
+   <div id="content" align="center">
+
 
 <div id="bbs">
-	<div id="bbs_title">
-	회원가입
+	<div id="bbs_title" align="center" >
+	<b>회&nbsp;원&nbsp;가&nbsp;입</b>
 	</div>
 	
 	<form action="" method="post" name="myForm">
-	<div id="bbsCreated">
+	<div id="bbsCreated" align="center">
 	
-		<div class="bbsCreated_bottomLine">
+		<div class="bbsCreated_bottomLine" align="center">
 			<dl>
 				<dt>아&nbsp;이&nbsp;디</dt>
 				<dd>
@@ -208,18 +214,20 @@
 
 	</div>
 	
-	<div id="bbsCreated_footer">
-	<input type="hidden" name="userAddress" value="javascript:'getUserAdress()';">
+	<div id="bbsCreated_footer" align="center">	
 		<input type="button" value=" 가입하기 " class="btn2" onclick="sendIt();"/> 
 		<input type="button" value=" 가입취소 " class="btn2" onclick="location.href='<%=cp%>/shop/main/main.do';"/> 
-		
-	
 	</div>
 	
 	
 	</form>
-	
 </div>
+
+
+
+</div>
+   
+<jsp:include page="../main/footer.jsp"/>
 
 </body>
 </html>

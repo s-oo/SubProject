@@ -59,7 +59,7 @@
 					<a href="/sub/shop/member/join.do" class="xans-element- xans-layout xans-layout-statelogoff ">JOIN</a>&nbsp;&nbsp;
 				</c:when>
 				<c:when test="${!empty userId }">
-					<a href="/sub/shop/member/mypage.do" class="xans-element- xans-layout xans-layout-statelogoff ">MYPAGE</a>&nbsp;&nbsp;
+					<a href="/sub/shop/member/myPage.do" class="xans-element- xans-layout xans-layout-statelogoff ">MYPAGE</a>&nbsp;&nbsp;
 					<a href="/sub/shop/member/logout_ok.do" class="xans-element- xans-layout xans-layout-statelogoff ">LOGOUT</a>&nbsp;&nbsp;
 					<a href="/sub/shop/orders/cartList.do" class="xans-element- xans-layout xans-layout-statelogoff ">BAG</a>
 				</c:when>

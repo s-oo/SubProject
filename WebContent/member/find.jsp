@@ -9,6 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css"href="<%=cp%>/css/shopStyle.css" />
 <script type="text/javascript">
 	function searchpw(){
 	
@@ -37,6 +38,10 @@
 
 </head>
 <body>
+<jsp:include page="../main/header.jsp"/>
+   
+<div id="content" align="center">
+
 
 <br><br>
 <form action="" method="post" name="myForm">
@@ -92,5 +97,8 @@
 	
 	
 </form>
+</div>
+   
+<jsp:include page="../main/footer.jsp"/>
 </body>
 </html>
