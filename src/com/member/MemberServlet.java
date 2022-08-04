@@ -2,6 +2,7 @@ package com.member;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.sql.Connection;
 
 import javax.servlet.RequestDispatcher;
@@ -90,12 +91,22 @@ public class MemberServlet extends HttpServlet {
 					out.print("</script>");
 
 				} else {
-
-					url = cp +"/member/join_result.jsp";
+				
+					url = cp + "/shop/member/join_result.do?userName=" +URLEncoder.encode(dto.getUserName(), "UTF-8");
 					resp.sendRedirect(url);
 
 				}
+
+			// 회원가입 결과화면
+			} else if (uri.indexOf("join_result.do") != -1) {
+				
+				String userName = req.getParameter("userName");
 			
+				req.setAttribute("userName", userName);
+				url = "/member/join_result.jsp";
+				forward(req, resp, url);
+				
+				
 			// 로그인 화면
 			} else if (uri.indexOf("login.do") != -1) {
 
