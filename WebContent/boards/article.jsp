@@ -37,7 +37,7 @@
 		<div class="bbsArticle_bottomLine">
 			<dl>
 				<dt>등록일</dt>
-				<dd>${dto.created }</dd>
+				<dd>${dto.postDate }</dd>
 				<dt>조회수</dt>
 				<dd>${dto.hitCount }</dd>
 			</dl>		
@@ -63,9 +63,9 @@
 	<div id="bbsArticle_footer">
 		<div id="leftFooter">
 			<input type="button" value=" 수정 " class="btn2" 
-			onclick="location='<%=cp%>/bbs/updated.do?num=${dto.num }&${params }' "/>
+			onclick="location='<%=cp%>/bbs/updated.do?num=${dto.boardNum }&${params }' "/>
  		    <input type="button" value=" 삭제 " class="btn2"
- 		     onclick="location='<%=cp%>/bbs/deleted_ok.do?num=${dto.num }&${params }' "/>
+ 		     onclick="location='<%=cp%>/bbs/deleted_ok.do?num=${dto.boardNum }&${params }' "/>
  		</div>
  		<div id="rightFooter">
 			<input type="button" value=" 리스트 " class="btn2" 

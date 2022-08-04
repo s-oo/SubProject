@@ -13,8 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
-import com.member.MemberDTO;
+import com.boards.BoardsDTO;
 import com.util.DBConn;
 import com.util.MyPage;
 
@@ -48,49 +47,50 @@ public class BoardsServlet extends HttpServlet {
 		MyPage myPage = new MyPage();
 
 		String url;
-		
+
 		String sessionUserId = (String) req.getSession().getAttribute("userId");
 		String userId = null;
-		
+
 		if (sessionUserId != null) {
 			userId = sessionUserId;
 		}
 
-
 		if (uri.indexOf("write.do") != -1) {
 
 			HttpSession session = req.getSession();
-				
-			/*url = "member/login.jsp";
-			forward(req, resp, url);*/
-		
-			
-			
-			
-			
-		url = "/member/login.jsp";
+
+			if (userId == null) {
+
+				url = "/member/login.jsp";
+				forward(req, resp, url);
+				return;
+
+			}
+
+			url = "/boards/write.jsp";
 			forward(req, resp, url);
 
 		} else if (uri.indexOf("write_ok.do") != -1) {
-
+			System.out.println("안녕");
 			BoardsDTO dto = new BoardsDTO();
 
 			int maxNum = dao.getMaxNum();
 
 			dto.setBoardNum(maxNum + 1);
-			dto.setSubject(req.getParameter("subject"));
 			dto.setUserId(req.getParameter("userId"));
-			//dto.setEmail(req.getParameter("email"));
-//			dto.setPwd(req.getParameter("pwd"));
+			dto.setSubject(req.getParameter("subject"));
 			dto.setContent(req.getParameter("content"));
-//			dto.setIpAddr(req.getRemoteAddr());
-
+			System.out.println("안녕");
 			dao.insertData(dto);
 
-			url = cp + "/shop/list.do";
+			System.out.println("안녕");
+
+			url = cp + "/shop/boards/list.do";
 			resp.sendRedirect(url);
 
-		} else if (uri.indexOf("list.do") != -1) {
+		}
+
+		else if (uri.indexOf("list.do") != -1) {
 
 			String pageNum = req.getParameter("pageNum");
 
@@ -127,12 +127,12 @@ public class BoardsServlet extends HttpServlet {
 
 			List<BoardsDTO> lists = dao.getLists(start, end, searchKey, searchValue);
 
-			String param = ""; //검색했던 그 페이지정보로 돌아가준다
+			String param = ""; // 검색했던 그 페이지정보로 돌아가준다
 
 			if (searchValue != null && !searchValue.equals("")) {
 				param = "searchKey=" + searchKey;
 				param += "&searchValue=" + URLEncoder.encode(searchValue, "UTF-8");
-			}  //param: 파라미터 값을 저장하고 있는 저장소
+			} // param: 파라미터 값을 저장하고 있는 저장소
 
 			String listUrl = cp + "/shop/boards/list.do";
 
@@ -156,161 +156,150 @@ public class BoardsServlet extends HttpServlet {
 
 			url = "/boards/list.jsp";
 			forward(req, resp, url);
-			
+
 		} else if (uri.indexOf("article.do") != -1) {
-			
-			int num = Integer.parseInt(req.getParameter("num"));
+
+			int boardNum = Integer.parseInt(req.getParameter("boardNum"));
 			String pageNum = req.getParameter("pageNum");
-			
+
 			String searchKey = req.getParameter("searchKey");
 			String searchValue = req.getParameter("searchValue");
-			
-			if(searchValue!=null&&!searchValue.equals("")) {
-				searchValue = URLDecoder.decode(searchValue,"UTF-8");
+
+			if (searchValue != null && !searchValue.equals("")) {
+				searchValue = URLDecoder.decode(searchValue, "UTF-8");
 			}
-			
-			dao.updateHitCount(num);
-			
-			BoardsDTO dto = dao.getReadData(num);
-			
-			if(dto==null) {
-				url = cp + "/bbs/list.do";
-				
+
+			dao.updateHitCount(boardNum);
+
+			BoardsDTO dto = dao.getReadData(boardNum);
+
+			if (dto == null) {
+				url = cp + "/shop/list.do";
+
 				resp.sendRedirect(url);
 			}
-			
+
 			int lineSu = dto.getContent().split("\n").length;
-			
+
 			dto.setContent(dto.getContent().replaceAll("\r", "<br/>"));
-			
+
 			String param = "pageNum=" + pageNum;
-			
-			if(searchValue!=null&&!searchValue.equals("")) {
-				
+
+			if (searchValue != null && !searchValue.equals("")) {
+
 				param += "&searchKey=" + searchKey;
 				param += "&searchValue=" + URLEncoder.encode(searchValue, "UTF-8");
-				
+
 			}
-			
+
 			req.setAttribute("dto", dto);
 			req.setAttribute("params", param);
 			req.setAttribute("lineSu", lineSu);
 			req.setAttribute("pageNum", pageNum);
 
-			url = "/boardTest/article.jsp";
+			url = "/boards/article.jsp";
 			forward(req, resp, url);
-			
+
 		} else if (uri.indexOf("updated.do") != -1) {
-			
-			
+
 			int num = Integer.parseInt(req.getParameter("num"));
 			String pageNum = req.getParameter("pageNum");
-			
+
 			String searchKey = req.getParameter("searchKey");
 			String searchValue = req.getParameter("searchValue");
-			
-			if(searchValue!=null&&!searchValue.equals("")) {
-				searchValue = URLDecoder.decode(searchValue,"UTF-8");
+
+			if (searchValue != null && !searchValue.equals("")) {
+				searchValue = URLDecoder.decode(searchValue, "UTF-8");
 			}
-			
+
 			BoardsDTO dto = dao.getReadData(num);
-			
-			if(dto==null) {
-				url = cp + "/bbs/list.do";
+
+			if (dto == null) {
+				url = cp + "/shop/list.do";
 				resp.sendRedirect(url);
 			}
-			
+
 			String param = "pageNum=" + pageNum;
-					
-			if(searchValue!=null&&!searchValue.equals("")) {
-						
-			param += "&searchKey=" + searchKey;
-			param += "&searchValue=" + URLEncoder.encode(searchValue, "UTF-8");
-						
-			}		
-			
+
+			if (searchValue != null && !searchValue.equals("")) {
+
+				param += "&searchKey=" + searchKey;
+				param += "&searchValue=" + URLEncoder.encode(searchValue, "UTF-8");
+
+			}
+
 			req.setAttribute("dto", dto);
 			req.setAttribute("pageNum", pageNum);
 			req.setAttribute("params", param);
 			req.setAttribute("searchKey", searchKey);
 			req.setAttribute("searchValue", searchValue);
-			
-			url = "/boardTest/updated.jsp";
+
+			url = "/boards/updated.jsp";
 			forward(req, resp, url);
-			
-		}/*else if(uri.indexOf("updated_ok.do")!=-1) {
-			
+
+		} /*
+			 * else if(uri.indexOf("updated_ok.do")!=-1) {
+			 * 
+			 * 
+			 * int num = Integer.parseInt(req.getParameter("num")); String pageNum =
+			 * req.getParameter("pageNum");
+			 * 
+			 * String searchKey = req.getParameter("searchKey"); String searchValue =
+			 * req.getParameter("searchValue");
+			 * 
+			 * if(searchValue!=null&&!searchValue.equals("")) { searchValue =
+			 * URLDecoder.decode(searchValue,"UTF-8"); }
+			 * 
+			 * BoardsDTO dto = new BoardsDTO();
+			 * 
+			 * dto.setNum(Integer.parseInt(req.getParameter("num")));
+			 * dto.setSubject(req.getParameter("subject"));
+			 * dto.setName(req.getParameter("name"));
+			 * dto.setEmail(req.getParameter("email")); dto.setPwd(req.getParameter("pwd"));
+			 * dto.setContent(req.getParameter("content"));
+			 * 
+			 * //수정된 데이터를 보낸다 dao.updateData(dto);
+			 * 
+			 * String param = "pageNum=" + pageNum;
+			 * 
+			 * if(searchValue!=null&&!searchValue.equals("")) {
+			 * 
+			 * param += "&searchKey=" + searchKey; param += "&searchValue=" +
+			 * URLEncoder.encode(searchValue, "UTF-8");
+			 * 
+			 * }
+			 * 
+			 * url = cp + "/bbs/list.do?" + param; resp.sendRedirect(url);
+			 * 
+			 * }
+			 */else if (uri.indexOf("deleted_ok") != -1) {
 
 			int num = Integer.parseInt(req.getParameter("num"));
 			String pageNum = req.getParameter("pageNum");
-			
+
 			String searchKey = req.getParameter("searchKey");
 			String searchValue = req.getParameter("searchValue");
-			
-			if(searchValue!=null&&!searchValue.equals("")) {
-				searchValue = URLDecoder.decode(searchValue,"UTF-8");
+
+			if (searchValue != null && !searchValue.equals("")) {
+				searchValue = URLDecoder.decode(searchValue, "UTF-8");
 			}
-			
-            BoardsDTO dto = new BoardsDTO();
-			
-            dto.setNum(Integer.parseInt(req.getParameter("num")));
-            dto.setSubject(req.getParameter("subject"));
-            dto.setName(req.getParameter("name"));
-            dto.setEmail(req.getParameter("email"));
-            dto.setPwd(req.getParameter("pwd"));
-            dto.setContent(req.getParameter("content"));
 
-            //수정된 데이터를 보낸다
-            dao.updateData(dto);
-
-            String param = "pageNum=" + pageNum;
-
-            if(searchValue!=null&&!searchValue.equals("")) {
-
-            	param += "&searchKey=" + searchKey;
-            	param += "&searchValue=" + URLEncoder.encode(searchValue, "UTF-8");
-
-            }
-
-            url = cp + "/bbs/list.do?" + param;
-            resp.sendRedirect(url);
-
-		}*/else if(uri.indexOf("deleted_ok")!=-1) {
-			
-			int num = Integer.parseInt(req.getParameter("num"));
-			String pageNum = req.getParameter("pageNum");
-			
-			String searchKey = req.getParameter("searchKey");
-			String searchValue = req.getParameter("searchValue");
-			
-			if(searchValue!=null&&!searchValue.equals("")) {
-				searchValue = URLDecoder.decode(searchValue,"UTF-8");
-			}
-			
 			dao.deleteData(num);
-			
-			  String param = "pageNum=" + pageNum;
 
-	            if(searchValue!=null&&!searchValue.equals("")) {
+			String param = "pageNum=" + pageNum;
 
-	            	param += "&searchKey=" + searchKey;
-	            	param += "&searchValue=" + URLEncoder.encode(searchValue, "UTF-8");
+			if (searchValue != null && !searchValue.equals("")) {
 
-	            }
-			
-			 url = cp + "/bbs/list.do?" + param;
-	            resp.sendRedirect(url);
-			
+				param += "&searchKey=" + searchKey;
+				param += "&searchValue=" + URLEncoder.encode(searchValue, "UTF-8");
+
+			}
+
+			url = cp + "/shop/list.do?" + param;
+			resp.sendRedirect(url);
+
 		}
-			
-		
-		
-		
 
-		
-		
-		
-		
 	}
 
 }

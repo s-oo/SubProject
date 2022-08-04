@@ -24,7 +24,7 @@
 </script>
 
 </head>
-<body bgcolor="green">
+<body>
 
 
 
@@ -80,20 +80,20 @@
 				<dl>
 					<dt class="num">번호</dt>
 					<dt class="subject">제목</dt>
-					<dt class="name">작성자</dt>
+					<dt class="name">작성ID</dt>
 					<dt class="created">작성일</dt>
 					<dt class="hitCount">조회수</dt>
 				</dl>
 			</div>
 			<div id="lists">
-				<c:forEach var="dto" items="${lists }">
+					<c:forEach var="dto" items="${lists }">
 					<dl>
-						<dd class="num">${dto.num }</dd>
+						<dd class="num">${dto.boardNum }</dd>
 						<dd class="subject">
-							<a href="${articleUrl }&num=${dto.num }">${dto.subject }</a>
+							<a href="${articleUrl }&boardNum=${dto.boardNum }">${dto.subject }</a>
 						</dd>
-						<dd class="name">${dto.name }</dd>
-						<dd class="created">${dto.created }</dd>
+						<dd class="name">${dto.userId }</dd>
+						<dd class="created">${dto.postDate }</dd>
 						<dd class="hitCount">${dto.hitCount }</dd>
 					</dl>
 				</c:forEach>
@@ -101,7 +101,7 @@
 			<div id="footer">
 			
 				<div>
-<img src="./img/사진.jpg">
+<%-- <img src="<%=cp%>/boards/img/사진.jpg"> --%>
 </div>
 			
 				<p>
