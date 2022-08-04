@@ -73,7 +73,7 @@
 <tr height="30">
 	<td colspan="2" align="center">
 	<input type="button" value=" 로그인 " class="btn2" onclick="login();"/>
-	<input type="button" value=" 취소 " class="btn2" onclick="location='<%=cp%>';"/>
+	<input type="button" value=" 취소 " class="btn2" onclick="location='<%=cp%>/shop/main/main.do';"/>
 	<input type="button" value=" 회원정보수정 " class="btn2" onclick="location='<%=cp%>/shop/member/update.do';"/>
 	</td>
 	
