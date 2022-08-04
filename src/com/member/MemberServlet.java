@@ -130,14 +130,14 @@ public class MemberServlet extends HttpServlet {
 					
 					req.setAttribute("message", "아이디 또는 패스워드를 정확히 입력하세요.");
 					req.setAttribute("searchpw", "비밀번호 찾기");
-					url = "/shop/member/login.do";
+					url = "/member/login.jsp";
 					forward(req, resp, url);
 					return;
 					
 					
 				} else {
 
-					
+					req.getSession().setAttribute("userId", userId);
 
 					url = cp + "/main/main.jsp";
 					resp.sendRedirect(url);
@@ -205,7 +205,8 @@ public class MemberServlet extends HttpServlet {
 				MemberDTO dto = dao.getReadData(userId);
 
 				req.setAttribute("dto", dto);
-
+			
+			
 				url = "/member/myPage.jsp";
 				forward(req, resp, url);
 
