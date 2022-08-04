@@ -8,22 +8,54 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>cart list</title>
+
+<link rel="stylesheet" type="text/css" href="<%=cp %>/product/data/style.css"/>
+
 </head>
 <body>
-	<c:set var="sum" value="0"/>
-	<c:forEach var="dto" items="${list }">
-		productNum : ${dto.productNum }<br/>
-		productName : ${dto.productName }<br/>
-		productQuantity : ${dto.productQuantity }<br/>
-		productPrice : ${dto.productPrice }<br/>
-		<c:set var="sum" value="${sum } + ${dto.productQuantity } * ${dto.productPrice }"/>
-	</c:forEach><br/>
-	<c:if test="${sum != 0}">
-		sum : ${sum }
-	</c:if>
-	<c:if test="${list == null }">
-		등록된 상품이 없음
-	</c:if>
+	<jsp:include page="../main/header.jsp"/>
+	
+	<div id="content" align="center" style="margin-top: 100px;">
+		<div id="contentList">
+			<ul class="listView">
+				<li>
+					
+				</li>
+				<c:forEach var="dto" items="${list }">
+					<li id="listBox" class="item" style="list-style: none; width: 300px; pading: 10em;">
+						<span class="box_wrap" style="display: inline-block; font-size: 10pt; color: #555555;">
+							${dto.orderNum }
+						</span>
+						<span class="box_wrap" style="display: inline-block; font-size: 10pt; color: #555555;">
+							${dto.userId }
+						</span>
+						<span class="box_wrap" style="display: inline-block; font-size: 10pt; color: #555555;">
+							${dto.productNum }
+						</span>
+						<span class="box_wrap" style="display: inline-block; font-size: 10pt; color: #555555;">
+							${dto.productName }
+						</span>
+						<span class="box_wrap" style="display: inline-block; font-size: 10pt; color: #555555;">
+							${dto.productQuantity }
+						</span>
+						<span class="box_wrap" style="display: inline-block; font-size: 10pt; color: #555555;">
+							${dto.productPrice }
+						</span>
+					</li>
+				</c:forEach>
+				
+				<c:if test="${empty list }">
+					<li id="listBox" class="item" style="list-style: none;width: 300px;display: inline-block;">
+						<div class="box_wrap" style="display: inline-block;font-size: 10pt;color: #555555;">
+							등록된 상품이 없음
+						</div>
+					</li>
+				</c:if>
+			</ul>
+		</div>
+	</div>
+	
+	<jsp:include page="../main/footer.jsp"/>
 </body>
 </html>
