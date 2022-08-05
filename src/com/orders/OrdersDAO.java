@@ -50,15 +50,17 @@ public class OrdersDAO {
 
 		try {
 
-			sql = "INSERT INTO ORDERS(ORDERNUM, USERID, PRODUCTNUM, PRODUCTQUANTITY, PROGRESS) ";
-			sql += "VALUES(?, ?, ?, ?, ?)";
+			sql = "INSERT INTO ORDERS(ORDERNUM, USERID, PRODUCTNUM, ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, PROGRESS) ";
+			sql += "VALUES(?, ?, ?, ?, ?, ?, ?)";
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, dto.getOrderNum());
 			pstmt.setString(2, dto.getUserId());
 			pstmt.setInt(3, dto.getProductNum());
-			pstmt.setInt(4, dto.getProductQuantity());
-			pstmt.setString(5, dto.getProgress());
+			pstmt.setInt(4, dto.getOrderQuantity());
+			pstmt.setString(5, dto.getOrderColor());
+			pstmt.setString(6, dto.getOrderSize());
+			pstmt.setString(7, dto.getProgress());
 
 			result = pstmt.executeUpdate();
 
@@ -80,13 +82,15 @@ public class OrdersDAO {
 
 		try {
 
-			sql = "UPDATE ORDERS SET PRODUCTQUANTITY = ?, PROGRESS = ?";
+			sql = "UPDATE ORDERS SET ORDERQUANTITY = ?, ORDERCOLOR = ?, ORDERSIZE = ?, PROGRESS = ? ";
 			sql += "WHERE ORDERNUM = ?";
 
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, dto.getProductQuantity());
-			pstmt.setString(2, dto.getProgress());
-			pstmt.setInt(3, dto.getOrderNum());
+			pstmt.setInt(1, dto.getOrderQuantity());
+			pstmt.setString(2, dto.getOrderColor());
+			pstmt.setString(3, dto.getOrderSize());
+			pstmt.setString(4, dto.getProgress());
+			pstmt.setInt(5, dto.getOrderNum());
 
 			result = pstmt.executeUpdate();
 
@@ -134,35 +138,87 @@ public class OrdersDAO {
 
 		try {
 
-			sql = "SELECT O.*, PRODUCTNAME, PRODUCTPRICE, PRODUCTCATEGORY, PRODUCTSIZE, PRODUCTCOLOR, SAVEFILENAME1 ";
+			sql = "SELECT ORDERNUM, USERID, O.PRODUCTNUM,ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, PROGRESS, ";
+			sql += "PRODUCTNAME, PRODUCTPRICE, PRODUCTCATEGORY, SAVEFILENAME ";
 			sql += "FROM ORDERS O, PRODUCT P ";
 			sql += "WHERE O.PRODUCTNUM = P.PRODUCTNUM AND USERID = ? AND PROGRESS = ?";
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
 			pstmt.setString(2, progress);
-			
+
 			rs = pstmt.executeQuery();
-			
+
+			while (rs.next()) {
+
+				OrdersDTO dto = new OrdersDTO();
+
+				dto.setOrderNum(rs.getInt("ORDERNUM"));
+				dto.setUserId(rs.getString("USERID"));
+				dto.setProductNum(rs.getInt("PRODUCTNUM"));
+				dto.setOrderQuantity(rs.getInt("ORDERQUANTITY"));
+				dto.setOrderColor(rs.getString("ORDERCOLOR"));
+				dto.setOrderSize(rs.getString("ORDERSIZE"));
+				dto.setProgress(rs.getString("PROGRESS"));
+
+				dto.setProductName(rs.getString("PRODUCTNAME"));
+				dto.setProductPrice(rs.getInt("PRODUCTPRICE"));
+				dto.setProductCategory(rs.getString("PRODUCTCATEGORY"));
+				dto.setSaveFileName(rs.getString("SAVEFILENAME").split(","));
+
+				list.add(dto);
+
+			}
+
+			rs.close();
+			pstmt.close();
+
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+
+		return list;
+
+	}
+
+	public List<OrdersDTO> getList(String[] orderNum) {
+
+		List<OrdersDTO> list = new ArrayList<>();
+		PreparedStatement pstmt;
+		ResultSet rs;
+		String sql;
+
+		try {
+
+			sql = "SELECT ORDERNUM, USERID, O.PRODUCTNUM, ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, PROGRESS, ";
+			sql += "PRODUCTNAME, PRODUCTPRICE, PRODUCTCATEGORY, SAVEFILENAME ";
+			sql += "FROM ORDERS O, PRODUCT P ";
+			sql += "WHERE O.PRODUCTNUM = P.PRODUCTNUM AND ORDERNUM IN (?)";
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, String.join(",", orderNum));
+
+			rs = pstmt.executeQuery();
+
 			while (rs.next()) {
 
 				OrdersDTO dto = new OrdersDTO();
 				
 				dto.setOrderNum(rs.getInt("ORDERNUM"));
 				dto.setUserId(rs.getString("USERID"));
-				dto.setProductNum(rs.getInt(3));
-				dto.setProductQuantity(rs.getInt("PRODUCTQUANTITY"));
+				dto.setProductNum(rs.getInt("PRODUCTNUM"));
+				dto.setOrderQuantity(rs.getInt("ORDERQUANTITY"));
 				dto.setProgress(rs.getString("PROGRESS"));
+				dto.setOrderSize(rs.getString("ORDERSIZE"));
+				dto.setOrderColor(rs.getString("ORDERCOLOR"));
 
 				dto.setProductName(rs.getString("PRODUCTNAME"));
 				dto.setProductPrice(rs.getInt("PRODUCTPRICE"));
 				dto.setProductCategory(rs.getString("PRODUCTCATEGORY"));
-				dto.setProductSize(rs.getString("PRODUCTSIZE"));
-				dto.setProductColor(rs.getString("PRODUCTCOLOR"));
-				dto.setSaveFileName1(rs.getString("SAVEFILENAME1"));
+				dto.setSaveFileName(rs.getString("SAVEFILENAME").split(","));
 
 				list.add(dto);
-				
+
 			}
 
 			rs.close();
@@ -176,62 +232,49 @@ public class OrdersDAO {
 
 	}
 	
-	public List<OrdersDTO> getList(String[] orderNum) {
-
-		List<OrdersDTO> list = new ArrayList<>();
+	public OrdersDTO getReadData(int orderNum) {
+		
+		OrdersDTO dto = null;
 		PreparedStatement pstmt;
 		ResultSet rs;
 		String sql;
-
+		
 		try {
-
-			int n = orderNum.length;
-			String str = "";
 			
-			for (int i = 0; i < n; i ++) {
-				if (i != 0)
-					str = ", ";
-				str += orderNum[i];
-			}
+			sql = "SELECT ORDERNUM, USERID, PRODUCTNUM, ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, PROGRESS ";
+			sql += "FROM ORDERS WHERE ORDERNUM = ?";
 			
-			sql = "SELECT O.*, PRODUCTNAME, PRODUCTPRICE, PRODUCTCATEGORY, PRODUCTSIZE, PRODUCTCOLOR, SAVEFILENAME1 ";
-			sql += "FROM ORDERS O, PRODUCT P ";
-			sql += "WHERE O.PRODUCTNUM = P.PRODUCTNUM AND ORDERNUM IN (?)";
-
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, str);
-
+			pstmt.setInt(1, orderNum);
+			
 			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-
-				OrdersDTO dto = new OrdersDTO();
+			
+			if (rs.next()) {
+				
+				dto = new OrdersDTO();
+				
 				dto.setOrderNum(rs.getInt("ORDERNUM"));
 				dto.setUserId(rs.getString("USERID"));
 				dto.setProductNum(rs.getInt("PRODUCTNUM"));
-				dto.setProductQuantity(rs.getInt("PRODUCTQUANTITY"));
+				dto.setOrderQuantity(rs.getInt("ORDERQUANTITY"));
 				dto.setProgress(rs.getString("PROGRESS"));
-
-				dto.setProductName(rs.getString("PRODUCTNAME"));
-				dto.setProductPrice(rs.getInt("PRODUCTPRICE"));
-				dto.setProductCategory(rs.getString("PRODUCTCATEGORY"));
-				dto.setProductSize(rs.getString("PRODUCTSIZE"));
-				dto.setProductColor(rs.getString("PRODUCTCOLOR"));
-				dto.setSaveFileName1(rs.getString("SAVEFILENAME1"));
-
-				list.add(dto);
+				dto.setOrderSize(rs.getString("ORDERSIZE"));
+				dto.setOrderColor(rs.getString("ORDERCOLOR"));
 				
 			}
-
+			
 			rs.close();
 			pstmt.close();
-
+			
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
-
-		return list;
-
+		
+		return dto;
+		
 	}
+	
+	
+	
 
 }

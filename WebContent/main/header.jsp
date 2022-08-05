@@ -21,7 +21,8 @@
 					<a href="/sub/shop/product/list.do?productCategory=pants" class="xans-record-">PANTS</a><br />
 				</div>
 			</div>
-			<br /> <br /> <b>borad</b>
+			<br /> <br />
+			<b>BORAD</b>
 			<div id="cate_wrap" class="on">
 				<div id="cate_inner" class="xans-element- xans-layout xans-layout-category">
 					<a href="/sub/shop/boards/list.do?community=QnA">Q/A</a><br />
@@ -56,7 +57,7 @@
 			<c:choose>
 				<c:when test="${empty userId }">
 					<a href="/sub/shop/member/login.do" class="xans-element- xans-layout xans-layout-statelogoff ">LOGIN</a>&nbsp;&nbsp;
-					<a href="/sub/shop/member/join.do" class="xans-element- xans-layout xans-layout-statelogoff ">JOIN</a>&nbsp;&nbsp;
+					<a href="/sub/shop/member/terms.do" class="xans-element- xans-layout xans-layout-statelogoff ">JOIN</a>&nbsp;&nbsp;
 				</c:when>
 				<c:when test="${!empty userId }">
 					<a href="/sub/shop/member/myPage.do" class="xans-element- xans-layout xans-layout-statelogoff ">MYPAGE</a>&nbsp;&nbsp;
