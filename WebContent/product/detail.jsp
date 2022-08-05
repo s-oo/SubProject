@@ -12,6 +12,7 @@
 <title>Product detail</title>
 
 <link rel="stylesheet" type="text/css" href="<%=cp %>/product/data/style.css"/>
+<script type="text/javascript" src="<%=cp%>/product/script.js"></script>
 
 </head>
 <body>
@@ -27,14 +28,6 @@
 							<img src="<%=cp %>/product/image/top/${dto.saveFileName[i] }"
 							width="600px" style="margin-bottom: 22px;" />
 						</c:forEach>
-						<%-- <img src="<%=cp %>/product/image/top/${dto.saveFileName2 }"
-						width="600px" style="margin-bottom: 22px;" />
-						<img src="<%=cp %>/product/image/top/${dto.saveFileName3 }"
-						width="600px" style="margin-bottom: 22px;" />
-						<img src="<%=cp %>/product/image/top/${dto.saveFileName4 }"
-						width="600px" style="margin-bottom: 22px;" />
-						<img src="<%=cp %>/product/image/top/${dto.saveFileName5 }"
-						width="600px" style="margin-bottom: 22px;" /> --%>
 					</div>
 				</div>
 				<div class="productMenu" align="center">
@@ -52,110 +45,131 @@
 							<tbody class="optionColor">
 								<!-- 컬러 -->
 								<tr>
-									<td><select name="option1" class="options">
+									<td><select name="option1" class="options" onchange="select('case1')">
 											<option value="*" selected="selected">[필수] COLOR 선택</option>
 											<option value="**" disabled="disabled">-------------------</option>
 											<c:forEach var="i" begin="0" end="${colorLength-1}" step="1">
-												<option value="WHITE">${dto.productColor[i] }</option>
+												<option value="case1">${dto.productColor[i] }</option>
 											</c:forEach>
 									</select></td>
 								</tr>
 							</tbody>
-							<tbody class="optionSize">
+
+							<tbody class="optionSize" id="optionSize">
 								<!-- 사이즈 -->
 								<tr>
-									<td><select name="option2" class="options">
+									<td><select name="option2" class="options" onchange="select('case2')">
 											<option value="*" selected="selected">[필수] SIZE 선택</option>
 											<option value="**" disabled="disabled">-------------------</option>
 											<c:forEach var="i" begin="0" end="${sizeLength-1}" step="1">
-												<option value="WHITE">${dto.productSize[i] }</option>
+												<option value="case2">${dto.productSize[i] }</option>
 											</c:forEach>
 									</select></td>
 								</tr>
 							</tbody>
 							<tbody>
 								<tr class="displaynone" id="">
-									<td colspan="2" class="selectButton"><a href="#none"
-										class="btnSubmit sizeS" onclick="">옵션선택</a></td>
+									<td colspan="2" class="selectButton">
+										<a href="#none" class="btnSubmit sizeS" onclick="">옵션선택</a>
+									</td>
 								</tr>
 							</tbody>
 						</table>
 
+
 						<div id="totalProduct" class="">
 							<!-- 선택한 옵션 -->
-							<table border="1" summary="">
+							<table class="totalProduct" border="1" summary="">
+								<colgroup>
+									<col style="width: 284px;">
+									<col style="width: 80px;">
+									<col style="width: 110px;">
+								</colgroup>
 								<tbody class="displaynone">
 									<tr>
-										<td>ANDREW COTTON HALF SHIRT [WHITE]</td>
-										<td><span class="quantity"> <input id="quantity"
-												name="quantity_name" style="" value="0" type="text">
-												<a href="#none"> <img
-													src="//img.echosting.cafe24.com/skin/base_ko_KR/product/btn_count_up.gif"
-													alt="수량증가" class="QuantityUp up">
-											</a> <a href="#none"> <img
-													src="//img.echosting.cafe24.com/skin/base_ko_KR/product/btn_count_down.gif"
-													alt="수량감소" class="QuantityDown down">
-											</a>
-										</span></td>
-										<td class="right"><span class="quantity_price">158000</span>
-											<span class="mileage displaynone"> (<img src="">&nbsp;
-												<span class="mileage_price"></span>)
-										</span></td>
+										<td>${dto.productName }</td>
+										<td>
+											<span class="quantity">
+												<input id="quantity" name="quantity_name" style="" value="0" type="text">
+												<a href="#none">
+													<img src="//img.echosting.cafe24.com/skin/base_ko_KR/product/btn_count_up.gif"
+													alt="수량증가" class="QuantityUp">
+												</a>
+												<a href="#none">
+													<img src="//img.echosting.cafe24.com/skin/base_ko_KR/product/btn_count_down.gif"
+													alt="수량감소" class="QuantityDown">
+												</a>
+											</span>
+										</td>
+										<td class="right">
+											<span class="quantity_price">${dto.productPrice }</span>
+												<span class="mileage displaynone">
+												(<img src="">&nbsp;<span class="mileage_price"></span>)
+											</span>
+										</td>
 									</tr>
 								</tbody>
-
-								<tbody class="option_products">
-									<tr class="option_product " data-option-index="1"
-										target-key="84">
-										<td><input type="hidden" class="option_box_id"
-											id="option_box1_id" value="P00000DG000B" name="item_code[]"
-											data-item-add-option="" data-item-reserved="N"
-											data-option-id="000B" data-option-index="1">
+								
+								<tbody class="selectedOptions" id="selectedOptions">
+									<tr class="selectedOption " data-option-index="1" target-key="84">
+										<td>
+											<input type="hidden" class="option_box_id" id="option_box1_id"
+											value="P00000DG000B" name="item_code[]" data-item-add-option=""
+											data-item-reserved="N" data-option-id="000B" data-option-index="1">
 											<p class="product">
-												ANDREW COTTON HALF SHIRT [WHITE]<br> - <span>WHITE/LARGE</span>
-											</p></td>
-										<td><span class="quantity" style="width: 65px;"> <input
-												type="text" id="option_box1_quantity" name="quantity_opt[]"
-												class="quantity_opt eProductQuantityClass" value="1"
-												product-no="84"> <a href="#none"
-												class="up eProductQuantityUpClass"
-												"=" "data-target="option_box1_up"> <img
-													src="//img.echosting.cafe24.com/design/skin/default/product/btn_count_up.gif"
-													id="option_box1_up" class="option_box_up" alt="수량증가">
-											</a> <a href="#none" class="down eProductQuantityDownClass"
-												data-target="option_box1_down"> <img
-													src="//img.echosting.cafe24.com/design/skin/default/product/btn_count_down.gif"
-													id="option_box1_down" class="option_box_down" alt="수량감소">
-											</a>
-										</span> <a href="#none" class="delete"> <img
-												src="//img.echosting.cafe24.com/design/skin/default/product/btn_price_delete.gif"
+												${dto.productName }<br> - <span>color/size</span>
+											</p>
+										</td>
+										<td>
+											<span class="quantity" style="width: 65px;">
+												<input type="text" id="option_box1_quantity" name="quantity_opt[]"
+												class="quantity_opt eProductQuantityClass" value="1" product-no="84">
+													<a href="#none" class="up eProductQuantityUpClass" "="" data-target="option_box1_up">
+														<img src="//img.echosting.cafe24.com/design/skin/default/product/btn_count_up.gif"
+														id="option_box1_up" class="option_box_up" alt="수량증가">
+													</a>
+													<a href="#none" class="down eProductQuantityDownClass" data-target="option_box1_down">
+														<img src="//img.echosting.cafe24.com/design/skin/default/product/btn_count_down.gif"
+														id="option_box1_down" class="option_box_down" alt="수량감소">
+													</a>
+											</span>
+											<a href="#none" class="delete">
+												<img src="//img.echosting.cafe24.com/design/skin/default/product/btn_price_delete.gif"
 												alt="삭제" id="option_box1_del" class="option_box_del">
-										</a></td>
-										<td class="right"><span id="option_box1_price"> <input
-												type="hidden" class="option_box_price" value="158000"
-												product-no="84" item_code="P00000DG000B"> <span
-												class="ec-front-product-item-price" code="P00000DG000B"
-												product-no="84">110,600 KRW</span>
-										</span></td>
+											</a>
+										</td>
+										<td class="right">
+											<span id="option_box1_price">
+												<input type="hidden" class="option_box_price" value="158000"
+												product-no="84" item_code="P00000DG000B">
+												<span class="ec-front-product-item-price" code="P00000DG000B"
+												product-no="84">${dto.productPrice } KRW
+												</span>
+											</span>
+										</td>
 									</tr>
 								</tbody>
 								<tbody class="add_products"></tbody>
 							</table>
 						</div>
 
-						<br />
-
+						<!-- 합계 금액 -->
 						<div id="totalPrice" class="totalPrice">
-							<!-- 합계 금액 -->
-							TOTAL : <span class="total"> <strong><em>110,600
-										KRW</em></strong> (1개)
+							TOTAL :
+							<span class="total">
+								<strong>
+									<!-- if 선택되지 않으면 -->
+									<em>0</em>
+									<!-- if 선택되면, 개수*금액 -->
+									<em>110,600 KRW</em>
+								</strong>
+								<!-- if 선택되면, 개수 -->
+								(1개)
 							</span>
 						</div>
 
-						<br />
-
+						<!-- 장바구니 추가 -->
 						<div class="addList">
-							<!-- 장바구니 추가 -->
 							<div class="ec-base-button gColumn">
 								<a href="#none" class="add_button"
 									onclick="product_submit(1, '/exec/front/order/basket/', this)"
@@ -166,14 +180,12 @@
 									TO BAG</a> <span class="sold_btn displaynone">SOLD OUT</span>
 							</div>
 						</div>
-
-
 					</div>
-
 				</div>
 			</div>
 
 
+			<!-- board -->
 			<div class="board">
 				<div class="board_wrap">
 					<!-- Review -->

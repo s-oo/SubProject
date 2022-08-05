@@ -22,6 +22,14 @@ div{
     padding: 0;
 }
 
+li{
+	margin-right: 10pt;
+}
+
+#content{
+	margin: 80pt;
+}
+
 /*  */
 
 #header {
@@ -165,6 +173,10 @@ table{
     text-align: left;
 }
 
+.optionSize{
+	display: none;
+}
+
 tbody{
 	display: table-row-group;
     vertical-align: middle;
@@ -194,6 +206,26 @@ tbody{
 
 .displaynone{
 	display: none !important;
+}
+
+.selectedOptions{
+	display: none;
+}
+
+.totalProduct{
+	border: none;
+	font-size: 9pt;
+}
+
+.totalProduct td{
+	border: none;
+}
+
+.totalProduct tbody{
+	float: left;
+    position: relative;
+    width: 100%;
+    padding-top: 16px;
 }
 
 /* 장바구니 */

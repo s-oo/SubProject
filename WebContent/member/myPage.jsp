@@ -10,6 +10,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css"href="<%=cp%>/css/shopStyle.css" />
+<link rel="stylesheet" type="text/css"href="<%=cp%>/member/css/memberListStyle.css" />
+
 </head>
 <body>
 
@@ -27,7 +29,8 @@
 		<input type="reset" value=" BAG " class="btn2" onclick="location.href='<%=cp%>/shop/orders/cartList.do';"/><br> 
 		<input type="button" value=" PROFILE " class="btn2" onclick="location.href='<%=cp%>/shop/member/update.do';"/><br>
 		<input type="button" value=" Q/A " class="btn2" onclick="location.href='<%=cp%>/shop/boards/list.do?community=QnA';"/><br> 
-		<input type="button" value=" 메인으로 " class="btn2" onclick="location.href='<%=cp%>/shop/main/main.do';"/><br> 
+		<input type="button" value=" MAIN " class="btn2" onclick="location.href='<%=cp%>/shop/main/main.do';"/><br> 
+		<input type="button" value=" 탈퇴 " class="btn2" onclick="location.href='<%=cp%>/shop/member/delete.do';"/><br> 
 	</div>
 	
 
