@@ -6,7 +6,9 @@
 %>
 <div id="header" class="txt">
 	<div align="center">
-		<img src="<%=cp%>/main/img/mainlogo.png" width="150px;">
+		<a href="<%=cp %>/shop/main/main.do">
+			<img src="<%=cp%>/main/img/mainlogo.png" width="150px;">
+		</a>
 	</div>
 	<div id="header_bg"></div>
 	<div class="cboth">

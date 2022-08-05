@@ -17,9 +17,11 @@
 	<jsp:include page="../main/header.jsp"/>
 	
 	<div id="content" align="center">
+	
 		<img src="<%=cp%>/main/img/사진.jpg" width="700px;">
+		
 	</div>
 	
-	<jsp:include page="footer.jsp"/>
+	<jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

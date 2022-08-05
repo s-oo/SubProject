@@ -21,27 +21,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>회원정보수정</title>
+<title>kristal회원정보수정</title>
 <link rel="stylesheet" type="text/css"href="<%=cp%>/css/shopStyle.css" />
-<style type="text/css">
-body{
-	font-size: 9pt;
-}
-td{
-	font-size: 9pt;
+<link rel="stylesheet" type="text/css"href="<%=cp%>/member/css/memberListStyle.css" />
 
-}
-.txtField{
-	font-size: 9pt;
-
-}
-
-.btn{
-	font-size: 9pt;
-	background: #e6e6e6;
-
-}
-</style>
 
 <script type="text/javascript">
 
@@ -117,117 +100,122 @@ td{
    
       
    
-<table width="500" cellpadding="0" cellspacing="3" align="center" bgcolor="#e4e4e4">
-<tr height="50">
-	<td bgcolor="#ffffff" style="padding-left: 10px;">
-	<b>회원수정</b>
-	</td>
-	</tr>
-</table>
-<br>
+
+
 <form action="" method="post" name="myForm">
-
-<table width="500" cellpadding="0" cellspacing="0" align="center">
-
-<tr height="2">
-	<td colspan="2" bgcolor="#ccccccc"></td></tr> 
-<tr height="30">
-	<td align="center" width="100" bgcolor="#e6e6e6" >아이디</td>
-	<td style="padding-left: 5px;">
-	${dto.userId }
-	</td>
-</tr>
-<tr height="2">
-	<td colspan="2" bgcolor="#ccccccc"></td></tr>
-<tr height="30">
-	<td align="center" width="100" bgcolor="#e6e6e6">이름</td>
-	<td style="padding-left: 5px;">
-	<input type="text" name="userName"  value="${dto.userName }" size="20" maxlength="10" class="txtField"/>
-	</td>
-</tr>
-<tr height="2">
-	<td colspan="2" bgcolor="#ccccccc"></td></tr>
-<tr height="30">
-	<td align="center" width="100" bgcolor="#e6e6e6">패스워드</td>
-	<td style="padding-left: 5px;">
-	<input type="text" name="userPwd"  value="${dto.userPwd }" size="20" maxlength="10" class="txtField"/>
-	</td>
-</tr>
-
-<tr height="2">
-	<td colspan="2" bgcolor="#ccccccc"></td></tr>
-<tr height="30">
-	<td align="center" width="100" bgcolor="#e6e6e6">성별</td>
-	<td style="padding-left: 5px;">
-	<input type="text" name="userGender"  value="${dto.userGender }" size="20" maxlength="15" class="txtField"/>
-	</td>
-</tr>
-
-<tr height="2">
-	<td colspan="2" bgcolor="#ccccccc"></td></tr>
-<tr height="30">
-	<td align="center" width="100" bgcolor="#e6e6e6">생일</td>
-	<td style="padding-left: 5px;">
-	<input type="text" name="userBirth"  value="${dto.userBirth }" size="20" maxlength="15" class="txtField"/>
-	</td>
-</tr>
-
-<tr height="2">
-	<td colspan="2" bgcolor="#ccccccc"></td></tr>
-<tr height="30">
-	<td align="center" width="100" bgcolor="#e6e6e6">주소</td>
-	<td style="padding-left: 5px;">
-	
-	
-				<input type="text" name="address1" id="sample6_postcode" value="${dto.address1 }">
-				<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-				<input type="text" name="address2" id="sample6_address" value="${dto.address2 }"><br>
-				<input type="text" name="address3" id="sample6_detailAddress" value="${dto.address3 }">
-				<input type="text"  name="address4"id="sample6_extraAddress" value="${dto.address4 }">
-	
-	
-	
-	</td>
-</tr>
-
-<tr height="2">
-	<td colspan="2" bgcolor="#ccccccc"></td></tr>
-<tr height="30">
-	<td align="center" width="100" bgcolor="#e6e6e6">E-Mail</td>
-	<td style="padding-left: 5px;">
-	<input type="text" name="userEmail"  value="${dto.userEmail }" size="20" maxlength="15" class="txtField"/>
-	</td>
-</tr>
-
-
-<tr height="2">
-	<td colspan="2" bgcolor="#ccccccc"></td></tr>
-<tr height="30">
-	<td align="center" width="100" bgcolor="#e6e6e6">전화</td>
-	<td style="padding-left: 5px;">
-	<input type="text" name="userTel"  value="${dto.userTel }" size="20" maxlength="15" class="txtField"/>
-	</td>
-</tr>
-<tr height="2">
-	<td colspan="2" bgcolor="#ccccccc"></td></tr>
-	
-<tr height="35">
-	<td align="center" colspan="2">
-	
-	<input type="hidden" name="userId" value="${dto.userId }"/>
-	
-	<input type="button" class="btn" value="수정완료" onclick="sendIt();"/>
-	<input type="button" class="btn" value="수정취소" onclick="javascript:location.href='<%=cp%>/shop/member/myPage.do';"/> 
-</table>
-
-
-
-
-
+<div id="left_area" style="display: inline-block;" >
+               <div id="update_area" style="width: 600px;">
+                  <div class="box row">
+                  
+                  <div class="box label">
+                        <label for="userName"><span><b>I&nbsp;&nbsp;D</b></span></label>
+                     </div>
+                   <div class="box input">
+                        <input type="text" name="userId" id="userId"  readonly="readonly" value="${dto.userId }" />
+                     </div>
+                   </div>
+                   
+                   
+                    <div class="box row">
+	                     <div class="box label">
+	                        <label for="userName"><span><b>NAME</b></span></label>
+	                     </div>
+	                     <div class="box input">
+	                        <input type="text" name="userName" id="userName" value="${dto.userName }"/>
+	                     </div>
+             		</div>
+                  
+                    <div class="box row">
+	                     <div class="box label">
+	                        <label for="userName"><span><b>PASSWORD</b></span></label>
+	                     </div>
+	                     <div class="box input">
+	                        <input type="text" name="userPwd" id="userName" value="${dto.userPwd }"/>
+	                     </div>
+             		</div>
+                  	  <div class="box row">
+	                     <div class="box label">
+	                        <label for="userName"><span><b>GENDER</b></span></label>
+	                     </div>
+	                     <div class="box input">
+	                        <input type="text" name="userGender" id="userGender" value="${dto.userGender }"/>
+	                     </div>
+             		</div>
+                   <div class="box row">
+	                     <div class="box label">
+	                        <label for="userName"><span><b>BIRTH</b></span></label>
+	                     </div>
+	                     <div class="box input">
+	                        <input type="text" name="userBirth" id="userBirth" value="${dto.userBirth }"/>
+	                     </div>
+             		</div>
+                  
+                  <div class="box row" style="height: 110px;">
+                     <div class="box label" style="height: 80px;">
+                        <label for="userAddress"><span><b>ADDRESS</b></span></label>
+                     </div>
+                     <div class="box input" style="padding: 0px;">
+                      <div class="box input" style="padding: 5px;">
+                           <input type="text" name="address1" id="sample6_postcode" class="input-2" placeholder="우편번호" value="${dto.userAddr[0] }">
+                           <input type="button" onclick="sample6_execDaumPostcode()" class="input-2 right" value="우편번호 찾기">
+                        </div>
+                       
+                        <div class="box input" style="padding: 5px;">
+                           <input type="text" name="userAddr" id="sample6_address" placeholder="주소" value="${dto.userAddr[1] }">
+                        </div>
+                       
+                        <div class="box input" style="padding: 5px;">
+                           <input type="text" name="address3" id="sample6_detailAddress" placeholder="상세주소" value="${dto.userAddr[2] }">
+                          <br>
+                          
+                        <div class="box input" style="padding: 5px;">  
+                           <input type="text"  name="address4"id="sample6_extraAddress" placeholder="참고항목" value="${dto.userAddr[3] }">
+                        </div>
+                        </div>
+                     </div>
+                  </div>
+                <div class="box row">
+                     <div class="box label">
+                        <label for="userTel"><span><b>TEL</b></span></label>
+                     </div>
+                     <div class="box input">
+                        <input type="text" name="userTel" id="userTel" value="${dto.userTel }"/>
+                     </div>
+                  </div>
+                  <div class="box row">
+                     <div class="box label">
+                        <label for="userEmail"><span><b>E-MAIL</b></span></label>
+                     </div>
+                     <div class="box input">
+                        <input type="text" name="userEmail" id="userEmail" value="${dto.userEmail }"/>
+                     </div>
+                  </div>
+                </div>
+            </div>
+				<br><br>
+			<div align="center">	
+				<button  style="border:none; background-color: #FOFOFO; width: 200px; height: 50px;"
+					type="button" onclick="javascript:history.back();">
+						<b style="font-size: 17px; color: black;">뒤로가기</b>
+				</button>
+				&nbsp;&nbsp;
+				<button style="background-color: black; width: 200px; height: 50px;"
+					type="button" onclick="sendIt();">
+						<b style="font-size: 17px; color: white;">수정완료</b>
+				</button>	
+			</div>				
+			<br>
+				<div class="box input">	
+					<button style="border:none; background-color: gray; width: 100px; height: 25px;"
+							type="button" onclick="javascript:location.href='<%=cp%>/shop/member/delete.do';">
+						<a style="font-size: 13px; color: white;">탈&nbsp;퇴</a>
+					</button>
+				</div>
 </form>
-
+ 
 </div>
-   
+
+
 <jsp:include page="../main/footer.jsp"/>
 </body>
 </html>
