@@ -22,7 +22,7 @@ public class MemberDAO {
 
 		try {
 
-			sql = "insert into member values(?,?,?,?,?,?,?,?,?,?,?)";
+			sql = "insert into member values(?,?,?,?,?,?,?,?)";
 
 			pstmt=conn.prepareStatement(sql);
 
@@ -31,12 +31,9 @@ public class MemberDAO {
 			pstmt.setString(3, dto.getUserName());
 			pstmt.setString(4, dto.getUserGender());
 			pstmt.setString(5, dto.getUserBirth());
-			pstmt.setString(6, dto.getAddress1());
-			pstmt.setString(7, dto.getAddress2());
-			pstmt.setString(8, dto.getAddress3());
-			pstmt.setString(9, dto.getAddress4());			
-			pstmt.setString(10, dto.getUserEmail());
-			pstmt.setString(11, dto.getUserTel());
+			pstmt.setString(6, String.join(",", dto.getUserAddr()));			
+			pstmt.setString(7, dto.getUserEmail());
+			pstmt.setString(8, dto.getUserTel());
 
 			result=pstmt.executeUpdate();
 
@@ -59,7 +56,7 @@ public class MemberDAO {
 
 		try {
 
-			sql = "update member set userPwd=?, userName=?, userGender=?, userBirth=?, address1=?, address2=?,address3=?,address4=?,userEmail=?, userTel=?";
+			sql = "update member set userPwd=?, userName=?, userGender=?, userBirth=?, userAddr=?, userEmail=?, userTel=? ";
 			sql +="where userId=?";
 
 
@@ -69,13 +66,10 @@ public class MemberDAO {
 			pstmt.setString(2, dto.getUserName());
 			pstmt.setString(3, dto.getUserGender());
 			pstmt.setString(4, dto.getUserBirth());
-			pstmt.setString(5, dto.getAddress1());
-			pstmt.setString(6, dto.getAddress2());
-			pstmt.setString(7, dto.getAddress3());
-			pstmt.setString(8, dto.getAddress4());			
-			pstmt.setString(9, dto.getUserEmail());
-			pstmt.setString(10, dto.getUserTel());
-			pstmt.setString(11, dto.getUserId());
+			pstmt.setString(5, String.join(",", dto.getUserAddr()));			
+			pstmt.setString(6, dto.getUserEmail());
+			pstmt.setString(7, dto.getUserTel());
+			pstmt.setString(8, dto.getUserId());
 
 			result = pstmt.executeUpdate();
 
@@ -133,7 +127,7 @@ public class MemberDAO {
 
 		try {
 			sql = "select userId,userPwd,userName,userGender,to_char(userBirth,'YYYY-MM-DD') userBirth,";
-			sql+= "address1,address2,address3,address4,userEmail,userTel from member where userId=?";
+			sql+= "userAddr,userEmail,userTel from member where userId=?";
 
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
@@ -144,17 +138,14 @@ public class MemberDAO {
 
 				dto = new MemberDTO();
 
-				dto.setUserId(rs.getString(1));
-				dto.setUserPwd(rs.getString(2));
-				dto.setUserName(rs.getString(3));
-				dto.setUserGender(rs.getString(4));
-				dto.setUserBirth(rs.getString(5));
-				dto.setAddress1(rs.getString(6));
-				dto.setAddress2(rs.getString(7));
-				dto.setAddress3(rs.getString(8));
-				dto.setAddress4(rs.getString(9));
-				dto.setUserEmail(rs.getString(10));
-				dto.setUserTel(rs.getString(11));				
+				dto.setUserId(rs.getString("userId"));
+				dto.setUserPwd(rs.getString("userPwd"));
+				dto.setUserName(rs.getString("userName"));
+				dto.setUserGender(rs.getString("userGender"));
+				dto.setUserBirth(rs.getString("userBirth"));
+				dto.setUserAddr(rs.getString("userAddr").split(","));
+				dto.setUserEmail(rs.getString("userEmail"));
+				dto.setUserTel(rs.getString("userTel"));				
 			}
 
 			rs.close();
