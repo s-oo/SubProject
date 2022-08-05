@@ -51,17 +51,17 @@ public class OrdersServlet extends HttpServlet {
 			userId = sessionUserId;
 		}
 
-//		if (userId == null) {
-//			out.print("<script>");
-//			out.print("alert('로그인을 해주세요');");
-////			out.print("locasion:href='/sub/shop/member/login.do';");
-//			out.print("</script>");
-//			
-//			url = "/sub/shop/member/login.do";
-//			resp.sendRedirect(url);
-//			
-//			return;
-//		}
+		if (userId == null) {
+			out.print("<script>");
+			out.print("alert('로그인을 해주세요');");
+//			out.print("locasion:href='/sub/shop/member/login.do';");
+			out.print("</script>");
+			
+			url = "/sub/shop/member/login.do";
+			resp.sendRedirect(url);
+			
+			return;
+		}
 
 		// 추가
 		if (uri.indexOf("addList_ok.do") != -1) {
@@ -162,7 +162,6 @@ public class OrdersServlet extends HttpServlet {
 			// 장바구니 목록
 		} else if (uri.indexOf("cartList.do") != -1) {
 
-			userId = "asd";
 			String progress = "cartList";
 			List<OrdersDTO> list = dao.getList(userId, progress);
 
@@ -189,7 +188,8 @@ public class OrdersServlet extends HttpServlet {
 		} else if (uri.indexOf("orderPayment.do") != -1) {
 
 			// 주문상품
-			String[] orderNum = (req.getParameterValues("orderNum"));
+			String[] orderNum = req.getParameterValues("orderNum");
+			
 			List<OrdersDTO> list = new ArrayList<>();
 
 			list = dao.getList(orderNum);
@@ -205,15 +205,27 @@ public class OrdersServlet extends HttpServlet {
 
 			// 결제 처리
 		} else if (uri.indexOf("orderPayment_ok.do") != -1) {
-
+			
+			String[] orderNum = req.getParameterValues("orderNum");
+			OrdersDTO dto = new OrdersDTO();
+				
+			for (int i = 0; i < orderNum.length; i++) {
+				dto = dao.getReadData(Integer.parseInt(orderNum[i]));
+				dto.setProgress("orderList");
+				dao.updateData(dto);
+			}
+			
+			url = cp + "/shop/orders/orderComplete.do";
+			resp.sendRedirect(url);
+			
 			// 주문 완료
 		} else if (uri.indexOf("orderComplete.do") != -1) {
 
-			int sum = Integer.parseInt(req.getParameter("sum"));
+			int tot = Integer.parseInt(req.getParameter("tot"));
 
 			MemberDTO memberDTO = new MemberDAO(conn).getReadData(userId);
 
-			req.setAttribute("sum", sum);
+			req.setAttribute("tot", tot);
 			req.setAttribute("memberDTO", memberDTO);
 
 			url = "/orders/orderComplete.jsp";
@@ -229,7 +241,7 @@ public class OrdersServlet extends HttpServlet {
 
 			req.setAttribute("list", list);
 
-			url = "/sub/orders/orderList.jsp";
+			url = "/orders/orderList.jsp";
 			forward(req, resp, url);
 
 			// 결제내역

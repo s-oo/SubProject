@@ -190,20 +190,27 @@ public class OrdersDAO {
 
 		try {
 
+			String n = "?";
+			for (int i = 0; i < orderNum.length - 1; i++) {
+				n += ", ?";
+			}
+
 			sql = "SELECT ORDERNUM, USERID, O.PRODUCTNUM, ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, PROGRESS, ";
 			sql += "PRODUCTNAME, PRODUCTPRICE, PRODUCTCATEGORY, SAVEFILENAME ";
 			sql += "FROM ORDERS O, PRODUCT P ";
-			sql += "WHERE O.PRODUCTNUM = P.PRODUCTNUM AND ORDERNUM IN (?)";
+			sql += "WHERE O.PRODUCTNUM = P.PRODUCTNUM AND ORDERNUM IN (" + n + ")";
 
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, String.join(",", orderNum));
+			for (int i = 0; i < orderNum.length; i++) {
+				pstmt.setString(i + 1, orderNum[i]);
+			}
 
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 
 				OrdersDTO dto = new OrdersDTO();
-				
+
 				dto.setOrderNum(rs.getInt("ORDERNUM"));
 				dto.setUserId(rs.getString("USERID"));
 				dto.setProductNum(rs.getInt("PRODUCTNUM"));
@@ -231,28 +238,28 @@ public class OrdersDAO {
 		return list;
 
 	}
-	
+
 	public OrdersDTO getReadData(int orderNum) {
-		
+
 		OrdersDTO dto = null;
 		PreparedStatement pstmt;
 		ResultSet rs;
 		String sql;
-		
+
 		try {
-			
+
 			sql = "SELECT ORDERNUM, USERID, PRODUCTNUM, ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, PROGRESS ";
 			sql += "FROM ORDERS WHERE ORDERNUM = ?";
-			
+
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, orderNum);
-			
+
 			rs = pstmt.executeQuery();
-			
+
 			if (rs.next()) {
-				
+
 				dto = new OrdersDTO();
-				
+
 				dto.setOrderNum(rs.getInt("ORDERNUM"));
 				dto.setUserId(rs.getString("USERID"));
 				dto.setProductNum(rs.getInt("PRODUCTNUM"));
@@ -260,21 +267,18 @@ public class OrdersDAO {
 				dto.setProgress(rs.getString("PROGRESS"));
 				dto.setOrderSize(rs.getString("ORDERSIZE"));
 				dto.setOrderColor(rs.getString("ORDERCOLOR"));
-				
+
 			}
-			
+
 			rs.close();
 			pstmt.close();
-			
+
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
-		
+
 		return dto;
-		
+
 	}
-	
-	
-	
 
 }
