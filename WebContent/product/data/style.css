@@ -173,10 +173,6 @@ table{
     text-align: left;
 }
 
-.optionSize{
-	display: none;
-}
-
 tbody{
 	display: table-row-group;
     vertical-align: middle;
@@ -226,6 +222,26 @@ tbody{
     position: relative;
     width: 100%;
     padding-top: 16px;
+}
+
+.selected1{
+	border: none;
+	outline: none;
+}
+
+.selected2{
+	border: none;
+	outline: none;
+}
+
+.optionQuantity{
+	border: none;
+	outline: none;
+}
+
+input{
+	font: 11px 'S-CoreDream-3Light','NeueHaasDisplay','Roboto','Noto Sans KR','Helvetica','Malgun Gothic',sans-serif;
+	color: #555;
 }
 
 /* 장바구니 */
