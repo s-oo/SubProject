@@ -47,6 +47,7 @@ td {
 .box.label {
    width: 80px;
    vertical-align: middle;
+  	font-size: 12px;
 }
 
 label span {
@@ -96,3 +97,15 @@ input.input-2 {
    vertical-align: middle;
    background-color: black;
 }
+.cateBtn{
+        width: 100px;
+        height: 50px;
+        margin: 10px;
+    }
+    #cateBtn{
+        text-align: center; 
+    }
+    button.on {
+        color: white;
+        background-color: ;
+    }
