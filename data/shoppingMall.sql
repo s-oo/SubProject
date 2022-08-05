@@ -59,3 +59,16 @@ CREATE TABLE BOARDS (
 	CONSTRAINT PK_BOARD_BOARDNUM PRIMARY KEY (BOARDNUM),
 	CONSTRAINT FK_BOARD_USERID FOREIGN KEY (USERID) REFERENCES MEMBER(USERID),
 	CONSTRAINT FK_BOARD_PRODUCTNUM FOREIGN KEY (PRODUCTNUM) REFERENCES PRODUCT(PRODUCTNUM));
+
+INSERT INTO MEMBER VALUES('asd','asd','asd','m',sysdate,'asd','asd','asd','asd','as@asd.asd','01012341234');
+INSERT INTO MEMBER VALUES('qwe','qwe','qwe','m',sysdate,'asd','asd','asd','asd','as@asd.asd','01012341234');
+INSERT INTO PRODUCT VALUES(1,'asd',10000,'top','173bce5481474f6b91e2a2601ca8d394.jpg','173bce5481474f6b91e2a2601ca8d394.jpg','asd','asd');
+INSERT INTO PRODUCT VALUES(2,'qwe',20000,'top','64b97bf1a03ba91c6b6dd29a187a30a9.jpg','64b97bf1a03ba91c6b6dd29a187a30a9.jpg','asd','asd');
+INSERT INTO ORDERS VALUES(1,'asd',1,5,'asd','asd','cartList');
+INSERT INTO ORDERS VALUES(2,'qwe',2,2,'qwe','qwe','wishList');
+INSERT INTO ORDERS VALUES(3,'asd',2,5,'zxc','zxc','cartList');
+INSERT INTO BOARDS VALUES(1,'asd',1,'asd','asdasdasd',SYSDATE,'QnA',0);
+INSERT INTO BOARDS VALUES(2,'qwe',2,'qwe','asdasdasd',SYSDATE,'notice',0);
+
+commit;
+
