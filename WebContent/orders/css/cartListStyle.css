@@ -1,0 +1,32 @@
+@charset "EUC-KR";
+
+#content {
+	width: 1000px; 
+	
+}
+
+#cartList {
+	width: 1000px;
+}
+
+#cartList td {
+	height: 100px;
+	padding: 10px 0px 10px 0px;
+}
+
+#paymentBox span {
+	display: inline-block;
+	margin: 10px;
+	
+	
+	
+}
+
+
+
+
+
+
+
+
+

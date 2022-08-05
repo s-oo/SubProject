@@ -5,12 +5,15 @@ public class OrdersDTO {
 	private int orderNum;
 	private String userId;
 	private int productNum;
-	private int productQuantity;
+	private int orderQuantity;
+	private String orderColor;
+	private String orderSize;
 	private String progress;
 
 	private String productName;
 	private int productPrice;
-	private String saveFileName;
+	private String productCategory;
+	private String[] saveFileName;
 
 	public int getOrderNum() {
 		return orderNum;
@@ -36,12 +39,28 @@ public class OrdersDTO {
 		this.productNum = productNum;
 	}
 
-	public int getProductQuantity() {
-		return productQuantity;
+	public int getOrderQuantity() {
+		return orderQuantity;
 	}
 
-	public void setProductQuantity(int productQuantity) {
-		this.productQuantity = productQuantity;
+	public void setOrderQuantity(int orderQuantity) {
+		this.orderQuantity = orderQuantity;
+	}
+
+	public String getOrderColor() {
+		return orderColor;
+	}
+
+	public void setOrderColor(String orderColor) {
+		this.orderColor = orderColor;
+	}
+
+	public String getOrderSize() {
+		return orderSize;
+	}
+
+	public void setOrderSize(String orderSize) {
+		this.orderSize = orderSize;
 	}
 
 	public String getProgress() {
@@ -68,11 +87,19 @@ public class OrdersDTO {
 		this.productPrice = productPrice;
 	}
 
-	public String getSaveFileName() {
+	public String getProductCategory() {
+		return productCategory;
+	}
+
+	public void setProductCategory(String productCategory) {
+		this.productCategory = productCategory;
+	}
+
+	public String[] getSaveFileName() {
 		return saveFileName;
 	}
 
-	public void setSaveFileName(String saveFileName) {
+	public void setSaveFileName(String[] saveFileName) {
 		this.saveFileName = saveFileName;
 	}
 
