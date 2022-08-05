@@ -14,8 +14,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css"href="<%=cp%>/css/shopStyle.css" />
 </head>
 <body>
+
+ <jsp:include page="../main/header.jsp"/>
+   
+   <div id="content" align="center">
+
 <h1>${userName }님 반갑습니다</h1>
 <br><br>
 
@@ -28,6 +34,9 @@
 
 
 
+</div>
+   
+<jsp:include page="../main/footer.jsp"/>
 
 
 </body>

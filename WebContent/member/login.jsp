@@ -10,7 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>로그인</title>
 
-<link rel="stylesheet" type="text/css" href="<%=cp%>/member/css/style.css">
+<link rel="stylesheet" type="text/css"href="<%=cp%>/css/shopStyle.css" />
 
 <script type="text/javascript">
 	function login(){
@@ -38,6 +38,13 @@
 
 </head>
 <body>
+ <jsp:include page="../main/header.jsp"/>
+   
+   <div id="content" align="center">
+
+
+
+
 
 <br><br>
 
@@ -97,12 +104,9 @@
 
 </form>
 
-
-
-
-
-
-
+</div>
+   
+<jsp:include page="../main/footer.jsp"/>
 
 
 

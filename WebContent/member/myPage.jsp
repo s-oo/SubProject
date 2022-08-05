@@ -9,16 +9,32 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css"href="<%=cp%>/css/shopStyle.css" />
 </head>
 <body>
+
+ <jsp:include page="../main/header.jsp"/>
+   
+   <div id="content" align="center">
+
+
+
 <br><br>
-<h1>${userName }님 반갑습니다</h1>
+
 
 	<div align="center" >
 		<input type="button" value=" ORDER " class="btn2" onclick="location.href='<%=cp%>/shop/orders/orderList.do';"/> <br>
 		<input type="reset" value=" BAG " class="btn2" onclick="location.href='<%=cp%>/shop/orders/cartList.do';"/><br> 
 		<input type="button" value=" PROFILE " class="btn2" onclick="location.href='<%=cp%>/shop/member/update.do';"/><br>
-		<input type="button" value=" Q/A " class="btn2" onclick="location.href='<%=cp%>/shop/member/login.do';"/><br> 
+		<input type="button" value=" Q/A " class="btn2" onclick="location.href='<%=cp%>/shop/boards/list.do?community=QnA';"/><br> 
+		<input type="button" value=" 메인으로 " class="btn2" onclick="location.href='<%=cp%>/shop/main/main.do';"/><br> 
 	</div>
+	
+
+</div>
+   
+<jsp:include page="../main/footer.jsp"/>
+
+	
 </body>
 </html>
