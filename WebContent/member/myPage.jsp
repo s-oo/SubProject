@@ -9,22 +9,35 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css"href="<%=cp%>/css/shopStyle.css" />
+<link rel="stylesheet" type="text/css"href="<%=cp%>/member/css/memberListStyle.css" />
+
 </head>
 <body>
-<c:choose>
-	<c:when test="${empty sessionScope.customInfo.userId }">
-		<b>로그인이 필요한 서비스입니다.</b><br><br>
-	</c:when>
-	<c:otherwise>
-		<b>${sessionScope.customInfo.userName }</b>님 반갑습니다.<br><br>
-	</c:otherwise>
-</c:choose>
 
-	<div>
-		<input type="button" value=" 장바구니 " class="btn2" onclick="location.href='<%=cp%>/shop/orders/cartList.do';"/> 
-		<input type="reset" value=" 회원정보수정 " class="btn2" onclick="location.href='<%=cp%>/shop/member/update.do';"/> 
-		<input type="button" value=" 로그아웃 " class="btn2" onclick="location.href='<%=cp%>/shop/main/main.do';"/>
-		<input type="button" value=" 로그인하기 " class="btn2" onclick="location.href='<%=cp%>/shop/member/login.do';"/> 
+ <jsp:include page="../main/header.jsp"/>
+   
+   <div id="content" align="center">
+
+
+
+<br><br>
+
+
+	<div align="center" >
+		<input type="button" value=" ORDER " class="btn2" onclick="location.href='<%=cp%>/shop/orders/orderList.do';"/> <br>
+		<input type="reset" value=" BAG " class="btn2" onclick="location.href='<%=cp%>/shop/orders/cartList.do';"/><br> 
+		<input type="button" value=" PROFILE " class="btn2" onclick="location.href='<%=cp%>/shop/member/update.do';"/><br>
+		<input type="button" value=" Q/A " class="btn2" onclick="location.href='<%=cp%>/shop/boards/list.do?community=QnA';"/><br> 
+		<input type="button" value=" MAIN " class="btn2" onclick="location.href='<%=cp%>/shop/main/main.do';"/><br> 
+		<input type="button" value=" 탈퇴 " class="btn2" onclick="location.href='<%=cp%>/shop/member/delete.do';"/><br> 
 	</div>
+	
+
+</div>
+   
+<jsp:include page="../main/footer.jsp"/>
+
+	
 </body>
 </html>

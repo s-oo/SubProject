@@ -10,18 +10,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Main Page</title>
 
-<link rel="stylesheet" type="text/css"href="<%=cp%>/main/css/stylemain.css" />
+<link rel="stylesheet" type="text/css"href="<%=cp%>/css/shopStyle.css" />
 
 </head>
 <body>
-	<jsp:include page="header.jsp"/>
+	<jsp:include page="../main/header.jsp"/>
 	
-	<div id="content" align="center" style="margin-top: 100px;">
-		
+	<div id="content" align="center">
+	
 		<img src="<%=cp%>/main/img/사진.jpg" width="700px;">
-	
+		
 	</div>
 	
-	<jsp:include page="footer.jsp"/>
+	<jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

@@ -123,16 +123,20 @@ public class ProductServlet extends HttpServlet{
 			String searchKey = req.getParameter("searchKey");
 			String searchValue = req.getParameter("searchValue");
 			
+			String imagePath = cp + "/image/top";
+			
 			if(searchValue!=null && !searchValue.equals("")) {
 				searchValue = URLDecoder.decode(searchValue, "UTF-8");
 			}
 			
 			ProductDTO dto = dao.getReadData(productNum);
-			
-			if(dto==null) {
+
+			/*if(dto==null) {
 				url = cp + "/shop/product/list.do";
 				resp.sendRedirect(url);
-			}
+				
+				return;
+			}*/
 			
 			String param = "pageNum=" + pageNum;
 			
@@ -143,9 +147,19 @@ public class ProductServlet extends HttpServlet{
 				
 			}
 			
+			int saveLength = dto.getSaveFileName().length;
+			int originalLength = dto.getOriginalFileName().length;
+			int sizeLength = dto.getProductSize().length;
+			int colorLength = dto.getProductColor().length;
+			
 			req.setAttribute("dto", dto);
 			req.setAttribute("params", param);
 			req.setAttribute("pageNum", pageNum);
+			req.setAttribute("imagePath", imagePath);
+			req.setAttribute("saveLength", saveLength);
+			req.setAttribute("originalLength", originalLength);
+			req.setAttribute("sizeLength", sizeLength);
+			req.setAttribute("colorLength", colorLength);
 			
 			url = "/product/detail.jsp";
 			forward(req, resp, url);

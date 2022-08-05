@@ -14,12 +14,20 @@ body{
 a{
 	text-decoration: none;
 	color: #484848;
-	font-size: 9pt;
+	font-size: 10pt;
 }
 
 div{
 	margin: 0;
     padding: 0;
+}
+
+li{
+	margin-right: 10pt;
+}
+
+#content{
+	margin: 80pt;
 }
 
 /*  */
@@ -99,10 +107,18 @@ div{
 }
 /*  */
 
+/* list */
+
+.productPrice{
+	
+}
+
+/* detail? */
 
 .detail_wrap{
 	width: 80%;
 	margin: 106px auto 0;
+	
 }
 
 .detail{
@@ -157,6 +173,10 @@ table{
     text-align: left;
 }
 
+.optionSize{
+	display: none;
+}
+
 tbody{
 	display: table-row-group;
     vertical-align: middle;
@@ -188,6 +208,26 @@ tbody{
 	display: none !important;
 }
 
+.selectedOptions{
+	display: none;
+}
+
+.totalProduct{
+	border: none;
+	font-size: 9pt;
+}
+
+.totalProduct td{
+	border: none;
+}
+
+.totalProduct tbody{
+	float: left;
+    position: relative;
+    width: 100%;
+    padding-top: 16px;
+}
+
 /* 장바구니 */
 .add_button{
 	text-align: center;
@@ -208,6 +248,7 @@ tbody{
 
 /* board(Review, Q&A) */
 .board{
+	max-width: calc(100% - 300px);
 }
 
 .board_warp{
@@ -225,3 +266,27 @@ tbody{
 	margin-bottom: 10px;
 }
 
+.boardTitle{
+	height: 10pt;
+	margin-bottom: 10px;
+}
+
+.boardContent{
+	border-top: 0.5px solid;
+	border-bottom: 0.5px solid;
+	border-color: #484848;
+}
+
+.boardContent tr{
+	border-bottom: 0.5px solid;
+	border-color: #484848;
+}
+
+.boardContent th{
+	font-size: 9pt;
+	font-weight: normal;
+}
+
+.boardContent tbody{
+	text-align: center;
+}

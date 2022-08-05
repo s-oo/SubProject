@@ -2,6 +2,7 @@ package com.member;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.sql.Connection;
 
 import javax.servlet.RequestDispatcher;
@@ -55,8 +56,14 @@ public class MemberServlet extends HttpServlet {
 		// 로그아웃상태
 		if (userId == null) {
 			
-			// 회원가입 화면
-			if (uri.indexOf("join.do") != -1) {
+			if (uri.indexOf("terms.do") != -1) {
+
+				url = "/member/terms.jsp";
+				forward(req, resp, url);
+
+			
+			}// 회원가입 화면
+			else if (uri.indexOf("join.do") != -1) {
 
 				url = "/member/join.jsp";
 				forward(req, resp, url);
@@ -72,30 +79,37 @@ public class MemberServlet extends HttpServlet {
 				dto.setUserName(req.getParameter("userName"));
 				dto.setUserGender(req.getParameter("userGender"));
 				dto.setUserBirth(req.getParameter("userBirth"));
-				dto.setAddress1(req.getParameter("address1"));
-				dto.setAddress2(req.getParameter("address2"));
-				dto.setAddress3(req.getParameter("address3"));
-				dto.setAddress4(req.getParameter("address4"));
+				dto.setUserAddr(req.getParameterValues("userAddr"));
 				dto.setUserEmail(req.getParameter("userEmail"));
 				dto.setUserTel(req.getParameter("userTel"));
 				
-
+				
 				result = dao.insert(dto);
 
 				if (result == 0) {
 
 					out.print("<script>");
-					out.print("alert('로그인실패');");
+					out.print("alert('회원가입실패');");
 					out.print("history.back()");
 					out.print("</script>");
 
 				} else {
-
-					url = cp +"/main/main.jsp";
+				
+					url = cp + "/shop/member/join_result.do?userName=" +URLEncoder.encode(dto.getUserName(), "UTF-8");
 					resp.sendRedirect(url);
 
 				}
+
+			// 회원가입 결과화면
+			} else if (uri.indexOf("join_result.do") != -1) {
+				
+				String userName = req.getParameter("userName");
 			
+				req.setAttribute("userName", userName);
+				url = "/member/join_result.jsp";
+				forward(req, resp, url);
+				
+				
 			// 로그인 화면
 			} else if (uri.indexOf("login.do") != -1) {
 
@@ -119,7 +133,7 @@ public class MemberServlet extends HttpServlet {
 					
 					req.setAttribute("message", "아이디 또는 패스워드를 정확히 입력하세요.");
 					req.setAttribute("searchpw", "비밀번호 찾기");
-					url = "/shop/member/login.do";
+					url = "/member/login.jsp";
 					forward(req, resp, url);
 					return;
 					
@@ -128,17 +142,53 @@ public class MemberServlet extends HttpServlet {
 
 					req.getSession().setAttribute("userId", userId);
 
-					url = cp + "/shop/main/main.do";
+					url = cp + "/main/main.jsp";
 					resp.sendRedirect(url);
 
 				}
-
+				///비밀번호 찾기
+			}else if(uri.indexOf("find.do")!=-1) {
+				url =  "/member/find.jsp";
+				forward(req, resp, url);
+				
+			}else if(uri.indexOf("find_ok.do")!=-1) {
+				userId = req.getParameter("userId");
+				String userTel = req.getParameter("userTel");
+				
+				
+				MemberDTO dto = dao.getReadData(userId);
+				
+				if(dto==null||!dto.getUserTel().equals(userTel)) {
+					
+					out.print("<script>");
+					out.print("alert('로그인실패');");
+					out.print("location.href='cp/shop/member/login.do';");
+					out.print("</script>");
+					
+					//아이디가 틀리거나 또는 패스워드가 틀리면
+					req.setAttribute("message", "회원정보가 존재하지 않습니다.");
+					
+					url =  "/shop/member/find.do";
+					forward(req, resp, url);
+					//아이디 패스워드가 틀리면 실행되지않게 막아줌	
+					return;
+				}else {
+				req.setAttribute("message", "비밀번호는 ["+ dto.getUserPwd() + "] 입니다.");
+				req.setAttribute("lego", "로그인 하러 가기");
+				url = "/shop/member/find.do";
+				forward(req, resp, url);
+				}
+				
+				
+				
+				
+				
 			// 오류
 			} else {
 
 				out.print("<script>");
 				out.print("alert('잘못된 접근 : 로그인을 해주세요');");
-				out.print("location.href='cp/shop/member/login.do';");
+				out.print("location.href='" + cp + "/shop/member/login.do';");
 				out.print("</script>");
 				
 			}
@@ -156,13 +206,15 @@ public class MemberServlet extends HttpServlet {
 				url = cp + "/shop/main/main.do";
 				resp.sendRedirect(url);
 
-			// 회원정보 화면
-			} else if (uri.indexOf("myPage.do") != -1) {
+			
+				// 회원정보 화면
+			}else if (uri.indexOf("myPage.do") != -1) {
 
 				MemberDTO dto = dao.getReadData(userId);
 
 				req.setAttribute("dto", dto);
-
+			
+			
 				url = "/member/myPage.jsp";
 				forward(req, resp, url);
 
@@ -188,10 +240,7 @@ public class MemberServlet extends HttpServlet {
 				dto.setUserName(req.getParameter("userName"));
 				dto.setUserGender(req.getParameter("userGender"));
 				dto.setUserBirth(req.getParameter("userBirth"));
-				dto.setAddress1(req.getParameter("address1"));
-				dto.setAddress2(req.getParameter("address2"));
-				dto.setAddress3(req.getParameter("address3"));
-				dto.setAddress4(req.getParameter("address4"));
+				dto.setUserAddr(req.getParameterValues("userAddr"));
 				dto.setUserEmail(req.getParameter("userEmail"));
 				dto.setUserTel(req.getParameter("userTel"));				
 				
@@ -201,10 +250,23 @@ public class MemberServlet extends HttpServlet {
 				resp.sendRedirect(url);
 
 			// 탈퇴 실행
-			} else if (uri.indexOf("delete_ok.do") != -1) {
-
+			// 오류
+			} else if (uri.indexOf("delete.do")!=-1) {
+				
 				MemberDTO dto = dao.getReadData(userId);
-							
+
+				req.setAttribute("dto", dto);
+
+				url = "/member/delete.jsp";
+				forward(req, resp, url);
+
+				
+				
+				
+			}else if (uri.indexOf("delete_ok.do") != -1) {
+				
+				MemberDTO dto = dao.getReadData(userId);
+				
 				dao.delete(dto);
 
 				HttpSession session = req.getSession();
@@ -213,9 +275,11 @@ public class MemberServlet extends HttpServlet {
 
 				url = cp + "/shop/main/main.do";
 				resp.sendRedirect(url);
-
-			// 오류
-			} else {
+				
+				
+				
+				
+			}else {
 
 				out.print("<script>");
 				out.print("alert('잘못된 접근 : 이미 로그인 상태입니다.');");

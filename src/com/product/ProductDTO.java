@@ -1,79 +1,63 @@
 package com.product;
 
 public class ProductDTO {
-
+	
 	private int productNum;
 	private String productName;
 	private int productPrice;
 	private String productCategory;
-	private String saveFileName;
-	private String originalFileName;
+	private String[] saveFileName;
+	private String[] originalFileName;
+	private String[] productSize;
+	private String[] productColor;
 	
-	private int categorySize;
-	private String categoryColor;
-
 	public int getProductNum() {
 		return productNum;
 	}
-
 	public void setProductNum(int productNum) {
 		this.productNum = productNum;
 	}
-
 	public String getProductName() {
 		return productName;
 	}
-
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
-
 	public int getProductPrice() {
 		return productPrice;
 	}
-
 	public void setProductPrice(int productPrice) {
 		this.productPrice = productPrice;
 	}
-
 	public String getProductCategory() {
 		return productCategory;
 	}
-
 	public void setProductCategory(String productCategory) {
 		this.productCategory = productCategory;
 	}
-
-	public String getSaveFileName() {
+	public String[] getSaveFileName() {
 		return saveFileName;
 	}
-
-	public void setSaveFileName(String saveFileName) {
+	public void setSaveFileName(String[] saveFileName) {
 		this.saveFileName = saveFileName;
 	}
-
-	public String getOriginalFileName() {
+	public String[] getOriginalFileName() {
 		return originalFileName;
 	}
-
-	public void setOriginalFileName(String originalFileName) {
+	public void setOriginalFileName(String[] originalFileName) {
 		this.originalFileName = originalFileName;
 	}
-
-	public int getCategorySize() {
-		return categorySize;
+	public String[] getProductSize() {
+		return productSize;
 	}
-
-	public void setCategorySize(int categorySize) {
-		this.categorySize = categorySize;
+	public void setProductSize(String[] productSize) {
+		this.productSize = productSize;
 	}
-
-	public String getCategoryColor() {
-		return categoryColor;
+	public String[] getProductColor() {
+		return productColor;
 	}
-
-	public void setCategoryColor(String categoryColor) {
-		this.categoryColor = categoryColor;
+	public void setProductColor(String[] productColor) {
+		this.productColor = productColor;
 	}
-
+	
 }

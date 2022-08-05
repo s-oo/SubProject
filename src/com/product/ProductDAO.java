@@ -53,7 +53,7 @@ public class ProductDAO {
 		try {
 			
 			sql = "insert into Product (productNum,productName,productPrice,productCategory,";
-			sql+= "saveFileName,originalFileName,categorySize,categoryColor) ";
+			sql+= "saveFileName,originalFileName,productSize,productColor) ";
 			sql+= "values (?,?,?,?)";
 			
 			pstmt = conn.prepareStatement(sql);
@@ -62,11 +62,10 @@ public class ProductDAO {
 			pstmt.setString(2, dto.getProductName());
 			pstmt.setInt(3, dto.getProductPrice());
 			pstmt.setString(4, dto.getProductCategory());
-			pstmt.setString(5, dto.getSaveFileName());
-			pstmt.setString(6, dto.getOriginalFileName());
-			pstmt.setInt(7, dto.getCategorySize());
-			pstmt.setString(8, dto.getCategoryColor());
-			
+			pstmt.setString(5, String.join(",", dto.getSaveFileName()));
+			pstmt.setString(6, String.join(",", dto.getOriginalFileName()));
+			pstmt.setString(7, String.join(",", dto.getProductSize()));
+			pstmt.setString(8, String.join(",", dto.getProductColor()));
 			result = pstmt.executeUpdate();
 			
 			pstmt.close();
@@ -88,7 +87,7 @@ public class ProductDAO {
 		try {
 			
 			sql = "update product set productNum=?,productName=?,productPrice=?,productCategory=?,";
-			sql+= "saveFileName=?,originalFileName=?,categorySize=?,categoryColor=? ";
+			sql+= "saveFileName=?,originalFileName=?,productSize=?,productColor=? ";
 			sql+= "where productNum=?";
 			
 			pstmt = conn.prepareStatement(sql);
@@ -97,10 +96,10 @@ public class ProductDAO {
 			pstmt.setString(2, dto.getProductName());
 			pstmt.setInt(3, dto.getProductPrice());
 			pstmt.setString(4, dto.getProductCategory());
-			pstmt.setString(5, dto.getSaveFileName());
-			pstmt.setString(6, dto.getOriginalFileName());
-			pstmt.setInt(7, dto.getCategorySize());
-			pstmt.setString(8, dto.getCategoryColor());
+			pstmt.setString(5, String.join(",", dto.getSaveFileName()));
+			pstmt.setString(6, String.join(",", dto.getOriginalFileName()));
+			pstmt.setString(7, String.join(",", dto.getProductSize()));
+			pstmt.setString(8, String.join(",", dto.getProductColor()));
 			
 			result = pstmt.executeUpdate();
 			
@@ -155,7 +154,7 @@ public class ProductDAO {
 			sql = "select * from (";
 			sql+= "select rownum rnum,data.* from(";
 			sql+= "select productNum,productName,productPrice,productCategory,";
-			sql+= "saveFileName,originalFileName ";
+			sql+= "saveFileName,originalFileName,productSize,productColor ";
 			sql+= "from product where " + searchKey;
 			sql+= " like ? order by productNum desc) data) ";
 			sql+= "where rnum>=? and rnum<=?";
@@ -176,8 +175,10 @@ public class ProductDAO {
 				dto.setProductName(rs.getString("productName"));
 				dto.setProductPrice(rs.getInt("productPrice"));
 				dto.setProductCategory(rs.getString("productCategory"));
-				dto.setSaveFileName(rs.getString("saveFileName"));
-				dto.setOriginalFileName(rs.getString("originalFileName"));
+				dto.setSaveFileName(rs.getString("saveFileName").split(","));
+				dto.setOriginalFileName(rs.getString("originalFileName").split(","));
+				dto.setProductSize(rs.getString("productSize").split(","));
+				dto.setProductColor(rs.getString("productColor").split(","));
 				
 				lists.add(dto);
 				
@@ -204,7 +205,7 @@ public class ProductDAO {
 		try {
 			
 			sql = "select productNum,productName,productPrice,productCategory,";
-			sql+= "saveFileName,originalFileName,categorySize,categoryColor ";
+			sql+= "saveFileName,originalFileName,productSize,productColor ";
 			sql+= "from product where productNum=?";
 			
 			pstmt = conn.prepareStatement(sql);
@@ -221,10 +222,10 @@ public class ProductDAO {
 				dto.setProductName(rs.getString("productName"));
 				dto.setProductPrice(rs.getInt("productPrice"));
 				dto.setProductCategory(rs.getString("productCategory"));
-				dto.setSaveFileName(rs.getString("saveFileName"));
-				dto.setOriginalFileName(rs.getString("originalFileName"));
-				dto.setCategorySize(rs.getInt("categorySize"));
-				dto.setCategoryColor(rs.getString("categoryColor"));
+				dto.setSaveFileName(rs.getString("saveFileName").split(","));
+				dto.setOriginalFileName(rs.getString("originalFileName").split(","));
+				dto.setProductSize(rs.getString("productSize").split(","));
+				dto.setProductColor(rs.getString("productColor").split(","));
 				
 			}
 			

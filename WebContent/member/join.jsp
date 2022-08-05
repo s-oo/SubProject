@@ -67,6 +67,8 @@
 	}
     
 </script>
+    
+
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     function sample6_execDaumPostcode() {
@@ -119,16 +121,20 @@
 </script>
 </head>
 <body>
+ <jsp:include page="../main/header.jsp"/>
+   
+   <div id="content" align="center">
+
 
 <div id="bbs">
-	<div id="bbs_title">
-	회원가입
+	<div id="bbs_title" align="center" >
+	<b>회&nbsp;원&nbsp;가&nbsp;입</b>
 	</div>
 	
 	<form action="" method="post" name="myForm">
-	<div id="bbsCreated">
+	<div id="bbsCreated" align="center">
 	
-		<div class="bbsCreated_bottomLine">
+		<div class="bbsCreated_bottomLine" align="center">
 			<dl>
 				<dt>아&nbsp;이&nbsp;디</dt>
 				<dd>
@@ -179,11 +185,11 @@
 			<dl>
 				<dt>주&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</dt>				
 				<dd>				
-				<input type="text" name="address1" id="sample6_postcode" placeholder="우편번호">
+				<input type="text" name="userAddr" id="sample6_postcode" placeholder="우편번호">
 				<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-				<input type="text" name="address2" id="sample6_address" placeholder="주소"><br>
-				<input type="text" name="address3" id="sample6_detailAddress" placeholder="상세주소">
-				<input type="text"  name="address4"id="sample6_extraAddress" placeholder="참고항목">
+				<input type="text" name="userAddr" id="sample6_address" placeholder="주소"><br>
+				<input type="text" name="userAddr" id="sample6_detailAddress" placeholder="상세주소">
+				<input type="text"  name="userAddr"id="sample6_extraAddress" placeholder="참고항목">
 				</dd>
 			</dl>
 		</div>
@@ -201,26 +207,31 @@
 			<dl>
 				<dt>전&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;화</dt>
 				<dd>
-				<input type="text" name="userTel" size="35" maxlength="20" class="boxTF"/>
+				<input type="text" name="userTel" size="35" maxlength="20"  placeholder="(-)없이 숫자만 입력하세요" class="boxTF"/>
 				</dd> 
 			</dl>
 		</div>
 
 	</div>
 	
-	<div id="bbsCreated_footer">
-	<input type="hidden" name="userAddress" value="javascript:'getUserAdress()';">
-		<input type="button" value=" 가입하기 " class="btn2" onclick="sendIt();"/> 
-		<input type="reset" value=" 회원정보수정 " class="btn2" onclick="location.href='<%=cp%>/shop/member/update.do';"/> 
-		<input type="button" value=" 가입취소 " class="btn2" onclick="location.href='<%=cp%>';"/> 
-		
 	
+	
+	
+	
+	<div id="bbsCreated_footer" align="center">	
+		<input type="button" value=" 가입하기 " class="btn2" onclick="sendIt();"/> 
+		<input type="button" value=" 가입취소 " class="btn2" onclick="location.href='<%=cp%>/shop/main/main.do';"/> 
 	</div>
 	
 	
 	</form>
-	
 </div>
+
+
+
+</div>
+   
+<jsp:include page="../main/footer.jsp"/>
 
 </body>
 </html>
