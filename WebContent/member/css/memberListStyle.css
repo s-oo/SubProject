@@ -1,0 +1,98 @@
+
+@charset "EUC-KR";
+
+#content {
+   width: 1000px; 
+   
+}
+
+#cartList {
+   width: 1000px;
+}
+
+#cartList td {
+   height: 100px;
+   padding: 10px 0px 10px 0px;
+}
+
+#paymentBox{
+   display: inline-block;
+   padding-right: 20px;
+   
+}
+
+#paymentBox div {
+   display: inline-block;
+   margin: 5px;
+   width: 100px;
+}
+
+td {
+   width: 150px;
+   
+}
+
+.box {
+   display: inline-block;
+   padding: 10px;
+   width: 500px;
+}
+
+.box.row {
+   display: inline-block;
+   width: 480px; height : 30px;
+   border-bottom: 1px solid #DBDBDB;
+}
+
+.box.label {
+   width: 80px;
+   vertical-align: middle;
+}
+
+label span {
+}
+
+.box.input {
+   width: 300px;
+   vertical-align: middle;
+}
+
+input {
+   display: inline-block;
+   width: 300px;
+   font-size: 15px;
+   border: none;
+   float: left;
+   outline: none;
+}
+
+input.input-2 {
+   width: 110px;
+   vertical-align: middle;
+   padding-right: 30px;
+}
+
+.input-2.right {
+   float: right;
+}
+
+.botton {
+    float: left;
+    position: relative;
+    box-sizing: border-box;
+    width: 440px;
+    padding: 0 72px;
+    margin-bottom: 18px;
+    border: 1px solid #000;
+    font-weight: 400;
+    font-size: 11px;
+    height: 64px;
+    line-height: 64px;
+    text-align: center;
+}
+.box.botton {
+   width: 300px;
+   height: 64px;
+   vertical-align: middle;
+   background-color: black;
+}

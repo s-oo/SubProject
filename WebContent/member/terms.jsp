@@ -10,93 +10,85 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
-<link rel="stylesheet" type="text/css"href="<%=cp%>/css/shopStyle.css" />
+<link rel="stylesheet" type="text/css" href="<%=cp%>/css/shopStyle.css" />
+<link rel="stylesheet" href="<%=cp%>/member/css/style.css"
+	type="text/css">
 
 
-<link rel="stylesheet" href="<%=cp%>/member/css/style.css" type="text/css">
-<script type="text/javascript" src="<%=cp%>/member/js/checkBox.js"></script>
+<script type="text/javascript">
+	function chk() {
+		 var req = document.form.req.checked;
+		 var num = 0;
+		 if(req == true){
+		  num = 1;
+		 }
+		 if(num==1){
+		  document.form.submit();
+		 }else{
+		  alert("개인정보 약관에 동의하셔야 합니다.");
+		 }
+		}
 
+	function nochk() {
+		alert("동의하지 않으면 가입하실 수 없습니다");
+		location.href="<%=cp%>/shop/main/main.do";}
+</script>
 
 </head>
 <body>
-	<jsp:include page="../main/header.jsp"/>
-   
-   <div id="content" align="center">
-   
-      
-	<form action="" id="joinForm">
-		            
-		<ul class="join_box">
+	<jsp:include page="../main/header.jsp" />
 
-			<li class="checkBox check01">                    
-				<ul class="clearfix">
+	<div id="content" align="center">
 
-					<li><b>이용약관, 개인정보 수집 및 이용,위치정보 이용약관(선택),<br>
-					프로모션 안내 메일 수신(선택)에 모두 동의합니다.</b></li>
-					<li class="checkAllBtn">                            
-					<input type="checkbox" name="chkAll" id="chk" class="chkAll">                        
-					</li>
-				</ul>
-			</li>
-			<li class="checkBox check02">                    
-				<ul class="clearfix">
+		<form action="<%=cp%>/shop/member/join.do" name="form" method="post">
+			<table width="1400" height="650">
+				
+				<tr>
+					<td width="100%" height="50%" align="center">
+						<p align="center">
+							<span  style="font-size: 15pt"> <b>KRISTAL 약관동의</b></span>
+						</p> <br> 
+						<textarea  rows="30" cols="75">가. 수집하는 개인정보의 항목첫째, 회사는 회원가 입, 원활한 고객상담, 각종 서비스의 제공을 위해 최초 회원가입 당시 아래와 같은 최소한의 개인정보를 필수항목으로 수집하고 있습니다.
+회원가입
+- 이름, 생년월일, 성별, 아이디, 비밀번호, 별명, 연락처(메일주소, 휴대폰 번호 중 선택), 가입인증정보
+만14세 미만 아동 회원가입
+- 이름, 생년월일, 성별, 법정대리인 정보, 아이디, 비밀번호, 연락처 (메일주소, 휴대폰 번호 중 선택), 가입인증정보
+단체아이디 회원가입
+- 단체아이디, 회사명, 대표자명, 대표 전화번호, 대표 이메일 주소, 단체주소, 관리자 아이디, 관리자 연락처, 관리자 부서/직위
+- 선택항목 : 대표 홈페이지, 대표 팩스번호
+둘째, 서비스 이용과정이나 사업처리 과정에서 아래와 같은 정보들이 자동으로 생성되어 수집될 수 있습니다.
+- IP Address, 쿠키, 방문 일시, 서비스 이용 기록, 불량 이용 기록
+셋째, 네이버 아이디를 이용한 부가 서비스 및 맞춤식 서비스 이용 또는 이벤트 응모 과정에서 해당 서비스의 이용자에 한해서만 개인정보 추가 수집이 발생할 수 있으며, 이러한 경우 별도의 동의를 받습니다.
+넷째, 성인컨텐츠, 유료/게임 등 일부 서비스 이용시 관련 법률 준수를 위해 본인인증이 필요한 경우, 아래와 같은 정보들이 수집될 수 있습니다.
+- 이름, 생년월일, 성별, 중복가입확인정보(DI), 암호화된 동일인 식별정보(CI), 휴대폰 번호(선택), 아이핀 번호(아이핀 이용시), 내/외국인 정보
+다섯째, 유료 서비스 이용 과정에서 아래와 같은 결제 정보들이 수집될 수 있습니다.
+- 신용카드 결제시 : 카드사명, 카드번호 등
+- 휴대전화 결제시 : 이동전화번호, 통신사, 결제승인번호 등
+- 계좌이체시 : 은행명, 계좌번호 등
+- 상품권 이용시 : 상품권 번호
+나. 개인정보 수집방법회사는 다음과 같은 방법으로 개인정보를 수집합니다.
+- 홈페이지, 서면양식, 팩스, 전화, 상담 게시판, 이메일, 이벤트 응모, 배송요청
+- 협력회사로부터의 제공
+- 생성정보 수집 툴을 통한 수집
+  			 		</textarea> <br> <br>
+  						 <input type="checkbox" name="req"> <b style="font-size: 10pt">개인정보 수집 및 이용에동의합니다.</b>
+					</td>
+				</tr>
+				<tr>
+					<td align="center" valign="top">
+						<input style="font-size: 10pt" type="button" value=" 동의 " onclick="chk()" />&nbsp;&nbsp;&nbsp; 
+						<input style="font-size: 10pt" type="button" value=" 비동의 " onclick="nochk()" />
+					</td>
+				</tr>
+			</table>
+		</form>
 
-					<li><b>이용약관 동의(필수)</b><input type="checkbox" name="chk">                         
-					</li>
 
-				<textarea name="" id="" rows="10" cols="60" readonly="readonly" style="resize: none;">여러분을 환영합니다.네이버 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 
-				본 약관은 다양한 네이버 서비스의 이용과 관련하여 네이버 서비스를 제공하는 네이버 주식회사(이하 ‘네이버’)와 
-				이를 이용하는 네이버 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 네이버 서비스 
-				이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.       
-				</textarea>
-				</ul>               
-			</li>
-			<li class="checkBox check03">                    
-				<ul class="clearfix">
+	</div>
 
-					<li><b>개인정보 수집 및 이용에 대한 안내(필수)</b>
-					<input type="checkbox" name="chk"></li>
-				 
-				<textarea name="" id="" rows="10" cols="60" readonly="readonly" style="resize: none;">여러분을 환영합니다.네이버 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 
-				본 약관은 다양한 네이버 서비스의 이용과 관련하여 네이버 서비스를 제공하는 네이버 주식회사(이하 ‘네이버’)와 
-				이를 이용하는 네이버 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 네이버 서비스 
-				이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
-				</textarea>
-				</ul>               
-			</li>
-			<li class="checkBox check03">                    
-				<ul class="clearfix">
-
-					<li><b>위치정보 이용약관 동의(선택)</b><input type="checkbox" name="chk">                        
-					</li>
-				<textarea name="" id="" rows="10" cols="60" readonly="readonly" style="resize: none;">	
-				여러분을 환영합니다.네이버 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 
-				본 약관은 다양한 네이버 서비스의 이용과 관련하여 네이버 서비스를 제공하는 
-				네이버 주식회사(이하 ‘네이버’)와 이를 이용하는 네이버 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 
-				아울러 여러분의 네이버 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다. 
-				</textarea>
-				</ul>             
-			</li>
-			<li class="checkBox check04">                    
-				<ul class="clearfix">
-
-					<li><b>이벤트 등 프로모션 알림 메일 수신(선택)</b><input type="checkbox" name="chk">                        
-					</li>
-				</ul>
-			</li>
-		</ul>
-		            
-		<ul class="footBtwrap clearfix">
-
-			<li><button class="fpmgBt1"><b>비동의</b></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button  style="background-color: black; color: white; width: 30%;height: 60px;"><b>동의</b></button></li>
-		</ul>
-		        
-	</form>
-
-   </div>
-   
-   <jsp:include page="../main/footer.jsp"/>
+	<jsp:include page="../main/footer.jsp" />
 
 
 </body>
+
 </html>

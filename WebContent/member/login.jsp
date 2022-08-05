@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
@@ -10,7 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>로그인</title>
 
-<link rel="stylesheet" type="text/css"href="<%=cp%>/css/shopStyle.css" />
+<link rel="stylesheet" type="text/css" href="<%=cp%>/css/shopStyle.css" />
 
 <script type="text/javascript">
 	function login(){
@@ -32,81 +32,83 @@
 	
 	f.action = "<%=cp%>/shop/member/login_ok.do";
 	f.submit();
-}
-
+	}
 </script>
 
 </head>
 <body>
- <jsp:include page="../main/header.jsp"/>
-   
-   <div id="content" align="center">
+	<jsp:include page="../main/header.jsp" />
 
+	<div id="content" align="center">
 
+		<form action="" method="post" name="myForm">
+			<table width="400" cellpadding="0" cellspacing="0"
+				style="margin: auto;">
 
+				<tr height="2">
+					<td colspan="2" bgcolor="#cccccc"></td>
+				</tr>
 
+				<tr height="30">
+					<span ><b>로그인</b></span>
+				</tr>
 
-<br><br>
+				<tr height="2">
+					<td colspan="2" bgcolor="#cccccc"></td>
+				</tr>
 
-<form action="" method="post" name="myForm">
-<table width="400" cellpadding="0" cellspacing="0" style="margin: auto;"> 
+				<tr height="25">
+					<td width="80" bgcolor="#e6e4e6" align="center">아이디</td>
+					<td width="120" style="padding-left: 5px;">
+					<input width="150" type="text" name="userId" maxlength="10" size="15" /></td>
+				</tr>
 
-<tr height="2"><td colspan="2" bgcolor="#cccccc"></td></tr>
+				<tr height="2">
+					<td colspan="2" bgcolor="#cccccc"></td>
+				</tr>
 
-<tr height="30">
-	<td colspan="2" align="center"><b>로그인</b></td>
-</tr>	
+				<tr height="25">
+					<td width="80" bgcolor="#e6e4e6" align="center">패스워드</td>
+					<td width="120" style="padding-left: 5px;">
+					<input type="password" name="userPwd" maxlength="10" size="15" /></td>
+				</tr>
 
-<tr height="2"><td colspan="2" bgcolor="#cccccc"></td></tr>
+				<tr height="2">
+					<td colspan="2" bgcolor="#cccccc"></td>
+				</tr>
 
-<tr height="25">
-	<td width="80" bgcolor="#e6e4e6" align="center">아이디</td>
-	<td width="120" style="padding-left: 5px;">
-	<input width="150" type="text" name="userId" maxlength="10" size="15"/>
-	</td> 
-</tr>
+				<tr height="30">
+					<td colspan="2" align="center"><input type="button"
+						value=" 로그인 " class="btn2" onclick="login();" /> 
+						<inputtype="button" value=" 취소 " class="btn2" onclick="lo cation='<%=cp%>/shop/main/main.do';" /><br> <br>
+						<input width="10" height="" type="button" value=" 회원가입 " class="btn2" onclick="location='<%=cp%>/shop/member/terms.do';" />
+					</td>
+				</tr>
 
-<tr height="2"><td colspan="2" bgcolor="#cccccc"></td></tr>
+				<tr height="30">
+					<td colspan="2" align="center"><font color="red"><b>${message }</b></font></td>
+				</tr>
+			</table>
 
-<tr height="25">
-	<td width="80" bgcolor="#e6e4e6" align="center">패스워드</td>
-	<td width="120" style="padding-left: 5px;">
-	<input type="password" name="userPwd" maxlength="10" size="15"/>
-	</td> 
-</tr>
+			<table style="margin: auto;">
+				<tr height="2">
+					<td colspan="2" bgcolor="#cccccc"></td>
+				</tr>
 
-<tr height="2"><td colspan="2" bgcolor="#cccccc"></td></tr>
+				<tr height="30">
+					<td colspan="2" align="center"><a
+						href="<%=cp%>/shop/member/find.do"><b>${searchpw }</b></a>
+				</tr>
+				<tr height="2">
+					<td colspan="2" bgcolor="#cccccc"></td>
+				</tr>
+			</table>
 
-<tr height="30">
-	<td colspan="2" align="center">
-	<input type="button" value=" 로그인 " class="btn2" onclick="login();"/>
-	<input type="button" value=" 취소 " class="btn2" onclick="location='<%=cp%>/shop/main/main.do';"/>
-	<input type="button" value=" 회원정보수정 " class="btn2" onclick="location='<%=cp%>/shop/member/update.do';"/>
-	</td>
-	
-	
-	<tr height="30">
-	<td colspan="2" align="center">
-	<font color="red"><b> ${message }</b></font>
-	</td>
-</tr>	
-</table>
+		</form>
 
-<table style="margin: auto;">
-<tr height="2"><td colspan="2" bgcolor="#cccccc"></td></tr>
+	</div>
 
-	<tr height="30">
-		<td colspan="2" align="center">	
-	<a href="<%=cp%>/shop/member/find.do" ><b>${searchpw }</b></a> 
-	</tr>
-<tr height="2"><td colspan="2" bgcolor="#cccccc"></td></tr>	
-</table>
-
-</form>
-
-</div>
-   
-<jsp:include page="../main/footer.jsp"/>
+	<jsp:include page="../main/footer.jsp" />
 
 
 
