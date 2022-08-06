@@ -24,17 +24,43 @@
 <br><br>
 <br><br>
 <br><br>
-<br><br>
-<br><br>
 
-	<div id="cateBtn" align="center" >
-		<input  class="cateBtn" style="height: 45px;" type="button" value=" ORDER "  onclick="location.href='<%=cp%>/shop/orders/orderList.do';"/> <br>
-		<input style="height: 45px;" type="reset" value=" BAG "  onclick="location.href='<%=cp%>/shop/orders/cartList.do';"/><br> 
-		<input style="height: 45px;" type="button" value=" PROFILE "  onclick="location.href='<%=cp%>/shop/member/update.do';"/><br>
-		<input style="height: 40px;" type="button" value=" Q/A "  onclick="location.href='<%=cp%>/shop/boards/list.do?community=QnA';"/><br> 
-		<input style="height: 45px;" type="button" value=" MAIN " onclick="location.href='<%=cp%>/shop/main/main.do';"/><br> 
-		<input style="height: 45px;" type="button" value=" 탈퇴 " onclick="location.href='<%=cp%>/shop/member/delete.do';"/><br> 
-	</div>
+
+			<div align="center">	
+				
+				
+				<button  style=" margin-top:10PX; border:1px solid #000; background-color: #FFFFFF; width: 480px; line-height: 48px;"
+					type="button" onclick="location.href='<%=cp%>/shop/orders/orderList.do';">
+						<b style="font-size: 17px; color: black;"> ORDER </b>
+				</button>
+	<br>
+				<button style=" margin-top:10PX; border:1px solid #000; background-color: #FFFFFF; width: 480px; line-height: 48px;"
+						type="button" onclick="location.href='<%=cp%>/shop/orders/cartList.do';">
+							<b style="font-size: 17px; color: black;"> BAG </b>
+					</button>	
+					
+	<br>
+				<button style=" margin-top:10PX; border:1px solid #000; background-color: #FFFFFF; width: 480px; line-height: 48px;"
+						type="button" onclick="location.href='<%=cp%>/shop/member/update.do';">
+							<b style="font-size: 17px; color: black;"> PROFILE </b>
+					</button>
+					
+	<br>
+				<button style=" margin-top:10PX; border:1px solid #000; background-color: #FFFFFF; width: 480px; line-height: 48px;"
+						type="button" onclick="location.href='<%=cp%>/shop/boards/list.do?community=QnA';">
+							<b style="font-size: 17px; color: black;"> Q/A </b>
+					</button>
+	<br>
+				<button style=" margin-top:10PX; border:1px solid #000; background-color: #FFFFFF; width: 480px; line-height: 48px;"
+						type="button" onclick="location.href='<%=cp%>/shop/main/main.do';">
+							<b style="font-size: 17px; color: black;"> MAIN </b>
+					</button>			
+					
+					
+				</div>		
+	
+
+
 	
 
 </div>
@@ -42,9 +68,7 @@
 <br><br>
 <br><br>
 <br><br>
-<br><br>
-<br><br>
-   
+
    
 <jsp:include page="../main/footer.jsp"/>
 

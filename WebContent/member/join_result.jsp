@@ -21,6 +21,9 @@
  <jsp:include page="../main/header.jsp"/>
    
    <div id="content" align="center">
+<br><br>
+<br><br>
+<br><br>
 
 <h1>${userName }님 반갑습니다</h1>
 <br><br>
@@ -28,8 +31,20 @@
 <b>kristal 회원가입을 진심으로 환영합니다.</b><br>
 <br>
 <br>
-<input type="button" value=" 메인으로 " onclick="location.href='<%=cp%>/shop/main/main.do';"/>
-<input type="button" value=" 로그인 " onclick="location.href='<%=cp%>/shop/member/login.do';"/>
+	<div align="center">	
+				<button  style="border:none; background-color: #FOFOFO; width: 200px; height: 50px;"
+					type="button" onclick="javascript:location.href='<%=cp%>/shop/main/main.do';">
+						<b style="font-size: 17px; color: black;">메인으로</b>
+				</button>
+				&nbsp;&nbsp;
+				<button style="background-color: black; width: 200px; height: 50px;"
+					type="button" onclick="javascript:location.href='<%=cp%>/shop/member/login.do';">
+						<b style="font-size: 17px; color: white;">로그인하기</b>
+				</button>	
+			</div>
+	<br><br>
+<br><br>
+<br><br>
 
 
 
