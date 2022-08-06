@@ -45,6 +45,42 @@ public class OrdersDAO {
 		return result;
 
 	}
+	
+public int getDataCount(String searchKey,String searchValue) {
+		
+		int dataCount = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql;
+		
+		try {
+			
+			searchValue = "%" + searchValue + "%";
+			
+			sql = "select nvl(count(*),0) from ORDERS ";
+			sql+= "where " + searchKey + " like ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, searchValue);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				dataCount = rs.getInt(1);
+			}
+			
+			rs.close();
+			pstmt.close();			
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return dataCount;
+		
+	}
 
 	public int insertData(OrdersDTO dto) {
 
@@ -222,6 +258,66 @@ public class OrdersDAO {
 				dto.setProgress(rs.getString("PROGRESS"));
 				dto.setOrderSize(rs.getString("ORDERSIZE"));
 				dto.setOrderColor(rs.getString("ORDERCOLOR"));
+
+				dto.setProductName(rs.getString("PRODUCTNAME"));
+				dto.setProductPrice(rs.getInt("PRODUCTPRICE"));
+				dto.setProductCategory(rs.getString("PRODUCTCATEGORY"));
+				dto.setSaveFileName(rs.getString("SAVEFILENAME").split(","));
+
+				list.add(dto);
+
+			}
+
+			rs.close();
+			pstmt.close();
+
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+
+		return list;
+
+	}
+	
+	public List<OrdersDTO> getList(int start, int end, String searchKey,String searchValue, String userId, String progress) {
+
+		List<OrdersDTO> list = new ArrayList<>();
+		PreparedStatement pstmt;
+		ResultSet rs;
+		String sql;
+
+		try {
+			
+			searchValue = "%" + searchValue + "%";
+		
+			sql = "select * from  (";
+			sql += "select rownum rnum,data.* from (";
+			sql += "SELECT ORDERNUM, USERID, O.PRODUCTNUM,ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, PROGRESS, ";
+			sql += "PRODUCTNAME, PRODUCTPRICE, PRODUCTCATEGORY, SAVEFILENAME ";
+			sql += "FROM ORDERS O, PRODUCT P ";
+			sql += "WHERE O.PRODUCTNUM = P.PRODUCTNUM and" + searchKey + " like ? AND USERID = ? AND PROGRESS = ? ORDER BY ORDERNUM DESC) data) ";
+			sql += "where rnum>=? and rnum<=?";	
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, searchValue);
+			pstmt.setString(2, userId);
+			pstmt.setString(3, progress);
+			pstmt.setInt(4, start);
+			pstmt.setInt(5, end);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				OrdersDTO dto = new OrdersDTO();
+
+				dto.setOrderNum(rs.getInt("ORDERNUM"));
+				dto.setUserId(rs.getString("USERID"));
+				dto.setProductNum(rs.getInt("PRODUCTNUM"));
+				dto.setOrderQuantity(rs.getInt("ORDERQUANTITY"));
+				dto.setOrderColor(rs.getString("ORDERCOLOR"));
+				dto.setOrderSize(rs.getString("ORDERSIZE"));
+				dto.setProgress(rs.getString("PROGRESS"));
 
 				dto.setProductName(rs.getString("PRODUCTNAME"));
 				dto.setProductPrice(rs.getInt("PRODUCTPRICE"));
