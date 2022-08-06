@@ -50,10 +50,8 @@
 									<a href="<%=cp%>/shop/orders/modifyList_ok.do?orderNum=${dto.orderNum }&orderQuantity=${dto.orderQuantity - 1 }">
 										-</a>
 								</td>
-								<td id="totalProductPrice">
-									${dto.productPrice * dto.orderQuantity }KRW
-								</td>
-								<td id="delete">
+								<td id="addOrder&delete">
+									<a href="<%=cp%>/shop/orders/addOrder_ok.do?orderNum=${dto.orderNum }">추가</a>&nbsp;&nbsp;&nbsp;
 									<a href="<%=cp%>/shop/orders/delete_ok.do?orderNum=${dto.orderNum }">X</a>
 								</td>
 							</tr>

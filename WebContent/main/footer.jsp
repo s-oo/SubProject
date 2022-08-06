@@ -5,8 +5,7 @@
 	String cp = request.getContextPath();
 %>
 <div id="footer">
-	<div
-		class="xans-element- xans-layout xans-layout-footer cboth bt_backbg ">
+	<div class="xans-element- xans-layout xans-layout-footer cboth bt_backbg ">
 		<div class="bt_shopinfo2">
 			<span>EMAIL: GOOAOFFICIAL@NAVER.COM</span><br> <span>CUSTOMER
 				SERVICES: 070-7954-3714</span><br> <span>ADDRESS: 21

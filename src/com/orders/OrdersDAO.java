@@ -30,7 +30,11 @@ public class OrdersDAO {
 			pstmt = conn.prepareStatement(sql);
 
 			rs = pstmt.executeQuery();
-
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
 			rs.close();
 			pstmt.close();
 
@@ -41,6 +45,42 @@ public class OrdersDAO {
 		return result;
 
 	}
+	
+public int getDataCount(String searchKey,String searchValue) {
+		
+		int dataCount = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql;
+		
+		try {
+			
+			searchValue = "%" + searchValue + "%";
+			
+			sql = "SELECT NVL(COUNT(*),0) FROM ORDERS ";
+			sql+= "WHERE " + searchKey + " LIKE ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, searchValue);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				dataCount = rs.getInt(1);
+			}
+			
+			rs.close();
+			pstmt.close();			
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return dataCount;
+		
+	}
 
 	public int insertData(OrdersDTO dto) {
 
@@ -50,8 +90,8 @@ public class OrdersDAO {
 
 		try {
 
-			sql = "INSERT INTO ORDERS(ORDERNUM, USERID, PRODUCTNUM, ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, PROGRESS) ";
-			sql += "VALUES(?, ?, ?, ?, ?, ?, ?)";
+			sql = "INSERT INTO ORDERS(ORDERNUM, USERID, PRODUCTNUM, ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, UPDATEDDATE, PROGRESS) ";
+			sql += "VALUES(?, ?, ?, ?, ?, ?, SYSDATE, ?)";
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, dto.getOrderNum());
@@ -82,7 +122,7 @@ public class OrdersDAO {
 
 		try {
 
-			sql = "UPDATE ORDERS SET ORDERQUANTITY = ?, ORDERCOLOR = ?, ORDERSIZE = ?, PROGRESS = ? ";
+			sql = "UPDATE ORDERS SET ORDERQUANTITY = ?, ORDERCOLOR = ?, ORDERSIZE = ?, UPDATEDDATE = SYSDATE, PROGRESS = ? ";
 			sql += "WHERE ORDERNUM = ?";
 
 			pstmt = conn.prepareStatement(sql);
@@ -138,10 +178,10 @@ public class OrdersDAO {
 
 		try {
 
-			sql = "SELECT ORDERNUM, USERID, O.PRODUCTNUM,ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, PROGRESS, ";
+			sql = "SELECT ORDERNUM, USERID, O.PRODUCTNUM,ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, UPDATEDDATE, PROGRESS, ";
 			sql += "PRODUCTNAME, PRODUCTPRICE, PRODUCTCATEGORY, SAVEFILENAME ";
 			sql += "FROM ORDERS O, PRODUCT P ";
-			sql += "WHERE O.PRODUCTNUM = P.PRODUCTNUM AND USERID = ? AND PROGRESS = ?";
+			sql += "WHERE O.PRODUCTNUM = P.PRODUCTNUM AND USERID = ? AND PROGRESS = ? ORDER BY ORDERNUM DESC";
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
@@ -159,6 +199,7 @@ public class OrdersDAO {
 				dto.setOrderQuantity(rs.getInt("ORDERQUANTITY"));
 				dto.setOrderColor(rs.getString("ORDERCOLOR"));
 				dto.setOrderSize(rs.getString("ORDERSIZE"));
+				dto.setUpdatedDate(rs.getString("UPDATEDDATE"));
 				dto.setProgress(rs.getString("PROGRESS"));
 
 				dto.setProductName(rs.getString("PRODUCTNAME"));
@@ -195,10 +236,10 @@ public class OrdersDAO {
 				n += ", ?";
 			}
 
-			sql = "SELECT ORDERNUM, USERID, O.PRODUCTNUM, ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, PROGRESS, ";
+			sql = "SELECT ORDERNUM, USERID, O.PRODUCTNUM, ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, UPDATEDDATE, PROGRESS, ";
 			sql += "PRODUCTNAME, PRODUCTPRICE, PRODUCTCATEGORY, SAVEFILENAME ";
 			sql += "FROM ORDERS O, PRODUCT P ";
-			sql += "WHERE O.PRODUCTNUM = P.PRODUCTNUM AND ORDERNUM IN (" + n + ")";
+			sql += "WHERE O.PRODUCTNUM = P.PRODUCTNUM AND ORDERNUM IN (" + n + ") ORDER BY ORDERNUM DESC";
 
 			pstmt = conn.prepareStatement(sql);
 			for (int i = 0; i < orderNum.length; i++) {
@@ -215,9 +256,71 @@ public class OrdersDAO {
 				dto.setUserId(rs.getString("USERID"));
 				dto.setProductNum(rs.getInt("PRODUCTNUM"));
 				dto.setOrderQuantity(rs.getInt("ORDERQUANTITY"));
-				dto.setProgress(rs.getString("PROGRESS"));
-				dto.setOrderSize(rs.getString("ORDERSIZE"));
 				dto.setOrderColor(rs.getString("ORDERCOLOR"));
+				dto.setOrderSize(rs.getString("ORDERSIZE"));
+				dto.setUpdatedDate(rs.getString("UPDATEDDATE"));
+				dto.setProgress(rs.getString("PROGRESS"));
+
+				dto.setProductName(rs.getString("PRODUCTNAME"));
+				dto.setProductPrice(rs.getInt("PRODUCTPRICE"));
+				dto.setProductCategory(rs.getString("PRODUCTCATEGORY"));
+				dto.setSaveFileName(rs.getString("SAVEFILENAME").split(","));
+
+				list.add(dto);
+
+			}
+
+			rs.close();
+			pstmt.close();
+
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+
+		return list;
+
+	}
+	
+	public List<OrdersDTO> getList(int start, int end, String searchKey,String searchValue, String userId, String progress) {
+
+		List<OrdersDTO> list = new ArrayList<>();
+		PreparedStatement pstmt;
+		ResultSet rs;
+		String sql;
+
+		try {
+			
+			searchValue = "%" + searchValue + "%";
+		
+			sql = "select * from  (";
+			sql += "select rownum rnum,data.* from (";
+			sql += "SELECT ORDERNUM, USERID, O.PRODUCTNUM,ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, UPDATEDDATE, PROGRESS, ";
+			sql += "PRODUCTNAME, PRODUCTPRICE, PRODUCTCATEGORY, SAVEFILENAME ";
+			sql += "FROM ORDERS O, PRODUCT P ";
+			sql += "WHERE O.PRODUCTNUM = P.PRODUCTNUM and" + searchKey + " like ? AND USERID = ? AND PROGRESS = ? ORDER BY ORDERNUM DESC) data) ";
+			sql += "where rnum>=? and rnum<=?";	
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, searchValue);
+			pstmt.setString(2, userId);
+			pstmt.setString(3, progress);
+			pstmt.setInt(4, start);
+			pstmt.setInt(5, end);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				OrdersDTO dto = new OrdersDTO();
+
+				dto.setOrderNum(rs.getInt("ORDERNUM"));
+				dto.setUserId(rs.getString("USERID"));
+				dto.setProductNum(rs.getInt("PRODUCTNUM"));
+				dto.setOrderQuantity(rs.getInt("ORDERQUANTITY"));
+				dto.setOrderColor(rs.getString("ORDERCOLOR"));
+				dto.setOrderSize(rs.getString("ORDERSIZE"));
+				dto.setUpdatedDate(rs.getString("UPDATEDDATE"));
+				dto.setProgress(rs.getString("PROGRESS"));
 
 				dto.setProductName(rs.getString("PRODUCTNAME"));
 				dto.setProductPrice(rs.getInt("PRODUCTPRICE"));
@@ -248,7 +351,7 @@ public class OrdersDAO {
 
 		try {
 
-			sql = "SELECT ORDERNUM, USERID, PRODUCTNUM, ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, PROGRESS ";
+			sql = "SELECT ORDERNUM, USERID, PRODUCTNUM, ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, UPDATEDDATE, PROGRESS ";
 			sql += "FROM ORDERS WHERE ORDERNUM = ?";
 
 			pstmt = conn.prepareStatement(sql);
@@ -266,7 +369,13 @@ public class OrdersDAO {
 				dto.setOrderQuantity(rs.getInt("ORDERQUANTITY"));
 				dto.setProgress(rs.getString("PROGRESS"));
 				dto.setOrderSize(rs.getString("ORDERSIZE"));
+				dto.setUpdatedDate(rs.getString("UPDATEDDATE"));
 				dto.setOrderColor(rs.getString("ORDERCOLOR"));
+
+				dto.setProductName(rs.getString("PRODUCTNAME"));
+				dto.setProductPrice(rs.getInt("PRODUCTPRICE"));
+				dto.setProductCategory(rs.getString("PRODUCTCATEGORY"));
+				dto.setSaveFileName(rs.getString("SAVEFILENAME").split(","));
 
 			}
 
