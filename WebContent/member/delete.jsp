@@ -39,7 +39,7 @@
    <div id="content" align="center">
 
 
-<b>회 원 탈 퇴</b>
+<h1><b>회 원 탈 퇴</b></h1>
 
 <form action="" method="post" name="deleteForm" onsubmit="return deleteValue();">
 
@@ -48,7 +48,7 @@
                   <div class="box row">
                   
                   <div class="box label">
-                        <label for="userName"><span>I&nbsp;&nbsp;D</span></label>
+                        <label for="userName"><span><b>I&nbsp;&nbsp;D</b></span></label>
                      </div>
                    <div class="box input">
                         <input type="text" name="userId" id="userId"  readonly="readonly" value="${dto.userId }" />
@@ -58,7 +58,7 @@
                    
                     <div class="box row">
 	                     <div class="box label">
-	                        <label for="userName"><span>NAME</span></label>
+	                        <label for="userName"><span><b>NAME</b></span></label>
 	                     </div>
 	                     <div class="box input">
 	                        <input type="text" name="userName" id="userName" value="${dto.userName }"/>
@@ -67,7 +67,7 @@
                   
                     <div class="box row">
 	                     <div class="box label">
-	                        <label for="userName"><span>PASSWORD</span></label>
+	                        <label for="userName"><span><b>PASSWORD</b></span></label>
 	                     </div>
 	                     <div class="box input">
 	                        <input type="text" name="userPwd" id="userPwd" placeholder="비밀번호를 입력해주세요."/>
@@ -77,10 +77,18 @@
             </div>
 	</div>
 <br><br>
-				<div class="box input">
-					<input type="button" value=" 탈퇴 " onclick="deleteValue();"/>
-				</div>
-
+					<div align="center">	
+						<button  style="border:none; background-color: #FOFOFO; width: 200px; height: 50px;"
+							type="button" onclick="javascript:history.back();">
+								<b style="font-size: 17px; color: black;">뒤로가기</b>
+						</button>
+							&nbsp;&nbsp;
+						<button style="background-color: black; width: 200px; height: 50px;"
+							type="button" onclick="deleteValue();">
+								<a style="font-size: 17px; color: white;">탈&nbsp;퇴</a>
+						</button>	
+					</div>	
+				
 
 </form>
 

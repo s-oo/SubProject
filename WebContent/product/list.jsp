@@ -32,7 +32,7 @@
 							<div class="productName">
 								<a href="<%=cp %>/shop/product/detail.do?productNum=${dto.productNum }">
 									<span>${dto.productName }</span>
-								</a>	
+								</a>
 							</div>
 							<div class="productPrice">
 								<ul>

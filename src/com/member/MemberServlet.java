@@ -276,6 +276,10 @@ public class MemberServlet extends HttpServlet {
 				url = cp + "/shop/main/main.do";
 				resp.sendRedirect(url);
 				
+			}else if(uri.indexOf("delete_result.do")!=-1) {
+				
+				url = "/member/delete_result.jsp";
+				forward(req, resp, url);
 				
 				
 				
