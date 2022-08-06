@@ -104,7 +104,7 @@ public class BoardsServlet extends HttpServlet {
 			String searchValue = req.getParameter("searchValue");
 
 			if (searchValue == null) {
-				searchKey = "subject";
+				searchKey = "productName";
 				searchValue = "";
 			} else {
 				if (req.getMethod().equalsIgnoreCase("GET")) {
@@ -133,7 +133,7 @@ public class BoardsServlet extends HttpServlet {
 				param = "searchKey=" + searchKey;
 				param += "&searchValue=" + URLEncoder.encode(searchValue, "UTF-8");
 			} // param: 파라미터 값을 저장하고 있는 저장소
-
+			
 			String listUrl = cp + "/shop/boards/list.do";
 
 			if (!param.equals("")) {

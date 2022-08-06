@@ -78,7 +78,7 @@ public class MemberServlet extends HttpServlet {
 				dto.setUserPwd(req.getParameter("userPwd"));
 				dto.setUserName(req.getParameter("userName"));
 				dto.setUserGender(req.getParameter("userGender"));
-				dto.setUserBirth(req.getParameter("userBirth"));
+				dto.setUserBirth(req.getParameterValues("userBirth"));
 				dto.setUserAddr(req.getParameterValues("userAddr"));
 				dto.setUserEmail(req.getParameter("userEmail"));
 				dto.setUserTel(req.getParameter("userTel"));
@@ -146,6 +146,41 @@ public class MemberServlet extends HttpServlet {
 					resp.sendRedirect(url);
 
 				}
+			
+			}else if(uri.indexOf("findId.do")!=-1) {
+				
+				url = "/member/findId.jsp";
+				forward(req, resp, url);
+				
+			}else if(uri.indexOf("findId_ok.do")!=-1) {
+				String userName = req.getParameter("userName");
+				String userTel = req.getParameter("userTel");
+				
+				
+				MemberDTO dto = dao.getReadDataName(userName);
+				
+				if(dto==null||!dto.getUserTel().equals(userTel)) {
+					
+					out.print("<script>");
+					out.print("alert('로그인실패');");
+					out.print("location.href='cp/shop/member/login.do';");
+					out.print("</script>");
+			
+					//아이디가 틀리거나 또는 패스워드가 틀리면
+					req.setAttribute("message", "회원정보가 존재하지 않습니다.");
+					
+					url =  "/shop/member/findId.do";
+					forward(req, resp, url);
+					//아이디 패스워드가 틀리면 실행되지않게 막아줌	
+					return;
+				}else {
+				req.setAttribute("message", "아이디는 ["+ dto.getUserId() + "] 입니다.");
+				req.setAttribute("lego", "로그인");
+				url = "/shop/member/find.do";
+				forward(req, resp, url);
+			
+				}
+				
 				///비밀번호 찾기
 			}else if(uri.indexOf("find.do")!=-1) {
 				url =  "/member/find.jsp";
@@ -174,16 +209,12 @@ public class MemberServlet extends HttpServlet {
 					return;
 				}else {
 				req.setAttribute("message", "비밀번호는 ["+ dto.getUserPwd() + "] 입니다.");
-				req.setAttribute("lego", "로그인 하러 가기");
+				req.setAttribute("lego", "로그인");
 				url = "/shop/member/find.do";
 				forward(req, resp, url);
 				}
 				
-				
-				
-				
-				
-			// 오류
+				// 오류
 			} else {
 
 				out.print("<script>");
@@ -239,7 +270,7 @@ public class MemberServlet extends HttpServlet {
 				dto.setUserPwd(req.getParameter("userPwd"));
 				dto.setUserName(req.getParameter("userName"));
 				dto.setUserGender(req.getParameter("userGender"));
-				dto.setUserBirth(req.getParameter("userBirth"));
+				dto.setUserBirth(req.getParameterValues("userBirth"));
 				dto.setUserAddr(req.getParameterValues("userAddr"));
 				dto.setUserEmail(req.getParameter("userEmail"));
 				dto.setUserTel(req.getParameter("userTel"));				
@@ -259,10 +290,7 @@ public class MemberServlet extends HttpServlet {
 
 				url = "/member/delete.jsp";
 				forward(req, resp, url);
-
-				
-				
-				
+	
 			}else if (uri.indexOf("delete_ok.do") != -1) {
 				
 				MemberDTO dto = dao.getReadData(userId);

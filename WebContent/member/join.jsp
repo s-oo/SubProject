@@ -9,7 +9,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-
+<link rel="stylesheet" type="text/css"href="<%=cp%>/css/shopStyle.css" />
+<link rel="stylesheet" type="text/css"href="<%=cp%>/member/css/memberListStyle.css" />
 
 <script type="text/javascript">
 
@@ -35,9 +36,19 @@
 			return;
 		}
 		
-		if(!f.userBirth.value){
-			alert("생일을 입력해 주세요.");
-			f.userBirth.focus();
+		if(!f.userBirth[0].value){
+			alert("년도를 입력해 주세요.");
+			f.userBirth[0].focus();
+			return;
+		}
+		if(!f.userBirth[1].value){
+			alert("월을 입력해 주세요.");
+			f.userBirth[1].focus();
+			return;
+		}
+		if(!f.userBirth[2].value){
+			alert("일을 입력해 주세요.");
+			f.userBirth[2].focus();
 			return;
 		}
 		
@@ -132,97 +143,135 @@
 	</div>
 	
 	<form action="" method="post" name="myForm">
-	<div id="bbsCreated" align="center">
 	
-		<div class="bbsCreated_bottomLine" align="center">
-			<dl>
-				<dt>아&nbsp;이&nbsp;디</dt>
-				<dd>
-				<input type="text" name="userId" size="35" maxlength="20" class="boxTF"/>
-				<input type="button" value=" 중복확인 " name="checkId" onclick="asdf();"/>
-				</dd> 
-			</dl>
-			
-		</div>
-
-		<div class="bbsCreated_bottomLine">
-			<dl>
-				<dt>패스워드</dt>
-				<dd>
-				<input type="password" name="userPwd" size="35" maxlength="20" class="boxTF"/>
-				</dd> 
-			</dl>
-		</div>
-		
-		<div class="bbsCreated_bottomLine">
-			<dl>
-				<dt>이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;름</dt>
-				<dd>
-				<input type="text" name="userName" size="35" maxlength="20" class="boxTF"/>
-				</dd> 
-			</dl>
-		</div>
-		
-		<div class="bbsCreated_bottomLine">
-			<dl>
-				<dt>성&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;별</dt>
-				<dd>
-				<input type="text" name="userGender" size="35" maxlength="20" class="boxTF"/>
-				</dd> 
-			</dl>
-		</div>
-		
-		<div class="bbsCreated_bottomLine">
-			<dl>
-				<dt>생&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;일</dt>
-				<dd>
-				<input type="text" name="userBirth" size="35" maxlength="20" class="boxTF"/>[YYYY-MM-DD]
-				</dd> 
-			</dl>
-		</div>
-		
-		<div class="bbsCreated_bottomLine">
-			<dl>
-				<dt>주&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</dt>				
-				<dd>				
-				<input type="text" name="userAddr" id="sample6_postcode" placeholder="우편번호">
-				<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-				<input type="text" name="userAddr" id="sample6_address" placeholder="주소"><br>
-				<input type="text" name="userAddr" id="sample6_detailAddress" placeholder="상세주소">
-				<input type="text"  name="userAddr"id="sample6_extraAddress" placeholder="참고항목">
-				</dd>
-			</dl>
-		</div>
-		
-		<div class="bbsCreated_bottomLine">
-			<dl>
-				<dt>이&nbsp;메&nbsp;일</dt>
-				<dd>
-				<input type="text" name="userEmail" size="35" maxlength="20" class="boxTF"/>
-				</dd> 
-			</dl>
-		</div>
-		
-		<div class="bbsCreated_bottomLine">
-			<dl>
-				<dt>전&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;화</dt>
-				<dd>
-				<input type="text" name="userTel" size="35" maxlength="20"  placeholder="(-)없이 숫자만 입력하세요" class="boxTF"/>
-				</dd> 
-			</dl>
-		</div>
-
-	</div>
-	
-	
-	
-	
-	
-	<div id="bbsCreated_footer" align="center">	
-		<input type="button" value=" 가입하기 " class="btn2" onclick="sendIt();"/> 
-		<input type="button" value=" 가입취소 " class="btn2" onclick="location.href='<%=cp%>/shop/main/main.do';"/> 
-	</div>
-	
+	<div id="left_area" style="display: inline-block;" >
+               <div id="update_area" style="width: 600px;">
+                  <div class="box row">
+                  
+                  <div class="box label">
+                        <label for="userId"><span><b>I&nbsp;&nbsp;D</b></span></label>
+                     </div>
+                   <div class="box input">
+                        <input type="text" name="userId" id="userId"placeholder="아이디"/>
+                     </div>
+                   </div>
+                   
+                   
+                    <div class="box row">
+	                     <div class="box label">
+	                        <label for="userName"><span><b>NAME</b></span></label>
+	                     </div>
+	                     <div class="box input">
+	                        <input type="text" name="userName" id="userName" placeholder="이름"/>
+	                     </div>
+             		</div>
+                  
+                    <div class="box row">
+	                     <div class="box label">
+	                        <label for="userName"><span><b>PASSWORD</b></span></label>
+	                     </div>
+	                     <div class="box input">
+	                        <input type="text" name="userPwd" id="userPwd" placeholder="비밀번호"/>
+	                     </div>
+             		</div>
+                  	  <div class="box row">
+	                     <div class="box label">
+	                        <label for="userName"><span><b>GENDER</b></span></label>
+	                     </div>
+	                     <div class="box input">
+	                     <!--  <input type="text" name="userGender" id="userGender"/> -->
+	                        <select style="border: none; width: 80; height: 30; margin-left: -235px;" name="userGender">
+	                       		<option value="">선택</option>
+	                        	<option value="선택안함">선택안함</option>
+	                        	<option value="남자">남자</option>
+	                        	<option value="여자">여자</option>	                        
+	                        </select>
+	                     </div>
+             		</div>
+                   <div class="box row">
+	                     <div class="box label">
+	                        <label for="userName"><span><b>BIRTH</b></span></label>
+	                     </div>
+	                     <div class="box input">
+	                  		<input maxlength="4" style="width: 50px; vertical-align: middle;" type="text" name="userBirth" id="userBirth" placeholder="년도"/> 
+		                  
+		                    <select style="border: none; width: 80; height: 30; margin-left: -330px;" name="userBirth" >
+							<option value="">월</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option></select>
+							
+							<input maxlength="2" style="margin-left: 100px; width: 50px; vertical-align: middle;" type="text" name="userBirth" id="userBirth" placeholder="일"/> 
+                    
+	                    </div>
+             		</div>
+                  
+                  <div class="box row" style="height: 110px;">
+                     <div class="box label" style="height: 80px;">
+                        <label for="userAddress"><span><b>ADDRESS</b></span></label>
+                     </div>
+                     <div class="box input" style="padding: 0px;">
+                      <div class="box input" style="padding: 5px;">
+                           <input type="text" name="userAddr" id="sample6_postcode" class="input-2" placeholder="우편번호" ">
+                           <input style="border: black; width: 80; height: 30; margin-left: -100px;" type="button" onclick="sample6_execDaumPostcode()" class="input-2 right" value="우편번호 찾기">
+                        </div>
+                       
+                        <div class="box input" style="padding: 5px;">
+                           <input type="text" name="userAddr" id="sample6_address" placeholder="주소" >
+                        </div>
+                       
+                        <div class="box input" style="padding: 5px;">
+                           <input type="text" name="userAddr" id="sample6_detailAddress" placeholder="상세주소" >
+                                                   
+                        <div class="box input" style="padding: 5px;">  
+                           <input type="text"  name="userAddr"id="sample6_extraAddress" placeholder="참고항목">
+                        </div>
+                        </div>
+                     </div>
+                  </div>
+                <div class="box row">
+                     <div class="box label">
+                        <label for="userTel"><span><b>TEL</b></span></label>
+                     </div>
+                     <div class="box input">
+                        <input type="text" name="userTel" id="userTel" placeholder="(-)없이 숫자만 입력해주세요."/>
+                     </div>
+                  </div>
+                  <div class="box row">
+                     <div class="box label">
+                        <label for="userEmail"><span><b>E-MAIL</b></span></label>
+                     </div>
+                     <div class="box input">
+                        <input type="text" name="userEmail" id="userEmail" placeholder="이메일"/>
+                     </div>
+                  </div>
+                </div>
+            </div>
+            <br><br><br>
+            
+            
+            
+            
+		<div align="center">	
+				<button  style="border:none; background-color: #FOFOFO; width: 200px; height: 50px;"
+					type="button" onclick="javascript:history.back();">
+						<b style="font-size: 17px; color: black;">뒤로가기</b>
+				</button>
+				&nbsp;&nbsp;
+				<button style="background-color: black; width: 200px; height: 50px;"
+					type="button" onclick="sendIt();">
+						<b style="font-size: 17px; color: white;">가입하기</b>
+				</button>	
+			</div>
 	
 	</form>
 </div>

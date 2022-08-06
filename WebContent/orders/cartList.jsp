@@ -28,81 +28,79 @@
 <body>
 	<jsp:include page="../main/header.jsp"/>
 	<div id="content" align="center" style="display: block;">
-		<div align="right">
-			<form action="" method="post" name="cartListForm">
-				<table id="cartList">
-					<tbody>
-						<c:set var="sum" value="0"/>
-						<c:set var="tot" value="0"/>
-						<c:forEach var="dto" items="${list }">
-							<tr align="center">
-								<td id="orderNum">
-									<input type="checkbox" name="orderNum" value="${dto.orderNum }" checked="checked">
-								</td>
-								<td id="saveFileName">
-									<a href="<%=cp %>/shop/product/detail.do?productNum=${dto.productNum }">
-										<img src="<%=cp %>/product/image/${dto.productCategory }/${dto.saveFileName[0] }" height="100px;">
-									</a>
-								</td>
-								<td id="productName">
-									<a href="<%=cp %>/shop/product/detail.do?productNum=${dto.productNum }">
-										${dto.productName }
-									</a><br/>
-									<span class="productOption">[옵션 : ${dto.orderColor }/${dto.orderSize }]</span>
-								</td>
-								<td id="productPrice">
-									<span style="text-decoration: line-through;">${dto.productPrice }KRW</span><br/>
-									<span>${dto.productPrice }KRW</span>
-								</td>
-								<td id="productQuantity">
-									${dto.orderQuantity }&nbsp;&nbsp;&nbsp;
-									<a href="<%=cp%>/shop/orders/changeOrder_ok.do?orderNum=${dto.orderNum }&orderQuantity=${dto.orderQuantity + 1 }">
-										+</a>&nbsp;
-									<a href="<%=cp%>/shop/orders/changeOrder_ok.do?orderNum=${dto.orderNum }&orderQuantity=${dto.orderQuantity - 1 }">
-										-</a>
-								</td>
-								<td id="totalProductPrice">
-									${dto.productPrice * dto.orderQuantity }KRW
-								</td>
-								<td id="delete">
-									<a href="<%=cp%>/shop/orders/delete_ok.do?orderNum=${dto.orderNum }">X</a>
-								</td>
-							</tr>
-							<c:set var="sum" value="${sum + dto.productPrice * dto.orderQuantity }"/>
-							<c:set var="tot" value="${tot + dto.productPrice * dto.orderQuantity }"/>
-						</c:forEach>
-					</tbody>
-					<c:if test="${empty list }">
-						<tfoot>
-							<tr id="listBox" class="item" style="list-style: none;width: 300px;display: inline-block;">
-								<td class="box_wrap" style="display: inline-block;font-size: 10pt;color: #555555;">
-									등록된 상품이 없음
-								</td>
-							</tr>
-						</tfoot>
-					</c:if>
-				</table>
-				<!-- 결제정보 -->
-				<div  id="right_area" style="display: inline-block; width: 300px; float: right; padding-right: 60px;">
-					<div class="box row" style="width: 300px;" align="left" >
-						<h3 style="margin: 0px;">결재정보</h3>
+		<form action="" method="post" name="cartListForm">
+			<table id="cartList">
+				<tbody>
+					<c:set var="sum" value="0"/>
+					<c:set var="tot" value="0"/>
+					<c:forEach var="dto" items="${list }">
+						<tr align="center">
+							<td id="orderNum">
+								<input type="checkbox" name="orderNum" value="${dto.orderNum }" checked="checked">
+							</td>
+							<td id="saveFileName">
+								<a href="<%=cp %>/shop/product/detail.do?productNum=${dto.productNum }">
+									<img src="<%=cp %>/product/image/${dto.productCategory }/${dto.saveFileName[0] }" height="100px;">
+								</a>
+							</td>
+							<td id="productName">
+								<a href="<%=cp %>/shop/product/detail.do?productNum=${dto.productNum }">
+									${dto.productName }
+								</a><br/>
+								<span class="productOption">[옵션 : ${dto.orderColor }/${dto.orderSize }]</span>
+							</td>
+							<td id="productPrice">
+								<span style="text-decoration: line-through;">${dto.productPrice }KRW</span><br/>
+								<span>${dto.productPrice }KRW</span>
+							</td>
+							<td id="productQuantity">
+								${dto.orderQuantity }&nbsp;&nbsp;&nbsp;
+								<a href="<%=cp%>/shop/orders/changeOrder_ok.do?orderNum=${dto.orderNum }&orderQuantity=${dto.orderQuantity + 1 }">
+									+</a>&nbsp;
+								<a href="<%=cp%>/shop/orders/changeOrder_ok.do?orderNum=${dto.orderNum }&orderQuantity=${dto.orderQuantity - 1 }">
+									-</a>
+							</td>
+							<td id="totalProductPrice">
+								${dto.productPrice * dto.orderQuantity }KRW
+							</td>
+							<td id="delete">
+								<a href="<%=cp%>/shop/orders/delete_ok.do?orderNum=${dto.orderNum }">X</a>
+							</td>
+						</tr>
+						<c:set var="sum" value="${sum + dto.productPrice * dto.orderQuantity }"/>
+						<c:set var="tot" value="${tot + dto.productPrice * dto.orderQuantity }"/>
+					</c:forEach>
+				</tbody>
+				<c:if test="${empty list }">
+					<tfoot>
+						<tr id="listBox" class="item" style="list-style: none;width: 300px;display: inline-block;">
+							<td class="box_wrap" style="display: inline-block;font-size: 10pt;color: #555555;">
+								등록된 상품이 없음
+							</td>
+						</tr>
+					</tfoot>
+				</c:if>
+			</table>
+			<!-- 결제정보 -->
+			<div  id="right_area" style="display: inline-block; width: 300px; float: right; padding-right: 60px;">
+				<div class="box row" style="width: 300px;" align="left" >
+					<h3 style="margin: 0px;">결재정보</h3>
+				</div>
+				<div class="box row payment" align="right">
+					<div style="width: 180px;">
+						<div>PRICE</div><div>${sum }KRW</div><br/>
+						<div>SHIPPNG</div><div>0KRW</div><br/>
+						<div>TOTAL</div><div>${tot }KRW</div><br/>
+						<input type="hidden" name="totalPrice" value="${tot }"/>
 					</div>
-					<div class="box row payment" align="right">
-						<div style="width: 180px;">
-							<div>PRICE</div><div>${sum }KRW</div><br/>
-							<div>SHIPPNG</div><div>0KRW</div><br/>
-							<div>TOTAL</div><div>${tot }KRW</div><br/>
-							<input type="hidden" name="totalPrice" value="${tot }"/>
-						</div>
-						<div style="float: right;">
-							<div style="border: 1px solid; width: 90px; height: 50px; padding-top: 35px;" align="center">
-								<a href="javascript:sendItPayment();">ORDER</a>
-							</div>
+					<div style="float: right;">
+						<div style="border: 1px solid; width: 90px; height: 50px; padding-top: 35px;" align="center">
+							<a href="javascript:sendItPayment();">ORDER</a>
 						</div>
 					</div>
 				</div>
-			</form>
-		</div>
+			</div>
+		</form>
 	</div>
 	<jsp:include page="../main/footer.jsp"/>
 </body>

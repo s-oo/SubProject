@@ -30,7 +30,7 @@ public class MemberDAO {
 			pstmt.setString(2, dto.getUserPwd());
 			pstmt.setString(3, dto.getUserName());
 			pstmt.setString(4, dto.getUserGender());
-			pstmt.setString(5, dto.getUserBirth());
+			pstmt.setString(5, String.join(",", dto.getUserBirth()));
 			pstmt.setString(6, String.join(",", dto.getUserAddr()));			
 			pstmt.setString(7, dto.getUserEmail());
 			pstmt.setString(8, dto.getUserTel());
@@ -65,7 +65,7 @@ public class MemberDAO {
 			pstmt.setString(1, dto.getUserPwd());
 			pstmt.setString(2, dto.getUserName());
 			pstmt.setString(3, dto.getUserGender());
-			pstmt.setString(4, dto.getUserBirth());
+			pstmt.setString(4, String.join(",", dto.getUserBirth()));
 			pstmt.setString(5, String.join(",", dto.getUserAddr()));			
 			pstmt.setString(6, dto.getUserEmail());
 			pstmt.setString(7, dto.getUserTel());
@@ -117,6 +117,50 @@ public class MemberDAO {
 	}
 
 
+	public MemberDTO getReadDataName(String userName) {
+
+		MemberDTO dto = null;
+
+		PreparedStatement pstmt;
+		ResultSet rs;
+		String sql;
+
+		try {
+			sql = "select userId,userPwd,userName,userGender,to_char(userBirth,'YYYY-MM-DD') userBirth,";
+			sql+= "userAddr,userEmail,userTel from member where userName=?";
+
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, userName);
+
+			rs=pstmt.executeQuery();
+
+			if(rs.next()) {
+
+				dto = new MemberDTO();
+
+				dto.setUserId(rs.getString("userId"));
+				dto.setUserPwd(rs.getString("userPwd"));
+				dto.setUserName(rs.getString("userName"));
+				dto.setUserGender(rs.getString("userGender"));
+				dto.setUserBirth(rs.getString("userBirth").split(","));
+				dto.setUserAddr(rs.getString("userAddr").split(","));
+				dto.setUserEmail(rs.getString("userEmail"));
+				dto.setUserTel(rs.getString("userTel"));				
+			}
+
+			rs.close();
+			pstmt.close();
+
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+
+		return dto;
+
+
+
+	}
+
 	public MemberDTO getReadData(String userId) {
 
 		MemberDTO dto = null;
@@ -142,7 +186,7 @@ public class MemberDAO {
 				dto.setUserPwd(rs.getString("userPwd"));
 				dto.setUserName(rs.getString("userName"));
 				dto.setUserGender(rs.getString("userGender"));
-				dto.setUserBirth(rs.getString("userBirth"));
+				dto.setUserBirth(rs.getString("userBirth").split(","));
 				dto.setUserAddr(rs.getString("userAddr").split(","));
 				dto.setUserEmail(rs.getString("userEmail"));
 				dto.setUserTel(rs.getString("userTel"));				
@@ -160,5 +204,6 @@ public class MemberDAO {
 
 
 	}
-
+	
+	
 }
