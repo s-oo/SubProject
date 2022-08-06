@@ -29,7 +29,7 @@
 				<div id="cate_inner" class="xans-element- xans-layout xans-layout-category">
 					<a href="/sub/shop/boards/list.do?community=QnA">Q/A</a><br />
 					<a href="/sub/shop/boards/list.do?community=notice">NOTICE</a><br />
-					<a href="//sub/shop/boards/list.do?community=review">REVIEW</a><br />
+					<a href="/sub/shop/boards/list.do?community=review">REVIEW</a><br />
 				</div>
 			</div>
 			<br /><br />
