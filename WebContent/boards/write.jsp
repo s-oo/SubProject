@@ -10,8 +10,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>게 시 판</title>
 
-<link rel="stylesheet" type="text/css" href="<%=cp%>/boards/css/style.css"/>
-<link rel="stylesheet" type="text/css" href="<%=cp%>/boards/css/created.css"/>
+<link rel="stylesheet" type="text/css"href="<%=cp%>/css/shopStyle.css" />
+<link rel="stylesheet" type="text/css"href="<%=cp%>/orders/css/cartListStyle.css" />
 
 <script type="text/javascript" src="<%=cp%>/boards/js/util.js"></script>
 <script type="text/javascript">
@@ -29,49 +29,7 @@
 		}
 		f.subject.value = str;
 		
-		/* str = f.name.value;
-		str = str.trim();
-		if(!str){
-			alert("\n이름을 입력하세요.");
-			f.name.focus();
-			return;
-		}
-		
-		 if(!isValidKorean(str)){
-			alert("\n이름을 정확히 입력하세요.");
-			f.name.focus();
-			return;
-		}		 
-		
-		f.name.value = str;
-		
-		if(f.email.value){
-			if(!isValidEmail(f.email.value)){
-				alert("\n정상적인 E-Mail을 입력하세요.");
-				f.subject.focus();
-				return;
-			}
-		}
-		
-		str = f.content.value;
-		str = str.trim();
-		if(!str){
-			alert("\n내용을 입력하세요.");
-			f.content.focus();
-			return;
-		}
-		f.content.value = str;
-		
-		str = f.pwd.value;
-		str = str.trim();
-		if(!str){
-			alert("\n패스워드를 입력하세요.");
-			f.pwd.focus();
-			return;
-		}
-		f.pwd.value = str; */
-		
-		f.action = "<%=cp%>/shop/boards/write_ok.do";  /* do는기본확장자명 */
+		f.action = "<%=cp%>/shop/boards/write_ok.do";
 		f.submit();
 		
 	}
@@ -80,65 +38,66 @@
 
 </head>
 <body>
-
-<div id="bbs">
-	<div id="bbs_title">
-	Q A
-	</div>
-	
-	<form action="" method="post" name="myForm">
-	<div id="bbsCreated">
-	
-		<div class="bbsCreated_bottomLine">
-			<dl>
-				<dt>제&nbsp;&nbsp;&nbsp;&nbsp;목</dt>
-				<dd>
-					<input type="text" name="subject" size="60" 
-					maxlength="100" class="boxTF"/>
-				</dd>
-			</dl>		
+	<jsp:include page="../main/header.jsp"/>
+	<div id="bbs">
+		<div id="bbs_title">
+		Q A
 		</div>
 		
-		<div class="bbsCreated_bottomLine">
-			<dl>
-				<dt>회원&nbsp;&nbsp;ID</dt>
-				<dd>
-					<input type="text" name="userId" size="35" 
-					maxlength="20" class="boxTF"
-					value="${sessionScope.userId }"/>
-				</dd>
-			</dl>		
-		</div>
+		<form action="" method="post" name="myForm">
+		<div id="bbsCreated">
+	
+			<div class="bbsCreated_bottomLine">
+				<dl>
+					<dt>제&nbsp;&nbsp;&nbsp;&nbsp;목</dt>
+					<dd>
+						<input type="text" name="subject" size="60" 
+						maxlength="100" class="boxTF"/>
+					</dd>
+				</dl>		
+			</div>
+		
+			<div class="bbsCreated_bottomLine">
+				<dl>
+					<dt>회원&nbsp;&nbsp;ID</dt>
+					<dd>
+						<input type="text" name="userId" size="35" 
+						maxlength="20" class="boxTF"
+						value="${sessionScope.userId }"/>
+					</dd>
+				</dl>		
+			</div>
 		
 		
 		
 		
-		<div id="bbsCreated_content">
-			<dl>
-				<dt>내&nbsp;&nbsp;&nbsp;&nbsp;용</dt>
-				<dd>
-					<textarea rows="12" cols="63" name="content" class="boxTA"></textarea>
-				</dd>
-			</dl>		
-		</div>
-		
+			<div id="bbsCreated_content">
+				<dl>
+					<dt>내&nbsp;&nbsp;&nbsp;&nbsp;용</dt>
+					<dd>
+						<textarea rows="12" cols="63" name="content" class="boxTA"></textarea>
+					</dd>
+				</dl>		
+			</div>
+			
 		
 	
-	</div>
+		</div>
 	
-	<div id="bbsCreated_footer">
-		<input type="button" value=" 등록하기 " class="btn2"
-			onclick="sendIt();"/>
-		<input type="reset" value=" 다시입력 " class="btn2"
-			onclick="document.myForm.subject.focus();"/>
-		<input type="button" value=" 작성취소 " class="btn2"
-			onclick="javascript:location.href='<%=cp%>/shop/boards/list.do';"/>	
-	</div>	
+		<div id="bbsCreated_footer">
+			<input type="button" value=" 등록하기 " class="btn2"
+				onclick="sendIt();"/>
+			<input type="reset" value=" 다시입력 " class="btn2"
+				onclick="document.myForm.subject.focus();"/>
+			<input type="button" value=" 작성취소 " class="btn2"
+				onclick="javascript:location.href='<%=cp%>/shop/boards/list.do';"/>	
+		</div>	
 	
 	</form>
 
 </div>
 
 
+	<jsp:include page="../main/footer.jsp"/>
 </body>
 </html>
