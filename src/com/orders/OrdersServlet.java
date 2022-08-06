@@ -69,7 +69,7 @@ public class OrdersServlet extends HttpServlet {
 
 			String referer = (String) req.getHeader("REFERER");
 
-			int orderNum = dao.getMaxNum();
+			int orderNum = dao.getMaxNum() + 1;
 			int productNum = Integer.parseInt(req.getParameter("productNum"));
 			String orderColor = req.getParameter("orderColor");
 			String orderSize = req.getParameter("orderSize");
