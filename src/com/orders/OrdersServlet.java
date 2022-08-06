@@ -43,6 +43,7 @@ public class OrdersServlet extends HttpServlet {
 
 		Connection conn = DBConn.getConnection();
 		OrdersDAO dao = new OrdersDAO(conn);
+		DeliveryDAO ddao = new DeliveryDAO(conn);
 
 		String sessionUserId = (String) req.getSession().getAttribute("userId");
 		String userId = null;
@@ -222,7 +223,6 @@ public class OrdersServlet extends HttpServlet {
 				dao.updateData(dto);
 			}
 			
-			DeliveryDAO ddao = new DeliveryDAO(conn);
 			DeliveryDTO ddto = new DeliveryDTO();
 			
 			ddto.setDeliveryNum(ddao.getMaxNum() + 1);
@@ -251,7 +251,6 @@ public class OrdersServlet extends HttpServlet {
 			// 주문 완료
 		} else if (uri.indexOf("orderComplete.do") != -1) {
 
-			DeliveryDAO ddao = new DeliveryDAO(conn);
 			int deliveryNum = ddao.getMaxNum();
 			DeliveryDTO ddto = ddao.getReadData(deliveryNum);
 			
@@ -264,7 +263,6 @@ public class OrdersServlet extends HttpServlet {
 		} else if (uri.indexOf("orderList.do") != -1) {
 
 			String progress = "orderList";
-			DeliveryDAO ddao = new DeliveryDAO(conn);
 			List<DeliveryDTO> list = new ArrayList<>();
 
 			list = ddao.getList(userId, progress);
@@ -278,7 +276,6 @@ public class OrdersServlet extends HttpServlet {
 		} else if (uri.indexOf("cancelList.do") != -1) {
 
 			String progress = "cancelList";
-			DeliveryDAO ddao = new DeliveryDAO(conn);
 			List<DeliveryDTO> list = new ArrayList<>();
 
 			list = ddao.getList(userId, progress);

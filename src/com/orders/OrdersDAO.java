@@ -30,7 +30,11 @@ public class OrdersDAO {
 			pstmt = conn.prepareStatement(sql);
 
 			rs = pstmt.executeQuery();
-
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
 			rs.close();
 			pstmt.close();
 

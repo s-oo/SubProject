@@ -17,6 +17,8 @@
 	function sendItPayment() {
 		var f = document.cartListForm;
 		
+		f.orderNum
+		
 		f.action = "<%=cp%>/shop/orders/orderPayment.do";
 		f.submit();
 	}
@@ -25,7 +27,7 @@
 </head>
 <body>
 	<jsp:include page="../main/header.jsp"/>
-	<div id="content" align="center">
+	<div id="content" align="center" style="display: block;">
 		<div align="right">
 			<form action="" method="post" name="cartListForm">
 				<table id="cartList">
@@ -80,15 +82,22 @@
 						</tfoot>
 					</c:if>
 				</table>
-				<div  id="right_area" style="display: inline-block; padding-right: 30px;">
-					<div id="paymentBox" align="right">
-						<div>PRICE</div><div>${sum }KRW</div><br/>
-						<div>SHIPPNG</div><div>0KRW</div><br/>
-						<div>TOTAL</div><div>${tot }KRW</div><br/>
+				<!-- 결제정보 -->
+				<div  id="right_area" style="display: inline-block; width: 300px; float: right; padding-right: 60px;">
+					<div class="box row" style="width: 300px;" align="left" >
+						<h3 style="margin: 0px;">결재정보</h3>
 					</div>
-					<div style="float: right;">
-						<div style="border: 1px solid; width: 80px; height: 50px; padding: 35px 5px 0px 5px;" align="center">
-							<a href="javascript:sendItPayment();">ORDER</a>
+					<div class="box row payment" align="right">
+						<div style="width: 180px;">
+							<div>PRICE</div><div>${sum }KRW</div><br/>
+							<div>SHIPPNG</div><div>0KRW</div><br/>
+							<div>TOTAL</div><div>${tot }KRW</div><br/>
+							<input type="hidden" name="totalPrice" value="${tot }"/>
+						</div>
+						<div style="float: right;">
+							<div style="border: 1px solid; width: 90px; height: 50px; padding-top: 35px;" align="center">
+								<a href="javascript:sendItPayment();">ORDER</a>
+							</div>
 						</div>
 					</div>
 				</div>
