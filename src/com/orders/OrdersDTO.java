@@ -8,6 +8,7 @@ public class OrdersDTO {
 	private int orderQuantity;
 	private String orderColor;
 	private String orderSize;
+	private String updatedDate;
 	private String progress;
 
 	private String productName;
@@ -61,6 +62,14 @@ public class OrdersDTO {
 
 	public void setOrderSize(String orderSize) {
 		this.orderSize = orderSize;
+	}
+
+	public String getUpdatedDate() {
+		return updatedDate;
+	}
+
+	public void setUpdatedDate(String updatedDate) {
+		this.updatedDate = updatedDate;
 	}
 
 	public String getProgress() {

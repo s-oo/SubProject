@@ -31,3 +31,7 @@ for (chk of chks){
 }
  }
 
+$("button.cateBtn").click(function(){
+    $("button.cateBtn").removeClass("on");
+    $(this).addClass("on");
+});

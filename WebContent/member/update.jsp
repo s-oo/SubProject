@@ -21,32 +21,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>회원정보수정</title>
+<title>kristal회원정보수정</title>
 <link rel="stylesheet" type="text/css"href="<%=cp%>/css/shopStyle.css" />
 <link rel="stylesheet" type="text/css"href="<%=cp%>/member/css/memberListStyle.css" />
 
-
-
-
-<style type="text/css">
-body{
-	font-size: 9pt;
-}
-td{
-	font-size: 9pt;
-
-}
-.txtField{
-	font-size: 9pt;
-
-}
-
-.btn{
-	font-size: 9pt;
-	background: #e6e6e6;
-
-}
-</style>
 
 <script type="text/javascript">
 
@@ -130,7 +108,7 @@ td{
                   <div class="box row">
                   
                   <div class="box label">
-                        <label for="userName"><span>I&nbsp;&nbsp;D</span></label>
+                        <label for="userName"><span><b>I&nbsp;&nbsp;D</b></span></label>
                      </div>
                    <div class="box input">
                         <input type="text" name="userId" id="userId"  readonly="readonly" value="${dto.userId }" />
@@ -140,7 +118,7 @@ td{
                    
                     <div class="box row">
 	                     <div class="box label">
-	                        <label for="userName"><span>NAME</span></label>
+	                        <label for="userName"><span><b>NAME</b></span></label>
 	                     </div>
 	                     <div class="box input">
 	                        <input type="text" name="userName" id="userName" value="${dto.userName }"/>
@@ -149,7 +127,7 @@ td{
                   
                     <div class="box row">
 	                     <div class="box label">
-	                        <label for="userName"><span>PASSWORD</span></label>
+	                        <label for="userName"><span><b>PASSWORD</b></span></label>
 	                     </div>
 	                     <div class="box input">
 	                        <input type="text" name="userPwd" id="userName" value="${dto.userPwd }"/>
@@ -157,7 +135,7 @@ td{
              		</div>
                   	  <div class="box row">
 	                     <div class="box label">
-	                        <label for="userName"><span>GENDER</span></label>
+	                        <label for="userName"><span><b>GENDER</b></span></label>
 	                     </div>
 	                     <div class="box input">
 	                        <input type="text" name="userGender" id="userGender" value="${dto.userGender }"/>
@@ -165,7 +143,7 @@ td{
              		</div>
                    <div class="box row">
 	                     <div class="box label">
-	                        <label for="userName"><span>BIRTH</span></label>
+	                        <label for="userName"><span><b>BIRTH</b></span></label>
 	                     </div>
 	                     <div class="box input">
 	                        <input type="text" name="userBirth" id="userBirth" value="${dto.userBirth }"/>
@@ -174,7 +152,7 @@ td{
                   
                   <div class="box row" style="height: 110px;">
                      <div class="box label" style="height: 80px;">
-                        <label for="userAddress"><span>ADDRESS</span></label>
+                        <label for="userAddress"><span><b>ADDRESS</b></span></label>
                      </div>
                      <div class="box input" style="padding: 0px;">
                       <div class="box input" style="padding: 5px;">
@@ -198,7 +176,7 @@ td{
                   </div>
                 <div class="box row">
                      <div class="box label">
-                        <label for="userTel"><span>TEL</span></label>
+                        <label for="userTel"><span><b>TEL</b></span></label>
                      </div>
                      <div class="box input">
                         <input type="text" name="userTel" id="userTel" value="${dto.userTel }"/>
@@ -206,7 +184,7 @@ td{
                   </div>
                   <div class="box row">
                      <div class="box label">
-                        <label for="userEmail"><span>E-MAIL</span></label>
+                        <label for="userEmail"><span><b>E-MAIL</b></span></label>
                      </div>
                      <div class="box input">
                         <input type="text" name="userEmail" id="userEmail" value="${dto.userEmail }"/>
@@ -215,15 +193,23 @@ td{
                 </div>
             </div>
 				<br><br>
-				<div class="box input">
-					<input type="button" value=" 수정완료 " onclick="sendIt();"/>
-				</div>
+			<div align="center">	
+				<button  style="border:none; background-color: #FOFOFO; width: 200px; height: 50px;"
+					type="button" onclick="javascript:history.back();">
+						<b style="font-size: 17px; color: black;">뒤로가기</b>
+				</button>
+				&nbsp;&nbsp;
+				<button style="background-color: black; width: 200px; height: 50px;"
+					type="button" onclick="sendIt();">
+						<b style="font-size: 17px; color: white;">수정완료</b>
+				</button>	
+			</div>				
+			<br>
 				<div class="box input">	
-					<input type="button" value=" 수정취소 " onclick="javascript:location.href='<%=cp%>/shop/member/myPage.do';"/> 
-			</div>
-			<br><br>
-				<div class="box input">	
-					<input type="button" value=" 탈퇴하기 " onclick="javascript:location.href='<%=cp%>/shop/member/delete.do';"/> 
+					<button style="border:none; background-color: gray; width: 100px; height: 25px;"
+							type="button" onclick="javascript:location.href='<%=cp%>/shop/member/delete.do';">
+						<a style="font-size: 13px; color: white;">탈&nbsp;퇴</a>
+					</button>
 				</div>
 </form>
  

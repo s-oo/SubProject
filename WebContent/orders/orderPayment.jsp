@@ -12,6 +12,7 @@
 
 <link rel="stylesheet" type="text/css"href="<%=cp%>/css/shopStyle.css" />
 <link rel="stylesheet" type="text/css"href="<%=cp%>/orders/css/cartListStyle.css" />
+<link rel="stylesheet" type="text/css"href="<%=cp%>/orders/css/orderPaymentStyle.css" />
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -65,9 +66,55 @@
     
     function sendItPayment_ok() {
 		var f = document.paymentForm;
+
+		if(!f.deliveryName.value) {
+			alert('이름을 입력해주세요');
+			f.deliveryName.focus();
+			return;
+		}
+		if(!f.deliveryAddr[0].value) {
+			alert('우편번호를 입력해주세요');
+			f.deliveryAddr[0].focus();
+			return;
+		}
+		if(!f.deliveryAddr[1].value) {
+			alert('주소를 입력해주세요');
+			f.deliveryAddr[1].focus();
+			return;
+		}
+		if(!f.deliveryTel.value) {
+			alert('전화번호를 입력해주세요');
+			f.deliveryTel.focus();
+			return;
+		}
+		if(!f.deliveryEmail.value) {
+			alert('이메일을 입력해주세요');
+			f.deliveryEmail.focus();
+			return;
+		}
 		
 		f.action = "<%=cp%>/shop/orders/orderPayment_ok.do";
 		f.submit();
+	}
+    
+    function copyData() {
+		var f = document.paymentForm;
+
+		f.deliveryName.value = '${memberDTO.userName }';
+		f.deliveryAddr[0].value = '${memberDTO.userAddr[0] }';
+		f.deliveryAddr[1].value = '${memberDTO.userAddr[1] }';
+		f.deliveryAddr[2].value = '${memberDTO.userAddr[2] }';
+		f.deliveryAddr[3].value = '${memberDTO.userAddr[3] }';
+		f.deliveryTel.value = '${memberDTO.userTel }';
+		f.deliveryEmail.value = '${memberDTO.userEmail }';
+		
+	}
+    
+    function resetData() {
+		var f = document.paymentForm;
+		
+    	f.reset();
+    	
 	}
 </script>
 
@@ -76,8 +123,9 @@
 	<jsp:include page="../main/header.jsp"/>
 	<div id="content" align="center">
 		<div>
-			<form action="" method="post" name="paymentForm">
-			
+			<form action="<%=cp%>/shop/orders/orderPayment_ok.do" method="post" name="paymentForm">
+
+				<!-- 주문할 목록 -->
 				<table id="cartList" style="margin-bottom: 50px;">
 					<tbody>
 						<c:set var="sum" value="0"/>
@@ -107,23 +155,27 @@
 									<input type="hidden" name="orderNum" value="${dto.orderNum }"/>
 								</td>
 							</tr>
-							<c:set var="sum" value="${sum + dto.productPrice }"/>
-							<c:set var="tot" value="${tot + dto.productPrice }"/>
+							<c:set var="sum" value="${sum + dto.productPrice * dto.orderQuantity }"/>
+							<c:set var="tot" value="${tot + dto.productPrice * dto.orderQuantity }"/>
 						</c:forEach>
 					</tbody>
 					<c:if test="${empty list }">
 						<tfoot>
 							<tr id="listBox" class="item" style="list-style: none;width: 300px;display: inline-block;">
 								<td class="box_wrap" style="display: inline-block;font-size: 10pt;color: #555555;">
-										등록된 상품이 없음
+									등록된 상품이 없음
 								</td>
 							</tr>
 						</tfoot>
 					</c:if>
 				</table>
-				
-				<div id="left_area" style="display: inline-block;" >
-					<div id="info_area" style="width: 500px;" align="left">
+
+				<div id="left_area" style="display: inline-block; float: left; padding-left: 40px;">
+					<!-- 주문자 정보 -->
+					<div id="info_area" style="width: 500px; margin-bottom: 30px;" align="left">
+						<div class="box row">
+							<h3 style="margin: 0px;">회원정보</h3>
+						</div>
 						<div class="box row">
 							<div class="box label">
 								<label for="userName"><span>NAME</span></label>
@@ -131,26 +183,23 @@
 							<div class="box text" align="left">
 								${memberDTO.userName }
 							</div>
-							<div style="display: inline-block; border: 1px solid; width: 80px; height: 20px; padding-top: 5px; float: right;" align="center">
-								<a href="<%=cp%>/shop/member/update.do">정보수정</a>
-							</div>
 						</div>
-						<div class="box row" style="height: 110px;">
+						<div class="box row" style="height: 120px;">
 							<div class="box label" style="height: 80px;">
-								<label for="userAddress"><span>ADDRESS</span></label>
+								<label for="userAddr"><span>ADDRESS</span></label>
 							</div>
 							<div class="box text" style="padding: 0px;" align="left">
 								<div class="box text" style="padding: 5px 10px 5px 10px;">
-									${memberDTO.address1 }
+									${memberDTO.userAddr[0] }
 								</div>
 								<div class="box text" style="padding: 5px 10px 5px 10px;">
-									${memberDTO.address2 }
+									${memberDTO.userAddr[1] }
 								</div>
 								<div class="box text" style="padding: 5px 10px 5px 10px;">
-									${memberDTO.address3 }
+									${memberDTO.userAddr[2] }
 								</div>
 								<div class="box text" style="padding: 5px 10px 5px 10px;">
-									${memberDTO.address4 }
+									${memberDTO.userAddr[3] }
 								</div>
 							</div>
 						</div>
@@ -171,22 +220,84 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				
-				<div  id="right_area" style="display: inline-block; padding-right: 30px; float:  right;">
-					<div id="paymentBox" align="right">
-						<div>PRICE</div><div>${sum }KRW</div><br/>
-						<div>SHIPPNG</div><div>0KRW</div><br/>
-						<div>TOTAL</div><div>${tot }KRW</div><br/>
-						<input type="hidden" name="tot" value="${tot }"/>
-					</div>
-					<div style="float: right;">
-						<div style="border: 1px solid; width: 90px; height: 50px; padding-top: 35px;" align="center">
-							<a href="javascript:sendItPayment_ok();">ORDER</a>
+
+					<!-- 배송지 정보 -->
+					<div id="info_area" style="width: 500px;" align="left">
+						<div class="box row">
+							<h3 style="margin: 0px; display: inline-block;">배송정보</h3>
+							<span style="float: right; padding-right: 30px;">
+								<input type="radio" name="deliveryDTO" id="copyDataBtn" onclick="copyData()"/>
+								<label for="copyDataBtn">주문자 정보와 동일</label>
+								<input type="radio" name="deliveryDTO" id="resetDataBtn" checked="checked" onclick="resetData()"/>
+								<label for="resetDataBtn">새로운 배송지</label>
+							</span>
+						</div>
+						<div class="box row">
+							<div class="box label">
+								<label for="deliveryName"><span>NAME</span></label>
+							</div>
+							<div class="box input" align="left">
+								<input type="text" name="deliveryName"/>
+							</div>
+						</div>
+						<div class="box row" style="height: 120px;">
+							<div class="box label" style="height: 80px;">
+								<label for="deliveryAddr"><span>ADDRESS</span></label>
+							</div>
+							<div class="box input" style="padding: 0px;" align="left">
+								<div class="box input" style="padding: 5px 10px 5px 10px;">
+									<input type="text" name="deliveryAddr" class="input-2" id="sample6_postcode" placeholder="우편번호"/>
+									<input type="button" onclick="sample6_execDaumPostcode()" class="input-2 button" value="우편번호">
+								</div>
+								<div class="box input" style="padding: 5px 10px 5px 10px;">
+									<input type="text" name="deliveryAddr" id="sample6_address" placeholder="주소"/>
+								</div>
+								<div class="box input" style="padding: 5px 10px 5px 10px;">
+									<input type="text" name="deliveryAddr" id="sample6_detailAddress" placeholder="상세주소"/>
+								</div>
+								<div class="box input" style="padding: 5px 10px 5px 10px;">
+									<input type="text" name="deliveryAddr" id="sample6_extraAddress" placeholder="참고항목"/>
+								</div>
+							</div>
+						</div>
+						<div class="box row">
+							<div class="box label">
+								<label for="deliveryTel"><span>TEL</span></label>
+							</div>
+							<div class="box input">
+								<input type="text" name="deliveryTel"/>
+							</div>
+						</div>
+						<div class="box row">
+							<div class="box label">
+								<label for="deliveryEmail"><span>E-MAIL</span></label>
+							</div>
+							<div class="box input">
+								<input type="text" name="deliveryEmail"/>
+							</div>
 						</div>
 					</div>
 				</div>
-				
+
+				<!-- 결제정보 -->
+				<div  id="right_area" style="display: inline-block; width: 300px; float: right; padding-right: 60px;">
+					<div class="box row" style="width: 300px;" align="left" >
+						<h3 style="margin: 0px;">결재정보</h3>
+					</div>
+					<div class="box row payment" align="right">
+						<div style="width: 180px;">
+							<div>PRICE</div><div>${sum }KRW</div><br/>
+							<div>SHIPPNG</div><div>0KRW</div><br/>
+							<div>TOTAL</div><div>${tot }KRW</div><br/>
+							<input type="hidden" name="totalPrice" value="${tot }"/>
+						</div>
+						<div style="float: right;">
+							<div style="border: 1px solid; width: 90px; height: 50px; padding-top: 35px;" align="center">
+								<a href="javascript:sendItPayment_ok();">ORDER</a>
+							</div>
+						</div>
+					</div>
+				</div>
 			</form>
 		</div>
 	</div>
