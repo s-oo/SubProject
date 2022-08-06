@@ -30,6 +30,10 @@ public class DeliveryDAO {
 
 			rs = pstmt.executeQuery();
 
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
 			rs.close();
 			pstmt.close();
 

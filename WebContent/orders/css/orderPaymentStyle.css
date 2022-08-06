@@ -52,6 +52,11 @@ label span {
 	outline: none;
 }
 
+.box.text {
+	width: 350px;
+	vertical-align: middle;
+}
+
 input.input-2 {
 	width: 120px;
 	vertical-align: middle;

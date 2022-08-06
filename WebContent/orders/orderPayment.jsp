@@ -66,9 +66,55 @@
     
     function sendItPayment_ok() {
 		var f = document.paymentForm;
+
+		if(!f.deliveryName.value) {
+			alert('이름을 입력해주세요');
+			f.deliveryName.focus();
+			return;
+		}
+		if(!f.deliveryAddr[0].value) {
+			alert('우편번호를 입력해주세요');
+			f.deliveryAddr[0].focus();
+			return;
+		}
+		if(!f.deliveryAddr[1].value) {
+			alert('주소를 입력해주세요');
+			f.deliveryAddr[1].focus();
+			return;
+		}
+		if(!f.deliveryTel.value) {
+			alert('전화번호를 입력해주세요');
+			f.deliveryTel.focus();
+			return;
+		}
+		if(!f.deliveryEmail.value) {
+			alert('이메일을 입력해주세요');
+			f.deliveryEmail.focus();
+			return;
+		}
 		
 		f.action = "<%=cp%>/shop/orders/orderPayment_ok.do";
 		f.submit();
+	}
+    
+    function copyData() {
+		var f = document.paymentForm;
+
+		f.deliveryName.value = '${memberDTO.userName }';
+		f.deliveryAddr[0].value = '${memberDTO.userAddr[0] }';
+		f.deliveryAddr[1].value = '${memberDTO.userAddr[1] }';
+		f.deliveryAddr[2].value = '${memberDTO.userAddr[2] }';
+		f.deliveryAddr[3].value = '${memberDTO.userAddr[3] }';
+		f.deliveryTel.value = '${memberDTO.userTel }';
+		f.deliveryEmail.value = '${memberDTO.userEmail }';
+		
+	}
+    
+    function resetData() {
+		var f = document.paymentForm;
+		
+    	f.reset();
+    	
 	}
 </script>
 
@@ -124,9 +170,9 @@
 					</c:if>
 				</table>
 
-				<div id="left_area" style="display: inline-block; float: left;" >
+				<div id="left_area" style="display: inline-block; float: left; padding-left: 40px;">
 					<!-- 주문자 정보 -->
-					<div id="info_area" style="width: 500px;" align="left">
+					<div id="info_area" style="width: 500px; margin-bottom: 30px;" align="left">
 						<div class="box row">
 							<h3 style="margin: 0px;">회원정보</h3>
 						</div>
@@ -134,27 +180,26 @@
 							<div class="box label">
 								<label for="userName"><span>NAME</span></label>
 							</div>
-							<div class="box input" align="left">
-								<input type="text" name="userName" value="${memberDTO.userName }"/>
+							<div class="box text" align="left">
+								${memberDTO.userName }
 							</div>
 						</div>
 						<div class="box row" style="height: 120px;">
 							<div class="box label" style="height: 80px;">
 								<label for="userAddr"><span>ADDRESS</span></label>
 							</div>
-							<div class="box input" style="padding: 0px;" align="left">
-								<div class="box input" style="padding: 5px 10px 5px 10px;">
-									<input type="text" name="userAddr" class="input-2" value="${memberDTO.userAddr[0] }"/>
-									<input type="button" onclick="sample6_execDaumPostcode()" class="input-2 button" value="우편번호">
+							<div class="box text" style="padding: 0px;" align="left">
+								<div class="box text" style="padding: 5px 10px 5px 10px;">
+									${memberDTO.userAddr[0] }
 								</div>
-								<div class="box input" style="padding: 5px 10px 5px 10px;">
-									<input type="text" name="userAddr" value="${memberDTO.userAddr[1] }"/>
+								<div class="box text" style="padding: 5px 10px 5px 10px;">
+									${memberDTO.userAddr[1] }
 								</div>
-								<div class="box input" style="padding: 5px 10px 5px 10px;">
-									<input type="text" name="userAddr" value="${memberDTO.userAddr[2] }"/>
+								<div class="box text" style="padding: 5px 10px 5px 10px;">
+									${memberDTO.userAddr[2] }
 								</div>
-								<div class="box input" style="padding: 5px 10px 5px 10px;">
-									<input type="text" name="userAddr" value="${memberDTO.userAddr[3] }"/>
+								<div class="box text" style="padding: 5px 10px 5px 10px;">
+									${memberDTO.userAddr[3] }
 								</div>
 							</div>
 						</div>
@@ -162,16 +207,16 @@
 							<div class="box label">
 								<label for="userTel"><span>TEL</span></label>
 							</div>
-							<div class="box input">
-								<input type="text" name="userTel" value="${memberDTO.userTel }"/>
+							<div class="box text">
+								${memberDTO.userTel }
 							</div>
 						</div>
 						<div class="box row">
 							<div class="box label">
 								<label for="userEmail"><span>E-MAIL</span></label>
 							</div>
-							<div class="box input">
-								<input type="text" name="userEmail" value="${memberDTO.userEmail }"/>
+							<div class="box text">
+								${memberDTO.userEmail }
 							</div>
 						</div>
 					</div>
@@ -179,7 +224,13 @@
 					<!-- 배송지 정보 -->
 					<div id="info_area" style="width: 500px;" align="left">
 						<div class="box row">
-							<h3 style="margin: 0px;">배송정보</h3>
+							<h3 style="margin: 0px; display: inline-block;">배송정보</h3>
+							<span style="float: right; padding-right: 30px;">
+								<input type="radio" name="deliveryDTO" id="copyDataBtn" onclick="copyData()"/>
+								<label for="copyDataBtn">주문자 정보와 동일</label>
+								<input type="radio" name="deliveryDTO" id="resetDataBtn" checked="checked" onclick="resetData()"/>
+								<label for="resetDataBtn">새로운 배송지</label>
+							</span>
 						</div>
 						<div class="box row">
 							<div class="box label">
@@ -195,17 +246,17 @@
 							</div>
 							<div class="box input" style="padding: 0px;" align="left">
 								<div class="box input" style="padding: 5px 10px 5px 10px;">
-									<input type="text" name="deliveryAddr" class="input-2"/>
+									<input type="text" name="deliveryAddr" class="input-2" id="sample6_postcode" placeholder="우편번호"/>
 									<input type="button" onclick="sample6_execDaumPostcode()" class="input-2 button" value="우편번호">
 								</div>
 								<div class="box input" style="padding: 5px 10px 5px 10px;">
-									<input type="text" name="deliveryAddr"/>
+									<input type="text" name="deliveryAddr" id="sample6_address" placeholder="주소"/>
 								</div>
 								<div class="box input" style="padding: 5px 10px 5px 10px;">
-									<input type="text" name="deliveryAddr"/>
+									<input type="text" name="deliveryAddr" id="sample6_detailAddress" placeholder="상세주소"/>
 								</div>
 								<div class="box input" style="padding: 5px 10px 5px 10px;">
-									<input type="text" name="deliveryAddr"/>
+									<input type="text" name="deliveryAddr" id="sample6_extraAddress" placeholder="참고항목"/>
 								</div>
 							</div>
 						</div>
@@ -229,7 +280,7 @@
 				</div>
 
 				<!-- 결제정보 -->
-				<div  id="right_area" style="display: inline-block; width: 300px; float: right;">
+				<div  id="right_area" style="display: inline-block; width: 300px; float: right; padding-right: 60px;">
 					<div class="box row" style="width: 300px;" align="left" >
 						<h3 style="margin: 0px;">결재정보</h3>
 					</div>
