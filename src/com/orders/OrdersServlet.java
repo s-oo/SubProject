@@ -63,8 +63,8 @@ public class OrdersServlet extends HttpServlet {
 			return;
 		}
 
-		// 추가
-		if (uri.indexOf("addList_ok.do") != -1) {
+		// cart/wish 추가
+		if (uri.indexOf("addOrder_ok.do") != -1) {
 
 			String referer = (String) req.getHeader("REFERER");
 
@@ -101,8 +101,8 @@ public class OrdersServlet extends HttpServlet {
 
 			resp.sendRedirect(referer);
 
-			// 수정
-		} else if (uri.indexOf("modifyList_ok.do") != -1) {
+			// cart/wish/order/cancel 수정
+		} else if (uri.indexOf("changeOrder_ok.do") != -1) {
 
 			String referer = (String) req.getHeader("REFERER");
 			int result = 0;
@@ -140,8 +140,8 @@ public class OrdersServlet extends HttpServlet {
 
 			resp.sendRedirect(referer);
 
-			// 삭제
-		} else if (uri.indexOf("delete_ok.do") != -1) {
+			// cart/wish 삭제
+		} else if (uri.indexOf("deleteOrder_ok.do") != -1) {
 
 			String referer = (String) req.getHeader("REFERER");
 
@@ -207,6 +207,13 @@ public class OrdersServlet extends HttpServlet {
 		} else if (uri.indexOf("orderPayment_ok.do") != -1) {
 			
 			String[] orderNum = req.getParameterValues("orderNum");
+			String deliveryName = req.getParameter("deliveryName");
+			String[] deliveryAddr = req.getParameterValues("deliveryAddr");
+			String deliveryTel = req.getParameter("deliveryTel");
+			String deliveryEmail = req.getParameter("deliveryEmail");
+			int totalPrice = Integer.parseInt(req.getParameter("totalPrice"));
+			String progress = "orderList";
+			
 			OrdersDTO dto = new OrdersDTO();
 				
 			for (int i = 0; i < orderNum.length; i++) {
@@ -215,18 +222,40 @@ public class OrdersServlet extends HttpServlet {
 				dao.updateData(dto);
 			}
 			
+			DeliveryDAO ddao = new DeliveryDAO(conn);
+			DeliveryDTO ddto = new DeliveryDTO();
+			
+			ddto.setDeliveryNum(ddao.getMaxNum() + 1);
+			ddto.setUserId(userId);
+			ddto.setOrderNum(orderNum);
+			ddto.setDeliveryName(deliveryName);
+			ddto.setDeliveryTel(deliveryTel);
+			ddto.setDeliveryAddr(deliveryAddr);
+			ddto.setDeliveryEmail(deliveryEmail);
+			ddto.setTotalPrice(totalPrice);
+			ddto.setProgress(progress);
+			
+			int result = ddao.insertData(ddto);
+			
+			if (result == 0) {
+				out.print("<script>");
+				out.print("alert('오류');");
+				out.print("history.back()");
+				out.print("</script>");
+				return;
+			}
+			
 			url = cp + "/shop/orders/orderComplete.do";
 			resp.sendRedirect(url);
 			
 			// 주문 완료
 		} else if (uri.indexOf("orderComplete.do") != -1) {
 
-			int tot = Integer.parseInt(req.getParameter("tot"));
-
-			MemberDTO memberDTO = new MemberDAO(conn).getReadData(userId);
-
-			req.setAttribute("tot", tot);
-			req.setAttribute("memberDTO", memberDTO);
+			DeliveryDAO ddao = new DeliveryDAO(conn);
+			int deliveryNum = ddao.getMaxNum();
+			DeliveryDTO ddto = ddao.getReadData(deliveryNum);
+			
+			req.setAttribute("ddto", ddto);
 
 			url = "/orders/orderComplete.jsp";
 			forward(req, resp, url);
@@ -235,22 +264,24 @@ public class OrdersServlet extends HttpServlet {
 		} else if (uri.indexOf("orderList.do") != -1) {
 
 			String progress = "orderList";
-			List<OrdersDTO> list = new ArrayList<>();
+			DeliveryDAO ddao = new DeliveryDAO(conn);
+			List<DeliveryDTO> list = new ArrayList<>();
 
-			list = dao.getList(userId, progress);
+			list = ddao.getList(userId, progress);
 
 			req.setAttribute("list", list);
 
 			url = "/orders/orderList.jsp";
 			forward(req, resp, url);
 
-			// 결제내역
+			// 취소 목록
 		} else if (uri.indexOf("cancelList.do") != -1) {
 
 			String progress = "cancelList";
-			List<OrdersDTO> list = new ArrayList<>();
+			DeliveryDAO ddao = new DeliveryDAO(conn);
+			List<DeliveryDTO> list = new ArrayList<>();
 
-			list = dao.getList(userId, progress);
+			list = ddao.getList(userId, progress);
 
 			req.setAttribute("list", list);
 

@@ -54,9 +54,9 @@
 								</td>
 								<td id="productQuantity">
 									${dto.orderQuantity }&nbsp;&nbsp;&nbsp;
-									<a href="<%=cp%>/shop/orders/modifyList_ok.do?orderNum=${dto.orderNum }&orderQuantity=${dto.orderQuantity + 1 }">
+									<a href="<%=cp%>/shop/orders/changeOrder_ok.do?orderNum=${dto.orderNum }&orderQuantity=${dto.orderQuantity + 1 }">
 										+</a>&nbsp;
-									<a href="<%=cp%>/shop/orders/modifyList_ok.do?orderNum=${dto.orderNum }&orderQuantity=${dto.orderQuantity - 1 }">
+									<a href="<%=cp%>/shop/orders/changeOrder_ok.do?orderNum=${dto.orderNum }&orderQuantity=${dto.orderQuantity - 1 }">
 										-</a>
 								</td>
 								<td id="totalProductPrice">
@@ -66,8 +66,8 @@
 									<a href="<%=cp%>/shop/orders/delete_ok.do?orderNum=${dto.orderNum }">X</a>
 								</td>
 							</tr>
-							<c:set var="sum" value="${sum + dto.productPrice }"/>
-							<c:set var="tot" value="${tot + dto.productPrice }"/>
+							<c:set var="sum" value="${sum + dto.productPrice * dto.orderQuantity }"/>
+							<c:set var="tot" value="${tot + dto.productPrice * dto.orderQuantity }"/>
 						</c:forEach>
 					</tbody>
 					<c:if test="${empty list }">
