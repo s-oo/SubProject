@@ -53,8 +53,9 @@ public class DeliveryDAO {
 
 		try {
 
-			sql = "INSERT INTO DELIVERY(DELIVERYNUM, USERID, ORDERNUM, DELIVERYNAME, DELIVERYTEL, DELIVERYADDR, DELIVERYEMAIL, TOTALPRICE, PROGRESS) ";
-			sql += "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			sql = "INSERT INTO DELIVERY(DELIVERYNUM, USERID, ORDERNUM, DELIVERYNAME, DELIVERYTEL, ";
+			sql += "DELIVERYADDR, DELIVERYEMAIL, TOTALPRICE, DELIVERYDATE, ARRIVEDATE, PROGRESS) ";
+			sql += "VALUES(?, ?, ?, ?, ?, ?, ?, ?, TO_CHAR(SYSDATE,'YYYY-MM-DD HH24:MI'), TO_CHAR(ROUND(SYSDATE + 3),'YYYY-MM-DD'), ?)";
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, dto.getDeliveryNum());
@@ -86,8 +87,13 @@ public class DeliveryDAO {
 		String sql;
 
 		try {
-
-			sql = "UPDATE DELIVERY SET DELIVERYNAME = ?, DELIVERYTEL = ?, DELIVERYADDR = ?, DELIVERYEMAIL = ?, PROGRESS = ? ";
+			
+			String str = "";
+			if (dto.getProgress() == "orderList") {
+				str = " DELIVERYDATE = SYSDATE, ARRIVEDATE = ROUND(SYSDATE + 3),";
+			}
+			
+			sql = "UPDATE DELIVERY SET DELIVERYNAME = ?, DELIVERYTEL = ?, DELIVERYADDR = ?, DELIVERYEMAIL = ?," + str + " PROGRESS = ? ";
 			sql += "WHERE DELIVERYNUM = ?";
 
 			pstmt = conn.prepareStatement(sql);
@@ -95,8 +101,17 @@ public class DeliveryDAO {
 			pstmt.setString(2, dto.getDeliveryTel());
 			pstmt.setString(3, String.join(",", dto.getDeliveryAddr()));
 			pstmt.setString(4, dto.getDeliveryEmail());
-			pstmt.setString(5, dto.getProgress());
-			pstmt.setInt(6, dto.getDeliveryNum());
+			
+			if (dto.getProgress() == "orderList") {
+				pstmt.setString(5, dto.getDeliveryDate());
+				pstmt.setString(6, dto.getArriveDate());
+				pstmt.setString(7, dto.getProgress());
+				pstmt.setInt(8, dto.getDeliveryNum());
+			} else {
+				pstmt.setString(5, dto.getProgress());
+				pstmt.setInt(6, dto.getDeliveryNum());
+			}
+			
 
 			result = pstmt.executeUpdate();
 

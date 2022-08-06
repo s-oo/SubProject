@@ -14,6 +14,8 @@ public class DeliveryDTO {
 	private String[] deliveryAddr;
 	private String deliveryEmail;
 	private int totalPrice;
+	private String deliveryDate;
+	private String arriveDate;
 	private String progress;
 
 	private List<OrdersDTO> OrderList;
@@ -80,6 +82,22 @@ public class DeliveryDTO {
 
 	public void setTotalPrice(int totalPrice) {
 		this.totalPrice = totalPrice;
+	}
+
+	public String getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	public void setDeliveryDate(String deliveryDate) {
+		this.deliveryDate = deliveryDate;
+	}
+
+	public String getArriveDate() {
+		return arriveDate;
+	}
+
+	public void setArriveDate(String arriveDate) {
+		this.arriveDate = arriveDate;
 	}
 
 	public String getProgress() {
