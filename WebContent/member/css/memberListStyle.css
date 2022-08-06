@@ -58,6 +58,24 @@ label span {
    vertical-align: middle;
 }
 
+.box.op {
+   width: 100px;
+   vertical-align: middle;
+}
+
+
+.box.option {
+   height:30px;
+   width: 80px;
+   vertical-align: middle;
+   border: none;
+   float: left;
+   font-size: 15px;
+}
+
+
+
+
 input {
    display: inline-block;
    width: 300px;

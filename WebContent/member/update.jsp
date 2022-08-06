@@ -156,7 +156,7 @@
                      </div>
                      <div class="box input" style="padding: 0px;">
                       <div class="box input" style="padding: 5px;">
-                           <input type="text" name="address1" id="sample6_postcode" class="input-2" placeholder="우편번호" value="${dto.userAddr[0] }">
+                           <input type="text" name="userAddr" id="sample6_postcode" class="input-2" placeholder="우편번호" value="${dto.userAddr[0] }">
                            <input type="button" onclick="sample6_execDaumPostcode()" class="input-2 right" value="우편번호 찾기">
                         </div>
                        
@@ -165,11 +165,11 @@
                         </div>
                        
                         <div class="box input" style="padding: 5px;">
-                           <input type="text" name="address3" id="sample6_detailAddress" placeholder="상세주소" value="${dto.userAddr[2] }">
+                           <input type="text" name="userAddr" id="sample6_detailAddress" placeholder="상세주소" value="${dto.userAddr[2] }">
                           <br>
                           
                         <div class="box input" style="padding: 5px;">  
-                           <input type="text"  name="address4"id="sample6_extraAddress" placeholder="참고항목" value="${dto.userAddr[3] }">
+                           <input type="text"  name="userAddr"id="sample6_extraAddress" placeholder="참고항목" value="${dto.userAddr[3] }">
                         </div>
                         </div>
                      </div>

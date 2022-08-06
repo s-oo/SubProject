@@ -8,20 +8,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>kristal 아이디찾기</title>
+
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/shopStyle.css" />
 <link rel="stylesheet" type="text/css"
 	href="<%=cp%>/member/css/memberListStyle.css" />
-
 
 <script type="text/javascript">
 	function searchpw(){
 	
 	var f = document.myForm;
 	
-	if(!f.userId.value){
-		alert("아이디를 입력해 주세요.");
-		f.userId.focus();
+	if(!f.userName.value){
+		alert("성함을 입력해 주세요.");
+		f.userName.focus();
 		return;
 	}
 	
@@ -32,29 +32,25 @@
 	
 	}
 	
-	f.action = "<%=cp%>/shop/member/find_ok.do";
-		f.submit();
-	}
+	f.action = "<%=cp%>/shop/member/findId_ok.do";
+	f.submit();
+}
+
 </script>
 
 
 
 </head>
 <body>
-
-
-
-
 	<jsp:include page="../main/header.jsp" />
 
 	<div id="content" align="center">
 
-		<br>
-		<br>
-	
+		<br> <br>
 
 
-		<h2>비밀번호 찾기</h2>
+
+		<h2>아이디 찾기</h2>
 
 		<br> <br>
 		<form action="" method="post" name="myForm">
@@ -63,10 +59,10 @@
 					<div class="box row">
 
 						<div class="box label">
-							<label for="userId"><span><b>I&nbsp;&nbsp;D</b></span></label>
+							<label for="userName"><span><b>NAME</b></span></label>
 						</div>
 						<div class="box input">
-							<input type="text" name="userId" id="userId" placeholder="아이디" />
+							<input type="text" name="userName" id="userName" placeholder="이름" />
 						</div>
 					</div>
 
@@ -84,8 +80,6 @@
 				</div>
 			</div>
 			<br> <br> <br>
-
-
 			<div align="center">
 				<button
 					style="border: none; background-color: #FOFOFO; width: 200px; height: 50px;"
@@ -98,18 +92,17 @@
 					<b style="font-size: 17px; color: white;">찾기</b>
 				</button>
 			</div>
-
-
-			<table>
+			<table width="200;">
 				<tr height="30">
 					<td colspan="2" align="center"><font color="red"><b>
 								${message }</b></font></td>
 				</tr>
 			</table>
 			<table style="margin: auto;">
+
 				<tr height="30">
 					<td colspan="2" align="center"><a
-						href="<%=cp%>/shop/member/login.do"><b>${lego }</b></a></td>
+						href="<%=cp%>/shop/member/findId.do"><b>${lego }</b></a></td>
 				</tr>
 			</table>
 

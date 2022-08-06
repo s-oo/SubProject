@@ -6,10 +6,12 @@ public class MemberDTO {
 	private String userPwd;
 	private String userName;
 	private String userGender;
-	private String userBirth;
+	private String[] userBirth;
 	private String[] userAddr;
 	private String userEmail;
 	private String userTel;
+	
+	
 	public String getUserId() {
 		return userId;
 	}
@@ -34,10 +36,10 @@ public class MemberDTO {
 	public void setUserGender(String userGender) {
 		this.userGender = userGender;
 	}
-	public String getUserBirth() {
+	public String[] getUserBirth() {
 		return userBirth;
 	}
-	public void setUserBirth(String userBirth) {
+	public void setUserBirth(String[] userBirth) {
 		this.userBirth = userBirth;
 	}
 	public String[] getUserAddr() {
@@ -58,8 +60,6 @@ public class MemberDTO {
 	public void setUserTel(String userTel) {
 		this.userTel = userTel;
 	}
-	
-
 	
 
 	
