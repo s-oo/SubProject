@@ -178,7 +178,7 @@ public int getDataCount(String searchKey,String searchValue) {
 
 		try {
 
-			sql = "SELECT ORDERNUM, USERID, O.PRODUCTNUM,ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, UPDATEDDATE, PROGRESS, ";
+			sql = "SELECT ORDERNUM, USERID, O.PRODUCTNUM, ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, UPDATEDDATE, PROGRESS, ";
 			sql += "PRODUCTNAME, PRODUCTPRICE, PRODUCTCATEGORY, SAVEFILENAME ";
 			sql += "FROM ORDERS O, PRODUCT P ";
 			sql += "WHERE O.PRODUCTNUM = P.PRODUCTNUM AND USERID = ? AND PROGRESS = ? ORDER BY ORDERNUM DESC";
@@ -292,13 +292,13 @@ public int getDataCount(String searchKey,String searchValue) {
 			
 			searchValue = "%" + searchValue + "%";
 		
-			sql = "select * from  (";
-			sql += "select rownum rnum,data.* from (";
-			sql += "SELECT ORDERNUM, USERID, O.PRODUCTNUM,ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, UPDATEDDATE, PROGRESS, ";
+			sql = "SELECT * FROM (";
+			sql += "SELECT ROWNUM RNUM, DATA.* FROM (";
+			sql += "SELECT ORDERNUM, USERID, O.PRODUCTNUM, ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, UPDATEDDATE, PROGRESS, ";
 			sql += "PRODUCTNAME, PRODUCTPRICE, PRODUCTCATEGORY, SAVEFILENAME ";
 			sql += "FROM ORDERS O, PRODUCT P ";
-			sql += "WHERE O.PRODUCTNUM = P.PRODUCTNUM and" + searchKey + " like ? AND USERID = ? AND PROGRESS = ? ORDER BY ORDERNUM DESC) data) ";
-			sql += "where rnum>=? and rnum<=?";	
+			sql += "WHERE O.PRODUCTNUM = P.PRODUCTNUM AND " + searchKey + " LIKE ? AND USERID = ? AND PROGRESS = ? ORDER BY ORDERNUM DESC) DATA) ";
+			sql += "WHERE RNUM >= ? AND RNUM <= ?";	
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, searchValue);
@@ -371,11 +371,6 @@ public int getDataCount(String searchKey,String searchValue) {
 				dto.setOrderSize(rs.getString("ORDERSIZE"));
 				dto.setUpdatedDate(rs.getString("UPDATEDDATE"));
 				dto.setOrderColor(rs.getString("ORDERCOLOR"));
-
-				dto.setProductName(rs.getString("PRODUCTNAME"));
-				dto.setProductPrice(rs.getInt("PRODUCTPRICE"));
-				dto.setProductCategory(rs.getString("PRODUCTCATEGORY"));
-				dto.setSaveFileName(rs.getString("SAVEFILENAME").split(","));
 
 			}
 
