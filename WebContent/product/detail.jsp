@@ -66,57 +66,53 @@
 							</tbody>
 						</table>
 
-						<div id="totalProduct" class="">
-						<form>
-							<table class="totalProduct" border="1" summary="">
-								<colgroup>
-									<col style="width: 20%;">
-									<col style="width: 5%;">
-									<col style="width: 10%;">
-								</colgroup>
-								<thead>
-								
-								<tbody class="selectedOptions" id="selectedOptions">
-									<tr id="selectedOption">
-										<td><!-- option(color,size) -->
-											<p class="product">
-												${dto.productName }
-											<span>
-												<input type="text" id="selected1" class="selected1" readonly="readonly">
-												<input type="text" id="selected2" class="selected1" readonly="readonly">
-											</span>
-											</p>
-										</td>
-										<td><!-- quantity -->
-											<span>
-												<input type=text name=amount value=1>
-												<input type=button value="+" onClick="javascript:this.form.amount.value++;">
-												<input type=button value="-" onClick="javascript:this.form.amount.value--;">
-			
-												<!-- <input type="text" id="result" value="1">
-												<a>
-													<img src="//img.echosting.cafe24.com/design/skin/default/product/btn_count_up.gif"
-													onclick='count("plus")'>
-												</a>
-												<a>
-													<img src="//img.echosting.cafe24.com/design/skin/default/product/btn_count_down.gif"
-													onclick='count("minus")'>
-												</a>
-												<a>
-													<img src="//img.echosting.cafe24.com/design/skin/default/product/btn_price_delete.gif"
-													onclick='count("delete")'>
-												</a> -->
-											</span>
-										</td>
-										
-										<td class="right">
-											<span id="option_box1_price">
-												<span class="ec-front-product-item-price">${dto.productPrice } KRW</span>
-											</span>
-										</td>
-									</tr>
-								</tbody>
-							</table>
+						<div>
+							<form name="form">
+								<table class="totalProduct" border="1" summary="">
+									<colgroup>
+										<col style="width: 20%;">
+										<col style="width: 20%;">
+										<col style="width: 10%;">
+									</colgroup>
+									<thead>
+									
+									<tbody class="selectedOptions" id="selectedOptions">
+										<tr id="selectedOption">
+											<td><!-- option(color,size) -->
+												<p class="product">
+													${dto.productName }
+												<span>
+													<input type="text" id="selected1" name="selected1" class="selected1" readonly="readonly">
+													<input type="text" id="selected2" name="selected2" class="selected1" readonly="readonly">
+												</span>
+												</p>
+											</td>
+											<td><!-- quantity -->
+												<span>
+													<input type=hidden name="price" value="${dto.productPrice }">
+													<input type="text" name="amount" class="amount" value="1" size="3" >
+													<a>
+														<img src="//img.echosting.cafe24.com/design/skin/default/product/btn_count_up.gif"
+														onclick='count("plus")'>
+													</a>
+													<a>
+														<img src="//img.echosting.cafe24.com/design/skin/default/product/btn_count_down.gif"
+														onclick='count("minus")'>
+													</a>
+													<a>
+														<img src="//img.echosting.cafe24.com/design/skin/default/product/btn_price_delete.gif"
+														onclick='count("delete")'>
+													</a>
+												</span>
+											</td>
+											<td>
+												<span>
+													<input type="text" name="sum" class="sum" size="10" readonly="readonly">
+												</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
 							</form>
 						</div>
 
@@ -124,14 +120,9 @@
 						<div id="totalPrice" class="totalPrice">
 							TOTAL :
 							<span class="total">
-								<strong>
-									<!-- if 선택되지 않으면 -->
-									<em>0</em>
-									<!-- if 선택되면, 개수*금액 -->
-									<em>${dto.productPrice } KRW</em>
-								</strong>
-								<!-- if 선택되면, 개수 -->
-								(1개)
+								<input type="text" id="totalSum" class="totalSum" value="0" size="10" readonly="readonly">
+								<input type="text" id="totalAmount" class="totalAmount" value="1" size="3" readonly="readonly">
+								
 							</span>
 						</div>
 

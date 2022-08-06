@@ -244,6 +244,28 @@ input{
 	color: #555;
 }
 
+.amount{
+	border: none;
+}
+
+.sum{
+	border: none;
+}
+
+.totalPrice{
+}
+
+.totalText{
+}
+
+.totalSum{
+	border: none;
+}
+
+.totalAmount{
+	border: none;
+}
+
 /* 장바구니 */
 .add_button{
 	text-align: center;

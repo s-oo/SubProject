@@ -10,8 +10,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>로그인</title>
 
-<link rel="stylesheet" type="text/css" href="<%=cp%>/css/shopStyle.css" />
-
+<link rel="stylesheet" type="text/css"href="<%=cp%>/member/css/memberListStyle.css" />
+<link rel="stylesheet" type="text/css"href="<%=cp%>/css/shopStyle.css" />
 <script type="text/javascript">
 	function login(){
 	
@@ -33,6 +33,9 @@
 	f.action = "<%=cp%>/shop/member/login_ok.do";
 	f.submit();
 	}
+	
+
+	
 </script>
 
 </head>
@@ -42,55 +45,50 @@
 	<div id="content" align="center">
 
 		<form action="" method="post" name="myForm">
-			<table width="400" cellpadding="0" cellspacing="0"
-				style="margin: auto;">
-
-				<tr height="2">
-					<td colspan="2" bgcolor="#cccccc"></td>
-				</tr>
-
-				<tr height="30">
-					<span ><b>로그인</b></span>
-				</tr>
-
-				<tr height="2">
-					<td colspan="2" bgcolor="#cccccc"></td>
-				</tr>
-
-				<tr height="25">
-					<td width="80" bgcolor="#e6e4e6" align="center">아이디</td>
-					<td width="120" style="padding-left: 5px;">
-					<input width="150" type="text" name="userId" maxlength="10" size="15" /></td>
-				</tr>
-
-				<tr height="2">
-					<td colspan="2" bgcolor="#cccccc"></td>
-				</tr>
-
-				<tr height="25">
-					<td width="80" bgcolor="#e6e4e6" align="center">패스워드</td>
-					<td width="120" style="padding-left: 5px;">
-					<input type="password" name="userPwd" maxlength="10" size="15" /></td>
-				</tr>
-
-				<tr height="2">
-					<td colspan="2" bgcolor="#cccccc"></td>
-				</tr>
-
-				<tr height="30">
-					<td colspan="2" align="center"><input type="button"
-						value=" 로그인 " class="btn2" onclick="login();" /> 
-						<inputtype="button" value=" 취소 " class="btn2" onclick="lo cation='<%=cp%>/shop/main/main.do';" /><br> <br>
-						<input width="10" height="" type="button" value=" 회원가입 " class="btn2" onclick="location='<%=cp%>/shop/member/terms.do';" />
-					</td>
-				</tr>
-
-				<tr height="30">
+			<div id="left_area" style="display: inline-block;" >
+               <div id="update_area" style="width: 500px; margin: 50px auto;">
+                  <div class="box row">
+                  
+                  <div class="box label">
+                        <label for="userId" ><span><b>MEMBER&nbsp;I&nbsp;D</b></span></label>
+                     </div>
+                   <div class="box input">
+                        <input type="text" name="userId" id="userId" />
+                     </div>
+                   </div>
+					 <div class="box row">
+                  
+	                  <div class="box label">
+	                        <label for="userPwd" ><span><b>PASSWORD</b></span></label>
+	                     </div>
+	                   <div class="box input">
+	                        <input type="password" name="userPwd" id="userPwd"/>
+                     </div>
+                   </div>
+				
+		
+				</div>
+			</div>
+			<div align="center">	
+				<button   style=" margin-top:10PX; border:1px solid #000; background-color: #FFFFFF; width: 480px; line-height: 48px;" type="button" onclick="login();">
+						<a style=" font-size: 17px; color: black;" >SIGN IN</a>
+				</button>				
+			</div>
+				
+				
+			<div style="font-size: 11px; margin-top: 10px; margin-left: 300px;">
+				<a href="<%=cp%>/shop/member/findId.do" style="font-size: 11px;">SEARCH&nbsp;ID</a> <span>/&nbsp;</span> 
+				<a href="<%=cp%>/shop/member/find.do" style="font-size: 11px;">PASSWORD</a>
+			</div>	
+				
+			
+			 <table width="300">
+				<tr  height="30">
 					<td colspan="2" align="center"><font color="red"><b>${message }</b></font></td>
 				</tr>
 			</table>
 
-			<table style="margin: auto;">
+		<%--	<table style="margin: auto;">
 				<tr height="2">
 					<td colspan="2" bgcolor="#cccccc"></td>
 				</tr>
@@ -103,9 +101,9 @@
 					<td colspan="2" bgcolor="#cccccc"></td>
 				</tr>
 			</table>
-
+ --%>
 		</form>
-
+<br><br><br><br><br><br><br>
 	</div>
 
 	<jsp:include page="../main/footer.jsp" />
