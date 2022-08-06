@@ -58,8 +58,8 @@ public int getDataCount(String searchKey,String searchValue) {
 			
 			searchValue = "%" + searchValue + "%";
 			
-			sql = "select nvl(count(*),0) from ORDERS ";
-			sql+= "where " + searchKey + " like ?";
+			sql = "SELECT NVL(COUNT(*),0) FROM ORDERS ";
+			sql+= "WHERE " + searchKey + " LIKE ?";
 			
 			pstmt = conn.prepareStatement(sql);
 			
@@ -90,8 +90,8 @@ public int getDataCount(String searchKey,String searchValue) {
 
 		try {
 
-			sql = "INSERT INTO ORDERS(ORDERNUM, USERID, PRODUCTNUM, ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, PROGRESS) ";
-			sql += "VALUES(?, ?, ?, ?, ?, ?, ?)";
+			sql = "INSERT INTO ORDERS(ORDERNUM, USERID, PRODUCTNUM, ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, UPDATEDDATE, PROGRESS) ";
+			sql += "VALUES(?, ?, ?, ?, ?, ?, SYSDATE, ?)";
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, dto.getOrderNum());
@@ -122,7 +122,7 @@ public int getDataCount(String searchKey,String searchValue) {
 
 		try {
 
-			sql = "UPDATE ORDERS SET ORDERQUANTITY = ?, ORDERCOLOR = ?, ORDERSIZE = ?, PROGRESS = ? ";
+			sql = "UPDATE ORDERS SET ORDERQUANTITY = ?, ORDERCOLOR = ?, ORDERSIZE = ?, UPDATEDDATE = SYSDATE, PROGRESS = ? ";
 			sql += "WHERE ORDERNUM = ?";
 
 			pstmt = conn.prepareStatement(sql);
@@ -178,7 +178,7 @@ public int getDataCount(String searchKey,String searchValue) {
 
 		try {
 
-			sql = "SELECT ORDERNUM, USERID, O.PRODUCTNUM,ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, PROGRESS, ";
+			sql = "SELECT ORDERNUM, USERID, O.PRODUCTNUM,ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, UPDATEDDATE, PROGRESS, ";
 			sql += "PRODUCTNAME, PRODUCTPRICE, PRODUCTCATEGORY, SAVEFILENAME ";
 			sql += "FROM ORDERS O, PRODUCT P ";
 			sql += "WHERE O.PRODUCTNUM = P.PRODUCTNUM AND USERID = ? AND PROGRESS = ? ORDER BY ORDERNUM DESC";
@@ -199,6 +199,7 @@ public int getDataCount(String searchKey,String searchValue) {
 				dto.setOrderQuantity(rs.getInt("ORDERQUANTITY"));
 				dto.setOrderColor(rs.getString("ORDERCOLOR"));
 				dto.setOrderSize(rs.getString("ORDERSIZE"));
+				dto.setUpdatedDate(rs.getString("UPDATEDDATE"));
 				dto.setProgress(rs.getString("PROGRESS"));
 
 				dto.setProductName(rs.getString("PRODUCTNAME"));
@@ -235,7 +236,7 @@ public int getDataCount(String searchKey,String searchValue) {
 				n += ", ?";
 			}
 
-			sql = "SELECT ORDERNUM, USERID, O.PRODUCTNUM, ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, PROGRESS, ";
+			sql = "SELECT ORDERNUM, USERID, O.PRODUCTNUM, ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, UPDATEDDATE, PROGRESS, ";
 			sql += "PRODUCTNAME, PRODUCTPRICE, PRODUCTCATEGORY, SAVEFILENAME ";
 			sql += "FROM ORDERS O, PRODUCT P ";
 			sql += "WHERE O.PRODUCTNUM = P.PRODUCTNUM AND ORDERNUM IN (" + n + ") ORDER BY ORDERNUM DESC";
@@ -255,9 +256,10 @@ public int getDataCount(String searchKey,String searchValue) {
 				dto.setUserId(rs.getString("USERID"));
 				dto.setProductNum(rs.getInt("PRODUCTNUM"));
 				dto.setOrderQuantity(rs.getInt("ORDERQUANTITY"));
-				dto.setProgress(rs.getString("PROGRESS"));
-				dto.setOrderSize(rs.getString("ORDERSIZE"));
 				dto.setOrderColor(rs.getString("ORDERCOLOR"));
+				dto.setOrderSize(rs.getString("ORDERSIZE"));
+				dto.setUpdatedDate(rs.getString("UPDATEDDATE"));
+				dto.setProgress(rs.getString("PROGRESS"));
 
 				dto.setProductName(rs.getString("PRODUCTNAME"));
 				dto.setProductPrice(rs.getInt("PRODUCTPRICE"));
@@ -292,7 +294,7 @@ public int getDataCount(String searchKey,String searchValue) {
 		
 			sql = "select * from  (";
 			sql += "select rownum rnum,data.* from (";
-			sql += "SELECT ORDERNUM, USERID, O.PRODUCTNUM,ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, PROGRESS, ";
+			sql += "SELECT ORDERNUM, USERID, O.PRODUCTNUM,ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, UPDATEDDATE, PROGRESS, ";
 			sql += "PRODUCTNAME, PRODUCTPRICE, PRODUCTCATEGORY, SAVEFILENAME ";
 			sql += "FROM ORDERS O, PRODUCT P ";
 			sql += "WHERE O.PRODUCTNUM = P.PRODUCTNUM and" + searchKey + " like ? AND USERID = ? AND PROGRESS = ? ORDER BY ORDERNUM DESC) data) ";
@@ -317,6 +319,7 @@ public int getDataCount(String searchKey,String searchValue) {
 				dto.setOrderQuantity(rs.getInt("ORDERQUANTITY"));
 				dto.setOrderColor(rs.getString("ORDERCOLOR"));
 				dto.setOrderSize(rs.getString("ORDERSIZE"));
+				dto.setUpdatedDate(rs.getString("UPDATEDDATE"));
 				dto.setProgress(rs.getString("PROGRESS"));
 
 				dto.setProductName(rs.getString("PRODUCTNAME"));
@@ -348,7 +351,7 @@ public int getDataCount(String searchKey,String searchValue) {
 
 		try {
 
-			sql = "SELECT ORDERNUM, USERID, PRODUCTNUM, ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, PROGRESS ";
+			sql = "SELECT ORDERNUM, USERID, PRODUCTNUM, ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, UPDATEDDATE, PROGRESS ";
 			sql += "FROM ORDERS WHERE ORDERNUM = ?";
 
 			pstmt = conn.prepareStatement(sql);
@@ -366,7 +369,13 @@ public int getDataCount(String searchKey,String searchValue) {
 				dto.setOrderQuantity(rs.getInt("ORDERQUANTITY"));
 				dto.setProgress(rs.getString("PROGRESS"));
 				dto.setOrderSize(rs.getString("ORDERSIZE"));
+				dto.setUpdatedDate(rs.getString("UPDATEDDATE"));
 				dto.setOrderColor(rs.getString("ORDERCOLOR"));
+
+				dto.setProductName(rs.getString("PRODUCTNAME"));
+				dto.setProductPrice(rs.getInt("PRODUCTPRICE"));
+				dto.setProductCategory(rs.getString("PRODUCTCATEGORY"));
+				dto.setSaveFileName(rs.getString("SAVEFILENAME").split(","));
 
 			}
 
