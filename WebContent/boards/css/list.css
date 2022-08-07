@@ -32,3 +32,51 @@ tr {
 	margin: 10pt 0pt 10pt;
 	height: 27pt;
 }
+
+a {
+	font: 9pt;
+	color: #555;
+}
+
+form {
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+
+#sub {
+	float: left;
+}
+
+.search {
+	width: 100%;
+    padding: 20px 0;
+    margin-top: 30px;
+}
+
+fieldset {
+	border: none;
+	border-bottom: 1px solid #ddd;
+}
+
+.selectField {
+	border: none;
+	outline: none;
+	color: #555;
+    font-size: 9px;
+}
+
+.textField {
+	border: none;
+	outline: none;
+	color: #555;
+    font-size: 9px;
+}
+
+.button {
+	border: none;
+	outline: none;
+	background-color: #fff;
+	color: #555;
+    font-size: 9px;
+}
