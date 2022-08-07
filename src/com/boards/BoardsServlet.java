@@ -169,7 +169,7 @@ public class BoardsServlet extends HttpServlet {
 				searchValue = URLDecoder.decode(searchValue, "UTF-8");
 			}
 
-			dao.updateHitCount(boardNum);
+			dao.updatehits(boardNum);
 
 			BoardsDTO dto = dao.getReadData(boardNum);
 
