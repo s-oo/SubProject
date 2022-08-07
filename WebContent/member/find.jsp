@@ -88,8 +88,9 @@
 
 			<div align="center">
 				<button
-					style="border: none; background-color: #FOFOFO; width: 200px; height: 50px;"
-					type="button" onclick="javascript:history.back();">
+					style="border: 0.5; background-color: white; width: 200px; height: 50px;"
+					type="button" onclick="javascript:history.back();"
+					onmouseover=this.style.backgroundColor='#F0F0F0' onmouseout=this.style.backgroundColor='white'>
 					<b style="font-size: 17px; color: black;">뒤로가기</b>
 				</button>
 				&nbsp;&nbsp;
