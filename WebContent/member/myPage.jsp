@@ -29,30 +29,35 @@
 			<div align="center">	
 				
 				
-				<button  style=" margin-top:10PX; border:1px solid #000; background-color: #FFFFFF; width: 480px; line-height: 48px;"
-					type="button" onclick="location.href='<%=cp%>/shop/orders/orderList.do';">
+				<button  style="cursor:pointer; margin-top:10PX; border:1px solid #000; background-color: #FFFFFF; width: 480px; line-height: 48px;"
+					type="button" onclick="location.href='<%=cp%>/shop/orders/orderList.do';"
+					onmouseover=this.style.backgroundColor='#F0F0F0' onmouseout=this.style.backgroundColor='white'>
 						<b style="font-size: 17px; color: black;"> ORDER </b>
 				</button>
 	<br>
-				<button style=" margin-top:10PX; border:1px solid #000; background-color: #FFFFFF; width: 480px; line-height: 48px;"
-						type="button" onclick="location.href='<%=cp%>/shop/orders/cartList.do';">
+				<button style="cursor:pointer; margin-top:10PX; border:1px solid #000; background-color: #FFFFFF; width: 480px; line-height: 48px;"
+						type="button" onclick="location.href='<%=cp%>/shop/orders/cartList.do';" 
+						onmouseover=this.style.backgroundColor='#F0F0F0' onmouseout=this.style.backgroundColor='white'>
 							<b style="font-size: 17px; color: black;"> BAG </b>
 					</button>	
 					
 	<br>
-				<button style=" margin-top:10PX; border:1px solid #000; background-color: #FFFFFF; width: 480px; line-height: 48px;"
-						type="button" onclick="location.href='<%=cp%>/shop/member/update.do';">
+				<button style="cursor:pointer; margin-top:10PX; border:1px solid #000; background-color: #FFFFFF; width: 480px; line-height: 48px;"
+						type="button" onclick="location.href='<%=cp%>/shop/member/update.do';"
+						onmouseover=this.style.backgroundColor='#F0F0F0' onmouseout=this.style.backgroundColor='white'>
 							<b style="font-size: 17px; color: black;"> PROFILE </b>
 					</button>
 					
 	<br>
-				<button style=" margin-top:10PX; border:1px solid #000; background-color: #FFFFFF; width: 480px; line-height: 48px;"
-						type="button" onclick="location.href='<%=cp%>/shop/boards/list.do?community=QnA';">
+				<button style="cursor:pointer; margin-top:10PX; border:1px solid #000; background-color: #FFFFFF; width: 480px; line-height: 48px;"
+						type="button" onclick="location.href='<%=cp%>/shop/boards/list.do?community=QnA';"
+						onmouseover=this.style.backgroundColor='#F0F0F0' onmouseout=this.style.backgroundColor='white'>
 							<b style="font-size: 17px; color: black;"> Q/A </b>
 					</button>
 	<br>
-				<button style=" margin-top:10PX; border:1px solid #000; background-color: #FFFFFF; width: 480px; line-height: 48px;"
-						type="button" onclick="location.href='<%=cp%>/shop/main/main.do';">
+				<button style="cursor:pointer; margin-top:10PX; border:1px solid #000; background-color: #FFFFFF; width: 480px; line-height: 48px;"
+						type="button" onclick="location.href='<%=cp%>/shop/main/main.do';"
+						onmouseover=this.style.backgroundColor='#F0F0F0' onmouseout=this.style.backgroundColor='white'>
 							<b style="font-size: 17px; color: black;"> MAIN </b>
 					</button>			
 					
