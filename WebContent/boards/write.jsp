@@ -11,7 +11,7 @@
 <title>게 시 판</title>
 
 <link rel="stylesheet" type="text/css"href="<%=cp%>/css/shopStyle.css" />
-<link rel="stylesheet" type="text/css"href="<%=cp%>/orders/css/cartListStyle.css" />
+<link rel="stylesheet" type="text/css"href="<%=cp%>/boards/css/writeStyle.css" />
 
 <script type="text/javascript" src="<%=cp%>/boards/js/util.js"></script>
 <script type="text/javascript">
@@ -39,65 +39,51 @@
 </head>
 <body>
 	<jsp:include page="../main/header.jsp"/>
-	<div id="bbs">
-		<div id="bbs_title">
-		Q A
+		<div id="content" align="center">
+			<div style="display: inline-block; margin: auto;" align="left">
+				<div class="box row" style="width: 700px; border-top: 1px solid #DBDBDB;">
+					<c:if test="${empty productNum }">
+						<img alt="noimage" src="<%=cp %>/boards/img/noimage.png" style="margin: 10px; display: inline;">
+						<div class="box">
+							<div style="border: 1px solid; width: 100px; padding: 5px;">
+								<a href="javascript:window.open('<%=cp %>/shop/boards/searchList.do','상품정보 선택','width=500, height=500, status=yes, top=100, left=100')">상품정보 선택</a>
+							</div>
+						</div>
+					</c:if>
+					<c:if test="${!empty productNum }">
+						<a href="<%=cp %>/shop/product/detail.do?productNum=${ordersDTO.productNum }">
+							<img src="<%=cp %>/product/image/top/${ordersDTO.saveFileName[0] }" style="margin: 10px; display: inline;">
+						</a>
+						<div class="box">
+							<div class="box text">${ordersDTO.productName }</div>
+							<div class="box text">${ordersDTO.productPrice } ${ordersDTO.productName }</div>
+							<div class="box text">[옵션 : ordersDTO.orderColor/ordersDTO.orderSize]</div>
+							<div style="border: 1px solid; width: 100px; padding: 5px;">
+								<a href="<%=cp %>/shop/product/detail.do?productNum=${ordersDTO.productNum }">상품정보 보기</a>
+							</div>
+							<div style="border: 1px solid; width: 100px; padding: 5px;">
+								<a href="javascript:window.open('<%=cp %>/shop/boards/searchList.do','상품정보 선택','width=500, height=500, status=yes, top=100, left=100')">상품정보 선택</a>
+							</div>
+						</div>
+					</c:if>
+				</div>
+				<div class="box row">
+					<div class="box label"><label for="subject">SUBJECT</label></div>
+					<div class="box input"><input type="text" name="subject"></div>
+				</div>
+				<div class="box row">
+					<div class="box label"><label for="userId">ID</label></div>
+					<div class="box input"><input type="text" name="userId"></div>
+				</div>
+				<div class="box row">
+					<label for="userId">CONTENT</label><br/>
+					<div class="box input">
+						<textarea rows="" cols=""></textarea>
+					</div>
+				</div>
+				
+			</div>
 		</div>
-		
-		<form action="" method="post" name="myForm">
-		<div id="bbsCreated">
-	
-			<div class="bbsCreated_bottomLine">
-				<dl>
-					<dt>제&nbsp;&nbsp;&nbsp;&nbsp;목</dt>
-					<dd>
-						<input type="text" name="subject" size="60" 
-						maxlength="100" class="boxTF"/>
-					</dd>
-				</dl>		
-			</div>
-		
-			<div class="bbsCreated_bottomLine">
-				<dl>
-					<dt>회원&nbsp;&nbsp;ID</dt>
-					<dd>
-						<input type="text" name="userId" size="35" 
-						maxlength="20" class="boxTF"
-						value="${sessionScope.userId }"/>
-					</dd>
-				</dl>		
-			</div>
-		
-		
-		
-		
-			<div id="bbsCreated_content">
-				<dl>
-					<dt>내&nbsp;&nbsp;&nbsp;&nbsp;용</dt>
-					<dd>
-						<textarea rows="12" cols="63" name="content" class="boxTA"></textarea>
-					</dd>
-				</dl>		
-			</div>
-			
-		
-	
-		</div>
-	
-		<div id="bbsCreated_footer">
-			<input type="button" value=" 등록하기 " class="btn2"
-				onclick="sendIt();"/>
-			<input type="reset" value=" 다시입력 " class="btn2"
-				onclick="document.myForm.subject.focus();"/>
-			<input type="button" value=" 작성취소 " class="btn2"
-				onclick="javascript:location.href='<%=cp%>/shop/boards/list.do';"/>	
-		</div>	
-	
-	</form>
-
-</div>
-
-
 	<jsp:include page="../main/footer.jsp"/>
 </body>
 </html>
