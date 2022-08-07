@@ -46,7 +46,40 @@ public class OrdersDAO {
 
 	}
 	
-public int getDataCount(String searchKey,String searchValue) {
+	public int getDataCount(String userId) {
+		
+		int dataCount = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql;
+		
+		try {
+			
+			sql = "SELECT NVL(COUNT(*),0) FROM ORDERS ";
+			sql+= "WHERE USERID = ? AND PROGRESS = 'cartLIst'";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				dataCount = rs.getInt(1);
+			}
+			
+			rs.close();
+			pstmt.close();			
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return dataCount;
+	}
+
+	/*
+	public int getDataCount(String searchKey,String searchValue) {
 		
 		int dataCount = 0;
 		
@@ -62,7 +95,6 @@ public int getDataCount(String searchKey,String searchValue) {
 			sql+= "WHERE " + searchKey + " LIKE ?";
 			
 			pstmt = conn.prepareStatement(sql);
-			
 			pstmt.setString(1, searchValue);
 			
 			rs = pstmt.executeQuery();
@@ -81,6 +113,7 @@ public int getDataCount(String searchKey,String searchValue) {
 		return dataCount;
 		
 	}
+	 */
 
 	public int insertData(OrdersDTO dto) {
 
@@ -281,6 +314,7 @@ public int getDataCount(String searchKey,String searchValue) {
 
 	}
 	
+	/*
 	public List<OrdersDTO> getList(int start, int end, String searchKey,String searchValue, String userId, String progress) {
 
 		List<OrdersDTO> list = new ArrayList<>();
@@ -289,9 +323,9 @@ public int getDataCount(String searchKey,String searchValue) {
 		String sql;
 
 		try {
-			
+
 			searchValue = "%" + searchValue + "%";
-		
+
 			sql = "SELECT * FROM (";
 			sql += "SELECT ROWNUM RNUM, DATA.* FROM (";
 			sql += "SELECT ORDERNUM, USERID, O.PRODUCTNUM, ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, UPDATEDDATE, PROGRESS, ";
@@ -299,7 +333,7 @@ public int getDataCount(String searchKey,String searchValue) {
 			sql += "FROM ORDERS O, PRODUCT P ";
 			sql += "WHERE O.PRODUCTNUM = P.PRODUCTNUM AND " + searchKey + " LIKE ? AND USERID = ? AND PROGRESS = ? ORDER BY ORDERNUM DESC) DATA) ";
 			sql += "WHERE RNUM >= ? AND RNUM <= ?";	
-			
+
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, searchValue);
 			pstmt.setString(2, userId);
@@ -341,7 +375,8 @@ public int getDataCount(String searchKey,String searchValue) {
 		return list;
 
 	}
-
+	 */
+	
 	public OrdersDTO getReadData(int orderNum) {
 
 		OrdersDTO dto = null;

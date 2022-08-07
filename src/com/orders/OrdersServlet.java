@@ -67,7 +67,7 @@ public class OrdersServlet extends HttpServlet {
 		// cart/wish 추가
 		if (uri.indexOf("addOrder_ok.do") != -1) {
 
-			String referer = (String) req.getHeader("REFERER");
+//			String referer = (String) req.getHeader("REFERER");
 
 			int orderNum = dao.getMaxNum() + 1;
 			int productNum = Integer.parseInt(req.getParameter("productNum"));
@@ -100,7 +100,9 @@ public class OrdersServlet extends HttpServlet {
 				out.print("</script>");
 			}
 
-			resp.sendRedirect(referer);
+			url = "/orders/cartList.do";
+			resp.sendRedirect(url);
+//			resp.sendRedirect(referer);
 
 			// cart/wish/order/cancel 수정
 		} else if (uri.indexOf("changeOrder_ok.do") != -1) {
@@ -190,6 +192,14 @@ public class OrdersServlet extends HttpServlet {
 
 			// 주문상품
 			String[] orderNum = req.getParameterValues("orderNum");
+			
+			if (orderNum == null) {
+				out.print("<script>");
+				out.print("alert('주문할 상품을 선택해 주세요');");
+				out.print("history.back()");
+				out.print("</script>");
+				return;
+			}
 			
 			List<OrdersDTO> list = new ArrayList<>();
 

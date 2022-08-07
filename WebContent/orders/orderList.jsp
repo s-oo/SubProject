@@ -9,18 +9,26 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
+<link rel="stylesheet" type="text/css"href="<%=cp%>/css/shopStyle.css" />
+<link rel="stylesheet" type="text/css"href="<%=cp%>/orders/css/cartListStyle.css" />
+<link rel="stylesheet" type="text/css"href="<%=cp%>/orders/css/orderPaymentStyle.css" />
+
 </head>
 <body>
 	<jsp:include page="../main/header.jsp"/>
 	<div id="content" align="center">
-		<div>
-			<form action="" method="post" name="paymentForm">
-			
-				<table id="cartList" style="margin-bottom: 50px;">
+		<form action="" method="post" name="paymentForm">
+			<c:forEach var="ddto" items="${list }">
+				<div class="box row" style="width: 900px;">
+					<h3 style="float: left; padding-left: 30px;">${ddto.deliveryDate } 주문</h3>
+					<h3 style="float: left; padding-left: 30px;">도착예정일 : ${ddto.arriveDate }</h3>
+				</div>
+				<table id="cartList">
 					<tbody>
 						<c:set var="sum" value="0"/>
 						<c:set var="tot" value="0"/>
-						<c:forEach var="dto" items="${list }">
+						<c:forEach var="dto" items="${ddto.orderList }">
 							<tr align="center">
 								<td id="saveFileName">
 									<a href="<%=cp %>/shop/product/detail.do?productNum=${dto.productNum }">
@@ -48,18 +56,12 @@
 							<c:set var="tot" value="${tot + dto.productPrice }"/>
 						</c:forEach>
 					</tbody>
-					<c:if test="${empty list }">
-						<tfoot>
-							<tr id="listBox" class="item" style="list-style: none;width: 300px;display: inline-block;">
-								<td class="box_wrap" style="display: inline-block;font-size: 10pt;color: #555555;">
-										등록된 상품이 없음
-								</td>
-							</tr>
-						</tfoot>
-					</c:if>
 				</table>
-			</form>
-		</div>
+				<div class="box row" style="width: 900px; margin-bottom: 50px;">
+					<h4 style="float: right; padding-right: 30px;">TOTAL : ${ddto.totalPrice }</h4>
+				</div>
+			</c:forEach>
+		</form>
 	</div>
 	<jsp:include page="../main/footer.jsp"/>
 </body>

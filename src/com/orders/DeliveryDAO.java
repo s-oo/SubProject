@@ -55,7 +55,7 @@ public class DeliveryDAO {
 
 			sql = "INSERT INTO DELIVERY(DELIVERYNUM, USERID, ORDERNUM, DELIVERYNAME, DELIVERYTEL, ";
 			sql += "DELIVERYADDR, DELIVERYEMAIL, TOTALPRICE, DELIVERYDATE, ARRIVEDATE, PROGRESS) ";
-			sql += "VALUES(?, ?, ?, ?, ?, ?, ?, ?, TO_CHAR(SYSDATE,'YYYY-MM-DD HH24:MI'), TO_CHAR(ROUND(SYSDATE + 3),'YYYY-MM-DD'), ?)";
+			sql += "VALUES(?, ?, ?, ?, ?, ?, ?, ?, SYSDATE, ROUND(SYSDATE + 3), ?)";
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, dto.getDeliveryNum());
@@ -134,7 +134,8 @@ public class DeliveryDAO {
 
 		try {
 
-			sql = "SELECT DELIVERYNUM, USERID, ORDERNUM, DELIVERYNAME, DELIVERYTEL, DELIVERYADDR, DELIVERYEMAIL, TOTALPRICE, PROGRESS ";
+			sql = "SELECT DELIVERYNUM, USERID, ORDERNUM, DELIVERYNAME, DELIVERYTEL, DELIVERYADDR, DELIVERYEMAIL, ";
+			sql += "TOTALPRICE, TO_CHAR(DELIVERYDATE, 'YYYY-MM-DD HH24:MI'), TO_CHAR(ARRIVEDATE, 'YYYY-MM-DD'), PROGRESS ";
 			sql += "FROM DELIVERY WHERE USERID = ? AND PROGRESS = ? ORDER BY DELIVERYNUM DESC";
 
 			pstmt = conn.prepareStatement(sql);
@@ -155,6 +156,8 @@ public class DeliveryDAO {
 				dto.setDeliveryAddr(rs.getString("DELIVERYADDR").split(","));
 				dto.setDeliveryEmail(rs.getString("DELIVERYEMAIL"));
 				dto.setTotalPrice(rs.getInt("TOTALPRICE"));
+				dto.setDeliveryDate(rs.getString(9));
+				dto.setArriveDate(rs.getString(10));
 				dto.setProgress(rs.getString("PROGRESS"));
 				
 				dto.setOrderList(new OrdersDAO(conn).getList(rs.getString("ORDERNUM").split(",")));
@@ -183,7 +186,8 @@ public class DeliveryDAO {
 
 		try {
 
-			sql = "SELECT DELIVERYNUM, USERID, ORDERNUM, DELIVERYNAME, DELIVERYTEL, DELIVERYADDR, DELIVERYEMAIL, TOTALPRICE, PROGRESS ";
+			sql = "SELECT DELIVERYNUM, USERID, ORDERNUM, DELIVERYNAME, DELIVERYTEL, DELIVERYADDR, DELIVERYEMAIL,";
+			sql += "TOTALPRICE, TO_CHAR(DELIVERYDATE, 'YYYY-MM-DD HH24:MI'), TO_CHAR(ARRIVEDATE, 'YYYY-MM-DD'), PROGRESS ";
 			sql += "FROM DELIVERY WHERE DELIVERYNUM = ? ";
 
 			pstmt = conn.prepareStatement(sql);
@@ -203,6 +207,8 @@ public class DeliveryDAO {
 				dto.setDeliveryAddr(rs.getString("DELIVERYADDR").split(","));
 				dto.setDeliveryEmail(rs.getString("DELIVERYEMAIL"));
 				dto.setTotalPrice(rs.getInt("TOTALPRICE"));
+				dto.setDeliveryDate(rs.getString(9));
+				dto.setArriveDate(rs.getString(10));
 				dto.setProgress(rs.getString("PROGRESS"));
 
 				dto.setOrderList(new OrdersDAO(conn).getList(rs.getString("ORDERNUM").split(",")));
