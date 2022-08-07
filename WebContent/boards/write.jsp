@@ -41,8 +41,8 @@
 	<jsp:include page="../main/header.jsp"/>
 		<div id="content" align="center">
 			<div style="display: inline-block; margin: auto;" align="left">
-				<div class="box row" style="width: 700px; border-top: 1px solid #DBDBDB;">
-					<c:if test="${empty productNum }">
+				<div class="box row" style="width: 800px; border-top: 1px solid #DBDBDB;">
+					<c:if test="${empty ordersDTO }">
 						<img alt="noimage" src="<%=cp %>/boards/img/noimage.png" style="margin: 10px; display: inline;">
 						<div class="box">
 							<div style="border: 1px solid; width: 100px; padding: 5px;">
@@ -50,19 +50,22 @@
 							</div>
 						</div>
 					</c:if>
-					<c:if test="${!empty productNum }">
-						<a href="<%=cp %>/shop/product/detail.do?productNum=${ordersDTO.productNum }">
-							<img src="<%=cp %>/product/image/top/${ordersDTO.saveFileName[0] }" style="margin: 10px; display: inline;">
-						</a>
+					<c:if test="${!empty ordersDTO }">
+						<div class="box" style="width: 150px;">
+							<a href="<%=cp %>/shop/product/detail.do?productNum=${ordersDTO.productNum }">
+								<img src="<%=cp %>/product/image/top/${ordersDTO.saveFileName[0] }" width="100px" style="margin: 10px; display: inline;">
+							</a>
+						</div>
 						<div class="box">
-							<div class="box text">${ordersDTO.productName }</div>
-							<div class="box text">${ordersDTO.productPrice } ${ordersDTO.productName }</div>
-							<div class="box text">[옵션 : ordersDTO.orderColor/ordersDTO.orderSize]</div>
-							<div style="border: 1px solid; width: 100px; padding: 5px;">
-								<a href="<%=cp %>/shop/product/detail.do?productNum=${ordersDTO.productNum }">상품정보 보기</a>
-							</div>
-							<div style="border: 1px solid; width: 100px; padding: 5px;">
-								<a href="javascript:window.open('<%=cp %>/shop/boards/searchList.do','상품정보 선택','width=600, height=500, status=yes, top=100, left=100')">상품정보 선택</a>
+							<div class="box text">${ordersDTO.productName } / ${ordersDTO.productPrice }KRW</div>
+							<div class="box text">[옵션 : ${ordersDTO.orderColor }/${ordersDTO.orderSize }]</div>
+							<div class="box">
+								<div style="border: 1px solid; width: 80px; padding: 5px; display: inline-block;">
+									<a href="<%=cp %>/shop/product/detail.do?productNum=${ordersDTO.productNum }">상품정보 보기</a>
+								</div>
+								<div style="border: 1px solid; width: 80px; padding: 5px; display: inline-block;">
+									<a href="javascript:window.open('<%=cp %>/shop/boards/searchList.do','상품정보 선택','width=600, height=500, status=yes, top=100, left=100')">상품정보 선택</a>
+								</div>
 							</div>
 						</div>
 					</c:if>

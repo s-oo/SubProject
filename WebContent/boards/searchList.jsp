@@ -22,8 +22,8 @@ td {
 
 <script type="text/javascript" src="<%=cp%>/boards/js/util.js"></script>
 <script type="text/javascript">
-	function select(productNum) {
-		window.opener.location.href = "<%=cp%>/shop/boards/write.do?productNum=" + productNum;
+	function select(orderNum) {
+		window.opener.location.href = "<%=cp%>/shop/boards/write.do?orderNum=" + orderNum;
 		window.close();
 	}
 </script>
@@ -45,7 +45,7 @@ td {
 							</td>
 							<td id="select">
 								<div style="border: 1px solid; width: 50px; padding: 5px;">
-									<a href="javascript:select(${dto.productNum })">선택</a>
+									<a href="javascript:select(${dto.orderNum })">선택</a>
 								</div>
 							</td>
 						</tr>

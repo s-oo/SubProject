@@ -66,13 +66,16 @@ public class BoardsServlet extends HttpServlet {
 			}
 			
 			String community = req.getParameter("community");
-			String productNum = req.getParameter("productNum");
+			String orderNum = req.getParameter("orderNum");
+			
+			System.out.println(orderNum);
+			
+			if (orderNum != null) {
+				OrdersDTO ordersDTO = new OrdersDAO(conn).getReadData(Integer.parseInt(orderNum));
+				req.setAttribute("ordersDTO", ordersDTO);
+			}
 			
 			req.setAttribute("community", community);
-			req.setAttribute("productNum", productNum);
-
-			System.out.println(community);
-			System.out.println(productNum);
 			
 			url = "/boards/write.jsp";
 			forward(req, resp, url);
