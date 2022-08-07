@@ -12,40 +12,49 @@
 
 <link rel="stylesheet" type="text/css"href="<%=cp%>/css/shopStyle.css" />
 <link rel="stylesheet" type="text/css"href="<%=cp%>/boards/css/writeStyle.css" />
+<style type="text/css">
+
+td {
+	width: 50px;
+}
+
+</style>
 
 <script type="text/javascript" src="<%=cp%>/boards/js/util.js"></script>
 <script type="text/javascript">
-	function select() {
-		window.opener.location.href = "<%=cp%>/shop/boards/write.do"
+	function select(productNum) {
+		window.opener.location.href = "<%=cp%>/shop/boards/write.do?productNum=" + productNum;
 		window.close();
 	}
 </script>
 
 </head>
 <body>
-	<div id="content" align="center" style="display: block;">
+	<div id="content" align="center" style="display: block; width:auto;">
 		<form action="" method="post" name="searchListForm">
-			<table id="cartList">
+			<table width="400px;">
 				<tbody>
 					<c:forEach var="dto" items="${list }">
-						<tr align="center">
-							<td id="orderNum">
-								<input type="checkbox" name="orderNum" value="${dto.orderNum }" checked="checked">
-							</td>
-							<td id="saveFileName">
+						<tr align="center" style="border-bottom: 1px solid #AAAAAA;">
+							<td id="saveFileName" width="80px">
 								<img src="<%=cp %>/product/image/${dto.productCategory }/${dto.saveFileName[0] }" height="100px;">
 							</td>
 							<td id="productName">
-								${dto.productName }
+								${dto.productName }<br/>
 								<span class="productOption">[옵션 : ${dto.orderColor }/${dto.orderSize }]</span>
 							</td>
 							<td id="select">
 								<div style="border: 1px solid; width: 50px; padding: 5px;">
-									<a href="javascript:select()">선택</a>
+									<a href="javascript:select(${dto.productNum })">선택</a>
 								</div>
 							</td>
 						</tr>
 					</c:forEach>
+					<c:if test="${empty list }">
+						<tr align="center">
+							<td>구입한 상품이 없습니다.</td>
+						</tr>
+					</c:if>
 				</tbody>
 			</table>
 		</form>
