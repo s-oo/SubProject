@@ -11,7 +11,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.boards.BoardsDTO;
 import com.orders.OrdersDAO;
@@ -40,7 +39,6 @@ public class BoardsServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String cp = req.getContextPath();
-		// uri : 주소가 끝까지 나옴
 		String uri = req.getRequestURI();
 
 		Connection conn = DBConn.getConnection();
@@ -66,16 +64,13 @@ public class BoardsServlet extends HttpServlet {
 			}
 			
 			String community = req.getParameter("community");
-			String orderNum = req.getParameter("orderNum");
-			
-			System.out.println(orderNum);
-			
-			if (orderNum != null) {
-				OrdersDTO ordersDTO = new OrdersDAO(conn).getReadData(Integer.parseInt(orderNum));
-				req.setAttribute("ordersDTO", ordersDTO);
-			}
+			String productNum = req.getParameter("productNum");
 			
 			req.setAttribute("community", community);
+			req.setAttribute("productNum", productNum);
+
+			System.out.println(community);
+			System.out.println(productNum);
 			
 			url = "/boards/write.jsp";
 			forward(req, resp, url);
@@ -109,7 +104,8 @@ public class BoardsServlet extends HttpServlet {
 			resp.sendRedirect(url);
 
 		} else if (uri.indexOf("notice.do") != -1) {
-
+			
+			String community = "notice";
 			String pageNum = req.getParameter("pageNum");
 
 			int currentPage = 1;
@@ -130,8 +126,8 @@ public class BoardsServlet extends HttpServlet {
 				}
 			}
 
-			int dataCount = dao.getDataCount(searchKey, searchValue);
-
+			int dataCount = dao.getDataCount(searchKey, searchValue, community);
+			
 			int numPerPage = 5;
 
 			int totalPage = myPage.getPageCount(numPerPage, dataCount);
@@ -143,14 +139,14 @@ public class BoardsServlet extends HttpServlet {
 			int start = (currentPage - 1) * numPerPage + 1;
 			int end = currentPage * numPerPage;
 
-			List<BoardsDTO> lists = dao.getLists(start, end, searchKey, searchValue);
+			List<BoardsDTO> lists = dao.getLists(start, end, searchKey, searchValue, community);
 
-			String param = ""; // 검색했던 그 페이지정보로 돌아가준다
+			String param = "";
 
 			if (searchValue != null && !searchValue.equals("")) {
 				param = "searchKey=" + searchKey;
 				param += "&searchValue=" + URLEncoder.encode(searchValue, "UTF-8");
-			} // param: 파라미터 값을 저장하고 있는 저장소
+			}
 			
 			String listUrl = cp + "/shop/boards/notice.do";
 
@@ -160,13 +156,12 @@ public class BoardsServlet extends HttpServlet {
 
 			String pageIndexList = myPage.pageIndexList(currentPage, totalPage, listUrl);
 
-			String viewUrl = cp + "/shop/boards/view.do?pageNum=" + currentPage;
+			String viewUrl = cp + "/shop/boards/noticeView.do?pageNum=" + currentPage;
 
 			if (!param.equals("")) {
 				viewUrl += "&" + param;
 			}
 
-			// 포워딩할 데이터
 			req.setAttribute("lists", lists);
 			req.setAttribute("pageIndexList", pageIndexList);
 			req.setAttribute("viewUrl", viewUrl);
@@ -241,6 +236,139 @@ public class BoardsServlet extends HttpServlet {
 
 			url = "/boards/list.jsp";
 			forward(req, resp, url);*/
+		} else if (uri.indexOf("qna.do") != -1) {
+			
+			String community = "qna";
+			String pageNum = req.getParameter("pageNum");
+
+			int currentPage = 1;
+
+			if (pageNum != null) {
+				currentPage = Integer.parseInt(pageNum);
+			}
+
+			String searchKey = req.getParameter("searchKey");
+			String searchValue = req.getParameter("searchValue");
+
+			if (searchValue == null) {
+				searchKey = "subject";
+				searchValue = "";
+			} else {
+				if (req.getMethod().equalsIgnoreCase("GET")) {
+					searchValue = URLDecoder.decode(searchValue, "UTF-8");
+				}
+			}
+
+			int dataCount = dao.getDataCount(searchKey, searchValue, community);
+
+			int numPerPage = 5;
+
+			int totalPage = myPage.getPageCount(numPerPage, dataCount);
+
+			if (currentPage > totalPage) {
+				currentPage = totalPage;
+			}
+
+			int start = (currentPage - 1) * numPerPage + 1;
+			int end = currentPage * numPerPage;
+
+			List<BoardsDTO> lists = dao.getLists(start, end, searchKey, searchValue, community);
+
+			String param = "";
+
+			if (searchValue != null && !searchValue.equals("")) {
+				param = "searchKey=" + searchKey;
+				param += "&searchValue=" + URLEncoder.encode(searchValue, "UTF-8");
+			}
+			
+			String listUrl = cp + "/shop/boards/qna.do";
+
+			if (!param.equals("")) {
+				listUrl += "?" + param;
+			}
+
+			String pageIndexList = myPage.pageIndexList(currentPage, totalPage, listUrl);
+
+			String viewUrl = cp + "/shop/boards/qnaView.do?pageNum=" + currentPage;
+
+			if (!param.equals("")) {
+				viewUrl += "&" + param;
+			}
+
+			req.setAttribute("lists", lists);
+			req.setAttribute("pageIndexList", pageIndexList);
+			req.setAttribute("viewUrl", viewUrl);
+			req.setAttribute("dataCount", dataCount);
+
+			url = "/boards/qna.jsp";
+			forward(req, resp, url);
+			
+		} else if (uri.indexOf("review.do") != -1) {
+
+			String community = "review";
+			String pageNum = req.getParameter("pageNum");
+
+			int currentPage = 1;
+
+			if (pageNum != null) {
+				currentPage = Integer.parseInt(pageNum);
+			}
+
+			String searchKey = req.getParameter("searchKey");
+			String searchValue = req.getParameter("searchValue");
+
+			if (searchValue == null) {
+				searchKey = "subject";
+				searchValue = "";
+			} else {
+				if (req.getMethod().equalsIgnoreCase("GET")) {
+					searchValue = URLDecoder.decode(searchValue, "UTF-8");
+				}
+			}
+
+			int dataCount = dao.getDataCount(searchKey, searchValue, community);
+
+			int numPerPage = 5;
+
+			int totalPage = myPage.getPageCount(numPerPage, dataCount);
+
+			if (currentPage > totalPage) {
+				currentPage = totalPage;
+			}
+
+			int start = (currentPage - 1) * numPerPage + 1;
+			int end = currentPage * numPerPage;
+
+			List<BoardsDTO> lists = dao.getLists(start, end, searchKey, searchValue, community);
+
+			String param = "";
+
+			if (searchValue != null && !searchValue.equals("")) {
+				param = "searchKey=" + searchKey;
+				param += "&searchValue=" + URLEncoder.encode(searchValue, "UTF-8");
+			}
+			
+			String listUrl = cp + "/shop/boards/review.do";
+
+			if (!param.equals("")) {
+				listUrl += "?" + param;
+			}
+
+			String pageIndexList = myPage.pageIndexList(currentPage, totalPage, listUrl);
+
+			String viewUrl = cp + "/shop/boards/reviewView.do?pageNum=" + currentPage;
+
+			if (!param.equals("")) {
+				viewUrl += "&" + param;
+			}
+
+			req.setAttribute("lists", lists);
+			req.setAttribute("pageIndexList", pageIndexList);
+			req.setAttribute("viewUrl", viewUrl);
+			req.setAttribute("dataCount", dataCount);
+
+			url = "/boards/review.jsp";
+			forward(req, resp, url);
 
 		} else if (uri.indexOf("article.do") != -1) {
 

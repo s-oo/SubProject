@@ -12,6 +12,16 @@
 
 <link rel="stylesheet" type="text/css"href="<%=cp%>/css/shopStyle.css" />
 <link rel="stylesheet" type="text/css" href="<%=cp %>/boards/css/list.css"/>
+<script type="text/javascript">
+
+	function sendIt() {
+		var f = document.searchForm;
+		
+		f.action = "<%=cp %>/shop/boards/notice.do";
+		f.submit();
+	}
+
+</script>
 
 </head>
 <body>
@@ -19,6 +29,7 @@
 <jsp:include page="../main/header.jsp"/>
 
 <div id="content" align="center">
+	<!-- board -->
 	<div class="boardList">
 		<!-- title -->
 		<div class="boardTitle" align="center">NOTICE</div>
@@ -51,7 +62,9 @@
 						<!-- NO -->
 						<td>${dto.boardNum }</td>
 						<!-- SUBJECT -->
-						<td>${dto.subject }</td>
+						<td>
+						<a href="${viewUrl }&boardNum=${dto.boardNum}">${dto.subject }</a>
+						</td>
 						<!-- ID -->
 						<td>${dto.userId }</td>
 						<td>${dto.postDate }</td>
@@ -60,11 +73,32 @@
 				</c:forEach>
 			</tbody>
 		</table>
-	</div>
-	<div id="paging">
-		<p>
-			<c:if test="${dataCount!=0 }">${pageIndexList }</c:if>
-		</p>
+	
+		<!-- paging -->
+		<div id="paging">
+			<p>
+				<c:if test="${dataCount!=0 }">${pageIndexList }</c:if>
+			</p>
+		</div>
+		
+		<!-- search -->
+		<div id="sub_wrap">
+			<div id="sub">
+				<form action="" method="post" name="searchForm">
+					<div class="search">
+						<fieldset>
+							<select name="searchKey" class="selectField">
+								<option value="subject">SUBJECT</option>
+								<option value="userId">ID</option>
+								<option value="content">CONTENT</option>
+							</select>
+							<input type="text" name="searchValue" class="textField">
+							<input type="button" value="SEARCH" class="button" onclick="sendIt();"/>
+						</fieldset>
+					</div>
+				</form>
+			</div>			
+		</div>
 	</div>
 </div>
 
