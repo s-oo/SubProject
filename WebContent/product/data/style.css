@@ -22,6 +22,10 @@ div{
     padding: 0;
 }
 
+ul{
+	list-style:none;
+}
+
 li{
 	margin-right: 10pt;
 }
@@ -109,9 +113,6 @@ li{
 
 /* list */
 
-.productPrice{
-	
-}
 
 /* detail? */
 
@@ -224,12 +225,7 @@ tbody{
     padding-top: 16px;
 }
 
-.selected1{
-	border: none;
-	outline: none;
-}
-
-.selected2{
+.selected{
 	border: none;
 	outline: none;
 }
@@ -244,7 +240,7 @@ input{
 	color: #555;
 }
 
-.amount{
+.orderQuantity{
 	border: none;
 }
 
@@ -252,17 +248,17 @@ input{
 	border: none;
 }
 
-.totalPrice{
+.totalSum{
 }
 
 .totalText{
 }
 
-.totalSum{
+.totalPrice{
 	border: none;
 }
 
-.totalAmount{
+.amount{
 	border: none;
 }
 
@@ -282,6 +278,10 @@ input{
     border: 1px solid #000;
     margin-bottom: 10px;
     display: block;
+}
+
+.bagImage{
+	height: 200px;
 }
 
 /* board(Review, Q&A) */
@@ -328,3 +328,4 @@ input{
 .boardContent tbody{
 	text-align: center;
 }
+
