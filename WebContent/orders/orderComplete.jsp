@@ -18,90 +18,103 @@
 <body>
 <jsp:include page="../main/header.jsp"/>
 	<div id="content" align="center">
-		<div>
-			<form action="<%=cp%>/shop/orders/orderPayment_ok.do" method="post" name="paymentForm">
-				<div class="box row" align="center" style="width: 900px; margin-bottom: 50px;">
-					<div class="box row" style="width: 900px;" align="left">
-						<h1>결제완료</h1>
-					</div>
-					<div style="padding: 50px;">
-						주문이 완료되었습니다.
-					</div>
+		<form action="<%=cp%>/shop/orders/orderPayment_ok.do" method="post" name="paymentForm">
+			
+			<!-- 결제완료 -->
+			<div class="box row" align="center" style="width: 900px; margin-bottom: 50px;">
+				<div class="box row" style="width: 900px;" align="left">
+					<h1>결제완료</h1>
 				</div>
+				<div style="padding: 50px;">
+					주문이 완료되었습니다.<br/>
+					주문 시간 : ${ddto.deliveryDate }<br/>
+					예상 도착일 : ${ddto.arriveDate }
+				</div>
+			</div>
 
-				<!-- 배송정보 -->
-				<div id="left_area" style="display: inline-block; float: left; padding-left: 40px;" >
-					<div id="info_area" style="width: 500px;" align="left">
-						<div class="box row">
-							<h3 style="margin: 0px;">배송정보</h3>
+			<!-- 배송정보 -->
+			<div id="left_area" style="display: inline-block; float: left; padding-left: 40px;" >
+				<div id="info_area" style="width: 500px;" align="left">
+					<div class="box row">
+						<h3 style="margin: 0px;">배송정보</h3>
+					</div>
+					<div class="box row">
+						<div class="box label">
+							<label for="deliveryName"><span>NAME</span></label>
 						</div>
-						<div class="box row">
-							<div class="box label">
-								<label for="deliveryName"><span>NAME</span></label>
-							</div>
-							<div class="box input" align="left">
-								${ddto.deliveryName }
-							</div>
+						<div class="box input" align="left">
+							${ddto.deliveryName }
 						</div>
-						<div class="box row" style="height: 120px;">
-							<div class="box label" style="height: 80px;">
-								<label for="deliveryAddr"><span>ADDRESS</span></label>
-							</div>
-							<div class="box input" style="padding: 0px;" align="left">
-								<div class="box input" style="padding: 5px 10px 5px 10px;">
-									${ddto.deliveryAddr[0] }
-								</div>
-								<div class="box input" style="padding: 5px 10px 5px 10px;">
-									${ddto.deliveryAddr[1] }
-								</div>
-								<div class="box input" style="padding: 5px 10px 5px 10px;">
-									${ddto.deliveryAddr[2] }
-								</div>
-								<div class="box input" style="padding: 5px 10px 5px 10px;">
-									${ddto.deliveryAddr[3] }
-								</div>
-							</div>
+					</div>
+					<div class="box row" style="height: 120px;">
+						<div class="box label" style="height: 80px;">
+							<label for="deliveryAddr"><span>ADDRESS</span></label>
 						</div>
-						<div class="box row">
-							<div class="box label">
-								<label for="deliveryTel"><span>TEL</span></label>
+						<div class="box input" style="padding: 0px;" align="left">
+							<div class="box input" style="padding: 5px 10px 5px 10px;">
+								${ddto.deliveryAddr[0] }
 							</div>
-							<div class="box input">
-								${ddto.deliveryTel }
+							<div class="box input" style="padding: 5px 10px 5px 10px;">
+								${ddto.deliveryAddr[1] }
 							</div>
-						</div>
-						<div class="box row">
-							<div class="box label">
-								<label for="deliveryEmail"><span>E-MAIL</span></label>
+							<div class="box input" style="padding: 5px 10px 5px 10px;">
+								${ddto.deliveryAddr[2] }
 							</div>
-							<div class="box input">
-								${ddto.deliveryEmail }
+							<div class="box input" style="padding: 5px 10px 5px 10px;">
+								${ddto.deliveryAddr[3] }
 							</div>
 						</div>
 					</div>
+					<div class="box row">
+						<div class="box label">
+							<label for="deliveryTel"><span>TEL</span></label>
+						</div>
+						<div class="box input">
+							${ddto.deliveryTel }
+						</div>
+					</div>
+					<div class="box row">
+						<div class="box label">
+							<label for="deliveryEmail"><span>E-MAIL</span></label>
+						</div>
+						<div class="box input">
+							${ddto.deliveryEmail }
+						</div>
+					</div>
 				</div>
+			</div>
 
-				<!-- 결제정보 -->
-				<div  id="right_area" style="display: inline-block; width: 300px; float: right; padding-right: 60px;">
-					<div class="box row" style="width: 300px;" align="left" >
-						<h3 style="margin: 0px;">결재정보</h3>
+			<!-- 결제정보 -->
+			<div  id="right_area" style="display: inline-block; width: 300px; float: right; padding-right: 60px;">
+				<div class="box row" style="width: 300px;" align="left" >
+					<h3 style="margin: 0px;">결재정보</h3>
+				</div>
+				<div class="box row payment" align="right">
+					<div style="width: 180px;">
+						<div>PRICE</div><div>${sum }KRW</div><br/>
+						<div>SHIPPNG</div><div>0KRW</div><br/>
+						<div>TOTAL</div><div>${ddto.totalPrice }KRW</div><br/>
 					</div>
-					<div class="box row payment" align="right">
-						<div style="width: 180px;">
-							<div>PRICE</div><div>${sum }KRW</div><br/>
-							<div>SHIPPNG</div><div>0KRW</div><br/>
-							<div>TOTAL</div><div>${tot }KRW</div><br/>
-							<input type="hidden" name="totalPrice" value="${tot }"/>
+				</div>
+			</div>
+			
+			<div class="box row" align="center" style="width: 900px; margin-bottom: 50px;">
+				<div class="box row" style="width: 900px;" align="left">
+				</div>
+				<div style="padding: 50px;">
+					<div align="center" style="display: inline-block; margin-right: 50px;">
+						<div style="border: 1px solid; width: 150px; height: 30px; padding-top: 15px;">
+							<a href="<%=cp %>/shop/orders/orderList.do">ORDER LIST</a>
 						</div>
-						<div style="float: right;">
-							<div style="border: 1px solid; width: 90px; height: 50px; padding-top: 35px;" align="center">
-								<a href="javascript:sendItPayment_ok();">ORDER</a>
-							</div>
+					</div>
+					<div align="center" style="display: inline-block;">
+						<div style="border: 1px solid; width: 150px; height: 30px; padding-top: 15px;">
+							<a href="<%=cp %>/shop/product/list.do">KEEP SHOPPING</a>
 						</div>
 					</div>
 				</div>
-			</form>
-		</div>
+			</div>
+		</form>
 	</div>
 	<jsp:include page="../main/footer.jsp"/>
 </body>

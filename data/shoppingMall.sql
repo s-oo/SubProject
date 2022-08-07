@@ -84,10 +84,10 @@ INSERT INTO PRODUCT VALUES(2,'qwe',20000,'top','80a486b82e7f26dfd48632d43f9ea8e7
 INSERT INTO PRODUCT VALUES(3,'zxc',30000,'top','97a083e98b97bf231eb081b614e312a9.jpg,f4abcc5266199d51e189638fa41405a2.jpg',
                             '97a083e98b97bf231eb081b614e312a9.jpg,f4abcc5266199d51e189638fa41405a2.jpg','red','L');
 INSERT INTO ORDERS VALUES(1,'asd',1,5,'red','L',SYSDATE,'cartList');
-INSERT INTO ORDERS VALUES(2,'qwe',1,5,'red','L',SYSDATE,'cartList');
+INSERT INTO ORDERS VALUES(2,'asd',1,5,'red','L',SYSDATE,'cartList');
 INSERT INTO ORDERS VALUES(3,'asd',3,5,'red','L',SYSDATE,'cartList');
-INSERT INTO ORDERS VALUES(4,'qwe',2,3,'red','L',SYSDATE,'cartList');
-INSERT INTO ORDERS VALUES(5,'asd',3,7,'red','L',SYSDATE,'wishList');
+INSERT INTO ORDERS VALUES(4,'asd',2,3,'red','L',SYSDATE,'cartList');
+INSERT INTO ORDERS VALUES(5,'asd',3,7,'red','L',SYSDATE,'cartList');
 
 commit;
 

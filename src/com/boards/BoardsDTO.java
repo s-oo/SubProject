@@ -9,7 +9,7 @@ public class BoardsDTO {
 	private String content;
 	private String postDate;
 	private String community;
-	private int hitCount;
+	private int hits;
 
 	private String productName;
 
@@ -69,12 +69,12 @@ public class BoardsDTO {
 		this.community = community;
 	}
 
-	public int getHitCount() {
-		return hitCount;
+	public int gethits() {
+		return hits;
 	}
 
-	public void setHitCount(int hitCount) {
-		this.hitCount = hitCount;
+	public void sethits(int hits) {
+		this.hits = hits;
 	}
 
 	public String getProductName() {
