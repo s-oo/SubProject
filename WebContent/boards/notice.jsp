@@ -26,7 +26,7 @@
 </head>
 <body>
 
-<jsp:include page="<%=cp %>/shop/main/header.jsp"/>
+<jsp:include page="../main/header.jsp"/>
 
 <div id="content" align="center">
 	<!-- board -->
@@ -60,7 +60,7 @@
 				<c:forEach var="dto" items="${lists }">
 					<tr>
 						<!-- NO -->
-						<td>${dto.boardNum }</td>
+						<td>${dto.rnum }</td>
 						<!-- SUBJECT -->
 						<td>
 						<a href="${viewUrl }&boardNum=${dto.boardNum}">${dto.subject }</a>
@@ -102,7 +102,7 @@
 	</div>
 </div>
 
-<jsp:include page="<%=cp %>/shop/main/footer.jsp"/>
+<jsp:include page="../main/footer.jsp"/>
 
 </body>
 </html>
