@@ -10,8 +10,8 @@ public class BoardsDTO {
 	private String postDate;
 	private String community;
 	private int hitCount;
-	
-	
+
+	private String productName;
 
 	public int getBoardNum() {
 		return boardNum;
@@ -60,7 +60,7 @@ public class BoardsDTO {
 	public void setPostDate(String postDate) {
 		this.postDate = postDate;
 	}
-	
+
 	public String getCommunity() {
 		return community;
 	}
@@ -75,6 +75,14 @@ public class BoardsDTO {
 
 	public void setHitCount(int hitCount) {
 		this.hitCount = hitCount;
+	}
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 
 }
