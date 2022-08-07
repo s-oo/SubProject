@@ -56,7 +56,7 @@ public class BoardsDAO {
 		try {
 
 			sql = "insert into boards (boardNum,userId,productNum,subject,content,";
-			sql += " postDate,community,hitCount) ";
+			sql += " postDate,community,hits) ";
 			sql += "values (?,?,?,?,?,sysdate,?,0)";
 
 			pstmt = conn.prepareStatement(sql);
@@ -81,7 +81,7 @@ public class BoardsDAO {
 	}
 
 	// 전체데이터 가져오기
-	public List<BoardsDTO> getLists(int start, int end, String searchKey, String searchValue) {
+	public List<BoardsDTO> getLists(int start, int end, String searchKey, String searchValue, String community) {
 
 		List<BoardsDTO> lists = new ArrayList<BoardsDTO>();
 
@@ -95,17 +95,18 @@ public class BoardsDAO {
 
 			sql = "select * from  (";
 			sql += "select rownum rnum,data.* from (";
-			sql += "select boardNum,userId,subject,hitCount,";
+			sql += "select boardNum,userId,subject,hits,";
 			sql += "to_char(postDate,'YYYY-MM-DD') postDate ";
 			// sql+= "from board order by num desc) data) ";
-			sql += "from boards where " + searchKey + " like ? order by boardNum desc) data) ";
+			sql += "from boards where " + searchKey + " like ? and community=? order by boardNum desc)  data) ";
 			sql += "where rnum>=? and rnum<=?";
 
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, searchValue);
-			pstmt.setInt(2, start);
-			pstmt.setInt(3, end);
+			pstmt.setString(2, community);
+			pstmt.setInt(3, start);
+			pstmt.setInt(4, end);
 
 			rs = pstmt.executeQuery();
 
@@ -116,8 +117,9 @@ public class BoardsDAO {
 				dto.setBoardNum(rs.getInt("boardNum"));
 				dto.setUserId(rs.getString("userId"));
 				dto.setSubject(rs.getString("subject"));
-				dto.setHitCount(rs.getInt("hitCount"));
+				dto.setHits(rs.getInt("hits"));
 				dto.setPostDate(rs.getString("postDate"));
+				dto.setRnum(rs.getInt("rnum"));
 
 				lists.add(dto);
 
@@ -135,7 +137,7 @@ public class BoardsDAO {
 	}
 
 	// 전체데이터의 갯수
-	public int getDataCount(String searchKey, String searchValue) {
+	public int getDataCount(String searchKey, String searchValue, String community) {
 
 		int dataCount = 0;
 
@@ -148,18 +150,20 @@ public class BoardsDAO {
 			searchValue = "%" + searchValue + "%";
 
 			sql = "select nvl(count(*),0) from boards ";
-			sql += "where " + searchKey + " like ?";
+			sql += "where " + searchKey + " like ? and community=?";
 
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, searchValue);
+			pstmt.setString(2, community);
 
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
 				dataCount = rs.getInt(1);
+				System.out.println(dataCount);
 			}
-
+			
 			rs.close();
 			pstmt.close();
 
@@ -182,7 +186,7 @@ public class BoardsDAO {
 		try {
 
 			sql = "select boardNum,userId,subject, content,postDate,";
-			sql += "community,hitCount from boards where boardNum=?";
+			sql += "community,hits from boards where boardNum=?";
 
 			pstmt = conn.prepareStatement(sql);
 
@@ -200,7 +204,7 @@ public class BoardsDAO {
 				dto.setContent(rs.getString("content"));
 				dto.setPostDate(rs.getString("postDate"));
 				dto.setCommunity(rs.getString("community"));
-				dto.setHitCount(rs.getInt("hitCount"));
+				dto.setHits(rs.getInt("hits"));
 
 			}
 
@@ -216,7 +220,7 @@ public class BoardsDAO {
 	}
 
 	// 조회수 증가
-	public int updateHitCount(int boardNum) {
+	public int updatehits(int boardNum) {
 
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -224,7 +228,7 @@ public class BoardsDAO {
 
 		try {
 
-			sql = "update boards set hitCount = hitCount + 1 where boardNum=?";
+			sql = "update boards set hits = hits + 1 where boardNum=?";
 
 			pstmt = conn.prepareStatement(sql);
 

@@ -37,11 +37,11 @@
 		}
 		
 		if(!f.userBirth[0].value){
-			alert("년도를 입력해 주세요.");
+			alert("생년월일을 입력해 주세요.");
 			f.userBirth[0].focus();
 			return;
 		}
-		if(!f.userBirth[1].value){
+		 if(!f.userBirth[1].value){
 			alert("월을 입력해 주세요.");
 			f.userBirth[1].focus();
 			return;
@@ -51,7 +51,7 @@
 			f.userBirth[2].focus();
 			return;
 		}
-		
+		 
 		if(!f.userTel.value){
 			alert("전화번호를 입력해 주세요.");
 			f.userTel.focus();

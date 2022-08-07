@@ -3,7 +3,7 @@
 a {
 	text-decoration: none;
 	color: #484848;
-	font-size: 11pt;
+	font-size: 8pt;
 }
 
 body {
@@ -60,6 +60,10 @@ span {
     z-index: 3000;
 }
 
+#header .display{
+	display: none;
+}
+
 #footer {
     display: block;
     width: 100%;
@@ -99,6 +103,7 @@ span {
     color: #000;
     line-height: 18px;
     overflow: auto;
+    min-height: 60vh;
 }
 
 .listTable {

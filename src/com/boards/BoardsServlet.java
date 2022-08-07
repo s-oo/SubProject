@@ -11,9 +11,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.boards.BoardsDTO;
+import com.orders.OrdersDAO;
+import com.orders.OrdersDTO;
 import com.util.DBConn;
 import com.util.MyPage;
 
@@ -38,7 +39,6 @@ public class BoardsServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String cp = req.getContextPath();
-		// uri : ÁÖ¼Ò°¡ ³¡±îÁö ³ª¿È
 		String uri = req.getRequestURI();
 
 		Connection conn = DBConn.getConnection();
@@ -57,21 +57,39 @@ public class BoardsServlet extends HttpServlet {
 
 		if (uri.indexOf("write.do") != -1) {
 
-			HttpSession session = req.getSession();
-
 			if (userId == null) {
-
 				url = "/member/login.jsp";
 				forward(req, resp, url);
 				return;
-
 			}
+			
+			String community = req.getParameter("community");
+			String productNum = req.getParameter("productNum");
+			
+			req.setAttribute("community", community);
+			req.setAttribute("productNum", productNum);
 
+			System.out.println(community);
+			System.out.println(productNum);
+			
 			url = "/boards/write.jsp";
+			forward(req, resp, url);
+			
+		} else if (uri.indexOf("searchList.do") != -1) {
+
+			String community = req.getParameter("community");
+			
+				
+			OrdersDAO ordersDAO = new OrdersDAO(conn);
+			List<OrdersDTO> list = ordersDAO.getList(userId, "orderList");
+			
+			req.setAttribute("list", list);
+			
+			url = "/boards/searchList.jsp";
 			forward(req, resp, url);
 
 		} else if (uri.indexOf("write_ok.do") != -1) {
-			System.out.println("¾È³ç");
+			
 			BoardsDTO dto = new BoardsDTO();
 
 			int maxNum = dao.getMaxNum();
@@ -80,17 +98,79 @@ public class BoardsServlet extends HttpServlet {
 			dto.setUserId(req.getParameter("userId"));
 			dto.setSubject(req.getParameter("subject"));
 			dto.setContent(req.getParameter("content"));
-			System.out.println("¾È³ç");
 			dao.insertData(dto);
-
-			System.out.println("¾È³ç");
 
 			url = cp + "/shop/boards/list.do";
 			resp.sendRedirect(url);
 
-		}
+		} else if (uri.indexOf("notice.do") != -1) {
+			
+			String community = "notice";
+			String pageNum = req.getParameter("pageNum");
 
-		else if (uri.indexOf("list.do") != -1) {
+			int currentPage = 1;
+
+			if (pageNum != null) {
+				currentPage = Integer.parseInt(pageNum);
+			}
+
+			String searchKey = req.getParameter("searchKey");
+			String searchValue = req.getParameter("searchValue");
+
+			if (searchValue == null) {
+				searchKey = "subject";
+				searchValue = "";
+			} else {
+				if (req.getMethod().equalsIgnoreCase("GET")) {
+					searchValue = URLDecoder.decode(searchValue, "UTF-8");
+				}
+			}
+
+			int dataCount = dao.getDataCount(searchKey, searchValue, community);
+			
+			int numPerPage = 5;
+
+			int totalPage = myPage.getPageCount(numPerPage, dataCount);
+
+			if (currentPage > totalPage) {
+				currentPage = totalPage;
+			}
+
+			int start = (currentPage - 1) * numPerPage + 1;
+			int end = currentPage * numPerPage;
+
+			List<BoardsDTO> lists = dao.getLists(start, end, searchKey, searchValue, community);
+
+			String param = "";
+
+			if (searchValue != null && !searchValue.equals("")) {
+				param = "searchKey=" + searchKey;
+				param += "&searchValue=" + URLEncoder.encode(searchValue, "UTF-8");
+			}
+			
+			String listUrl = cp + "/shop/boards/notice.do";
+
+			if (!param.equals("")) {
+				listUrl += "?" + param;
+			}
+
+			String pageIndexList = myPage.pageIndexList(currentPage, totalPage, listUrl);
+
+			String viewUrl = cp + "/shop/boards/noticeView.do?pageNum=" + currentPage;
+
+			if (!param.equals("")) {
+				viewUrl += "&" + param;
+			}
+
+			req.setAttribute("lists", lists);
+			req.setAttribute("pageIndexList", pageIndexList);
+			req.setAttribute("viewUrl", viewUrl);
+			req.setAttribute("dataCount", dataCount);
+
+			url = "/boards/notice.jsp";
+			forward(req, resp, url);
+
+		/*else if (uri.indexOf("list.do") != -1) {
 
 			String pageNum = req.getParameter("pageNum");
 
@@ -155,6 +235,139 @@ public class BoardsServlet extends HttpServlet {
 			req.setAttribute("dataCount", dataCount);
 
 			url = "/boards/list.jsp";
+			forward(req, resp, url);*/
+		} else if (uri.indexOf("qna.do") != -1) {
+			
+			String community = "qna";
+			String pageNum = req.getParameter("pageNum");
+
+			int currentPage = 1;
+
+			if (pageNum != null) {
+				currentPage = Integer.parseInt(pageNum);
+			}
+
+			String searchKey = req.getParameter("searchKey");
+			String searchValue = req.getParameter("searchValue");
+
+			if (searchValue == null) {
+				searchKey = "subject";
+				searchValue = "";
+			} else {
+				if (req.getMethod().equalsIgnoreCase("GET")) {
+					searchValue = URLDecoder.decode(searchValue, "UTF-8");
+				}
+			}
+
+			int dataCount = dao.getDataCount(searchKey, searchValue, community);
+
+			int numPerPage = 5;
+
+			int totalPage = myPage.getPageCount(numPerPage, dataCount);
+
+			if (currentPage > totalPage) {
+				currentPage = totalPage;
+			}
+
+			int start = (currentPage - 1) * numPerPage + 1;
+			int end = currentPage * numPerPage;
+
+			List<BoardsDTO> lists = dao.getLists(start, end, searchKey, searchValue, community);
+
+			String param = "";
+
+			if (searchValue != null && !searchValue.equals("")) {
+				param = "searchKey=" + searchKey;
+				param += "&searchValue=" + URLEncoder.encode(searchValue, "UTF-8");
+			}
+			
+			String listUrl = cp + "/shop/boards/qna.do";
+
+			if (!param.equals("")) {
+				listUrl += "?" + param;
+			}
+
+			String pageIndexList = myPage.pageIndexList(currentPage, totalPage, listUrl);
+
+			String viewUrl = cp + "/shop/boards/qnaView.do?pageNum=" + currentPage;
+
+			if (!param.equals("")) {
+				viewUrl += "&" + param;
+			}
+
+			req.setAttribute("lists", lists);
+			req.setAttribute("pageIndexList", pageIndexList);
+			req.setAttribute("viewUrl", viewUrl);
+			req.setAttribute("dataCount", dataCount);
+
+			url = "/boards/qna.jsp";
+			forward(req, resp, url);
+			
+		} else if (uri.indexOf("review.do") != -1) {
+
+			String community = "review";
+			String pageNum = req.getParameter("pageNum");
+
+			int currentPage = 1;
+
+			if (pageNum != null) {
+				currentPage = Integer.parseInt(pageNum);
+			}
+
+			String searchKey = req.getParameter("searchKey");
+			String searchValue = req.getParameter("searchValue");
+
+			if (searchValue == null) {
+				searchKey = "subject";
+				searchValue = "";
+			} else {
+				if (req.getMethod().equalsIgnoreCase("GET")) {
+					searchValue = URLDecoder.decode(searchValue, "UTF-8");
+				}
+			}
+
+			int dataCount = dao.getDataCount(searchKey, searchValue, community);
+
+			int numPerPage = 5;
+
+			int totalPage = myPage.getPageCount(numPerPage, dataCount);
+
+			if (currentPage > totalPage) {
+				currentPage = totalPage;
+			}
+
+			int start = (currentPage - 1) * numPerPage + 1;
+			int end = currentPage * numPerPage;
+
+			List<BoardsDTO> lists = dao.getLists(start, end, searchKey, searchValue, community);
+
+			String param = "";
+
+			if (searchValue != null && !searchValue.equals("")) {
+				param = "searchKey=" + searchKey;
+				param += "&searchValue=" + URLEncoder.encode(searchValue, "UTF-8");
+			}
+			
+			String listUrl = cp + "/shop/boards/review.do";
+
+			if (!param.equals("")) {
+				listUrl += "?" + param;
+			}
+
+			String pageIndexList = myPage.pageIndexList(currentPage, totalPage, listUrl);
+
+			String viewUrl = cp + "/shop/boards/reviewView.do?pageNum=" + currentPage;
+
+			if (!param.equals("")) {
+				viewUrl += "&" + param;
+			}
+
+			req.setAttribute("lists", lists);
+			req.setAttribute("pageIndexList", pageIndexList);
+			req.setAttribute("viewUrl", viewUrl);
+			req.setAttribute("dataCount", dataCount);
+
+			url = "/boards/review.jsp";
 			forward(req, resp, url);
 
 		} else if (uri.indexOf("article.do") != -1) {
@@ -169,7 +382,7 @@ public class BoardsServlet extends HttpServlet {
 				searchValue = URLDecoder.decode(searchValue, "UTF-8");
 			}
 
-			dao.updateHitCount(boardNum);
+			dao.updatehits(boardNum);
 
 			BoardsDTO dto = dao.getReadData(boardNum);
 

@@ -4,6 +4,9 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
+<link rel="stylesheet" type="text/css" href="<%=cp %>/css/shopStyle.css"/>
+<script type="text/javascript" src="<%=cp%>/main/header.js"></script>
+
 <div id="header" class="txt">
 	<div align="center">
 		<a href="<%=cp %>/shop/main/main.do">
@@ -13,26 +16,29 @@
 	<div id="header_bg"></div>
 	<div class="cboth">
 		<div class="left_area">
-			<b>PRODUCT</b>
-			<div id="cate_wrap" class="on">
-				<div id="cate_inner"
-					class="xans-element- xans-layout xans-layout-category">
-					<a href="/sub/shop/product/list.do" class="xans-record-">ALL</a><br />
-					<a href="/sub/shop/product/list.do?productCategory=outer" class="xans-record-">OUTER</a><br />
-					<a href="/sub/shop/product/list.do?productCategory=top" class="xans-record-">TOP</a><br />
-					<a href="/sub/shop/product/list.do?productCategory=pants" class="xans-record-">PANTS</a><br />
+			<div>
+				<a href="javascript:display1();">PRODUCT</a>
+				<!-- <b>PRODUCT</b> -->
+				<div id="display1" class="display">
+					<div class="display_elements">
+						<a href="/sub/shop/product/list.do">ALL</a><br/>
+						<a href="/sub/shop/product/list.do?productCategory=outer">OUTER</a><br />
+						<a href="/sub/shop/product/list.do?productCategory=top">TOP</a><br />
+						<a href="/sub/shop/product/list.do?productCategory=pants">PANTS</a><br />
+					</div>
 				</div>
 			</div>
-			<br /> <br />
-			<b>BORAD</b>
-			<div id="cate_wrap" class="on">
-				<div id="cate_inner" class="xans-element- xans-layout xans-layout-category">
-					<a href="/sub/shop/boards/list.do?community=QnA">Q/A</a><br />
-					<a href="/sub/shop/boards/list.do?community=notice">NOTICE</a><br />
-					<a href="/sub/shop/boards/list.do?community=review">REVIEW</a><br />
+			<br/>
+			<div>
+				<a href="javascript:display2();">BORAD</a>
+				<div id="display2" class="display">
+					<div class="display_elements">
+						<a href="/sub/shop/boards/notice.do" style="display: block;">NOTICE</a>
+						<a href="/sub/shop/boards/qna.do" style="display: block;">Q/A</a>
+						<a href="/sub/shop/boards/review.do" style="display: block;">REVIEW</a>
+					</div>
 				</div>
 			</div>
-			<br /><br />
 			<!-- <a href="#none" id="search_btn">SEARCH</a>
 			<form id="searchBarForm" name="" action="/product/search.html"
 				method="get" target="_self" enctype="multipart/form-data">
@@ -58,13 +64,13 @@
 		<div class="right_area">
 			<c:choose>
 				<c:when test="${empty userId }">
-					<a href="/sub/shop/member/login.do" class="xans-element- xans-layout xans-layout-statelogoff ">LOGIN</a>&nbsp;&nbsp;
-					<a href="/sub/shop/member/terms.do" class="xans-element- xans-layout xans-layout-statelogoff ">JOIN</a>&nbsp;&nbsp;
+					<a href="/sub/shop/member/login.do">LOGIN</a>&nbsp;&nbsp;
+					<a href="/sub/shop/member/terms.do">JOIN</a>&nbsp;&nbsp;
 				</c:when>
 				<c:when test="${!empty userId }">
-					<a href="/sub/shop/member/myPage.do" class="xans-element- xans-layout xans-layout-statelogoff ">MYPAGE</a>&nbsp;&nbsp;
-					<a href="/sub/shop/member/logout_ok.do" class="xans-element- xans-layout xans-layout-statelogoff ">LOGOUT</a>&nbsp;&nbsp;
-					<a href="/sub/shop/orders/cartList.do" class="xans-element- xans-layout xans-layout-statelogoff ">BAG</a>
+					<a href="/sub/shop/member/myPage.do">MYPAGE</a>&nbsp;&nbsp;
+					<a href="/sub/shop/member/logout_ok.do">LOGOUT</a>&nbsp;&nbsp;
+					<a href="/sub/shop/orders/cartList.do">BAG</a>
 				</c:when>
 			</c:choose>
 		</div>
