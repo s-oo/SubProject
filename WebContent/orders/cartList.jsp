@@ -17,8 +17,6 @@
 	function sendItPayment() {
 		var f = document.cartListForm;
 		
-		f.orderNum
-		
 		f.action = "<%=cp%>/shop/orders/orderPayment.do";
 		f.submit();
 	}
@@ -91,7 +89,6 @@
 						<div>PRICE</div><div>${sum }KRW</div><br/>
 						<div>SHIPPNG</div><div>0KRW</div><br/>
 						<div>TOTAL</div><div>${tot }KRW</div><br/>
-						<input type="hidden" name="totalPrice" value="${tot }"/>
 					</div>
 					<div style="float: right;">
 						<div style="border: 1px solid; width: 90px; height: 50px; padding-top: 35px;" align="center">

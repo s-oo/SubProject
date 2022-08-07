@@ -2,8 +2,6 @@ package com.orders;
 
 import java.util.List;
 
-import com.product.ProductDTO;
-
 public class DeliveryDTO {
 
 	private int deliveryNum;
@@ -18,7 +16,7 @@ public class DeliveryDTO {
 	private String arriveDate;
 	private String progress;
 
-	private List<OrdersDTO> OrderList;
+	private List<OrdersDTO> orderList;
 
 	public int getDeliveryNum() {
 		return deliveryNum;
@@ -109,11 +107,11 @@ public class DeliveryDTO {
 	}
 
 	public List<OrdersDTO> getOrderList() {
-		return OrderList;
+		return orderList;
 	}
 
 	public void setOrderList(List<OrdersDTO> orderList) {
-		OrderList = orderList;
+		this.orderList = orderList;
 	}
 
 }
