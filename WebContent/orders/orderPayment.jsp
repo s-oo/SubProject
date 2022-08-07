@@ -122,184 +122,182 @@
 <body>
 	<jsp:include page="../main/header.jsp"/>
 	<div id="content" align="center">
-		<div>
-			<form action="<%=cp%>/shop/orders/orderPayment_ok.do" method="post" name="paymentForm">
+		<form action="<%=cp%>/shop/orders/orderPayment_ok.do" method="post" name="paymentForm">
 
-				<!-- 주문할 목록 -->
-				<table id="cartList" style="margin-bottom: 50px;">
-					<tbody>
-						<c:set var="sum" value="0"/>
-						<c:set var="tot" value="0"/>
-						<c:forEach var="dto" items="${list }">
-							<tr align="center">
-								<td id="saveFileName">
-									<a href="<%=cp %>/shop/product/detail.do?productNum=${dto.productNum }">
-										<img src="<%=cp %>/product/image/${dto.productCategory }/${dto.saveFileName[0] }" height="100px;">
-									</a>
-								</td>
-								<td id="productName">
-									<a href="<%=cp %>/shop/product/detail.do?productNum=${dto.productNum }">
-										${dto.productName }
-									</a><br/>
-									<span class="productOption">[옵션 : ${dto.orderColor }/${dto.orderSize }]</span>
-								</td>
-								<td id="productPrice">
-									<span style="text-decoration: line-through;">${dto.productPrice }KRW</span><br/>
-									<span>${dto.productPrice }KRW</span>
-								</td>
-								<td id="productQuantity">
-									${dto.orderQuantity }
-								</td>
-								<td id="totalProductPrice">
-									${dto.productPrice * dto.orderQuantity }KRW
-									<input type="hidden" name="orderNum" value="${dto.orderNum }"/>
-								</td>
-							</tr>
-							<c:set var="sum" value="${sum + dto.productPrice * dto.orderQuantity }"/>
-							<c:set var="tot" value="${tot + dto.productPrice * dto.orderQuantity }"/>
-						</c:forEach>
-					</tbody>
-					<c:if test="${empty list }">
-						<tfoot>
-							<tr id="listBox" class="item" style="list-style: none;width: 300px;display: inline-block;">
-								<td class="box_wrap" style="display: inline-block;font-size: 10pt;color: #555555;">
-									등록된 상품이 없음
-								</td>
-							</tr>
-						</tfoot>
-					</c:if>
-				</table>
+			<!-- 주문할 목록 -->
+			<table id="cartList" style="margin-bottom: 50px;">
+				<tbody>
+					<c:set var="sum" value="0"/>
+					<c:set var="tot" value="0"/>
+					<c:forEach var="dto" items="${list }">
+						<tr align="center">
+							<td id="saveFileName">
+								<a href="<%=cp %>/shop/product/detail.do?productNum=${dto.productNum }">
+									<img src="<%=cp %>/product/image/${dto.productCategory }/${dto.saveFileName[0] }" height="100px;">
+								</a>
+							</td>
+							<td id="productName">
+								<a href="<%=cp %>/shop/product/detail.do?productNum=${dto.productNum }">
+									${dto.productName }
+								</a><br/>
+								<span class="productOption">[옵션 : ${dto.orderColor }/${dto.orderSize }]</span>
+							</td>
+							<td id="productPrice">
+								<span style="text-decoration: line-through;">${dto.productPrice }KRW</span><br/>
+								<span>${dto.productPrice }KRW</span>
+							</td>
+							<td id="productQuantity">
+								${dto.orderQuantity }
+							</td>
+							<td id="totalProductPrice">
+								${dto.productPrice * dto.orderQuantity }KRW
+								<input type="hidden" name="orderNum" value="${dto.orderNum }"/>
+							</td>
+						</tr>
+						<c:set var="sum" value="${sum + dto.productPrice * dto.orderQuantity }"/>
+						<c:set var="tot" value="${tot + dto.productPrice * dto.orderQuantity }"/>
+					</c:forEach>
+				</tbody>
+				<c:if test="${empty list }">
+					<tfoot>
+						<tr id="listBox" class="item" style="list-style: none;width: 300px;display: inline-block;">
+							<td class="box_wrap" style="display: inline-block;font-size: 10pt;color: #555555;">
+								등록된 상품이 없음
+							</td>
+						</tr>
+					</tfoot>
+				</c:if>
+			</table>
 
-				<div id="left_area" style="display: inline-block; float: left; padding-left: 40px;">
-					<!-- 주문자 정보 -->
-					<div id="info_area" style="width: 500px; margin-bottom: 30px;" align="left">
-						<div class="box row">
-							<h3 style="margin: 0px;">회원정보</h3>
+			<div id="left_area" style="display: inline-block; float: left; padding-left: 40px;">
+				<!-- 주문자 정보 -->
+				<div id="info_area" style="width: 500px; margin-bottom: 30px;" align="left">
+					<div class="box row">
+						<h3 style="margin: 0px;">회원정보</h3>
+					</div>
+					<div class="box row">
+						<div class="box label">
+							<label for="userName"><span>NAME</span></label>
 						</div>
-						<div class="box row">
-							<div class="box label">
-								<label for="userName"><span>NAME</span></label>
-							</div>
-							<div class="box text" align="left">
-								${memberDTO.userName }
-							</div>
+						<div class="box text" align="left">
+							${memberDTO.userName }
 						</div>
-						<div class="box row" style="height: 120px;">
-							<div class="box label" style="height: 80px;">
-								<label for="userAddr"><span>ADDRESS</span></label>
-							</div>
-							<div class="box text" style="padding: 0px;" align="left">
-								<div class="box text" style="padding: 5px 10px 5px 10px;">
-									${memberDTO.userAddr[0] }
-								</div>
-								<div class="box text" style="padding: 5px 10px 5px 10px;">
-									${memberDTO.userAddr[1] }
-								</div>
-								<div class="box text" style="padding: 5px 10px 5px 10px;">
-									${memberDTO.userAddr[2] }
-								</div>
-								<div class="box text" style="padding: 5px 10px 5px 10px;">
-									${memberDTO.userAddr[3] }
-								</div>
-							</div>
+					</div>
+					<div class="box row" style="height: 120px;">
+						<div class="box label" style="height: 80px;">
+							<label for="userAddr"><span>ADDRESS</span></label>
 						</div>
-						<div class="box row">
-							<div class="box label">
-								<label for="userTel"><span>TEL</span></label>
+						<div class="box text" style="padding: 0px;" align="left">
+							<div class="box text" style="padding: 5px 10px 5px 10px;">
+								${memberDTO.userAddr[0] }
 							</div>
-							<div class="box text">
-								${memberDTO.userTel }
+							<div class="box text" style="padding: 5px 10px 5px 10px;">
+								${memberDTO.userAddr[1] }
 							</div>
-						</div>
-						<div class="box row">
-							<div class="box label">
-								<label for="userEmail"><span>E-MAIL</span></label>
+							<div class="box text" style="padding: 5px 10px 5px 10px;">
+								${memberDTO.userAddr[2] }
 							</div>
-							<div class="box text">
-								${memberDTO.userEmail }
+							<div class="box text" style="padding: 5px 10px 5px 10px;">
+								${memberDTO.userAddr[3] }
 							</div>
 						</div>
 					</div>
-
-					<!-- 배송지 정보 -->
-					<div id="info_area" style="width: 500px;" align="left">
-						<div class="box row">
-							<h3 style="margin: 0px; display: inline-block;">배송정보</h3>
-							<span style="float: right; padding-right: 30px;">
-								<input type="radio" name="deliveryDTO" id="copyDataBtn" onclick="copyData()"/>
-								<label for="copyDataBtn">주문자 정보와 동일</label>
-								<input type="radio" name="deliveryDTO" id="resetDataBtn" checked="checked" onclick="resetData()"/>
-								<label for="resetDataBtn">새로운 배송지</label>
-							</span>
+					<div class="box row">
+						<div class="box label">
+							<label for="userTel"><span>TEL</span></label>
 						</div>
-						<div class="box row">
-							<div class="box label">
-								<label for="deliveryName"><span>NAME</span></label>
-							</div>
-							<div class="box input" align="left">
-								<input type="text" name="deliveryName"/>
-							</div>
+						<div class="box text">
+							${memberDTO.userTel }
 						</div>
-						<div class="box row" style="height: 120px;">
-							<div class="box label" style="height: 80px;">
-								<label for="deliveryAddr"><span>ADDRESS</span></label>
-							</div>
-							<div class="box input" style="padding: 0px;" align="left">
-								<div class="box input" style="padding: 5px 10px 5px 10px;">
-									<input type="text" name="deliveryAddr" class="input-2" id="sample6_postcode" placeholder="우편번호"/>
-									<input type="button" onclick="sample6_execDaumPostcode()" class="input-2 button" value="우편번호">
-								</div>
-								<div class="box input" style="padding: 5px 10px 5px 10px;">
-									<input type="text" name="deliveryAddr" id="sample6_address" placeholder="주소"/>
-								</div>
-								<div class="box input" style="padding: 5px 10px 5px 10px;">
-									<input type="text" name="deliveryAddr" id="sample6_detailAddress" placeholder="상세주소"/>
-								</div>
-								<div class="box input" style="padding: 5px 10px 5px 10px;">
-									<input type="text" name="deliveryAddr" id="sample6_extraAddress" placeholder="참고항목"/>
-								</div>
-							</div>
+					</div>
+					<div class="box row">
+						<div class="box label">
+							<label for="userEmail"><span>E-MAIL</span></label>
 						</div>
-						<div class="box row">
-							<div class="box label">
-								<label for="deliveryTel"><span>TEL</span></label>
-							</div>
-							<div class="box input">
-								<input type="text" name="deliveryTel"/>
-							</div>
-						</div>
-						<div class="box row">
-							<div class="box label">
-								<label for="deliveryEmail"><span>E-MAIL</span></label>
-							</div>
-							<div class="box input">
-								<input type="text" name="deliveryEmail"/>
-							</div>
+						<div class="box text">
+							${memberDTO.userEmail }
 						</div>
 					</div>
 				</div>
 
-				<!-- 결제정보 -->
-				<div  id="right_area" style="display: inline-block; width: 300px; float: right; padding-right: 60px;">
-					<div class="box row" style="width: 300px;" align="left" >
-						<h3 style="margin: 0px;">결재정보</h3>
+				<!-- 배송지 정보 -->
+				<div id="info_area" style="width: 500px;" align="left">
+					<div class="box row">
+						<h3 style="margin: 0px; display: inline-block;">배송정보</h3>
+						<span style="float: right; padding-right: 30px;">
+							<input type="radio" name="deliveryDTO" id="copyDataBtn" onclick="copyData()"/>
+							<label for="copyDataBtn">주문자 정보와 동일</label>
+							<input type="radio" name="deliveryDTO" id="resetDataBtn" checked="checked" onclick="resetData()"/>
+							<label for="resetDataBtn">새로운 배송지</label>
+						</span>
 					</div>
-					<div class="box row payment" align="right">
-						<div style="width: 180px;">
-							<div>PRICE</div><div>${sum }KRW</div><br/>
-							<div>SHIPPNG</div><div>0KRW</div><br/>
-							<div>TOTAL</div><div>${tot }KRW</div><br/>
-							<input type="hidden" name="totalPrice" value="${tot }"/>
+					<div class="box row">
+						<div class="box label">
+							<label for="deliveryName"><span>NAME</span></label>
 						</div>
-						<div style="float: right;">
-							<div style="border: 1px solid; width: 90px; height: 50px; padding-top: 35px;" align="center">
-								<a href="javascript:sendItPayment_ok();">ORDER</a>
+						<div class="box input" align="left">
+							<input type="text" name="deliveryName"/>
+						</div>
+					</div>
+					<div class="box row" style="height: 120px;">
+						<div class="box label" style="height: 80px;">
+							<label for="deliveryAddr"><span>ADDRESS</span></label>
+						</div>
+						<div class="box input" style="padding: 0px;" align="left">
+							<div class="box input" style="padding: 5px 10px 5px 10px;">
+								<input type="text" name="deliveryAddr" class="input-2" id="sample6_postcode" placeholder="우편번호"/>
+								<input type="button" onclick="sample6_execDaumPostcode()" class="input-2 button" value="우편번호">
+							</div>
+							<div class="box input" style="padding: 5px 10px 5px 10px;">
+								<input type="text" name="deliveryAddr" id="sample6_address" placeholder="주소"/>
+							</div>
+							<div class="box input" style="padding: 5px 10px 5px 10px;">
+								<input type="text" name="deliveryAddr" id="sample6_detailAddress" placeholder="상세주소"/>
+							</div>
+							<div class="box input" style="padding: 5px 10px 5px 10px;">
+								<input type="text" name="deliveryAddr" id="sample6_extraAddress" placeholder="참고항목"/>
 							</div>
 						</div>
 					</div>
+					<div class="box row">
+						<div class="box label">
+							<label for="deliveryTel"><span>TEL</span></label>
+						</div>
+						<div class="box input">
+							<input type="text" name="deliveryTel"/>
+						</div>
+					</div>
+					<div class="box row">
+						<div class="box label">
+							<label for="deliveryEmail"><span>E-MAIL</span></label>
+						</div>
+						<div class="box input">
+							<input type="text" name="deliveryEmail"/>
+						</div>
+					</div>
 				</div>
-			</form>
-		</div>
+			</div>
+
+			<!-- 결제정보 -->
+			<div  id="right_area" style="display: inline-block; width: 300px; float: right; padding-right: 60px;">
+				<div class="box row" style="width: 300px;" align="left" >
+					<h3 style="margin: 0px;">결재정보</h3>
+				</div>
+				<div class="box row payment" align="right">
+					<div style="width: 180px;">
+						<div>PRICE</div><div>${sum }KRW</div><br/>
+						<div>SHIPPNG</div><div>0KRW</div><br/>
+						<div>TOTAL</div><div>${tot }KRW</div><br/>
+						<input type="hidden" name="totalPrice" value="${tot }"/>
+					</div>
+					<div style="float: right;">
+						<div style="border: 1px solid; width: 90px; height: 50px; padding-top: 35px;" align="center">
+							<a href="javascript:sendItPayment_ok();">ORDER</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
 	</div>
 	<jsp:include page="../main/footer.jsp"/>
 </body>
