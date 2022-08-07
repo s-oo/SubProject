@@ -2,13 +2,12 @@
 
 .boardList {
     margin: 20px auto 0;
-    padding: 0 200px 0 280px;
-    
+    padding: 0 200px 0 380px;
 }
 
 .boardTitle {
-    font-weight: 600;
-    font: 19px'S-CoreDream-3Light','NeueHaasDisplay','Roboto','Noto Sans KR','Helvetica','Malgun Gothic',sans-serif;
+    font-weight: 700;
+    font: 15px'S-CoreDream-3Light','NeueHaasDisplay','Roboto','Noto Sans KR','Helvetica','Malgun Gothic',sans-serif;
 	color: #555;
     margin-bottom: 30px;
 }
@@ -21,4 +20,15 @@ table {
     border-collapse: collapse;
     border-color: #d7d5d5;
     text-align: center;
+    color: #555;
+}
+
+thead {
+	border-bottom: 1px solid;
+	border-color: #d7d5d5;
+}
+
+tr {
+	margin: 10pt 0pt 10pt;
+	height: 27pt;
 }
