@@ -36,7 +36,39 @@
 		f.submit();
 	}
 	</script>	
-
+	
+	
+	
+	<%-- <script type="text/javascript">
+	
+		function selected() {
+			var f = document.myForm;
+			var month = f.userBirth[];
+			var gender = f.userGender;
+			
+			for(i=0;i<12;i++){
+				
+				if(month[1].value == <%=dto.getUserBirth() %>){
+					month[1].selected =true;
+				}
+				
+				
+			}
+			
+			for(i=0;i<4;i++){
+				
+				if(gender[i].value =="<%=dto.getUserGender()%>"){
+					gender[i].selected = true;
+				}
+			}
+			
+			
+			
+		}
+	
+	
+	
+	</script> --%>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     function sample6_execDaumPostcode() {
@@ -93,7 +125,7 @@
 
 
 </head>
-<body>
+<body >
   <jsp:include page="../main/header.jsp"/>
    
    <div id="content" align="center">
@@ -130,7 +162,7 @@
 	                        <label for="userName"><span><b>PASSWORD</b></span></label>
 	                     </div>
 	                     <div class="box input">
-	                        <input type="text" name="userPwd" id="userName" value="${dto.userPwd }"/>
+	                        <input type="password" name="userPwd" id="userName" value="${dto.userPwd }"/>
 	                     </div>
              		</div>
                   	  <div class="box row">
@@ -143,11 +175,29 @@
              		</div>
                    <div class="box row">
 	                     <div class="box label">
-	                        <label for="userName"><span><b>BIRTH</b></span></label>
+	                        <label for="userBirth"><span><b>BIRTH</b></span></label>
 	                     </div>
-	                     <div class="box input">
-	                        <input type="text" name="userBirth" id="userBirth" value="${dto.userBirth }"/>
-	                     </div>
+	                       <div class="box input">
+	                  		<input maxlength="4" style="width: 50px; vertical-align: middle;" type="text" name="userBirth" id="userBirth" placeholder="년도" value="${dto.userBirth[0] }"> 
+		                  
+		                    <select style="border: none; width: 80; height: 30; margin-left: -330px;" name="userBirth" id="userBirth">
+							<option value="">월</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option></select>
+							
+							<input maxlength="2" style="margin-left: 100px; width: 50px; vertical-align: middle;" type="text" name="userBirth" id="userBirth" placeholder="일" value="${dto.userBirth[2] }"/> 
+                    
+	                    </div>
              		</div>
                   
                   <div class="box row" style="height: 110px;">
@@ -194,21 +244,24 @@
             </div>
 				<br><br>
 			<div align="center">	
-				<button  style="border:none; background-color: #FOFOFO; width: 200px; height: 50px;"
-					type="button" onclick="javascript:history.back();">
+				<button  style="cursor:pointer; border:0.5; background-color: white; width: 200px; height: 50px;"
+					type="button" onclick="javascript:history.back();"
+					onmouseover=this.style.backgroundColor='#F0F0F0' onmouseout=this.style.backgroundColor='white'>
 						<b style="font-size: 17px; color: black;">뒤로가기</b>
 				</button>
 				&nbsp;&nbsp;
-				<button style="background-color: black; width: 200px; height: 50px;"
-					type="button" onclick="sendIt();">
+				<button style="cursor:pointer; background-color: black; width: 200px; height: 50px;"
+					type="button" onclick="sendIt();"
+					onmouseover=this.style.backgroundColor='#6E6E6E' onmouseout=this.style.backgroundColor='black'>
 						<b style="font-size: 17px; color: white;">수정완료</b>
 				</button>	
 			</div>				
 			<br>
 				<div class="box input">	
-					<button style="border:none; background-color: gray; width: 100px; height: 25px;"
-							type="button" onclick="javascript:location.href='<%=cp%>/shop/member/delete.do';">
-						<a style="font-size: 13px; color: white;">탈&nbsp;퇴</a>
+					<button style="cursor:pointer; border:0.5; background-color: white; width: 100px; height: 25px;"
+							type="button" onclick="javascript:location.href='<%=cp%>/shop/member/delete.do';"
+							onmouseover=this.style.backgroundColor='#F0F0F0' onmouseout=this.style.backgroundColor='white'>
+						<b style="font-size: 13px; color: black;">회원탈퇴</b>
 					</button>
 				</div>
 </form>
