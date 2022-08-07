@@ -9,9 +9,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="<%=cp%>/boards/css/style.css"/>
-<link rel="stylesheet" type="text/css" href="<%=cp%>/boards/css/list.css"/>
+
+<link rel="stylesheet" type="text/css"href="<%=cp%>/css/shopStyle.css" />
+<link rel="stylesheet" type="text/css"href="<%=cp%>/boards/css/listStyle.css" />
 
 <script type="text/javascript">
 	function sendIt() {
@@ -19,102 +19,91 @@
 		
 		f.action = "<%=cp%>/shop/boards/list.do"
 		f.submit();
-		
+
 	}
 </script>
 
 </head>
 <body>
+	<jsp:include page="../main/header.jsp"/>
+		<div id="content" align="center">
+			<table id="communityList" class="listTable">
+				<colgroup>
+					<col width="100px">
+					<col width="350px">
+					<col width="150px">
+					<col width="150px">
+					<col width="100px">
+				</colgroup>
 
-
-
-<div id="header" class="txt">
-	<div id="header_bg"></div>
-	<div class="cboth">
-		<div class="left_area">
-		
-			<a href="/sub/main/main.jsp" id="cate_btn" class="on"><b>Main</b></a>
-			<div id="cate_wrap" class="on">
-				<div id="cate_inner" class="xans-element- xans-layout xans-layout-category">
-					<a href="/sub/boards/Review.jsp" class="xans-record-">Q/A</a><br/>
-					<a href="/sub/boards/Review.jsp" class="xans-record-">REVIEW</a><br/>
-					<a href="/product/list.html?cate_no=47" class="xans-record-">NOTICE</a><br/>
-				
-
-				</div>
-			</div>
-
-	</div>
-	</div>
-	</div>
-	<div id="bbsList">
-	
-	
-
-	
-	
-		<div id="bbsList_title"><a> </a> QA    </div>
-			
-
-			
-			<div id="bbsList_header">
-				<div id="leftHeader">
-			
-					<form action="" method="post" name="searchForm">
-						<select name="searchKey" class="selectField">
-							<option value="subject">제목</option>
-							<option value="name">작성자</option>
-							<option value="content">내용</option>
-						</select>
-						<input type="text" name="searchValue" class="textField"/>
-						<input type="button" value=" 검 색 " class="btn2" onclick="sendIt()"/>
-					</form>
-				</div>
-				<div id="rightHeader">
-					<input type="button" value="글올리기" class="btn2" onclick="javascript:location.href='<%=cp%>/shop/boards/write.do';">
-				</div>
-			</div>
-	
-		<div id="bbsList_list">
-			<div id="title">
-				<dl>
-					<dt class="num">번호</dt>
-					<dt class="subject">제목</dt>
-					<dt class="name">작성ID</dt>
-					<dt class="created">작성일</dt>
-					<dt class="hitCount">조회수</dt>
-				</dl>
-			</div>
-			<div id="lists">
-					<c:forEach var="dto" items="${lists }">
-					<dl>
-						<dd class="num">${dto.boardNum }</dd>
-						<dd class="subject">
-							<a href="${articleUrl }&boardNum=${dto.boardNum }">${dto.subject }</a>
-						</dd>
-						<dd class="name">${dto.userId }</dd>
-						<dd class="created">${dto.postDate }</dd>
-						<dd class="hitCount">${dto.hitCount }</dd>
-					</dl>
-				</c:forEach>
-			</div>
-			<div id="footer">
-			
-				<div>
-<%-- <img src="<%=cp%>/boards/img/사진.jpg"> --%>
-</div>
-			
-				<p>
-					<c:if test="${dataCount != 0 }">
-						${pageIndexList }
+				<thead>
+					<tr>
+						<th>NO.</th>
+						<th>
+							<c:if test="${community == 'QnA' }">
+								subject
+							</c:if>
+							<c:if test="${community == 'notice' || community == 'review' }">
+								productName
+							</c:if>
+						</th>
+						<th>userId</th>
+						<th>postDate</th>
+						<th>hitCount</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr><th colspan="5" bgcolor="#999999"></th></tr>
+					
+					<c:if test="${!empty lists }">
+						<c:forEach var="dto" items="${lists }">
+							<tr align="center">
+								<td id="boardNum">
+									<a href="<%=cp%>/shop/boards/article?boardNum=${dto.boardNum }">
+										${dto.boardNum }
+									</a>
+								</td>
+								<c:if test="${community == 'QnA' }">
+									<td id="subject">
+										<a href="<%=cp%>/shop/boards/article?boardNum=${dto.boardNum }">
+											${dto.subject }
+										</a>
+									</td>
+								</c:if>
+								<c:if test="${community == 'notice' || community == 'review'}">
+									<td id="productName">
+										<a href="<%=cp%>/shop/boards/article?boardNum=${dto.boardNum }">
+											dto.productName
+										</a>
+									</td>
+								</c:if>
+								<td id="userId">
+									${dto.userId }
+								</td>
+								<td id="postDate">
+									${dto.postDate }
+								</td>
+								<td id="hitCount">
+									${dto.hitCount }
+								</td>
+							</tr>
+						</c:forEach>
 					</c:if>
-					<c:if test="${dataCount == 0 }">
-						등록된게시물이 없습니다.
+				</tbody>
+				<tfoot>
+					<c:if test="${empty lists }">
+						<tr>
+							<td colspan="5" align="center" height="100px;">
+								등록된 게시물이 없음
+							</td>
+						</tr>
+						<tr><th colspan="5" bgcolor="#999999"></th></tr>
 					</c:if>
-				</p>
-			</div>
+				</tfoot>
+			</table>
+			
 		</div>
-	</div>
-	 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+	<jsp:include page="../main/footer.jsp"/>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
