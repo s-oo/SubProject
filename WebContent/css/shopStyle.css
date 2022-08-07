@@ -60,6 +60,10 @@ span {
     z-index: 3000;
 }
 
+#header .display{
+	display: none;
+}
+
 #footer {
     display: block;
     width: 100%;
