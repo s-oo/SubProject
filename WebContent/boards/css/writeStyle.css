@@ -26,6 +26,10 @@
 	width: 100px;
 }
 
+tr {
+	border-bottom: 1px solid #AAAAAA;
+}
+
 td {
 	width: 150px;
 }

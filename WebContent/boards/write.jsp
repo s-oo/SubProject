@@ -46,7 +46,7 @@
 						<img alt="noimage" src="<%=cp %>/boards/img/noimage.png" style="margin: 10px; display: inline;">
 						<div class="box">
 							<div style="border: 1px solid; width: 100px; padding: 5px;">
-								<a href="javascript:window.open('<%=cp %>/shop/boards/searchList.do','상품정보 선택','width=500, height=500, status=yes, top=100, left=100')">상품정보 선택</a>
+								<a href="javascript:window.open('<%=cp %>/shop/boards/searchList.do','상품정보 선택','width=600, height=500, status=yes, top=100, left=100')">상품정보 선택</a>
 							</div>
 						</div>
 					</c:if>
@@ -62,16 +62,16 @@
 								<a href="<%=cp %>/shop/product/detail.do?productNum=${ordersDTO.productNum }">상품정보 보기</a>
 							</div>
 							<div style="border: 1px solid; width: 100px; padding: 5px;">
-								<a href="javascript:window.open('<%=cp %>/shop/boards/searchList.do','상품정보 선택','width=500, height=500, status=yes, top=100, left=100')">상품정보 선택</a>
+								<a href="javascript:window.open('<%=cp %>/shop/boards/searchList.do','상품정보 선택','width=600, height=500, status=yes, top=100, left=100')">상품정보 선택</a>
 							</div>
 						</div>
 					</c:if>
 				</div>
-				<div class="box row">
+				<div class="box row" style="margin: 0px;">
 					<div class="box label"><label for="subject">SUBJECT</label></div>
 					<div class="box input"><input type="text" name="subject"></div>
 				</div>
-				<div class="box row">
+				<div class="box row" style="margin: 0px;">
 					<div class="box label"><label for="userId">ID</label></div>
 					<div class="box input"><input type="text" name="userId"></div>
 				</div>
@@ -81,7 +81,19 @@
 						<textarea rows="" cols=""></textarea>
 					</div>
 				</div>
-				
+				<div class="box row" align="center">
+					<div style="border: 1px solid; width: 50px; padding: 5px; float: left; margin-left: 30px;">
+						<a href="<%=cp %>/shop/boards/list.do">목록</a>
+					</div>
+					<div style="border: 1px solid; width: 50px; padding: 5px; float: right; margin-right: 30px;">
+						<a href="<%=cp %>/shop/boards/list.do">취소</a>
+					</div>
+					<div style="border: 1px solid; width: 50px; padding: 5px; float: right; margin-right: 10px;">
+						<a href="<%=cp %>/shop/boards/write_ok.do">등록</a>
+						<input type="hidden" name="productNum" value="productNum"/>
+						<input type="hidden" name="community" value="community"/>
+					</div>
+				</div>
 			</div>
 		</div>
 	<jsp:include page="../main/footer.jsp"/>
