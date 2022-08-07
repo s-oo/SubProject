@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.boards.BoardsDTO;
+import com.orders.OrdersDAO;
+import com.orders.OrdersDTO;
 import com.util.DBConn;
 import com.util.MyPage;
 
@@ -57,20 +59,39 @@ public class BoardsServlet extends HttpServlet {
 
 		if (uri.indexOf("write.do") != -1) {
 
-			HttpSession session = req.getSession();
-
 			if (userId == null) {
-
 				url = "/member/login.jsp";
 				forward(req, resp, url);
 				return;
-
 			}
+			
+			String community = req.getParameter("community");
+			String productNum = req.getParameter("productNum");
+			
+			req.setAttribute("community", community);
+			req.setAttribute("productNum", productNum);
 
+			System.out.println(community);
+			System.out.println(productNum);
+			
 			url = "/boards/write.jsp";
+			forward(req, resp, url);
+			
+		} else if (uri.indexOf("searchList.do") != -1) {
+
+			String community = req.getParameter("community");
+			
+				
+			OrdersDAO ordersDAO = new OrdersDAO(conn);
+			List<OrdersDTO> list = ordersDAO.getList(userId, "orderList");
+			
+			req.setAttribute("list", list);
+			
+			url = "/boards/searchList.jsp";
 			forward(req, resp, url);
 
 		} else if (uri.indexOf("write_ok.do") != -1) {
+			
 			BoardsDTO dto = new BoardsDTO();
 
 			int maxNum = dao.getMaxNum();
@@ -84,7 +105,7 @@ public class BoardsServlet extends HttpServlet {
 			url = cp + "/shop/boards/list.do";
 			resp.sendRedirect(url);
 
-		}else if (uri.indexOf("notice.do") != -1) {
+		} else if (uri.indexOf("notice.do") != -1) {
 
 			String pageNum = req.getParameter("pageNum");
 
@@ -136,7 +157,7 @@ public class BoardsServlet extends HttpServlet {
 
 			String pageIndexList = myPage.pageIndexList(currentPage, totalPage, listUrl);
 
-			String viewUrl = cp + "/shop/view.do?pageNum=" + currentPage;
+			String viewUrl = cp + "/shop/boards/view.do?pageNum=" + currentPage;
 
 			if (!param.equals("")) {
 				viewUrl += "&" + param;
