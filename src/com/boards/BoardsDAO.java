@@ -98,7 +98,7 @@ public class BoardsDAO {
 			sql += "select boardNum,userId,subject,hits,";
 			sql += "to_char(postDate,'YYYY-MM-DD') postDate ";
 			// sql+= "from board order by num desc) data) ";
-			sql += "from boards where " + searchKey + " like ? and community=? order by boardNum desc) data) ";
+			sql += "from boards where " + searchKey + " like ? and community=? order by boardNum desc)  data) ";
 			sql += "where rnum>=? and rnum<=?";
 
 			pstmt = conn.prepareStatement(sql);
@@ -119,7 +119,7 @@ public class BoardsDAO {
 				dto.setSubject(rs.getString("subject"));
 				dto.setHits(rs.getInt("hits"));
 				dto.setPostDate(rs.getString("postDate"));
-				
+				dto.setRnum(rs.getInt("rnum"));
 
 				lists.add(dto);
 
