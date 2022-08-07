@@ -26,7 +26,7 @@
 </head>
 <body>
 
-<jsp:include page="../main/header.jsp"/>
+<jsp:include page="<%=cp %>/shop/main/header.jsp"/>
 
 <div id="content" align="center">
 	<!-- board -->
@@ -102,7 +102,7 @@
 	</div>
 </div>
 
-<jsp:include page="../main/footer.jsp"/>
+<jsp:include page="<%=cp %>/shop/main/footer.jsp"/>
 
 </body>
 </html>
