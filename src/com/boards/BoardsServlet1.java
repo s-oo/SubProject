@@ -18,7 +18,7 @@ import com.orders.OrdersDTO;
 import com.util.DBConn;
 import com.util.MyPage;
 
-public class BoardsServlet extends HttpServlet {
+public class BoardsServlet1 extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -55,289 +55,7 @@ public class BoardsServlet extends HttpServlet {
 			userId = sessionUserId;
 		}
 		
-			// QnA list
-		if (uri.indexOf("qna.do") != -1) {
-			
-			String community = "qna";
-			String pageNum = req.getParameter("pageNum");
-
-			int currentPage = 1;
-
-			if (pageNum != null) {
-				currentPage = Integer.parseInt(pageNum);
-			}
-
-			String searchKey = req.getParameter("searchKey");
-			String searchValue = req.getParameter("searchValue");
-
-			if (searchValue == null) {
-				searchKey = "subject";
-				searchValue = "";
-			} else {
-				if (req.getMethod().equalsIgnoreCase("GET")) {
-					searchValue = URLDecoder.decode(searchValue, "UTF-8");
-				}
-			}
-
-			int dataCount = dao.getDataCount(searchKey, searchValue, community);
-
-			int numPerPage = 5;
-
-			int totalPage = myPage.getPageCount(numPerPage, dataCount);
-
-			if (currentPage > totalPage) {
-				currentPage = totalPage;
-			}
-
-			int start = (currentPage - 1) * numPerPage + 1;
-			int end = currentPage * numPerPage;
-
-			List<BoardsDTO> lists = dao.getLists(start, end, searchKey, searchValue, community);
-
-			String param = "";
-
-			if (searchValue != null && !searchValue.equals("")) {
-				param = "searchKey=" + searchKey;
-				param += "&searchValue=" + URLEncoder.encode(searchValue, "UTF-8");
-			}
-			
-			String listUrl = cp + "/shop/boards/qna.do";
-
-			if (!param.equals("")) {
-				listUrl += "?" + param;
-			}
-
-			String pageIndexList = myPage.pageIndexList(currentPage, totalPage, listUrl);
-
-			String viewUrl = cp + "/shop/boards/qnaView.do?pageNum=" + currentPage;
-
-			if (!param.equals("")) {
-				viewUrl += "&" + param;
-			}
-
-			req.setAttribute("lists", lists);
-			req.setAttribute("pageIndexList", pageIndexList);
-			req.setAttribute("viewUrl", viewUrl);
-			req.setAttribute("dataCount", dataCount);
-
-			url = "/boards/qna.jsp";
-			forward(req, resp, url);
-
-			// notice list
-		} else if (uri.indexOf("notice.do") != -1) {
-			
-			String community = "notice";
-			String pageNum = req.getParameter("pageNum");
-
-			int currentPage = 1;
-
-			if (pageNum != null) {
-				currentPage = Integer.parseInt(pageNum);
-			}
-
-			String searchKey = req.getParameter("searchKey");
-			String searchValue = req.getParameter("searchValue");
-
-			if (searchValue == null) {
-				searchKey = "subject";
-				searchValue = "";
-			} else {
-				if (req.getMethod().equalsIgnoreCase("GET")) {
-					searchValue = URLDecoder.decode(searchValue, "UTF-8");
-				}
-			}
-
-			int dataCount = dao.getDataCount(searchKey, searchValue, community);
-			
-			int numPerPage = 5;
-
-			int totalPage = myPage.getPageCount(numPerPage, dataCount);
-
-			if (currentPage > totalPage) {
-				currentPage = totalPage;
-			}
-
-			int start = (currentPage - 1) * numPerPage + 1;
-			int end = currentPage * numPerPage;
-
-			List<BoardsDTO> lists = dao.getLists(start, end, searchKey, searchValue, community);
-
-			String param = "";
-
-			if (searchValue != null && !searchValue.equals("")) {
-				param = "searchKey=" + searchKey;
-				param += "&searchValue=" + URLEncoder.encode(searchValue, "UTF-8");
-			}
-			
-			String listUrl = cp + "/shop/boards/notice.do";
-
-			if (!param.equals("")) {
-				listUrl += "?" + param;
-			}
-
-			String pageIndexList = myPage.pageIndexList(currentPage, totalPage, listUrl);
-
-			String viewUrl = cp + "/shop/boards/noticeView.do?pageNum=" + currentPage;
-
-			if (!param.equals("")) {
-				viewUrl += "&" + param;
-			}
-
-			req.setAttribute("lists", lists);
-			req.setAttribute("pageIndexList", pageIndexList);
-			req.setAttribute("viewUrl", viewUrl);
-			req.setAttribute("dataCount", dataCount);
-
-			url = "/boards/notice.jsp";
-			forward(req, resp, url);
-
-			// review list
-		} else if (uri.indexOf("review.do") != -1) {
-
-			String community = "review";
-			String pageNum = req.getParameter("pageNum");
-
-			int currentPage = 1;
-
-			if (pageNum != null) {
-				currentPage = Integer.parseInt(pageNum);
-			}
-
-			String searchKey = req.getParameter("searchKey");
-			String searchValue = req.getParameter("searchValue");
-
-			if (searchValue == null) {
-				searchKey = "subject";
-				searchValue = "";
-			} else {
-				if (req.getMethod().equalsIgnoreCase("GET")) {
-					searchValue = URLDecoder.decode(searchValue, "UTF-8");
-				}
-			}
-
-			int dataCount = dao.getDataCount(searchKey, searchValue, community);
-
-			int numPerPage = 5;
-
-			int totalPage = myPage.getPageCount(numPerPage, dataCount);
-
-			if (currentPage > totalPage) {
-				currentPage = totalPage;
-			}
-
-			int start = (currentPage - 1) * numPerPage + 1;
-			int end = currentPage * numPerPage;
-
-			List<BoardsDTO> lists = dao.getLists(start, end, searchKey, searchValue, community);
-
-			String param = "";
-
-			if (searchValue != null && !searchValue.equals("")) {
-				param = "searchKey=" + searchKey;
-				param += "&searchValue=" + URLEncoder.encode(searchValue, "UTF-8");
-			}
-			
-			String listUrl = cp + "/shop/boards/review.do";
-
-			if (!param.equals("")) {
-				listUrl += "?" + param;
-			}
-
-			String pageIndexList = myPage.pageIndexList(currentPage, totalPage, listUrl);
-
-			String viewUrl = cp + "/shop/boards/reviewView.do?pageNum=" + currentPage;
-
-			if (!param.equals("")) {
-				viewUrl += "&" + param;
-			}
-
-			req.setAttribute("lists", lists);
-			req.setAttribute("pageIndexList", pageIndexList);
-			req.setAttribute("viewUrl", viewUrl);
-			req.setAttribute("dataCount", dataCount);
-
-			url = "/boards/review.jsp";
-			forward(req, resp, url);
-
-			// QnA view
-		} else if (uri.indexOf("qnaView.do") != -1) {
-
-			// notice view
-		} else if (uri.indexOf("noticeView.do") != -1) {
-
-			// review view
-		} else if (uri.indexOf("reviewView.do") != -1) {
-			
-
-			
-
-			// QnA Delete_ok
-		} else if (uri.indexOf("qnaDelete_ok.do") != -1) {
-			
-			// notice Delete_ok
-		} else if (uri.indexOf("noticeDelete_ok.do") != -1) {
-
-			// review Delete_ok
-		} else if (uri.indexOf("reviewDelete_ok.do") != -1) {
-
-		
-			
-
-			// QnA Write
-		} else if (uri.indexOf("qnaWrite.do") != -1) {
-
-			// notice Write
-		} else if (uri.indexOf("noticeWrite.do") != -1) {
-
-			// review Write
-		} else if (uri.indexOf("reviewWrite.do") != -1) {
-			
-
-		
-
-			// QnA Update
-		} else if (uri.indexOf("qnaUpdate.do") != -1) {
-
-			// notice Update
-		} else if (uri.indexOf("noticeUpdate.do") != -1) {
-
-			// review Update
-		} else if (uri.indexOf("reviewUpdate.do") != -1) {
-			
-
-		
-
-			// QnA Update_ok
-		} else if (uri.indexOf("qnaUpdate_ok.do") != -1) {
-
-			// notice Update_ok
-		} else if (uri.indexOf("noticeUpdate_ok.do") != -1) {
-
-			// review Update_ok
-		} else if (uri.indexOf("reviewUpdate_ok.do") != -1) {
-			
-			
-		
-
-			// QnA SearchList
-		} else if (uri.indexOf("qnaSearchList.do") != -1) {
-
-			// notice SearchList
-		} else if (uri.indexOf("noticeSearchList.do") != -1) {
-
-			// review SearchList
-		} else if (uri.indexOf("reviewSearchList.do") != -1) {
-			
-			
-			
-			
-		}
-	
-		
-		
-		
-		
-		/*if (uri.indexOf("write.do") != -1) {
+		if (uri.indexOf("write.do") != -1) {
 
 			if (userId == null) {
 				url = "/member/login.jsp";
@@ -452,7 +170,7 @@ public class BoardsServlet extends HttpServlet {
 			url = "/boards/notice.jsp";
 			forward(req, resp, url);
 
-		else if (uri.indexOf("list.do") != -1) {
+		/*else if (uri.indexOf("list.do") != -1) {
 
 			String pageNum = req.getParameter("pageNum");
 
@@ -517,7 +235,7 @@ public class BoardsServlet extends HttpServlet {
 			req.setAttribute("dataCount", dataCount);
 
 			url = "/boards/list.jsp";
-			forward(req, resp, url);
+			forward(req, resp, url);*/
 		} else if (uri.indexOf("qna.do") != -1) {
 			
 			String community = "qna";
@@ -732,7 +450,7 @@ public class BoardsServlet extends HttpServlet {
 			url = "/boards/updated.jsp";
 			forward(req, resp, url);
 
-		} 
+		} /*
 			 * else if(uri.indexOf("updated_ok.do")!=-1) {
 			 * 
 			 * 
@@ -767,7 +485,7 @@ public class BoardsServlet extends HttpServlet {
 			 * url = cp + "/bbs/list.do?" + param; resp.sendRedirect(url);
 			 * 
 			 * }
-			 else if (uri.indexOf("deleted_ok") != -1) {
+			 */else if (uri.indexOf("deleted_ok") != -1) {
 
 			int num = Integer.parseInt(req.getParameter("num"));
 			String pageNum = req.getParameter("pageNum");
@@ -793,7 +511,7 @@ public class BoardsServlet extends HttpServlet {
 			url = cp + "/shop/list.do?" + param;
 			resp.sendRedirect(url);
 
-		}*/
+		}
 
 	}
 
