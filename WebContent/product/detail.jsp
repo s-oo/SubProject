@@ -14,30 +14,45 @@
 <link rel="stylesheet" type="text/css" href="<%=cp %>/product/data/style.css"/>
 <script type="text/javascript" src="<%=cp%>/product/script.js"></script>
 
+<script type="text/javascript">
+	function sendItCartList() {
+		var f = document.detailForm;
+		
+		f.productNum
+		
+		f.action = "<%=cp%>/shop/orders/addOrder_ok.do";
+		f.submit();
+	}
+</script>
+
 </head>
-<body onload="initial()">
+<body onload="initial();">
 
 <jsp:include page="../main/header.jsp"/>
 
 	<div id="content" align="center">
 		<div class="detail_wrap">
 			<div class="detail">
+				<!-- product image -->
 				<div class="productImage">
 					<div>
 						<c:forEach var="i" begin="0" end="${saveLength-1}" step="1">
 							<img src="<%=cp %>/product/image/top/${dto.saveFileName[i] }"
-							width="600px" style="margin-bottom: 22px;" />
+							width="600px" style="margin-bottom: 22px;"/>
 						</c:forEach>
 					</div>
 				</div>
+				<!-- product detail -->
 				<div class="productMenu" align="center">
 					<div class="productInfo">
+						<!-- product name, price  -->
 						<div class="productName">
-							<h2>${dto.productName }</h2>
+							<span>${dto.productName }</span> 
 						</div>
-						<div class="productPrice">
+						<div>
 							<h2>${dto.productPrice }KRW</h2>
 						</div>
+						<!-- choose option(color,size) -->
 						<table border="0" class="option" id="option">
 							<tbody class="optionColor" id="optionColor">
 								<tr>
@@ -65,9 +80,12 @@
 								</tr>
 							</tbody>
 						</table>
-
+						
+						<!-- selected option(color,size) -->
 						<div>
-							<form name="form">
+							<form name="detailForm" method="post">
+							<input type="hidden" name="productNum" value="${dto.productNum }">
+							<input type="hidden" name="progress" value="cartList">
 								<table class="totalProduct" border="1" summary="">
 									<colgroup>
 										<col style="width: 20%;">
@@ -75,22 +93,24 @@
 										<col style="width: 10%;">
 									</colgroup>
 									<thead>
-									
 									<tbody class="selectedOptions" id="selectedOptions">
 										<tr id="selectedOption">
-											<td><!-- option(color,size) -->
+											<td>
 												<p class="product">
 													${dto.productName }
 												<span>
-													<input type="text" id="selected1" name="selected1" class="selected1" readonly="readonly">
-													<input type="text" id="selected2" name="selected2" class="selected1" readonly="readonly">
+													<input type="text" id="orderColor" name="orderColor"
+													class="selected" readonly="readonly">
+													<input type="text" id="orderSize" name="orderSize"
+													class="selected" readonly="readonly">
 												</span>
 												</p>
 											</td>
-											<td><!-- quantity -->
+											<!-- choose quantity -->
+											<td>
 												<span>
-													<input type=hidden name="price" value="${dto.productPrice }">
-													<input type="text" name="amount" class="amount" value="1" size="3" >
+													<input type=hidden name="productPrice" value="${dto.productPrice }">
+													<input type="text" name="orderQuantity" class="orderQuantity" value="1" size="3" >
 													<a>
 														<img src="//img.echosting.cafe24.com/design/skin/default/product/btn_count_up.gif"
 														onclick='count("plus")'>
@@ -105,6 +125,7 @@
 													</a>
 												</span>
 											</td>
+											<!-- price -->
 											<td>
 												<span>
 													<input type="text" name="sum" class="sum" size="10" readonly="readonly">
@@ -113,183 +134,75 @@
 										</tr>
 									</tbody>
 								</table>
+								<!-- total price, selected quantity -->
+								<div id="totalSum" class="totalSum">
+								TOTAL :
+								<span class="total">
+									<input type="text" id="totalPrice" class="totalPrice" value="0" size="10" readonly="readonly">
+									<input type="text" id="amount" class="amount" value="1" size="3" readonly="readonly">
+								</span>
+								</div>
 							</form>
 						</div>
 
-						<!-- 합계 금액 -->
-						<div id="totalPrice" class="totalPrice">
-							TOTAL :
-							<span class="total">
-								<input type="text" id="totalSum" class="totalSum" value="0" size="10" readonly="readonly">
-								<input type="text" id="totalAmount" class="totalAmount" value="1" size="3" readonly="readonly">
-								
-							</span>
-						</div>
-
-						<!-- 장바구니 추가 -->
-						<div class="addList">
-							<div class="ec-base-button gColumn">
-								<a href="#none" class="add_button"
-									onclick="product_submit(1, '/exec/front/order/basket/', this)"
-									style="display: none;"> <span id="btnBuy">BUY NOW</span> <span
-									id="btnReserve" class="displaynone" style="display: none;">BACKORDER</span>
-								</a> <a href="#none" class="add_button"
-									onclick="product_submit(2, '/exec/front/order/basket/', this)">ADD
-									TO BAG</a> <span class="sold_btn displaynone">SOLD OUT</span>
+						<!-- add bag -->
+						<div class="addBag">
+							<div>
+								<a href="#none" class="add_button" onclick="sendItCartList();">ADD TO BAG</a>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			
-
-
-			<!-- board -->
-			<div class="board">
-				<div class="board_wrap">
-					<!-- Review -->
-					<div class="boardTitle">
-						<div class="titleName" style="float: left; font-size: 10pt;">Review</div>
-						<div class="titleButton" style="float: right; text-align: right;">
-							<a href="">Write</a> <a href="" style="margin-left: 15px">View
-								all</a>
-						</div>
-					</div>
-
-					<table class="boardContent">
-						<colgroup>
-							<col style="width: 5%;">
-							<col style="width: 5%;">
-							<col style="width: 10%;">
-							<col style="width: 5%;">
-							<col style="width: 5%;">
-						</colgroup>
-						<thead>
-							<tr>
-								<th scope="col">NO</th>
-								<th scope="col">PRODUCT</th>
-								<th scope="col">SUBJECT</th>
-								<th scope="col">NAME</th>
-								<th scope="col">DATE</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:if test="">
-								<tr>
-									<td colspan="5" class="empty">등록된 상품 후기가 없습니다.</td>
-								</tr>
-							</c:if>
-							<tr style="margin: 10pt 0pt 10pt">
-								<td>1</td>
-								<!-- number -->
-								<td>ANDREW COTTON SHIRT [SKY BLUE]</td>
-								<!-- product -->
-								<td>[기타]<!-- subject --> <a
-									href="javascript:prdBoardView('review','311');"> <font
-										onclick="rvQnaHit('review', '311');">보라돌이뚜비</font>
-								</a> <img
-									src="https://www.lememe.co.kr/_skin/lememe_220520/img/shop/i_new.gif"
-									border="0" alt="최신">
-								</td>
-								<td>뚜비</td>
-								<td>2022/08/04</td>
-							</tr>
-							<tr>
-								<td colspan="5" class="qnarev_cnt">
-									<div id="revContent311" style="display: block;">
-										<div style="text-align: left; margin: 10pt 30pt 10pt;">
-											<b>좋아요</b><br /> <b>ㅎㅎㅎ</b><br /> <b>!!!</b><br />
-										</div>
-										<div></div>
-										<div></div>
-										<div class="btn" align="right">
-											<span class="box_btn w100 white"> <a
-												href="javascript:editRev(311)">수정</a>
-											</span> <span class="box_btn w100 white"> <a
-												href="javascript:delRev(311)">삭제</a>
-											</span>
-										</div>
-									</div>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-					
-					<!-- QnA -->
-					<div class="boardTitle">
-						<div class="titleName" style="float: left; font-size: 10pt;">Q&A</div>
-						<div class="titleButton" style="float: right; text-align: right;">
-							<a href="">Write</a> <a href="" style="margin-left: 15px">View
-								all</a>
-						</div>
-					</div>
-
-					<table class="boardContent">
-						<colgroup>
-							<col style="width: 5%;">
-							<col style="width: 5%;">
-							<col style="width: 10%;">
-							<col style="width: 5%;">
-							<col style="width: 5%;">
-						</colgroup>
-						<thead>
-							<tr>
-								<th scope="col">NO</th>
-								<th scope="col">PRODUCT</th>
-								<th scope="col">SUBJECT</th>
-								<th scope="col">NAME</th>
-								<th scope="col">DATE</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:if test="">
-								<tr>
-									<td colspan="5" class="empty">등록된 상품 후기가 없습니다.</td>
-								</tr>
-							</c:if>
-							<tr style="margin: 10pt 0pt 10pt">
-								<td>1</td>
-								<!-- number -->
-								<td>ANDREW COTTON SHIRT [SKY BLUE]</td>
-								<!-- product -->
-								<td>[기타]<!-- subject --> <a
-									href="javascript:prdBoardView('review','311');"> <font
-										onclick="rvQnaHit('review', '311');">질문있어요</font>
-								</a> <img
-									src="https://www.lememe.co.kr/_skin/lememe_220520/img/shop/i_new.gif"
-									border="0" alt="최신">
-								</td>
-								<td>뚜비</td>
-								<td>2022/08/04</td>
-							</tr>
-							<tr>
-								<td colspan="5" class="qnarev_cnt">
-									<div id="revContent311" style="display: block;">
-										<div style="text-align: left; margin: 10pt 30pt 10pt;">
-											<b>언제 배송되나요</b><br /> <b>ㅎㅎㅎ</b><br /> <b>???</b><br />
-										</div>
-										<div></div>
-										<div></div>
-										<div class="btn" align="right">
-											<span class="box_btn w100 white"> <a
-												href="javascript:editRev(311)">수정</a>
-											</span> <span class="box_btn w100 white"> <a
-												href="javascript:delRev(311)">삭제</a>
-											</span>
-										</div>
-									</div>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-			</div>
-	</div>
-	
+		
+		<jsp:include page="./productBoard.jsp"/>
 		
 	</div>
 </div>
 
 	<jsp:include page="../main/footer.jsp"/>
+
+ 
+ 	<!-- bag box (new window) -->
+	<div class="bagBox">
+		<div class="">
+			<h3>BAG (1) ITEM</h3><!-- countItem -->
+		</div>
+		<div class="">
+			<ul class="">
+				<li class="">
+					<div class="box">
+						<a href="<%=cp %>/shop/product/detail.do?productNum=${dto.productNum }" >
+							<img src="<%=cp %>/product/image/top/${dto.saveFileName[0] }" class="bagImage" >
+						</a>
+						<p class="name">
+							<a href="<%=cp %>/shop/product/detail.do?productNum=${dto.productNum }"
+							class="ec-product-name">DAVID ECO LEATHER CROP JUMPER [KHAKI]</a>
+						</p>
+						<p class="option">[옵션: KHAKI/MEDIUM]</p>
+						<ul>
+							<li class="price strike">348,000 KRW</li>
+							<li class="strike displaynone"><strong></strong></li>
+							<li><strong>243,600 KRW</strong></li>
+							<li><strong></strong></li>
+							<li>수량 : 1</li>
+						</ul>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="ec-base-button" style="border-top: 1px solid #000;">
+			<a href="#none" class="btnNormalFix sizeS" onclick="Basket.orderLayerAll(this)"
+			link-order="/order/orderform.html?basket_type=all_buy"
+			link-login="/member/login.html">바로 구매하기</a>
+			<a href="/order/basket.html" class="btnNormalFix sizeS">장바구니 이동</a>
+			<a href="#none" onclick="$('#confirmLayer').remove();" class="btnNormalFix sizeS">쇼핑계속하기</a>
+		</div>
+		<a class="close" onclick="$('#confirmLayer').remove();">
+			<img src="//img.echosting.cafe24.com/skin/base/common/btn_close.gif" alt="닫기">
+		</a>
+	</div>
+
 
 </body>
 </html>

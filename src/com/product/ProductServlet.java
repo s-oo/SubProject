@@ -43,6 +43,7 @@ public class ProductServlet extends HttpServlet{
 		
 		MyPage myPage = new MyPage();
 		
+		//상품 리스트 페이지
 		if(uri.indexOf("list.do")!=-1) {
 			
 			String pageNum = req.getParameter("pageNum");
@@ -114,7 +115,8 @@ public class ProductServlet extends HttpServlet{
 			
 			url = "/product/list.jsp";
 			forward(req, resp, url);
-			
+		
+		//상품 상세 페이지
 		}else if(uri.indexOf("detail.do")!=-1) {
 			
 			int productNum = Integer.parseInt(req.getParameter("productNum"));
@@ -163,9 +165,6 @@ public class ProductServlet extends HttpServlet{
 			
 			url = "/product/detail.jsp";
 			forward(req, resp, url);
-			
 		}
-		
 	}
-
 }
