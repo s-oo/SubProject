@@ -71,7 +71,6 @@ public class BoardsServlet extends HttpServlet {
 			forward(req, resp, url);
 
 		} else if (uri.indexOf("write_ok.do") != -1) {
-			System.out.println("안녕");
 			BoardsDTO dto = new BoardsDTO();
 
 			int maxNum = dao.getMaxNum();
@@ -80,17 +79,79 @@ public class BoardsServlet extends HttpServlet {
 			dto.setUserId(req.getParameter("userId"));
 			dto.setSubject(req.getParameter("subject"));
 			dto.setContent(req.getParameter("content"));
-			System.out.println("안녕");
 			dao.insertData(dto);
-
-			System.out.println("안녕");
 
 			url = cp + "/shop/boards/list.do";
 			resp.sendRedirect(url);
 
-		}
+		}else if (uri.indexOf("notice.do") != -1) {
 
-		else if (uri.indexOf("list.do") != -1) {
+			String pageNum = req.getParameter("pageNum");
+
+			int currentPage = 1;
+
+			if (pageNum != null) {
+				currentPage = Integer.parseInt(pageNum);
+			}
+
+			String searchKey = req.getParameter("searchKey");
+			String searchValue = req.getParameter("searchValue");
+
+			if (searchValue == null) {
+				searchKey = "subject";
+				searchValue = "";
+			} else {
+				if (req.getMethod().equalsIgnoreCase("GET")) {
+					searchValue = URLDecoder.decode(searchValue, "UTF-8");
+				}
+			}
+
+			int dataCount = dao.getDataCount(searchKey, searchValue);
+
+			int numPerPage = 5;
+
+			int totalPage = myPage.getPageCount(numPerPage, dataCount);
+
+			if (currentPage > totalPage) {
+				currentPage = totalPage;
+			}
+
+			int start = (currentPage - 1) * numPerPage + 1;
+			int end = currentPage * numPerPage;
+
+			List<BoardsDTO> lists = dao.getLists(start, end, searchKey, searchValue);
+
+			String param = ""; // 검색했던 그 페이지정보로 돌아가준다
+
+			if (searchValue != null && !searchValue.equals("")) {
+				param = "searchKey=" + searchKey;
+				param += "&searchValue=" + URLEncoder.encode(searchValue, "UTF-8");
+			} // param: 파라미터 값을 저장하고 있는 저장소
+			
+			String listUrl = cp + "/shop/boards/notice.do";
+
+			if (!param.equals("")) {
+				listUrl += "?" + param;
+			}
+
+			String pageIndexList = myPage.pageIndexList(currentPage, totalPage, listUrl);
+
+			String viewUrl = cp + "/shop/view.do?pageNum=" + currentPage;
+
+			if (!param.equals("")) {
+				viewUrl += "&" + param;
+			}
+
+			// 포워딩할 데이터
+			req.setAttribute("lists", lists);
+			req.setAttribute("pageIndexList", pageIndexList);
+			req.setAttribute("viewUrl", viewUrl);
+			req.setAttribute("dataCount", dataCount);
+
+			url = "/boards/notice.jsp";
+			forward(req, resp, url);
+
+		/*else if (uri.indexOf("list.do") != -1) {
 
 			String pageNum = req.getParameter("pageNum");
 
@@ -155,7 +216,7 @@ public class BoardsServlet extends HttpServlet {
 			req.setAttribute("dataCount", dataCount);
 
 			url = "/boards/list.jsp";
-			forward(req, resp, url);
+			forward(req, resp, url);*/
 
 		} else if (uri.indexOf("article.do") != -1) {
 

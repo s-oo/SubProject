@@ -13,7 +13,6 @@
 <link rel="stylesheet" type="text/css"href="<%=cp%>/css/shopStyle.css" />
 <link rel="stylesheet" type="text/css" href="<%=cp %>/boards/css/list.css"/>
 
-
 </head>
 <body>
 
@@ -26,11 +25,11 @@
 		<!-- content -->
 		<table class="boardContent">
 			<colgroup>
-				<col style="width: 170px;">
+				<col style="width: 80px;">
 				<col style="width: auto;">
-				<col style="width: 184px;">
-				<col style="width: 177px;">
-				<col style="width: 155px;">
+				<col style="width: 100px;">
+				<col style="width: 100px;">
+				<col style="width: 80px;">
 			</colgroup>
 			<thead>
 				<tr>
@@ -47,18 +46,25 @@
 						<td colspan="5" class="empty">등록된 글이 없습니다.</td>
 					</tr>
 				</c:if>
-				<tr style="margin: 10pt 0pt 10pt">
-					<!-- NO -->
-					<td>${dto.boardNum }</td>
-					<!-- SUBJECT -->
-					<td>${dto.subject }</td>
-					<!-- ID -->
-					<td>${dto.userId }</td>
-					<td>${dto.postDate }</td>
-					<td>${dto.hits }</td>
-				</tr>
+				<c:forEach var="dto" items="${lists }">
+					<tr>
+						<!-- NO -->
+						<td>${dto.boardNum }</td>
+						<!-- SUBJECT -->
+						<td>${dto.subject }</td>
+						<!-- ID -->
+						<td>${dto.userId }</td>
+						<td>${dto.postDate }</td>
+						<td>${dto.hits }</td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
+	</div>
+	<div id="paging">
+		<p>
+			<c:if test="${dataCount!=0 }">${pageIndexList }</c:if>
+		</p>
 	</div>
 </div>
 
