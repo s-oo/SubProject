@@ -89,10 +89,12 @@
 				<div class="box row" style="width: 300px;" align="left" >
 					<h3 style="margin: 0px;">결재정보</h3>
 				</div>
-				<div class="box row payment" align="right">
+				<div class="box row payment" align="right" style="height: 40px;">
 					<div style="width: 180px;">
+						<%-- 
 						<div>PRICE</div><div>${sum }KRW</div><br/>
 						<div>SHIPPNG</div><div>0KRW</div><br/>
+						 --%>
 						<div>TOTAL</div><div>${ddto.totalPrice }KRW</div><br/>
 					</div>
 				</div>

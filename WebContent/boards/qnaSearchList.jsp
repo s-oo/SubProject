@@ -23,7 +23,7 @@ td {
 <script type="text/javascript" src="<%=cp%>/boards/js/util.js"></script>
 <script type="text/javascript">
 	function select(orderNum) {
-		window.opener.location.href = "<%=cp%>/shop/boards/write.do?orderNum=" + orderNum;
+		window.opener.location.href = "<%=cp%>/shop/boards/reviewWrite.do?orderNum=" + orderNum;
 		window.close();
 	}
 </script>
