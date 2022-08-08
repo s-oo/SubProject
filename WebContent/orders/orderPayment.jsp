@@ -125,7 +125,7 @@
 		<form action="<%=cp%>/shop/orders/orderPayment_ok.do" method="post" name="paymentForm">
 
 			<!-- 주문할 목록 -->
-			<table id="cartList" style="margin-bottom: 50px;">
+			<table id="cartList" style="border-top: 1px solid #DBDBDB; border-bottom: 1px solid #DBDBDB; padding: 20px 0px 20px 0px; margin-bottom: 50px;">
 				<tbody>
 					<c:set var="sum" value="0"/>
 					<c:set var="tot" value="0"/>
