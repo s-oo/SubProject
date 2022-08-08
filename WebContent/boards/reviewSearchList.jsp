@@ -23,7 +23,7 @@ td {
 <script type="text/javascript" src="<%=cp%>/boards/js/util.js"></script>
 <script type="text/javascript">
 	function select(orderNum) {
-		window.opener.location.href = "<%=cp%>/shop/boards/write.do?orderNum=" + orderNum;
+		window.opener.location.href = "<%=cp%>/shop/boards/reviewWrite.do?orderNum=" + orderNum;
 		window.close();
 	}
 </script>
@@ -31,7 +31,7 @@ td {
 </head>
 <body>
 	<div id="content" align="center" style="display: block; width:auto;">
-		<form action="" method="post" name="searchListForm">
+		<form action="" method="post" name="searchListForm" style="width: 900px;">
 			<table width="400px;">
 				<tbody>
 					<c:forEach var="dto" items="${list }">
