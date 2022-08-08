@@ -138,7 +138,7 @@ public class ProductDAO {
 		return result;
 
 	}
-
+	
 	public List<ProductDTO> getLists(int start,int end,String searchKey,String searchValue) {
 		
 		List<ProductDTO> lists = new ArrayList<ProductDTO>();
@@ -164,6 +164,64 @@ public class ProductDAO {
 			pstmt.setString(1, searchValue);
 			pstmt.setInt(2, start);
 			pstmt.setInt(3, end);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				ProductDTO dto = new ProductDTO();
+				
+				dto.setProductNum(rs.getInt("productNum"));
+				dto.setProductName(rs.getString("productName"));
+				dto.setProductPrice(rs.getInt("productPrice"));
+				dto.setProductCategory(rs.getString("productCategory"));
+				dto.setSaveFileName(rs.getString("saveFileName").split(","));
+				dto.setOriginalFileName(rs.getString("originalFileName").split(","));
+				dto.setProductSize(rs.getString("productSize").split(","));
+				dto.setProductColor(rs.getString("productColor").split(","));
+				
+				lists.add(dto);
+				
+			}
+			
+			rs.close();
+			pstmt.close();
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return lists;
+		
+	}
+
+	public List<ProductDTO> getLists(int start,int end,String searchKey,String searchValue, String productCategory) {
+		
+		List<ProductDTO> lists = new ArrayList<ProductDTO>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql;
+		
+		try {
+			
+			searchValue = "%" + searchValue + "%";
+			productCategory = "%" + productCategory + "%";
+			
+			sql = "select * from (";
+			sql+= "select rownum rnum,data.* from(";
+			sql+= "select productNum,productName,productPrice,productCategory,";
+			sql+= "saveFileName,originalFileName,productSize,productColor ";
+			sql+= "from product where " + searchKey;
+			sql+= " like ? and productCategory like ? order by productNum desc) data) ";
+			sql+= "where rnum>=? and rnum<=?";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, searchValue);
+			pstmt.setString(2, productCategory);
+			pstmt.setInt(3, start);
+			pstmt.setInt(4, end);
 			
 			rs = pstmt.executeQuery();
 			
@@ -240,7 +298,7 @@ public class ProductDAO {
 		
 	}
 
-	public int getDataCount(String searchKey,String searchValue) {
+	public int getDataCount(String searchKey,String searchValue,String productCategory) {
 		
 		int dataCount = 0;
 		PreparedStatement pstmt = null;
@@ -250,13 +308,15 @@ public class ProductDAO {
 		try {
 			
 			searchValue = "%" + searchValue + "%";
+			productCategory = "%" + productCategory + "%";
 			
 			sql = "select nvl(count(*),0) from product ";
-			sql+= "where " + searchKey + " like ?";
+			sql+= "where " + searchKey + " like ? and productCategory like ?";
 			
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, searchValue);
+			pstmt.setString(2, productCategory);
 			
 			rs = pstmt.executeQuery();
 			
