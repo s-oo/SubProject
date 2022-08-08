@@ -88,7 +88,7 @@
 						</div>
 						<div style="border: 1px solid; width: 50px; padding: 5px; float: right; margin-right: 10px;">
 							<a href="javascript:sendIt();">수정</a>
-							<input type="hidden" name="orderNum" value="${ordersDTO.orderNum }"/>
+							<input type="hidden" name="boardNum" value="${dto.boardNum }"/>
 						</div>
 					</div>
 				</div>
