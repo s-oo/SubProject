@@ -1,3 +1,4 @@
+<%@page import="com.sun.prism.impl.Disposer.Target"%>
 <%@page import="com.member.MemberDTO"%>
 <%@page import="com.member.MemberDAO"%>
 <%@page import="com.util.DBConn"%>
@@ -63,10 +64,10 @@
 	</script>
 	
 <!-- <script type="text/javascript">
-	function selected() {
+	function wewe() {
 		var f = document.myForm;
-		/* var month = f.userBirth[]; */
-		/* var gender = f.userGender; */
+		var month = f.userBirth[]; 
+		var gender = f.userGender; 
 		
 		for(i=0;i<12;i++){
 			
@@ -92,7 +93,7 @@
 
 	
 	
-	</script> -->
+	</script>  -->
 	
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -150,7 +151,7 @@
 
 
 </head>
-<body>
+<body >
   <jsp:include page="../main/header.jsp"/>
    
    <div id="content" align="center">
@@ -196,13 +197,14 @@
 	                        <label for="userName"><span><b>GENDER</b></span></label>
 	                     </div>
 	                     <div class="box input">
-	                       <%--  <input type="text" name="userGender" id="userGender" value="${dto.userGender }"/> --%>
-	                       <select style="border: none; width: 80; height: 30; margin-left: -235px;" name="userGender">
+	                      
+	                     
+	                   <select style="border: none; width: 80; height: 30; margin-left: -235px;" name="userGender" id="userGender">
 	                       		<option value="">선택</option>
 	                        	<option value="선택안함">선택안함</option>
-	                        	<option value="남자">남자</option>
+	                       		 <option value="남자" >남자</option>
 	                        	<option value="여자">여자</option>	                        
-	                        </select>
+	                        </select> 
 	                     </div>
              		</div>
                    <div class="box row">
