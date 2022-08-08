@@ -96,7 +96,7 @@ CREATE TABLE REVIEW (
 	CONSTRAINT FK_REVIEW_USERID FOREIGN KEY (USERID) REFERENCES MEMBER(USERID),
 	CONSTRAINT FK_REVIEW_ORDERNUM FOREIGN KEY (ORDERNUM) REFERENCES ORDERS(ORDERNUM));
 
-INSERT INTO MEMBER VALUES('kristal','asd','kristal','여자','1993/02/14','서울시 강남구 청담동 129 PH129','kristal@naver.com','01055861420');
+INSERT INTO MEMBER VALUES('KRISTAL','sss','관리자','여자','1993/02/14','서울시 강남구 청담동 129 PH129','kristal@naver.com','01055861420');
 INSERT INTO MEMBER VALUES('yun','asd','yun','남자','95/04/01','서울 강남구 테헤란로 124,4층,(역삼동)','yun@naver.com','01020893971');
 INSERT INTO MEMBER VALUES('hong','asd','hong','남자','90/01/01','서울시 강남구 청담동 134-38','hong@naver.com','01068755530');
 INSERT INTO MEMBER VALUES('chang','asd','chang','남자','88/07/07','서울시 강남구 개포동 1282','chang@naver.com','01041643687');
@@ -164,14 +164,14 @@ INSERT INTO ORDERS VALUES(5,'chang',1,3,'red','L','2022/08/05','cartList');
 INSERT INTO ORDERS VALUES(6,'chang',2,4,'red','L','2022/08/06','wishList');
 
 
-INSERT INTO NOTICE VALUES(1,'kristal','고객 보상 지원 제도 시행 안내','고객 보상 지원 제도 시행 안내','2022/08/01',0);
-INSERT INTO NOTICE VALUES(2,'kristal','상의 일부 상품의 권장 소비자 가격이 변경됨을 안내드립니다.','상의 일부 상품의 권장 소비자 가격이 변경됨을 안내드립니다.','2022/08/03',0);
-INSERT INTO NOTICE VALUES(3,'kristal','인터넷 익스플로러(IE) 지원 종료 안내','친구 및 쪽지 서비스 종료 안내','2022/09/01',0);
-INSERT INTO NOTICE VALUES(4,'kristal','친구 및 쪽지 서비스 종료 안내','친구 및 쪽지 서비스 종료 안내','2022/09/20',0);
-INSERT INTO NOTICE VALUES(5,'kristal','대리구매 이용 자제를 당부드립니다.','대리구매 이용 자제를 당부드립니다.','2022/10/11',0);
-INSERT INTO NOTICE VALUES(6,'kristal','5년이상 미 사용 적립금 소멸 관련 공지사항입니다.','5년이상 미 사용 적립금 소멸 관련 공지사항입니다.','2022/11/27',0);
-INSERT INTO NOTICE VALUES(7,'kristal','[사과문] 후속 조치에 대해 말씀드립니다.','[사과문] 후속 조치에 대해 말씀드립니다.','2022/08/01',0);
-INSERT INTO NOTICE VALUES(8,'kristal','장바구니 상품 보관 정책 변경 안내','장바구니 상품 보관 정책 변경 안내','2022/12/25',0);
+INSERT INTO NOTICE VALUES(1,'KRISTAL','고객 보상 지원 제도 시행 안내','고객 보상 지원 제도 시행 안내','2022/08/01',0);
+INSERT INTO NOTICE VALUES(2,'KRISTAL','상의 일부 상품의 권장 소비자 가격이 변경됨을 안내드립니다.','상의 일부 상품의 권장 소비자 가격이 변경됨을 안내드립니다.','2022/08/03',0);
+INSERT INTO NOTICE VALUES(3,'KRISTAL','인터넷 익스플로러(IE) 지원 종료 안내','친구 및 쪽지 서비스 종료 안내','2022/09/01',0);
+INSERT INTO NOTICE VALUES(4,'KRISTAL','친구 및 쪽지 서비스 종료 안내','친구 및 쪽지 서비스 종료 안내','2022/09/20',0);
+INSERT INTO NOTICE VALUES(5,'KRISTAL','대리구매 이용 자제를 당부드립니다.','대리구매 이용 자제를 당부드립니다.','2022/10/11',0);
+INSERT INTO NOTICE VALUES(6,'KRISTAL','5년이상 미 사용 적립금 소멸 관련 공지사항입니다.','5년이상 미 사용 적립금 소멸 관련 공지사항입니다.','2022/11/27',0);
+INSERT INTO NOTICE VALUES(7,'KRISTAL','[사과문] 후속 조치에 대해 말씀드립니다.','[사과문] 후속 조치에 대해 말씀드립니다.','2022/08/01',0);
+INSERT INTO NOTICE VALUES(8,'KRISTAL','장바구니 상품 보관 정책 변경 안내','장바구니 상품 보관 정책 변경 안내','2022/12/25',0);
 
 
 INSERT INTO QNA VALUES(1,'yun',1,'상품문의','상품문의','2022/08/01',0);
