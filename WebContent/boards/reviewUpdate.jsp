@@ -37,7 +37,7 @@
 		}
 		f.subject.value = str;
 		
-		f.action = "<%=cp%>/shop/boards/write_ok.do";
+		f.action = "<%=cp%>/shop/boards/reviewUpdate_ok.do";
 		f.submit();
 		
 	}
@@ -60,7 +60,7 @@
 					<c:if test="${!empty ordersDTO }">
 						<div class="box" style="width: 150px;">
 							<a href="<%=cp %>/shop/product/detail.do?productNum=${ordersDTO.productNum }">
-								<img src="<%=cp %>/product/image/top/${ordersDTO.saveFileName[0] }" width="100px" style="margin: 10px; display: inline;">
+								<img src="<%=cp %>/product/image/${ordersDTO.productCategory }/${ordersDTO.saveFileName[0] }" width="100px" style="margin: 10px; display: inline;">
 							</a>
 						</div>
 						<div class="box">
@@ -79,7 +79,7 @@
 				</div>
 				<div class="box row" style="margin: 0px;">
 					<div class="box label"><label for="subject">SUBJECT</label></div>
-					<div class="box input"><input type="text" name="subject"></div>
+					<div class="box input"><input type="text" name="subject" value="${dto.subject }"></div>
 				</div>
 				<div class="box row" style="margin: 0px;">
 					<div class="box label"><label for="userId">ID</label></div>
@@ -88,7 +88,7 @@
 				<div class="box row">
 					<label for="userId">CONTENT</label><br/>
 					<div class="box input">
-						<textarea name="content"></textarea>
+						<textarea name="content">${dto.content }</textarea>
 					</div>
 				</div>
 				<div class="box row" align="center">
@@ -96,10 +96,10 @@
 						<a href="<%=cp %>/shop/boards/review.do">목록</a>
 					</div>
 					<div style="border: 1px solid; width: 50px; padding: 5px; float: right; margin-right: 30px;">
-						<a href="<%=cp %>/shop/boards/review.do">취소</a>
+						<a href="<%=cp %>/shop/boards/reviewView.do?boardNum=${dto.boardNum }">취소</a>
 					</div>
 					<div style="border: 1px solid; width: 50px; padding: 5px; float: right; margin-right: 10px;">
-						<a href="javascript:sendIt();">등록</a>
+						<a href="javascript:sendIt();">수정</a>
 						<input type="hidden" name="orderNum" value="${ordersDTO.orderNum }"/>
 					</div>
 				</div>
