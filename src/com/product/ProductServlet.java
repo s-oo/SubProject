@@ -56,6 +56,11 @@ public class ProductServlet extends HttpServlet{
 			
 			String searchKey = req.getParameter("searchKey");
 			String searchValue = req.getParameter("searchValue");
+			String productCategory = req.getParameter("productCategory");
+			
+			if(productCategory==null) {
+				productCategory = "";
+			}
 			
 			if(searchValue==null) {
 				searchKey = "productName";
@@ -66,7 +71,7 @@ public class ProductServlet extends HttpServlet{
 				}
 			}
 			
-			int dataCount = dao.getDataCount(searchKey, searchValue);
+			int dataCount = dao.getDataCount(searchKey, searchValue, productCategory);
 			
 			int numPerPage = 6;
 			
@@ -79,8 +84,9 @@ public class ProductServlet extends HttpServlet{
 			int start = (currentPage-1) * numPerPage+1;
 			int end = currentPage * numPerPage;
 			
+			
 			List<ProductDTO> lists =
-					dao.getLists(start, end, searchKey, searchValue);
+					dao.getLists(start, end, searchKey, searchValue, productCategory);
 			
 			String param = "";
 			if(searchValue!=null && !searchValue.equals("")) {
@@ -90,10 +96,10 @@ public class ProductServlet extends HttpServlet{
 			
 			String imagePath = cp + "/image/top";
 			
-			String listUrl = cp + "/shop/product/list.do";
+			String listUrl = cp + "/shop/product/list.do?productCategory=" + productCategory;
 			
 			if(!param.equals("")) {
-				listUrl += "?" + param;
+				listUrl += "&" + param;
 			}
 			
 			String pageIndexList =
