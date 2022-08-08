@@ -37,7 +37,7 @@
 				<div class="productImage">
 					<div>
 						<c:forEach var="i" begin="0" end="${saveLength-1}" step="1">
-							<img src="<%=cp %>/product/image/top/${dto.saveFileName[i] }"
+							<img src="<%=cp %>/product/image/${dto.productCategory }/${dto.saveFileName[i] }"
 							width="600px" style="margin-bottom: 22px;"/>
 						</c:forEach>
 					</div>

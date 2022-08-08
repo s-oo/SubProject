@@ -19,13 +19,13 @@
 
 <div id="content" align="center">
 	<div id="productList">
-		<ul class="listView"">
+		<ul class="listView">
 			<c:forEach var="dto" items="${lists }">
 				<li id="listBox" class="item" style="list-style: none;width: 300px;display: inline-block;">
 					<div class="box_wrap" style="display: inline-block;font-size: 10pt;color: #555555;">
 						<div class="image">
 							<a href="<%=cp %>/shop/product/detail.do?productNum=${dto.productNum }">
-								<img src="<%=cp %>/product/image/outer/${dto.saveFileName[0] }" width="300px"/>
+								<img src="<%=cp %>/product/image/${dto.productCategory }/${dto.saveFileName[0] }" width="300px"/>
 							</a>
 						</div>
 						<div class="productBrief" align="center">
