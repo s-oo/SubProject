@@ -29,13 +29,18 @@
 			f.userPwd.focus();
 			return;
 		}
-		
+			
 		if(!f.userName.value){
 			alert("이름을 입력해 주세요.");
 			f.userName.focus();
 			return;
 		}
 		
+		if(!f.userGender.value){
+			alert("성별을 입력해 주세요.");
+			f.userGender.focus();
+			return;
+		}
 		if(!f.userBirth[0].value){
 			alert("생년월일을 입력해 주세요.");
 			f.userBirth[0].focus();
@@ -51,32 +56,38 @@
 			f.userBirth[2].focus();
 			return;
 		}
-		 
+		
 		if(!f.userTel.value){
 			alert("전화번호를 입력해 주세요.");
 			f.userTel.focus();
 			return;
 		}
 		
+		if(!f.userEmail.value){
+			alert("E-Mail 입력해 주세요.");
+			f.userEmail.focus();
+			return;
+		}
 		f.action = "<%=cp%>/shop/member/join_ok.do"
 		f.submit();
 		
 		
 		
 	}
-
-	function asdf() {
 	
-		window.open("/sub/member/idCheck.jsp","idcheck","width=500, height=300");
+	function checkNumber(event) {
+		  if(event.key >= 0 && event.key <= 9) {
+		    return true;
+		  }
+		  alert("0~9까지 숫자 4자리만 입력해주세요.")
+		  return false;
+		}
 	
-	}
+	function id_check() {
+		  //window.open("팝업될 문서 경로", "팝업될 문서 이름", "옵션");
+		  window.open("<%=cp%>/shop/member/idCheck.do", "idCheck", "width=600, height=200, left=200, top=100");
+		}
 	
-	function getUserAddress() {
-		var f = document.myForm;
-		var str="";
-		str+=f.address1 + address2
-	}
-    
 </script>
     
 
@@ -131,7 +142,7 @@
     }
 </script>
 </head>
-<body>
+<body >
  <jsp:include page="../main/header.jsp"/>
    
    <div id="content" align="center">
@@ -149,38 +160,41 @@
                   <div class="box row">
                   
                   <div class="box label">
-                        <label for="userId"><span><b>I&nbsp;&nbsp;D</b></span></label>
+                        <label for="userId"><span>I&nbsp;&nbsp;D</span></label>
                      </div>
                    <div class="box input">
                         <input type="text" name="userId" id="userId"placeholder="아이디"/>
+                        <!-- <button type="button" onclick="id_check();">중복확인</button>
+                        <input type="hidden" name="idDuplication" value="idUncheck"> -->
+
                      </div>
                    </div>
-                   
+                   <div class="box row">
+	                     <div class="box label">
+	                        <label for="userName"><span>PASSWORD</span></label>
+	                     </div>
+	                     <div class="box input">
+	                        <input type="text" name="userPwd" id="userPwd" placeholder="비밀번호"/>
+	                     </div>
+             		</div>
                    
                     <div class="box row">
 	                     <div class="box label">
-	                        <label for="userName"><span><b>NAME</b></span></label>
+	                        <label for="userName"><span>NAME</span></label>
 	                     </div>
 	                     <div class="box input">
 	                        <input type="text" name="userName" id="userName" placeholder="이름"/>
 	                     </div>
              		</div>
                   
-                    <div class="box row">
-	                     <div class="box label">
-	                        <label for="userName"><span><b>PASSWORD</b></span></label>
-	                     </div>
-	                     <div class="box input">
-	                        <input type="text" name="userPwd" id="userPwd" placeholder="비밀번호"/>
-	                     </div>
-             		</div>
+                    
                   	  <div class="box row">
 	                     <div class="box label">
-	                        <label for="userName"><span><b>GENDER</b></span></label>
+	                        <label for="userName"><span>GENDER</span></label>
 	                     </div>
 	                     <div class="box input">
 	                     <!--  <input type="text" name="userGender" id="userGender"/> -->
-	                        <select style="border: none; width: 80; height: 30; margin-left: -235px;" name="userGender">
+	                        <select style="border: none; width: 80; height: 30; margin-left: -230px;" name="userGender">
 	                       		<option value="">선택</option>
 	                        	<option value="선택안함">선택안함</option>
 	                        	<option value="남자">남자</option>
@@ -190,10 +204,11 @@
              		</div>
                    <div class="box row">
 	                     <div class="box label">
-	                        <label for="userName"><span><b>BIRTH</b></span></label>
+	                        <label for="userName"><span>BIRTH</span></label>
 	                     </div>
 	                     <div class="box input">
-	                  		<input maxlength="4" style="width: 50px; vertical-align: middle;" type="text" name="userBirth" id="userBirth" placeholder="년도"/> 
+	                  		<input onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="4" style="width: 50px; vertical-align: middle;" 
+	                  		type="text" name="userBirth" id="userBirth" placeholder="년도"/> 
 		                  
 		                    <select style="border: none; width: 80; height: 30; margin-left: -330px;" name="userBirth" >
 							<option value="">월</option>
@@ -217,22 +232,23 @@
                   
                   <div class="box row" style="height: 110px;">
                      <div class="box label" style="height: 80px;">
-                        <label for="userAddress"><span><b>ADDRESS</b></span></label>
+                        <label style="margin-left: -20px;" for="userAddress"><span>ADDRESS</span></label>
                      </div>
                      <div class="box input" style="padding: 0px;">
-                      <div class="box input" style="padding: 5px;">
+                      <div class="box input" style="padding: 5px; margin-left: -5px;">
                            <input type="text" name="userAddr" id="sample6_postcode" class="input-2" placeholder="우편번호" ">
-                           <input style="border: black; width: 80; height: 30; margin-left: -100px;" type="button" onclick="sample6_execDaumPostcode()" class="input-2 right" value="우편번호 찾기">
+                           <input style="cursor:pointer; border: black; width: 80; height: 30; margin-left: -100px;" type="button" 
+                           onclick="sample6_execDaumPostcode()" class="input-2 right" value="우편번호 찾기">
                         </div>
                        
-                        <div class="box input" style="padding: 5px;">
+                        <div class="box input" style="padding: 5px; margin-left: -5px;">
                            <input type="text" name="userAddr" id="sample6_address" placeholder="주소" >
                         </div>
                        
-                        <div class="box input" style="padding: 5px;">
+                        <div class="box input" style="padding: 5px;margin-left: -5px;">
                            <input type="text" name="userAddr" id="sample6_detailAddress" placeholder="상세주소" >
                                                    
-                        <div class="box input" style="padding: 5px;">  
+                        <div class="box input" style="padding: 5px; margin-left: -6px;">  
                            <input type="text"  name="userAddr"id="sample6_extraAddress" placeholder="참고항목">
                         </div>
                         </div>
@@ -240,15 +256,15 @@
                   </div>
                 <div class="box row">
                      <div class="box label">
-                        <label for="userTel"><span><b>TEL</b></span></label>
+                        <label for="userTel"><span>TEL</span></label>
                      </div>
                      <div class="box input">
-                        <input type="text" name="userTel" id="userTel" placeholder="(-)없이 숫자만 입력해주세요."/>
+                        <input onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="11" type="text" name="userTel" id="userTel" placeholder="(-)없이 숫자만 입력해주세요."/>
                      </div>
                   </div>
                   <div class="box row">
                      <div class="box label">
-                        <label for="userEmail"><span><b>E-MAIL</b></span></label>
+                        <label for="userEmail"><span>E-MAIL</span></label>
                      </div>
                      <div class="box input">
                         <input type="text" name="userEmail" id="userEmail" placeholder="이메일"/>
@@ -262,12 +278,12 @@
             
             
 		<div align="center">	
-				<button  style="border:none; background-color: #FOFOFO; width: 200px; height: 50px;"
+				<button  style="cursor:pointer; border:none; background-color: #FOFOFO; width: 200px; height: 50px;"
 					type="button" onclick="javascript:history.back();">
 						<b style="font-size: 17px; color: black;">뒤로가기</b>
 				</button>
 				&nbsp;&nbsp;
-				<button style="background-color: black; width: 200px; height: 50px;"
+				<button style="cursor:pointer; background-color: black; width: 200px; height: 50px;"
 					type="button" onclick="sendIt();">
 						<b style="font-size: 17px; color: white;">가입하기</b>
 				</button>	
