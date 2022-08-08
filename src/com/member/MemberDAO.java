@@ -32,7 +32,7 @@ public class MemberDAO {
 			pstmt.setString(4, dto.getUserGender());
 			pstmt.setString(5, String.join(",", dto.getUserBirth()));
 			pstmt.setString(6, String.join(",", dto.getUserAddr()));			
-			pstmt.setString(7, dto.getUserEmail());
+			pstmt.setString(7, String.join(",", dto.getUserEmail()));
 			pstmt.setString(8, dto.getUserTel());
 
 			result=pstmt.executeUpdate();
@@ -67,7 +67,7 @@ public class MemberDAO {
 			pstmt.setString(3, dto.getUserGender());
 			pstmt.setString(4, String.join(",", dto.getUserBirth()));
 			pstmt.setString(5, String.join(",", dto.getUserAddr()));			
-			pstmt.setString(6, dto.getUserEmail());
+			pstmt.setString(6, String.join(",", dto.getUserEmail()));
 			pstmt.setString(7, dto.getUserTel());
 			pstmt.setString(8, dto.getUserId());
 
@@ -205,10 +205,87 @@ public class MemberDAO {
 
 	}
 
+	/*public boolean confirmId(String userId) {
+		PreparedStatement pstmt;
+		ResultSet rs;
+		String sql;
+
+		boolean result = false;
+		try {
+			
+			sql="select userId from member where userId=?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = true;
+				
+			}
+			rs.close();
+			pstmt.close();
+			
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return result;
+				
+	}
+	
+	public int selectAllId(String userId) {
+		int result=-1;
+		PreparedStatement pstmt;
+		ResultSet rs;
+		String sql;
+		
+		try {
+			
+			sql = "select userId from member where userId=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result=1;
+				System.out.println("result °ª: " + result);
+			
+			}else {
+				result=0;
+				System.out.println("result °ª: " + result);
+			}
+			
+			rs.close();
+			pstmt.close();
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+		
+		
+	}
 	
 	
 	
-/*	public boolean duplicateIdCheck(String userId) {
+	
+	public int idCheck(String userId) {
+		int result =MemberDAO.
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	public boolean duplicateIdCheck(String userId) {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -241,8 +318,8 @@ public class MemberDAO {
 		
 	}
 	
-	*/
 	
+	*/
 	
 
 	}

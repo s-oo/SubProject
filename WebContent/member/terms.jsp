@@ -31,7 +31,7 @@
 
 	function nochk() {
 		alert("동의하지 않으면 가입하실 수 없습니다");
-		location.href="<%=cp%>/shop/member/terms.do";}
+		location.href="<%=cp%>/shop/main/main.do";}
 </script>
 
 </head>
@@ -41,7 +41,7 @@
 	<div id="content" align="center">
 
 		<form action="<%=cp%>/shop/member/join.do" name="form" method="post">
-			<table width="1400" height="650">
+			<table width="600" height="650">
 				
 				<tr>
 					<td width="100%" height="50%" align="center">
