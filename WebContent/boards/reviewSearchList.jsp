@@ -31,8 +31,21 @@ td {
 </head>
 <body>
 	<div id="content" align="center" style="display: block; width:auto;">
-		<form action="" method="post" name="searchListForm" style="width: 900px;">
-			<table width="400px;">
+		<form action="" method="post" name="searchListForm">
+			<table style="width: 500px;">
+				<thead>
+					<tr align="center" style="border-bottom: 1px solid #AAAAAA;">
+						<th id="saveFileName" width="80px">
+							상품 이미지
+						</th>
+						<th id="productName">
+							상품 정보
+						</th>
+						<th id="select">
+							선택
+						</th>
+					</tr>
+				</thead>
 				<tbody>
 					<c:forEach var="dto" items="${list }">
 						<tr align="center" style="border-bottom: 1px solid #AAAAAA;">
@@ -59,7 +72,5 @@ td {
 			</table>
 		</form>
 	</div>
-	
-	
 </body>
 </html>

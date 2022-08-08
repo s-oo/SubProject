@@ -62,7 +62,7 @@
 								${dto.productPrice * dto.orderQuantity }KRW
 							</td>
 							<td id="delete">
-								<a href="<%=cp%>/shop/orders/delete_ok.do?orderNum=${dto.orderNum }">X</a>
+								<a href="<%=cp%>/shop/orders/deleteOrder_ok.do?orderNum=${dto.orderNum }">X</a>
 							</td>
 						</tr>
 						<c:set var="sum" value="${sum + dto.productPrice * dto.orderQuantity }"/>

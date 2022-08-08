@@ -30,11 +30,24 @@ td {
 
 </head>
 <body>
-	<div id="content" align="center" style="display: block; width:auto;">
+	<div id="content" align="center" style="display: block; width: auto;">
 		<form action="" method="post" name="searchListForm">
-			<table width="400px;">
+			<table style="width: 500px;">
+				<thead>
+					<tr align="center" style="border-bottom: 1px solid #AAAAAA;">
+						<th id="saveFileName" width="80px">
+							상품 이미지
+						</th>
+						<th id="productName">
+							상품 정보
+						</th>
+						<th id="select">
+							선택
+						</th>
+					</tr>
+				</thead>
 				<tbody>
-					<c:forEach var="dto" items="${list }">
+					<c:forEach var="dto" items="${lists }">
 						<tr align="center" style="border-bottom: 1px solid #AAAAAA;">
 							<td id="saveFileName" width="80px">
 								<img src="<%=cp %>/product/image/${dto.productCategory }/${dto.saveFileName[0] }" height="100px;">
