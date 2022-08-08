@@ -64,11 +64,13 @@
 					<h4 style="float: right; padding-right: 30px;">TOTAL : ${ddto.totalPrice }</h4>
 				</div>
 			</c:forEach>
-			<div class="box row" style="font-size: 10pt;color: #555555; width: 900px; margin-bottom: 30px;">
-			</div>
-			<div class="box row" style="font-size: 10pt;color: #555555; width: 900px; padding-bottom: 50px;">
-				등록된 상품이 없음
-			</div>
+			<c:if test="${empty list }">
+				<div class="box row" style="font-size: 10pt;color: #555555; width: 900px; margin-bottom: 30px;">
+				</div>
+				<div class="box row" style="font-size: 10pt;color: #555555; width: 900px; padding-bottom: 50px;">
+					구입한 상품이 없습니다.
+				</div>
+			</c:if>
 		</form>
 	</div>
 	<jsp:include page="../main/footer.jsp"/>

@@ -63,7 +63,7 @@ public class DeliveryDAO {
 			pstmt.setString(3, String.join(",", dto.getOrderNum()));
 			pstmt.setString(4, dto.getDeliveryName());
 			pstmt.setString(5, dto.getDeliveryTel());
-			pstmt.setString(6, String.join(",", dto.getDeliveryAddr()));
+			pstmt.setString(6, String.join("/", dto.getDeliveryAddr()));
 			pstmt.setString(7, dto.getDeliveryEmail());
 			pstmt.setInt(8, dto.getTotalPrice());
 			pstmt.setString(9, dto.getProgress());
@@ -99,7 +99,7 @@ public class DeliveryDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getDeliveryName());
 			pstmt.setString(2, dto.getDeliveryTel());
-			pstmt.setString(3, String.join(",", dto.getDeliveryAddr()));
+			pstmt.setString(3, String.join("/", dto.getDeliveryAddr()));
 			pstmt.setString(4, dto.getDeliveryEmail());
 			
 			if (dto.getProgress() == "orderList") {
@@ -153,7 +153,7 @@ public class DeliveryDAO {
 				dto.setOrderNum(rs.getString("ORDERNUM").split(","));
 				dto.setDeliveryName(rs.getString("DELIVERYNAME"));
 				dto.setDeliveryTel(rs.getString("DELIVERYTEL"));
-				dto.setDeliveryAddr(rs.getString("DELIVERYADDR").split(","));
+				dto.setDeliveryAddr(rs.getString("DELIVERYADDR").split("/"));
 				dto.setDeliveryEmail(rs.getString("DELIVERYEMAIL"));
 				dto.setTotalPrice(rs.getInt("TOTALPRICE"));
 				dto.setDeliveryDate(rs.getString(9));
@@ -204,7 +204,7 @@ public class DeliveryDAO {
 				dto.setOrderNum(rs.getString("ORDERNUM").split(","));
 				dto.setDeliveryName(rs.getString("DELIVERYNAME"));
 				dto.setDeliveryTel(rs.getString("DELIVERYTEL"));
-				dto.setDeliveryAddr(rs.getString("DELIVERYADDR").split(","));
+				dto.setDeliveryAddr(rs.getString("DELIVERYADDR").split("/"));
 				dto.setDeliveryEmail(rs.getString("DELIVERYEMAIL"));
 				dto.setTotalPrice(rs.getInt("TOTALPRICE"));
 				dto.setDeliveryDate(rs.getString(9));

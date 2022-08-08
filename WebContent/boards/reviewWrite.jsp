@@ -37,7 +37,7 @@
 		}
 		f.subject.value = str;
 		
-		f.action = "<%=cp%>/shop/boards/write_ok.do";
+		f.action = "<%=cp%>/shop/boards/reviewWrite_ok.do";
 		f.submit();
 		
 	}
@@ -47,63 +47,65 @@
 <body>
 	<jsp:include page="../main/header.jsp"/>
 		<div id="content" align="center">
-			<div style="display: inline-block; margin: auto;" align="left">
-				<div class="box row" style="width: 800px; border-top: 1px solid #DBDBDB;">
-					<c:if test="${empty ordersDTO }">
-						<img alt="noimage" src="<%=cp %>/boards/img/noimage.png" style="margin: 10px; display: inline;">
-						<div class="box">
-							<div style="border: 1px solid; width: 100px; padding: 5px;">
-								<a href="javascript:window.open('<%=cp %>/shop/boards/reviewSearchList.do','상품정보 선택','width=600, height=500, status=yes, top=100, left=100')">상품정보 선택</a>
-							</div>
-						</div>
-					</c:if>
-					<c:if test="${!empty ordersDTO }">
-						<div class="box" style="width: 150px;">
-							<a href="<%=cp %>/shop/product/detail.do?productNum=${ordersDTO.productNum }">
-								<img src="<%=cp %>/product/image/top/${ordersDTO.saveFileName[0] }" width="100px" style="margin: 10px; display: inline;">
-							</a>
-						</div>
-						<div class="box">
-							<div class="box text">${ordersDTO.productName } / ${ordersDTO.productPrice }KRW</div>
-							<div class="box text">[옵션 : ${ordersDTO.orderColor }/${ordersDTO.orderSize }]</div>
+			<form action="" method="post" name="myForm">
+				<div style="display: inline-block; margin: auto;" align="left">
+					<div class="box row" style="width: 800px; border-top: 1px solid #DBDBDB;">
+						<c:if test="${empty ordersDTO }">
+							<img alt="noimage" src="<%=cp %>/boards/img/noimage.png" style="margin: 10px; display: inline;">
 							<div class="box">
-								<div style="border: 1px solid; width: 80px; padding: 5px; display: inline-block;">
-									<a href="<%=cp %>/shop/product/detail.do?productNum=${ordersDTO.productNum }">상품정보 보기</a>
-								</div>
-								<div style="border: 1px solid; width: 80px; padding: 5px; display: inline-block;">
+								<div style="border: 1px solid; width: 100px; padding: 5px;">
 									<a href="javascript:window.open('<%=cp %>/shop/boards/reviewSearchList.do','상품정보 선택','width=600, height=500, status=yes, top=100, left=100')">상품정보 선택</a>
 								</div>
 							</div>
+						</c:if>
+						<c:if test="${!empty ordersDTO }">
+							<div class="box" style="width: 150px;">
+								<a href="<%=cp %>/shop/product/detail.do?productNum=${ordersDTO.productNum }">
+									<img src="<%=cp %>/product/image/${ordersDTO.productCategory }/${ordersDTO.saveFileName[0] }" width="100px" style="margin: 10px; display: inline;">
+								</a>
+							</div>
+							<div class="box">
+								<div class="box text">${ordersDTO.productName } / ${ordersDTO.productPrice }KRW</div>
+								<div class="box text">[옵션 : ${ordersDTO.orderColor }/${ordersDTO.orderSize }]</div>
+								<div class="box">
+									<div style="border: 1px solid; width: 80px; padding: 5px; display: inline-block;">
+										<a href="<%=cp %>/shop/product/detail.do?productNum=${ordersDTO.productNum }">상품정보 보기</a>
+									</div>
+									<div style="border: 1px solid; width: 80px; padding: 5px; display: inline-block;">
+										<a href="javascript:window.open('<%=cp %>/shop/boards/reviewSearchList.do','상품정보 선택','width=600, height=500, status=yes, top=100, left=100')">상품정보 선택</a>
+									</div>
+								</div>
+							</div>
+						</c:if>
+					</div>
+					<div class="box row" style="margin: 0px;">
+						<div class="box label"><label for="subject">SUBJECT</label></div>
+						<div class="box input"><input type="text" name="subject"></div>
+					</div>
+					<div class="box row" style="margin: 0px;">
+						<div class="box label"><label for="userId">ID</label></div>
+						<div class="box text">${userId }</div>
+					</div>
+					<div class="box row">
+						<label for="userId">CONTENT</label><br/>
+						<div class="box input">
+							<textarea name="content"></textarea>
 						</div>
-					</c:if>
-				</div>
-				<div class="box row" style="margin: 0px;">
-					<div class="box label"><label for="subject">SUBJECT</label></div>
-					<div class="box input"><input type="text" name="subject"></div>
-				</div>
-				<div class="box row" style="margin: 0px;">
-					<div class="box label"><label for="userId">ID</label></div>
-					<div class="box text">${dto.userId }</div>
-				</div>
-				<div class="box row">
-					<label for="userId">CONTENT</label><br/>
-					<div class="box input">
-						<textarea name="content"></textarea>
+					</div>
+					<div class="box row" align="center">
+						<div style="border: 1px solid; width: 50px; padding: 5px; float: left; margin-left: 30px;">
+							<a href="<%=cp %>/shop/boards/review.do">목록</a>
+						</div>
+						<div style="border: 1px solid; width: 50px; padding: 5px; float: right; margin-right: 30px;">
+							<a href="<%=cp %>/shop/boards/review.do">취소</a>
+						</div>
+						<div style="border: 1px solid; width: 50px; padding: 5px; float: right; margin-right: 10px;">
+							<a href="javascript:sendIt();">등록</a>
+							<input type="hidden" name="orderNum" value="${ordersDTO.orderNum }"/>
+						</div>
 					</div>
 				</div>
-				<div class="box row" align="center">
-					<div style="border: 1px solid; width: 50px; padding: 5px; float: left; margin-left: 30px;">
-						<a href="<%=cp %>/shop/boards/review.do">목록</a>
-					</div>
-					<div style="border: 1px solid; width: 50px; padding: 5px; float: right; margin-right: 30px;">
-						<a href="<%=cp %>/shop/boards/review.do">취소</a>
-					</div>
-					<div style="border: 1px solid; width: 50px; padding: 5px; float: right; margin-right: 10px;">
-						<a href="javascript:sendIt();">등록</a>
-						<input type="hidden" name="orderNum" value="${ordersDTO.orderNum }"/>
-					</div>
-				</div>
-			</div>
+			</form>
 		</div>
 	<jsp:include page="../main/footer.jsp"/>
 </body>

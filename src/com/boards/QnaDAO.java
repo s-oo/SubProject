@@ -250,38 +250,35 @@ public class QnaDAO {
 	}
 
 	// 수정
-//	public int updateData(BoardsDTO dto) {
+	public int updateData(QnaDTO dto) {
 
-//		int result = 0;
-//		PreparedStatement pstmt = null;
-//		String sql;
-//		
-//		try {
-//			
-//			sql = "update board set name=?,pwd=?,email=?,subject=?,";
-//			sql+= "content=? where boardNum=?";
-//			
-//			pstmt = conn.prepareStatement(sql);
-//						
-//			pstmt.setString(1, dto.getName());
-//			pstmt.setString(2, dto.getPwd());
-//			pstmt.setString(3, dto.getEmail());
-//			pstmt.setString(4, dto.getSubject());
-//			pstmt.setString(5, dto.getContent());
-//			pstmt.setInt(6, dto.getNum());
-//			
-//			result = pstmt.executeUpdate();
-//			
-//			pstmt.close();
-//				
-//			
-//		} catch (Exception e) {
-//			System.out.println(e.toString());
-//		}
-//		
-//		return result;		
-//		
-//	}
+		int result = 0;
+		PreparedStatement pstmt;
+		String sql;
+		
+		try {
+			
+			sql = "UPDATE QNA SET SUBJECT = ?, CONTENT = ?, POSTDATE = SYSDATE ";
+			sql += "WHERE BOARDNUM = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, dto.getSubject());
+			pstmt.setString(2, dto.getContent());
+			pstmt.setInt(3, dto.getBoardNum());
+			
+			result = pstmt.executeUpdate();
+			
+			pstmt.close();
+				
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return result;		
+		
+	}
 
 	// 삭제
 	public int deleteData(int boardNum) {
