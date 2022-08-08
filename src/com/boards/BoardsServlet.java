@@ -312,25 +312,172 @@ public class BoardsServlet extends HttpServlet {
 
 			// QnA view
 		} else if (uri.indexOf("qnaView.do") != -1) {
+			
+			int boardNum = Integer.parseInt(req.getParameter("boardNum"));
+			String pageNum = req.getParameter("pageNum");
 
+			String searchKey = req.getParameter("searchKey");
+			String searchValue = req.getParameter("searchValue");
+
+			if (searchValue != null && !searchValue.equals("")) {
+				searchValue = URLDecoder.decode(searchValue, "UTF-8");
+			}
+			
+			NoticeDAO.updatehits(boardNum);
+
+			NoticeDTO dto = NoticeDAO.getReadData(boardNum);
+
+			if (dto == null) {
+				url = cp + "/shop/notice.do";
+
+				resp.sendRedirect(url);
+			}
+
+			int lineSu = dto.getContent().split("\n").length;
+
+			dto.setContent(dto.getContent().replaceAll("\r", "<br/>"));
+
+			String param = "pageNum=" + pageNum;
+
+			if (searchValue != null && !searchValue.equals("")) {
+
+				param += "&searchKey=" + searchKey;
+				param += "&searchValue=" + URLEncoder.encode(searchValue, "UTF-8");
+
+			}
+
+			req.setAttribute("dto", dto);
+			req.setAttribute("params", param);
+			req.setAttribute("lineSu", lineSu);
+			req.setAttribute("pageNum", pageNum);
+
+			url = "/boards/noticeView.jsp";
+			forward(req, resp, url);
 			
 			// review view
 		} else if (uri.indexOf("reviewView.do") != -1) {
 			
+			int boardNum = Integer.parseInt(req.getParameter("boardNum"));
+			String pageNum = req.getParameter("pageNum");
 
+			String searchKey = req.getParameter("searchKey");
+			String searchValue = req.getParameter("searchValue");
+
+			if (searchValue != null && !searchValue.equals("")) {
+				searchValue = URLDecoder.decode(searchValue, "UTF-8");
+			}
 			
+			ReviewDAO.updatehits(boardNum);
 
+			ReviewDTO dto = ReviewDAO.getReadData(boardNum);
+
+			if (dto == null) {
+				url = cp + "/shop/review.do";
+
+				resp.sendRedirect(url);
+			}
+
+			int lineSu = dto.getContent().split("\n").length;
+
+			dto.setContent(dto.getContent().replaceAll("\r", "<br/>"));
+
+			String param = "pageNum=" + pageNum;
+
+			if (searchValue != null && !searchValue.equals("")) {
+
+				param += "&searchKey=" + searchKey;
+				param += "&searchValue=" + URLEncoder.encode(searchValue, "UTF-8");
+
+			}
+
+			req.setAttribute("dto", dto);
+			req.setAttribute("params", param);
+			req.setAttribute("lineSu", lineSu);
+			req.setAttribute("pageNum", pageNum);
+
+			url = "/boards/reviewView.jsp";
+			forward(req, resp, url);
+	
+			// notice Delete_ok
+		} else if (uri.indexOf("noticeDelete_ok.do") != -1) {
+			
+			int boardNum = Integer.parseInt(req.getParameter("boardNum"));
+			String pageNum = req.getParameter("pageNum");
+			
+			String searchKey = req.getParameter("searchKey");
+			String searchValue = req.getParameter("searchValue");
+			
+			if(searchValue!=null && !searchValue.equals("")) {
+				searchValue = URLDecoder.decode(searchValue, "UTF-8");
+			}
+			
+			NoticeDAO.deleteData(boardNum);
+			
+			String param = "pageNum=" + pageNum;
+			
+			if(searchValue!=null && !searchValue.equals("")) {
+				
+				param += "&searchKey=" + searchKey;
+				param += "&searchValue=" +URLEncoder.encode(searchValue, "UTF-8");
+				
+			}
+			
+			url = "/sub/shop/boards/notice.do";
+			resp.sendRedirect(url);
+			
 			// QnA Delete_ok
 		} else if (uri.indexOf("qnaDelete_ok.do") != -1) {
 			
-			// notice Delete_ok
-		} else if (uri.indexOf("noticeDelete_ok.do") != -1) {
+			int boardNum = Integer.parseInt(req.getParameter("boardNum"));
+			String pageNum = req.getParameter("pageNum");
+			
+			String searchKey = req.getParameter("searchKey");
+			String searchValue = req.getParameter("searchValue");
+			
+			if(searchValue!=null && !searchValue.equals("")) {
+				searchValue = URLDecoder.decode(searchValue, "UTF-8");
+			}
+			
+			NoticeDAO.deleteData(boardNum);
+			
+			String param = "pageNum=" + pageNum;
+			
+			if(searchValue!=null && !searchValue.equals("")) {
+				
+				param += "&searchKey=" + searchKey;
+				param += "&searchValue=" +URLEncoder.encode(searchValue, "UTF-8");
+				
+			}
+			
+			url = "/sub/shop/boards/qna.do";
+			resp.sendRedirect(url);		
 
 			// review Delete_ok
 		} else if (uri.indexOf("reviewDelete_ok.do") != -1) {
 
-		
+			int boardNum = Integer.parseInt(req.getParameter("boardNum"));
+			String pageNum = req.getParameter("pageNum");
 			
+			String searchKey = req.getParameter("searchKey");
+			String searchValue = req.getParameter("searchValue");
+			
+			if(searchValue!=null && !searchValue.equals("")) {
+				searchValue = URLDecoder.decode(searchValue, "UTF-8");
+			}
+			
+			NoticeDAO.deleteData(boardNum);
+			
+			String param = "pageNum=" + pageNum;
+			
+			if(searchValue!=null && !searchValue.equals("")) {
+				
+				param += "&searchKey=" + searchKey;
+				param += "&searchValue=" +URLEncoder.encode(searchValue, "UTF-8");
+				
+			}
+			
+			url = "/sub/shop/boards/review.do";
+			resp.sendRedirect(url);			
 
 			// Write
 		} 

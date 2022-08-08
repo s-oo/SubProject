@@ -80,7 +80,7 @@
 						</div>
 						<div style="border: 1px solid; width: 50px; padding: 5px; float: right; margin-right: 10px;">
 							<a href="<%=cp %>/shop/boards/qnaUpdate_ok.do">수정</a>
-							<input type="hidden" name="productNum" value="${productDTO.productNum }"/>
+							<input type="hidden" name="boardNum" value="${dto.boardNum }"/>
 						</div>
 					</div>
 				</div>

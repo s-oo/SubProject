@@ -32,48 +32,7 @@
 	<div class="boardList">
 		<!-- title -->
 		<div class="boardTitle" align="center">NOTICE</div>
-		<%-- <!-- content -->
-		<table class="boardContent">
-			<colgroup>
-				<col style="width: 80px;">
-				<col style="width: auto;">
-				<col style="width: 100px;">
-				<col style="width: 100px;">
-				<col style="width: 80px;">
-			</colgroup>
-			<thead>
-				<tr>
-					<th scope="col">NO</th>
-					<th scope="col">SUBJECT</th>
-					<th scope="col">ID</th>
-					<th scope="col">DATE</th>
-					<th scope="col">HITS</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:if test="">
-					<tr>
-						<td colspan="5" class="empty">등록된 글이 없습니다.</td>
-					</tr>
-				</c:if>
-				<c:forEach var="dto" items="${lists }">
-					<tr>
-						<!-- NO -->
-						<td>${dto.rnum }</td>
-						<!-- SUBJECT -->
-						<td>
-						<a href="${viewUrl }&boardNum=${dto.boardNum}">${dto.subject }</a>
-						</td>
-						<!-- ID -->
-						<td>${dto.userId }</td>
-						<td>${dto.postDate }</td>
-						<td>${dto.hits }</td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table> --%>
-
-
+		<!-- content -->
 		<div class="boardContent" align="center">
 			<div class="">
 				<table border="0">
@@ -121,16 +80,17 @@
 				</table>
 			</div>
 			<div class="button">
-				<div class="element">
+				<div class="elementLeft">
 						<a href="<%=cp %>/shop/boards/notice.do">LIST</a>
-					<c:if test="${dto.userId == userId }">
-						<a href="<%=cp %>/shop/boards/noticeUpdate.do?boardNum=${dto.boardNum }&${params }';"
-						class="displaynone">EDIT</a>
-						<a href="<%=cp %>/shop/boards/noticeDelete_ok.do?boardNum=${dto.boardNum }&${params }';"
-						class="displaynone">DELETE</a>
-					</c:if>
-						<a href="/board/product/reply.html" class="displaynone">COMMENT</a>
 				</div>
+				<c:if test="${dto.userId == userId }">
+					<div class="elementRight">
+						<a href="<%=cp %>/shop/boards/noticeUpdate.do?boardNum=${dto.boardNum }&${params }';"
+						class="element">EDIT</a>
+						<a href="<%=cp %>/shop/boards/noticeDelete_ok.do?boardNum=${dto.boardNum }&${params }';"
+						class="element">DELETE</a>
+					</div>
+				</c:if>
 			</div>
 		</div>
 
