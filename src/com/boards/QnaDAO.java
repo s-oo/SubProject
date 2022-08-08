@@ -186,7 +186,7 @@ public class QnaDAO {
 
 		try {
 
-			sql = "select boardNum,userId,subject, content,postDate,hits ";
+			sql = "select boardNum,userId,productNum,subject,content,postDate,hits ";
 			sql += "from qna where boardNum=?";
 
 			pstmt = conn.prepareStatement(sql);
