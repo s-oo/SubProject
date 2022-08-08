@@ -1,6 +1,7 @@
 package com.boards;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.sql.Connection;
@@ -15,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.boards.BoardsDTO;
 import com.orders.OrdersDAO;
 import com.orders.OrdersDTO;
+import com.product.ProductDAO;
+import com.product.ProductDTO;
 import com.util.DBConn;
 import com.util.MyPage;
 
@@ -38,8 +41,10 @@ public class BoardsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		req.setCharacterEncoding("UTF-8");
+		resp.setContentType("text/html; charset=UTF-8");
 		String cp = req.getContextPath();
 		String uri = req.getRequestURI();
+		PrintWriter out = resp.getWriter();
 
 		Connection conn = DBConn.getConnection();
 		BoardsDAO dao = new BoardsDAO(conn);
@@ -283,26 +288,108 @@ public class BoardsServlet extends HttpServlet {
 		
 			
 
-			// QnA Write
-		} else if (uri.indexOf("qnaWrite.do") != -1) {
-
-			// notice Write
-		} else if (uri.indexOf("noticeWrite.do") != -1) {
-
-			// review Write
-		} else if (uri.indexOf("reviewWrite.do") != -1) {
+			// Write
+		} else if (uri.indexOf("Write.do") != -1) {
 			
+			if (userId == null) {
+				out.print("<script>");
+				out.print("alert('로그인을 해주세요');");
+				out.print("locasion:href='/sub/shop/member/login.do';");
+				out.print("</script>");
+			}
+			
+			// qna
+			String str = req.getParameter("productNum");
 
-		
+			if (str != null) {
+				int productNum = Integer.parseInt(str);
+				ProductDTO ProductDTO = new ProductDAO(conn).getReadData(productNum);
+				req.setAttribute("ProductDTO", ProductDTO);
+			}
+			
+			// review
+			str = req.getParameter("orderNum");
+
+			if (str != null) {
+				int orderNum = Integer.parseInt(str);
+				OrdersDTO ordersDTO = new OrdersDAO(conn).getReadData(orderNum);
+				req.setAttribute("ordersDTO", ordersDTO);
+			}
+			
+			if (uri.indexOf("qnaWrite.do") != -1) {
+				url = "/boards/qnaWrite.jsp";
+			} else if (uri.indexOf("noticeWrite.do") != -1) {
+				url = "/boards/noticeWrite.jsp";
+			} else if (uri.indexOf("reviewWrite.do") != -1) {
+				url = "/boards/reviewWrite.jsp";
+			} else {
+				url = "/main/main.jsp";
+			}
+
+			forward(req, resp, url);
+			
+//			// notice Write
+//		} else if (uri.indexOf("noticeWrite.do") != -1) {
+//
+//			// review Write
+//		} else if (uri.indexOf("reviewWrite.do") != -1) {
 
 			// QnA Update
-		} else if (uri.indexOf("qnaUpdate.do") != -1) {
+		} else if (uri.indexOf("Update.do") != -1) {
+			
+			if (userId == null) {
+				out.print("<script>");
+				out.print("alert('로그인을 해주세요');");
+				out.print("locasion:href='/sub/shop/member/login.do';");
+				out.print("</script>");
+			}
+			
+			int boardNum = Integer.parseInt(req.getParameter("boardNum"));
+			BoardsDTO dto = dao.getReadData(boardNum);
+			
+			if (dto == null) {
+				out.print("<script>");
+				out.print("alert('게시글을 찾을수없습니다.');");
+				out.print("history.back();");
+				out.print("</script>");
+			}
+			
+			if (!dto.getUserId().equals(userId)) {
+				out.print("<script>");
+				out.print("alert('권한이 없습니다.');");
+				out.print("history.back();");
+				out.print("</script>");
+			}
+			
+			String community = req.getParameter("community");
+			if(community == null) {
+				if (uri.indexOf("qnaUpdate.do") != -1) {
+					community = "qna";
+				} else if (uri.indexOf("noticeUpdate.do") != -1) {
+					community = "notice";
+				} else if (uri.indexOf("reviewUpdate.do") != -1) {
+					community = "review";
+				}
+			}
 
-			// notice Update
-		} else if (uri.indexOf("noticeUpdate.do") != -1) {
+			String str = req.getParameter("orderNum");
 
-			// review Update
-		} else if (uri.indexOf("reviewUpdate.do") != -1) {
+			if (str != null) {
+				int orderNum = Integer.parseInt(str);
+				OrdersDTO ordersDTO = new OrdersDAO(conn).getReadData(orderNum);
+				req.setAttribute("ordersDTO", ordersDTO);
+			}
+			
+			req.setAttribute("community", community);
+
+			url = "/boards/" + community + "Update.jsp";
+			forward(req, resp, url);
+			
+//			// notice Update
+//		} else if (uri.indexOf("noticeUpdate.do") != -1) {
+//
+//			// review Update
+//		} else if (uri.indexOf("reviewUpdate.do") != -1) {
 			
 
 		
@@ -327,6 +414,8 @@ public class BoardsServlet extends HttpServlet {
 
 			// review SearchList
 		} else if (uri.indexOf("reviewSearchList.do") != -1) {
+			
+			
 			
 			
 			
@@ -697,40 +786,7 @@ public class BoardsServlet extends HttpServlet {
 
 		} else if (uri.indexOf("updated.do") != -1) {
 
-			int num = Integer.parseInt(req.getParameter("num"));
-			String pageNum = req.getParameter("pageNum");
-
-			String searchKey = req.getParameter("searchKey");
-			String searchValue = req.getParameter("searchValue");
-
-			if (searchValue != null && !searchValue.equals("")) {
-				searchValue = URLDecoder.decode(searchValue, "UTF-8");
-			}
-
-			BoardsDTO dto = dao.getReadData(num);
-
-			if (dto == null) {
-				url = cp + "/shop/list.do";
-				resp.sendRedirect(url);
-			}
-
-			String param = "pageNum=" + pageNum;
-
-			if (searchValue != null && !searchValue.equals("")) {
-
-				param += "&searchKey=" + searchKey;
-				param += "&searchValue=" + URLEncoder.encode(searchValue, "UTF-8");
-
-			}
-
-			req.setAttribute("dto", dto);
-			req.setAttribute("pageNum", pageNum);
-			req.setAttribute("params", param);
-			req.setAttribute("searchKey", searchKey);
-			req.setAttribute("searchValue", searchValue);
-
-			url = "/boards/updated.jsp";
-			forward(req, resp, url);
+			m 
 
 		} 
 			 * else if(uri.indexOf("updated_ok.do")!=-1) {
