@@ -60,7 +60,7 @@
 				<c:forEach var="dto" items="${lists }">
 					<tr>
 						<!-- NO -->
-						<td>${dto.rnum }</td>
+						<td>${dto.boardNum }</td>
 						<!-- SUBJECT -->
 						<td>
 						<a href="${viewUrl }&boardNum=${dto.boardNum}">${dto.subject }</a>
