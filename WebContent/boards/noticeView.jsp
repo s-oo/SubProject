@@ -11,7 +11,7 @@
 <title>NOTICE VIEW</title>
 
 <link rel="stylesheet" type="text/css"href="<%=cp%>/css/shopStyle.css" />
-<link rel="stylesheet" type="text/css" href="<%=cp %>/boards/css/list.css"/>
+<link rel="stylesheet" type="text/css" href="<%=cp %>/boards/css/view.css"/>
 <script type="text/javascript">
 
 	function sendIt() {
@@ -74,99 +74,67 @@
 		</table> --%>
 
 
-			<div style="border: 1px solid #dfdfdf; padding: 30px" class="">
-				<div class="">
-					<table border="0" summary="">
-						<colgroup>
-							<col style="width: 130px;">
-							<col style="width: auto;">
-						</colgroup>
-						<tbody>
-							<c:forEach var="dto" items="${lists }">
-								<tr>
-									<!-- SUBJECT -->
-									<td style="border: 0; font-size: 15px;">&lt; ${dto.subject } &gt;
-									<!-- userID -->
-									<span class="writer">${dto.userId }
-										<span>
-											<!-- POSTDATE -->
-											<span class="writer">DATE
-												<span>${dto.postDate }</span>
-											</span>
-										</span>
-									</span>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2">
-										<ul class="etcArea">
-											<li class="displaynone"><strong>평점</strong> <img
-												src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif"
-												alt="0점"> &nbsp;</li>
-											<li class="displaynone"><strong>추천</strong> <span
-												class="txtNum"><a href="#none"
-													onclick="BOARD_READ.article_vote('/exec/front/Board/vote/1?no=7&amp;return_url=%2Farticle%2Fnotice%2F1%2F7%2F&amp;e2d2a63aa7b718a384e=f342c0d4e2adcf3567eae96cf9cc3650&amp;board_no=1');">
-														<img
-														src="//img.echosting.cafe24.com/skin/base_ko_KR/board/btn_recommend.gif"
-														alt="추천하기">
-												</a></span></li>
-										</ul>
-										<div class="detail">
-											<!-- CONTENT -->
-											<div class="fr-view fr-view-article">${dto.content }</div>
-										</div>
-									</td>
-								</tr>
-								<tr class="attach displaynone">
-									<th scope="row">첨부파일</th>
-									<td></td>
-								</tr>
-								<tr class="displaynone ">
-									<th scope="row">비밀번호</th>
-									<td><input id="password" name="password" fw-filter=""
-										fw-label="비밀번호" fw-msg=""
-										onkeydown="if (event.keyCode == 13 || event.which == 13) { return false; }"
-										value="" type="password"> <span
-										class="ec-base-help txtInfo">수정 및 삭제하려면 비밀번호를 입력하세요.</span></td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
-				<div class="ec-base-button ">
-					<span class="gLeft"> <span class="displaynone"> <!--div class="borad_button_s"><a href="#none" onclick="" class="admin displaynone">관리자게시</a></div-->
-							<div class="artfinger_button_board_list">
-								<a href="#none" onclick="" class="admin displaynone">게시안함</a>
-							</div>
-							<div class="artfinger_button_board_list">
-								<a href="#none" onclick="">스팸신고</a>
-							</div>
-							<div class="artfinger_button_board_list">
-								<a href="#none" onclick="">스팸해제</a>
-							</div>
-					</span>
-						<div class="artfinger_button_board_list">
-							<a href="/board/notice/1/">목록</a>
-						</div>
-					</span> <span class="gRight">
-						<div class="artfinger_button_board_list">
-							<a href="#none"
-								onclick="BOARD_READ.article_delete('BoardDelForm','1');"
-								class="displaynone">삭제</a>
-						</div>
-						<div class="artfinger_button_board_enter">
-							<a
-								href="/board/product/modify.html?board_act=edit&amp;no=7&amp;board_no=1"
-								class="displaynone">수정</a>
-						</div>
-						<div class="artfinger_button_board_list">
-							<a href="/board/product/reply.html" class="displaynone">답변</a>
-						</div>
-					</span>
+		<div class="boardContent" align="center">
+			<div class="">
+				<table border="0">
+					<colgroup>
+						<col style="width: 130px;">
+						<col style="width: auto;">
+					</colgroup>
+					<tbody>
+						<tr class="viewTitle">
+							<td colspan="3">
+								<!-- SUBJECT -->
+								<div class="name">SUBJECT
+									<p>${dto.subject }</p>
+								</div>
+								<!-- userID -->
+								<div class="name">ID
+									<p>${dto.userId }</p>
+								</div>
+								<!-- POSTDATE -->
+								<div class="name">DATE
+									<p>${dto.postDate }</p>
+								</div>
+							</td>
+						</tr>
+						<tr class="viewContents">
+							<td colspan="3">
+								<div class="">
+									<!-- CONTENT -->
+									<div class="viewContent">${dto.content }</div>
+								</div>
+							</td>
+						</tr>
+						<!-- <tr class="attach displaynone">
+							<th scope="row">첨부파일</th>
+							<td></td>
+						</tr> -->
+						<!-- <tr class="displaynone ">
+							<th scope="row">비밀번호</th>
+							<td><input id="password" name="password"
+								onkeydown="if (event.keyCode == 13 || event.which == 13) { return false; }"
+								value="" type="password">
+								<span class="">수정 및 삭제하려면 비밀번호를 입력하세요.</span></td>
+						</tr> -->
+					</tbody>
+				</table>
+			</div>
+			<div class="button">
+				<div class="element">
+						<a href="<%=cp %>/shop/boards/notice.do">LIST</a>
+					<c:if test="${dto.userId == userId }">
+						<a href="<%=cp %>/shop/boards/noticeUpdate.do?boardNum=${dto.boardNum }&${params }';"
+						class="displaynone">EDIT</a>
+						<a href="<%=cp %>/shop/boards/noticeDelete_ok.do?boardNum=${dto.boardNum }&${params }';"
+						class="displaynone">DELETE</a>
+					</c:if>
+						<a href="/board/product/reply.html" class="displaynone">COMMENT</a>
 				</div>
 			</div>
-
 		</div>
+
+	</div>
 </div>
 
 <jsp:include page="../main/footer.jsp"/>
