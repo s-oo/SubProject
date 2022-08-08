@@ -26,8 +26,6 @@
 				</div>
 				<table id="cartList">
 					<tbody>
-						<c:set var="sum" value="0"/>
-						<c:set var="tot" value="0"/>
 						<c:forEach var="dto" items="${ddto.orderList }">
 							<tr align="center">
 								<td id="saveFileName">
@@ -55,8 +53,6 @@
 									<a href="<%=cp %>/shop/boards/reviewWrite.do?orderNum=${dto.orderNum}">REVIEW</a>
 								</td>
 							</tr>
-							<c:set var="sum" value="${sum + dto.productPrice }"/>
-							<c:set var="tot" value="${tot + dto.productPrice }"/>
 						</c:forEach>
 					</tbody>
 				</table>
