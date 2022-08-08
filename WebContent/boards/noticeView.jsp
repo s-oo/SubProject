@@ -74,154 +74,62 @@
 		</table> --%>
 
 
-			<div style="border: 1px solid #dfdfdf; padding: 30px"
-				class="xans-element- xans-board xans-board-read-1002 xans-board-read xans-board-1002">
-				<!--
-            $login_page_url = /member/login.html
-            $deny_access_url = /board/free/list.html
-        -->
-				<div class="ec-base-table typeWrite ">
+			<div style="border: 1px solid #dfdfdf; padding: 30px" class="">
+				<div class="">
 					<table border="0" summary="">
-						<caption>게시판 상세</caption>
 						<colgroup>
 							<col style="width: 130px;">
 							<col style="width: auto;">
 						</colgroup>
 						<tbody>
-							<tr>
-								<!--th scope="row">제목</th-->
-								<td style="border: 0; font-size: 15px;">&lt; 배송 안내 &gt; <span
-									class="writer"> 와우뷰 <span class="displaynone">(ip:)</span>
-										<span><span class="writer">DATE <span>2020-04-26
-													22:33:58</span>
-										</span></span></span>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2">
-									<ul class="etcArea">
-										<li class="displaynone"><strong>평점</strong> <img
-											src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif"
-											alt="0점"> &nbsp;</li>
-										<li class="displaynone"><strong>추천</strong> <span
-											class="txtNum"><a href="#none"
-												onclick="BOARD_READ.article_vote('/exec/front/Board/vote/1?no=7&amp;return_url=%2Farticle%2Fnotice%2F1%2F7%2F&amp;e2d2a63aa7b718a384e=f342c0d4e2adcf3567eae96cf9cc3650&amp;board_no=1');">
-													<img
-													src="//img.echosting.cafe24.com/skin/base_ko_KR/board/btn_recommend.gif"
-													alt="추천하기">
-											</a></span></li>
-									</ul>
-									<div class="detail">
-										<div class="fr-view fr-view-article">
-											<p>
-												<b style="font-size: 9pt; line-height: 1.5;"><span
-													style="font-family: Verdana;"><span
-														style="font-size: 12pt;">&lt; 배송 안내 &gt;</span></span></b>
-											</p>
-											<p>
-												<strong><br></strong>
-											</p>
-											<p>
-												<strong><br></strong>
-											</p>
-											<p>
-												<strong><span style="font-family: Verdana;"><span
-														style="font-size: 10pt;">안녕하세요 WOWVIEW입니다.</span></span></strong>
-											</p>
-											<p>
-												<strong><br></strong>
-											</p>
-											<p>
-												<strong><span style="font-family: Verdana;"><span
-														style="font-size: 10pt;">월-금 (공휴일 제외) 오후 1시 이전 결제
-															완료건까지 확인하여 출고작업이 진행되며</span></span></strong>
-											</p>
-											<p>
-												<strong><span style="font-family: Verdana;"><span
-														style="font-size: 10pt;">배송기간은 상품에 따라 2-5일정도 소요됩니다.</span></span></strong>
-											</p>
-											<p>
-												<strong><span style="font-family: Verdana;"><span
-														style="font-size: 10pt;">(* 토, 일, 공휴일은 택배사의 휴무로 제품이
-															발송되지 않습니다.)</span></span></strong>
-											</p>
-											<p>
-												<strong><br></strong>
-											</p>
-											<p>
-												<strong><span style="font-family: Verdana;"><span
-														style="font-size: 10pt;">주문 상품은 순차적으로 발송됩니다.</span></span></strong>
-											</p>
-											<p>
-												<strong><br></strong>
-											</p>
-											<p>
-												<strong><span style="font-family: Verdana;"><span
-														style="font-size: 10pt;">입고지연 상품 / 주문폭주 상품 등은 배송
-															시일이 조금 지연될 수 있으니 양해 부탁드립니다.</span></span></strong>
-											</p>
-											<p>
-												<strong><br></strong>
-											</p>
-											<p>
-												<strong><br></strong>
-											</p>
-											<p>
-												<strong><span style="font-family: Verdana;"><span
-														style="font-size: 10pt;">* 배송 방법 : 택배</span></span></strong>
-											</p>
-											<p>
-												<strong><br></strong>
-											</p>
-											<p>
-												<strong><span style="font-family: Verdana;"><span
-														style="font-size: 10pt;">* 배송 지역 : 전국 지역 배송</span></span></strong>
-											</p>
-											<p>
-												<strong><br></strong>
-											</p>
-											<p>
-												<strong><span style="font-family: Verdana;"><span
-														style="font-size: 10pt;">* 비용 : 주문금액 5만원 미만일 때 배송비
-															2,500원이 추가됩니다.</span></span></strong>
-											</p>
-											<p>
-												<strong><span style="font-family: Verdana;"><span
-														style="font-size: 10pt;">&nbsp; &nbsp; &nbsp;
-															&nbsp; &nbsp; &nbsp; (도서 산간 및 제주지방은 3,500원이 추가로 발생할 수
-															있습니다.)</span></span></strong>
-											</p>
-											<p>
-												<strong><br></strong>
-											</p>
-											<p>
-												<strong><span style="font-family: Verdana;"><span
-														style="font-size: 10pt;"><br></span></span></strong>
-											</p>
-											<p>
-												<strong><span style="font-family: Verdana;"><span
-														style="font-size: 10pt;"><br></span></span></strong>
-											</p>
-											<p>
-												<strong><span style="font-family: Verdana;"><span
-														style="font-size: 10pt;">감사합니다.</span></span></strong>
-											</p>
+							<c:forEach var="dto" items="${lists }">
+								<tr>
+									<!-- SUBJECT -->
+									<td style="border: 0; font-size: 15px;">&lt; ${dto.subject } &gt;
+									<!-- userID -->
+									<span class="writer">${dto.userId }
+										<span>
+											<!-- POSTDATE -->
+											<span class="writer">DATE
+												<span>${dto.postDate }</span>
+											</span>
+										</span>
+									</span>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<ul class="etcArea">
+											<li class="displaynone"><strong>평점</strong> <img
+												src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif"
+												alt="0점"> &nbsp;</li>
+											<li class="displaynone"><strong>추천</strong> <span
+												class="txtNum"><a href="#none"
+													onclick="BOARD_READ.article_vote('/exec/front/Board/vote/1?no=7&amp;return_url=%2Farticle%2Fnotice%2F1%2F7%2F&amp;e2d2a63aa7b718a384e=f342c0d4e2adcf3567eae96cf9cc3650&amp;board_no=1');">
+														<img
+														src="//img.echosting.cafe24.com/skin/base_ko_KR/board/btn_recommend.gif"
+														alt="추천하기">
+												</a></span></li>
+										</ul>
+										<div class="detail">
+											<!-- CONTENT -->
+											<div class="fr-view fr-view-article">${dto.content }</div>
 										</div>
-									</div>
-								</td>
-							</tr>
-							<tr class="attach displaynone">
-								<th scope="row">첨부파일</th>
-								<td></td>
-							</tr>
-							<tr class="displaynone ">
-								<th scope="row">비밀번호</th>
-								<td><input id="password" name="password" fw-filter=""
-									fw-label="비밀번호" fw-msg=""
-									onkeydown="if (event.keyCode == 13 || event.which == 13) { return false; }"
-									value="" type="password"> <span
-									class="ec-base-help txtInfo">수정 및 삭제하려면 비밀번호를 입력하세요.</span></td>
-							</tr>
+									</td>
+								</tr>
+								<tr class="attach displaynone">
+									<th scope="row">첨부파일</th>
+									<td></td>
+								</tr>
+								<tr class="displaynone ">
+									<th scope="row">비밀번호</th>
+									<td><input id="password" name="password" fw-filter=""
+										fw-label="비밀번호" fw-msg=""
+										onkeydown="if (event.keyCode == 13 || event.which == 13) { return false; }"
+										value="" type="password"> <span
+										class="ec-base-help txtInfo">수정 및 삭제하려면 비밀번호를 입력하세요.</span></td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>

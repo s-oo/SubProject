@@ -2,8 +2,14 @@
 
 a {
 	text-decoration: none;
-	color: #484848;
-	font-size: 8pt;
+    color: #484848;
+    font-size: 8pt;
+    margin: 0;
+    padding: 0;
+  
+    
+    
+}
 }
 
 body {
@@ -20,12 +26,49 @@ body {
 div {
 	margin: 0;
     padding: 0;
+    
+    
+}
+
+h2{
+	
+	 text-decoration: none;
+    color: #484848;
+    font-size: 9pt;
+}
+
+
+button{
+	
+	font-size: 8pt
+	cursor: pointer;
+    margin-top: 10px;
+    border: 1px solid rgb(189, 189, 189);
+    background-color: white;
+    width: 200px;
+    line-height: 48px;
+    
+	
 }
 
 span {
-	margin: 0;
-    padding: 0;
+	text-decoration: none;
+    color: #000000;
+    font-size: 8pt;
+  font-style: italic;
+  text-align: left;
+    
 }
+
+
+b {
+  text-decoration: none;
+    color: #000000;
+    font-size: 8pt;
+    font-style: italic;
+    text-align: left;
+}
+
 
 #header {
     position: fixed;
@@ -35,6 +78,19 @@ span {
     height: 36px;
     z-index: 2000;
 }
+
+#header .bbs_title {
+    position: absolute;
+    left: 0px;
+    top: 56px;
+    width: 150px;
+    z-index: 3000;
+    
+    font-size: 10pt;
+  font-style: italic;
+}
+
+
 
 #header .left_area {
     position: absolute;
