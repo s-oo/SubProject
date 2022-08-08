@@ -97,12 +97,12 @@ CREATE TABLE REVIEW (
 	CONSTRAINT FK_REVIEW_USERID FOREIGN KEY (USERID) REFERENCES MEMBER(USERID),
 	CONSTRAINT FK_REVIEW_ORDERNUM FOREIGN KEY (ORDERNUM) REFERENCES ORDERS(ORDERNUM));
 
-INSERT INTO MEMBER VALUES('KRISTAL','sss','관리자','여자','1993/02/14','서울시 강남구 청담동 129 PH129','kristal@naver.com','01055861420',1);
-INSERT INTO MEMBER VALUES('yun','asd','yun','남자','95/04/01','서울 강남구 테헤란로 124,4층,(역삼동)','yun@naver.com','01020893971',1);
-INSERT INTO MEMBER VALUES('hong','asd','hong','남자','90/01/01','서울시 강남구 청담동 134-38','hong@naver.com','01068755530',1);
-INSERT INTO MEMBER VALUES('chang','asd','chang','남자','88/07/07','서울시 강남구 개포동 1282','chang@naver.com','01041643687',1);
-INSERT INTO MEMBER VALUES('asd','asd','asdName','남자',SYSDATE,'06234,서울 강남구 테헤란로 124,4층,(역삼동)','asd@asd.asd','01012341234',1);
-INSERT INTO MEMBER VALUES('qwe','qwe','qweName','남자',SYSDATE,'11111,서울 역삼,4층,(역삼동)','qwe@qwe.qwe','01012341234',1);
+INSERT INTO MEMBER VALUES('KRISTAL','sss','관리자','여자','1993/02/14','06234/서울 강남구 테헤란로 124/4층/(역삼동)','kristal@naver.com','01055861420',1);
+INSERT INTO MEMBER VALUES('yun','asd','yun','남자','95/04/01','12334/서울 강남구 테헤란로 124/4층/(역삼동)','yun@naver.com','01020893971',1);
+INSERT INTO MEMBER VALUES('hong','asd','hong','남자','90/01/01','06234/서울 강남구 테헤란로 124/4층/(역삼동)','hong@naver.com','01068755530',1);
+INSERT INTO MEMBER VALUES('chang','asd','chang','남자','88/07/07','06234/서울 강남구 테헤란로 124/4층/(역삼동)','chang@naver.com','01041643687',1);
+INSERT INTO MEMBER VALUES('asd','asd','asdName','남자',SYSDATE,'06234/서울 강남구 테헤란로 124/4층/(역삼동)','asd@asd.asd','01012341234',1);
+INSERT INTO MEMBER VALUES('qwe','qwe','qweName','남자',SYSDATE,'11111/서울 역삼/4층/(역삼동)','qwe@qwe.qwe','01012341234',1);
 
 INSERT INTO PRODUCT VALUES(1,'Half-sleeve linen Jacket',139500,'outer','44d34ec9996559ad8ccc723232d7ea46.jpg,97501c74e01b25dc9609a62b52db502c.jpg,54c688722a8a2c464bc8c03463055344.jpg,c10b47ebdd58e09ba4affbf5ba01051a.jpg,65f284088a5db1291351c3e9ac6cbc7b.jpg','44d34ec9996559ad8ccc723232d7ea46.jpg,97501c74e01b25dc9609a62b52db502c.jpg,54c688722a8a2c464bc8c03463055344.jpg,c10b47ebdd58e09ba4affbf5ba01051a.jpg,65f284088a5db1291351c3e9ac6cbc7b.jpg','BEIGE','SMALL,MEDIUM,LARGE');
 INSERT INTO PRODUCT VALUES(2,'Half-sleeve linen jacket',139500,'outer','e559674f242de910cd8bc196de30d2e8.jpg,82089ea5569897db10ceb0f12ec7ea1d.jpg,5694d1ef348f3f5e26f36ec5a2a1ee9b.jpg,1494772317f8fc016c582802f3812de9.jpg,e2fa70c29edbbb0e2076117bf3170640.jpg,bb86c8065bbe22d93436c4cbae9e1f97.jpg','e559674f242de910cd8bc196de30d2e8.jpg,82089ea5569897db10ceb0f12ec7ea1d.jpg,5694d1ef348f3f5e26f36ec5a2a1ee9b.jpg,1494772317f8fc016c582802f3812de9.jpg,e2fa70c29edbbb0e2076117bf3170640.jpg,bb86c8065bbe22d93436c4cbae9e1f97.jpg','BLACK','MEDIUM,LARGE');
@@ -195,3 +195,19 @@ INSERT INTO REVIEW VALUES(7,'chang',1,'정말 멋져요','또사고싶어요','2022/08/07',
 INSERT INTO REVIEW VALUES(8,'chang',2,'착샷','또살게요','2022/08/08',0);                            
 
 commit;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
