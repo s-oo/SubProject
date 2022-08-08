@@ -31,8 +31,8 @@ public class MemberDAO {
 			pstmt.setString(3, dto.getUserName());
 			pstmt.setString(4, dto.getUserGender());
 			pstmt.setString(5, String.join(",", dto.getUserBirth()));
-			pstmt.setString(6, String.join(",", dto.getUserAddr()));			
-			pstmt.setString(7, String.join(",", dto.getUserEmail()));
+			pstmt.setString(6, String.join("/", dto.getUserAddr()));			
+			pstmt.setString(7, dto.getUserEmail());
 			pstmt.setString(8, dto.getUserTel());
 
 			result=pstmt.executeUpdate();
@@ -66,8 +66,8 @@ public class MemberDAO {
 			pstmt.setString(2, dto.getUserName());
 			pstmt.setString(3, dto.getUserGender());
 			pstmt.setString(4, String.join(",", dto.getUserBirth()));
-			pstmt.setString(5, String.join(",", dto.getUserAddr()));			
-			pstmt.setString(6, String.join(",", dto.getUserEmail()));
+			pstmt.setString(5, String.join("/", dto.getUserAddr()));			
+			pstmt.setString(6,  dto.getUserEmail());
 			pstmt.setString(7, dto.getUserTel());
 			pstmt.setString(8, dto.getUserId());
 
@@ -143,7 +143,7 @@ public class MemberDAO {
 				dto.setUserName(rs.getString("userName"));
 				dto.setUserGender(rs.getString("userGender"));
 				dto.setUserBirth(rs.getString("userBirth").split(","));
-				dto.setUserAddr(rs.getString("userAddr").split(","));
+				dto.setUserAddr(rs.getString("userAddr").split("/"));
 				dto.setUserEmail(rs.getString("userEmail"));
 				dto.setUserTel(rs.getString("userTel"));				
 			}
@@ -187,7 +187,7 @@ public class MemberDAO {
 				dto.setUserName(rs.getString("userName"));
 				dto.setUserGender(rs.getString("userGender"));
 				dto.setUserBirth(rs.getString(5).split(","));
-				dto.setUserAddr(rs.getString("userAddr").split(","));
+				dto.setUserAddr(rs.getString("userAddr").split("/"));
 				dto.setUserEmail(rs.getString("userEmail"));
 				dto.setUserTel(rs.getString("userTel"));				
 			}
