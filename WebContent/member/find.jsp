@@ -88,13 +88,13 @@
 
 			<div align="center">
 				<button
-					style="border: 0.5; background-color: white; width: 200px; height: 50px;"
-					type="button" onclick="javascript:history.back();"
+					style="cursor:pointer; border: 0.5; background-color: white; width: 200px; height: 50px;"
+					type="button" onclick="location.href='<%=cp%>/shop/member/login.do';"
 					onmouseover=this.style.backgroundColor='#F0F0F0' onmouseout=this.style.backgroundColor='white'>
 					<b style="font-size: 17px; color: black;">뒤로가기</b>
 				</button>
 				&nbsp;&nbsp;
-				<button style="background-color: black; width: 200px; height: 50px;"
+				<button style="cursor:pointer; background-color: black; width: 200px; height: 50px;"
 					type="button" onclick="searchpw();">
 					<b style="font-size: 17px; color: white;">찾기</b>
 				</button>

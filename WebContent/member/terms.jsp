@@ -31,7 +31,7 @@
 
 	function nochk() {
 		alert("동의하지 않으면 가입하실 수 없습니다");
-		location.href="<%=cp%>/shop/main/main.do";}
+		location.href="<%=cp%>/shop/member/terms.do";}
 </script>
 
 </head>
