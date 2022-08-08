@@ -16,9 +16,9 @@
 <body>
 	<jsp:include page="../main/header.jsp"/>
 	
-	<div id="content" align="center">
+	<div id="content" align="center" style="width: 1100px;">
 	
-		<img src="<%=cp%>/main/img/사진.jpg" width="700px;">
+		<img src="<%=cp%>/main/img/mainImage.jpeg" height="620px;">
 		
 	</div>
 	

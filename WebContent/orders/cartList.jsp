@@ -27,7 +27,7 @@
 	<jsp:include page="../main/header.jsp"/>
 	<div id="content" align="center" style="display: block;">
 		<form action="" method="post" name="cartListForm">
-			<table id="cartList">
+			<table id="cartList" style="border-top: 1px solid #DBDBDB; border-bottom: 1px solid #DBDBDB; padding: 20px 0px 20px 0px; margin-bottom: 50px;">
 				<tbody>
 					<c:set var="sum" value="0"/>
 					<c:set var="tot" value="0"/>
@@ -71,8 +71,8 @@
 				</tbody>
 				<c:if test="${empty list }">
 					<tfoot>
-						<tr id="listBox" class="item" style="list-style: none;width: 300px;display: inline-block;">
-							<td class="box_wrap" style="display: inline-block;font-size: 10pt;color: #555555;">
+						<tr align="center">
+							<td style="font-size: 10pt;color: #555555;">
 								등록된 상품이 없음
 							</td>
 						</tr>

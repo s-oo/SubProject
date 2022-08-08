@@ -100,7 +100,7 @@
 				</div>
 			</div>
 			
-			<div class="box row" align="center" style="width: 900px; margin-bottom: 50px;">
+			<div class="box row" align="center" style="width: 900px; margin-bottom: 50px; padding: 0px;">
 				<div class="box row" style="width: 900px;" align="left">
 				</div>
 				<div style="padding: 50px;">

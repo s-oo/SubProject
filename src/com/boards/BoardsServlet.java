@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.boards.BoardsDTO;
 import com.orders.OrdersDAO;
 import com.orders.OrdersDTO;
 import com.product.ProductDAO;
@@ -47,7 +46,10 @@ public class BoardsServlet extends HttpServlet {
 		PrintWriter out = resp.getWriter();
 
 		Connection conn = DBConn.getConnection();
-		BoardsDAO dao = new BoardsDAO(conn);
+		
+		NoticeDAO NoticeDAO = new NoticeDAO(conn);
+		QnaDAO QnaDAO = new QnaDAO(conn);
+		ReviewDAO ReviewDAO = new ReviewDAO(conn);
 
 		MyPage myPage = new MyPage();
 
@@ -84,7 +86,7 @@ public class BoardsServlet extends HttpServlet {
 				}
 			}
 
-			int dataCount = dao.getDataCount(searchKey, searchValue, community);
+			int dataCount = QnaDAO.getDataCount(searchKey, searchValue);
 
 			int numPerPage = 5;
 
@@ -97,7 +99,7 @@ public class BoardsServlet extends HttpServlet {
 			int start = (currentPage - 1) * numPerPage + 1;
 			int end = currentPage * numPerPage;
 
-			List<BoardsDTO> lists = dao.getLists(start, end, searchKey, searchValue, community);
+			List<QnaDTO> lists = QnaDAO.getLists(start, end, searchKey, searchValue);
 
 			String param = "";
 
@@ -152,7 +154,7 @@ public class BoardsServlet extends HttpServlet {
 				}
 			}
 
-			int dataCount = dao.getDataCount(searchKey, searchValue, community);
+			int dataCount = NoticeDAO.getDataCount(searchKey, searchValue);
 			
 			int numPerPage = 5;
 
@@ -165,7 +167,7 @@ public class BoardsServlet extends HttpServlet {
 			int start = (currentPage - 1) * numPerPage + 1;
 			int end = currentPage * numPerPage;
 
-			List<BoardsDTO> lists = dao.getLists(start, end, searchKey, searchValue, community);
+			List<NoticeDTO> lists = NoticeDAO.getLists(start, end, searchKey, searchValue);
 
 			String param = "";
 
@@ -220,7 +222,7 @@ public class BoardsServlet extends HttpServlet {
 				}
 			}
 
-			int dataCount = dao.getDataCount(searchKey, searchValue, community);
+			int dataCount = ReviewDAO.getDataCount(searchKey, searchValue);
 
 			int numPerPage = 5;
 
@@ -233,7 +235,7 @@ public class BoardsServlet extends HttpServlet {
 			int start = (currentPage - 1) * numPerPage + 1;
 			int end = currentPage * numPerPage;
 
-			List<BoardsDTO> lists = dao.getLists(start, end, searchKey, searchValue, community);
+			List<ReviewDTO> lists = ReviewDAO.getLists(start, end, searchKey, searchValue);
 
 			String param = "";
 
@@ -334,8 +336,93 @@ public class BoardsServlet extends HttpServlet {
 //			// review Write
 //		} else if (uri.indexOf("reviewWrite.do") != -1) {
 
+			// qnaWrite_ok
+		} else if (uri.indexOf("qnaWrite_ok.do") != -1) {
+			
+			QnaDAO dao = new QnaDAO(conn);
+			
+			int boardNum = dao.getMaxNum() + 1;
+			String subject = req.getParameter("subject");
+			String content = req.getParameter("content");
+			int productNum = Integer.parseInt(req.getParameter("productNum"));
+			
+			QnaDTO dto = dao.getReadData(boardNum);
+			
+			dto.setBoardNum(boardNum);
+			dto.setSubject(subject);
+			dto.setContent(content);
+			dto.setProductNum(productNum);
+			
+			int result = dao.insertData(dto);
+
+			if (result == 0) {
+				out.print("<script>");
+				out.print("alert('오류');");
+				out.print("history.back();");
+				out.print("</script>");
+			}
+
+			url =  "/sub/shop/boards/qna.do";
+			resp.sendRedirect(url);
+			
+			// noticeWrite_ok
+		} else if (uri.indexOf("noticeWrite_ok.do") != -1) {
+			
+			NoticeDAO dao = new NoticeDAO(conn);
+			
+			int boardNum = dao.getMaxNum() + 1;
+			String subject = req.getParameter("subject");
+			String content = req.getParameter("content");
+			
+			NoticeDTO dto = dao.getReadData(boardNum);
+
+			dto.setBoardNum(boardNum);
+			dto.setSubject(subject);
+			dto.setContent(content);
+
+			int result = dao.insertData(dto);
+
+			if (result == 0) {
+				out.print("<script>");
+				out.print("alert('오류');");
+				out.print("history.back();");
+				out.print("</script>");
+			}
+			
+			url =  "/sub/shop/boards/notice.do";
+			resp.sendRedirect(url);
+			
+			// reviewWrite_ok
+		} else if (uri.indexOf("reviewWrite_ok.do") != -1) {
+			
+			ReviewDAO dao = new ReviewDAO(conn);
+			
+			int boardNum = dao.getMaxNum() + 1;
+			String subject = req.getParameter("subject");
+			String content = req.getParameter("content");
+			int orderNum = Integer.parseInt(req.getParameter("orderNum"));
+
+			ReviewDTO dto = dao.getReadData(boardNum);
+
+			dto.setBoardNum(boardNum);
+			dto.setSubject(subject);
+			dto.setContent(content);
+			dto.setOrderNum(orderNum);
+			
+			int result = dao.insertData(dto);
+
+			if (result == 0) {
+				out.print("<script>");
+				out.print("alert('오류');");
+				out.print("history.back();");
+				out.print("</script>");
+			}
+
+			url =  "/sub/shop/boards/review.do";
+			resp.sendRedirect(url);
+			
 			// QnA Update
-		} else if (uri.indexOf("Update.do") != -1) {
+		} else if (uri.indexOf("qnaUpdate.do") != -1) {
 			
 			if (userId == null) {
 				out.print("<script>");
@@ -343,9 +430,11 @@ public class BoardsServlet extends HttpServlet {
 				out.print("locasion:href='/sub/shop/member/login.do';");
 				out.print("</script>");
 			}
+
+			QnaDAO dao = new QnaDAO(conn);
 			
 			int boardNum = Integer.parseInt(req.getParameter("boardNum"));
-			BoardsDTO dto = dao.getReadData(boardNum);
+			QnaDTO dto = dao.getReadData(boardNum);
 			
 			if (dto == null) {
 				out.print("<script>");
@@ -361,17 +450,79 @@ public class BoardsServlet extends HttpServlet {
 				out.print("</script>");
 			}
 			
-			String community = req.getParameter("community");
-			if(community == null) {
-				if (uri.indexOf("qnaUpdate.do") != -1) {
-					community = "qna";
-				} else if (uri.indexOf("noticeUpdate.do") != -1) {
-					community = "notice";
-				} else if (uri.indexOf("reviewUpdate.do") != -1) {
-					community = "review";
-				}
+			String str = req.getParameter("productNum");
+
+			if (str != null) {
+				int productNum = Integer.parseInt(str);
+				ProductDTO productDTO = new ProductDAO(conn).getReadData(productNum);
+				req.setAttribute("productDTO", productDTO);
 			}
 
+			url = "/boards/qnaUpdate.jsp";
+			forward(req, resp, url);
+			
+			// notice Update
+		} else if (uri.indexOf("noticeUpdate.do") != -1) {
+
+			if (userId == null) {
+				out.print("<script>");
+				out.print("alert('로그인을 해주세요');");
+				out.print("locasion:href='/sub/shop/member/login.do';");
+				out.print("</script>");
+			}
+
+			NoticeDAO dao = new NoticeDAO(conn);
+			
+			int boardNum = Integer.parseInt(req.getParameter("boardNum"));
+			NoticeDTO dto = dao.getReadData(boardNum);
+			
+			if (dto == null) {
+				out.print("<script>");
+				out.print("alert('게시글을 찾을수없습니다.');");
+				out.print("history.back();");
+				out.print("</script>");
+			}
+			
+			if (!dto.getUserId().equals(userId)) {
+				out.print("<script>");
+				out.print("alert('권한이 없습니다.');");
+				out.print("history.back();");
+				out.print("</script>");
+			}
+
+			url = "/boards/noticeUpdate.jsp";
+			forward(req, resp, url);
+			
+			// review Update
+		} else if (uri.indexOf("reviewUpdate.do") != -1) {
+			
+
+			if (userId == null) {
+				out.print("<script>");
+				out.print("alert('로그인을 해주세요');");
+				out.print("locasion:href='/sub/shop/member/login.do';");
+				out.print("</script>");
+			}
+
+			ReviewDAO dao = new ReviewDAO(conn);
+			
+			int boardNum = Integer.parseInt(req.getParameter("boardNum"));
+			ReviewDTO dto = dao.getReadData(boardNum);
+			
+			if (dto == null) {
+				out.print("<script>");
+				out.print("alert('게시글을 찾을수없습니다.');");
+				out.print("history.back();");
+				out.print("</script>");
+			}
+			
+			if (!dto.getUserId().equals(userId)) {
+				out.print("<script>");
+				out.print("alert('권한이 없습니다.');");
+				out.print("history.back();");
+				out.print("</script>");
+			}
+			
 			String str = req.getParameter("orderNum");
 
 			if (str != null) {
@@ -379,20 +530,9 @@ public class BoardsServlet extends HttpServlet {
 				OrdersDTO ordersDTO = new OrdersDAO(conn).getReadData(orderNum);
 				req.setAttribute("ordersDTO", ordersDTO);
 			}
-			
-			req.setAttribute("community", community);
 
-			url = "/boards/" + community + "Update.jsp";
+			url = "/boards/reviewUpdate.jsp";
 			forward(req, resp, url);
-			
-//			// notice Update
-//		} else if (uri.indexOf("noticeUpdate.do") != -1) {
-//
-//			// review Update
-//		} else if (uri.indexOf("reviewUpdate.do") != -1) {
-			
-
-		
 
 			// QnA Update_ok
 		} else if (uri.indexOf("qnaUpdate_ok.do") != -1) {
