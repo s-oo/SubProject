@@ -31,7 +31,7 @@
 	<!-- board -->
 	<div class="boardList">
 		<!-- title -->
-		<div class="boardTitle" align="center">NOTICE</div>
+		<div class="boardTitle" align="center">REVIEW</div>
 		<!-- content -->
 		<div class="boardContent" align="center">
 			<div class="">
@@ -81,7 +81,7 @@
 			</div>
 			<div class="button">
 				<div class="elementLeft">
-						<a href="<%=cp %>/shop/boards/notice.do">LIST</a>
+						<a href="<%=cp %>/shop/boards/review.do">LIST</a>
 				</div>
 				<div class="elementRight">
 					<a href="<%=cp %>/shop/boards/reviewUpdate.do?boardNum=${dto.boardNum }&${params }';"
