@@ -1,6 +1,18 @@
 
 @charset "EUC-KR";
 
+body {
+	max-width: 1561px;
+    margin: 0 auto;
+    padding-left: 11px;
+    padding-right: 11px;
+    font: 8px 'S-CoreDream-3Light','NeueHaasDisplay','Roboto','Noto Sans KR','Helvetica','Malgun Gothic',sans-serif;
+    color: #555;
+    letter-spacing: 0.6px;
+    background: #fff;
+}
+
+
 #content {
    width: 1000px; 
    
@@ -56,6 +68,7 @@ label span {
 .box.input {
    width: 300px;
    vertical-align: middle;
+   font: 8px 'S-CoreDream-3Light','NeueHaasDisplay','Roboto','Noto Sans KR','Helvetica','Malgun Gothic',sans-serif;
 }
 
 .box.op {

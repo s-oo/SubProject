@@ -4,7 +4,9 @@ TEMPORARY TABLESPACE TEMP;
 
 GRANT CONNECT,RESOURCE,UNLIMITED TABLESPACE TO shop;
 
-DROP TABLE BOARDS PURGE;
+DROP TABLE REVIEW PURGE;
+DROP TABLE QNA PURGE;
+DROP TABLE NOTICE PURGE;
 DROP TABLE DELIVERY PURGE;
 DROP TABLE ORDERS PURGE;
 DROP TABLE PRODUCT PURGE;
@@ -60,19 +62,39 @@ CREATE TABLE DELIVERY (
 	CONSTRAINT PK_DELIVERY_DELIVERYNUM PRIMARY KEY (DELIVERYNUM),
 	CONSTRAINT FK_DELIVERY_USERID FOREIGN KEY (USERID) REFERENCES MEMBER(USERID));
 
-CREATE TABLE BOARDS (
+CREATE TABLE NOTICE (
 	BOARDNUM NUMBER,
-
+	USERID VARCHAR2(20),
+	SUBJECT VARCHAR2(100),
+	CONTENT VARCHAR2(1024),
+	POSTDATE DATE,
+	HITCOUNT NUMBER,
+	CONSTRAINT PK_NOTICE_BOARDNUM PRIMARY KEY (BOARDNUM),
+	CONSTRAINT FK_NOTICE_USERID FOREIGN KEY (USERID) REFERENCES MEMBER(USERID));
+    
+CREATE TABLE QNA (
+	BOARDNUM NUMBER,
 	USERID VARCHAR2(20),
 	PRODUCTNUM NUMBER(10),
 	SUBJECT VARCHAR2(100),
 	CONTENT VARCHAR2(1024),
 	POSTDATE DATE,
-	COMMUNITY VARCHAR2(20),
 	HITCOUNT NUMBER,
-	CONSTRAINT PK_BOARD_BOARDNUM PRIMARY KEY (BOARDNUM),
-	CONSTRAINT FK_BOARD_USERID FOREIGN KEY (USERID) REFERENCES MEMBER(USERID),
-	CONSTRAINT FK_BOARD_PRODUCTNUM FOREIGN KEY (PRODUCTNUM) REFERENCES PRODUCT(PRODUCTNUM));
+	CONSTRAINT PK_QNA_BOARDNUM PRIMARY KEY (BOARDNUM),
+	CONSTRAINT FK_QNA_USERID FOREIGN KEY (USERID) REFERENCES MEMBER(USERID),
+	CONSTRAINT FK_QNA_PRODUCTNUM FOREIGN KEY (PRODUCTNUM) REFERENCES PRODUCT(PRODUCTNUM));
+    
+CREATE TABLE REVIEW (
+	BOARDNUM NUMBER,
+	USERID VARCHAR2(20),
+	ORDERNUM NUMBER(10),
+	SUBJECT VARCHAR2(100),
+	CONTENT VARCHAR2(1024),
+	POSTDATE DATE,
+	HITCOUNT NUMBER,
+	CONSTRAINT PK_REVIEW_BOARDNUM PRIMARY KEY (BOARDNUM),
+	CONSTRAINT FK_REVIEW_USERID FOREIGN KEY (USERID) REFERENCES MEMBER(USERID),
+	CONSTRAINT FK_REVIEW_ORDERNUM FOREIGN KEY (ORDERNUM) REFERENCES ORDERS(ORDERNUM));
 
 INSERT INTO MEMBER VALUES('kristal','asd','kristal','F','1993/02/14','서울시 강남구 청담동 129 PH129','kristal@naver.com','01055861420');
 INSERT INTO MEMBER VALUES('yun','asd','yun','M','95/04/01','서울 강남구 테헤란로 124,4층,(역삼동)','yun@naver.com','01020893971');
@@ -95,40 +117,33 @@ INSERT INTO ORDERS VALUES(5,'chang',1,3,'red','L','2022/08/05','cartList');
 INSERT INTO ORDERS VALUES(6,'chang',2,4,'red','L','2022/08/06','wishList');
 
 
-INSERT INTO BOARDS VALUES(1,'kristal',1,'고객 보상 지원 제도 시행 안내','고객 보상 지원 제도 시행 안내','2022/08/01','NOTICE',0);
-
-INSERT INTO BOARDS VALUES(2,'kristal',2,'상의 일부 상품의 권장 소비자 가격이 변경됨을 안내드립니다.','상의 일부 상품의 권장 소비자 가격이 변경됨을 안내드립니다.','2022/08/03','NOTICE',0);
-
-INSERT INTO BOARDS VALUES(3,'kristal',3,'인터넷 익스플로러(IE) 지원 종료 안내','친구 및 쪽지 서비스 종료 안내','2022/09/01','NOTICE',0);
-
-INSERT INTO BOARDS VALUES(4,'kristal',1,'친구 및 쪽지 서비스 종료 안내','친구 및 쪽지 서비스 종료 안내','2022/09/20','NOTICE',0);
-
-INSERT INTO BOARDS VALUES(5,'kristal',2,'대리구매 이용 자제를 당부드립니다.','대리구매 이용 자제를 당부드립니다.','2022/10/11','NOTICE',0);
-
-INSERT INTO BOARDS VALUES(6,'kristal',3,'5년이상 미 사용 적립금 소멸 관련 공지사항입니다.','5년이상 미 사용 적립금 소멸 관련 공지사항입니다.','2022/11/27','NOTICE',0);
-
-INSERT INTO BOARDS VALUES(7,'kristal',1,'[사과문] 후속 조치에 대해 말씀드립니다.','[사과문] 후속 조치에 대해 말씀드립니다.','2022/08/01','NOTICE',0);
-
-INSERT INTO BOARDS VALUES(8,'kristal',2,'장바구니 상품 보관 정책 변경 안내','장바구니 상품 보관 정책 변경 안내','2022/12/25','NOTICE',0);
+INSERT INTO NOTICE VALUES(1,'kristal','고객 보상 지원 제도 시행 안내','고객 보상 지원 제도 시행 안내','2022/08/01',0);
+INSERT INTO NOTICE VALUES(2,'kristal','상의 일부 상품의 권장 소비자 가격이 변경됨을 안내드립니다.','상의 일부 상품의 권장 소비자 가격이 변경됨을 안내드립니다.','2022/08/03',0);
+INSERT INTO NOTICE VALUES(3,'kristal','인터넷 익스플로러(IE) 지원 종료 안내','친구 및 쪽지 서비스 종료 안내','2022/09/01',0);
+INSERT INTO NOTICE VALUES(4,'kristal','친구 및 쪽지 서비스 종료 안내','친구 및 쪽지 서비스 종료 안내','2022/09/20',0);
+INSERT INTO NOTICE VALUES(5,'kristal','대리구매 이용 자제를 당부드립니다.','대리구매 이용 자제를 당부드립니다.','2022/10/11',0);
+INSERT INTO NOTICE VALUES(6,'kristal','5년이상 미 사용 적립금 소멸 관련 공지사항입니다.','5년이상 미 사용 적립금 소멸 관련 공지사항입니다.','2022/11/27',0);
+INSERT INTO NOTICE VALUES(7,'kristal','[사과문] 후속 조치에 대해 말씀드립니다.','[사과문] 후속 조치에 대해 말씀드립니다.','2022/08/01',0);
+INSERT INTO NOTICE VALUES(8,'kristal','장바구니 상품 보관 정책 변경 안내','장바구니 상품 보관 정책 변경 안내','2022/12/25',0);
 
 
-INSERT INTO BOARDS VALUES(9,'yun',1,'상품문의','상품문의','2022/08/01','QnA',0);
-INSERT INTO BOARDS VALUES(10,'yun',2,'환불문의','환불문의','2022/08/02','QnA',0);
-INSERT INTO BOARDS VALUES(11,'yun',3,'결제문의','결제문의','2022/08/03','QnA',0);
-INSERT INTO BOARDS VALUES(12,'hong',1,'상품문의','상품문의','2022/08/04','QnA',0);
-INSERT INTO BOARDS VALUES(13,'hong',2,'환불문의','환불문의','2022/08/05','QnA',0);
-INSERT INTO BOARDS VALUES(14,'hong',3,'결제문의','결제문의','2022/08/06','QnA',0);
-INSERT INTO BOARDS VALUES(15,'chang',1,'상품문의','상품문의','2022/08/07','QnA',0);
-INSERT INTO BOARDS VALUES(16,'chang',2,'결제문의','결제문의','2022/08/08','QnA',0);
+INSERT INTO QNA VALUES(1,'yun',1,'상품문의','상품문의','2022/08/01',0);
+INSERT INTO QNA VALUES(2,'yun',2,'환불문의','환불문의','2022/08/02',0);
+INSERT INTO QNA VALUES(3,'yun',3,'결제문의','결제문의','2022/08/03',0);
+INSERT INTO QNA VALUES(4,'hong',1,'상품문의','상품문의','2022/08/04',0);
+INSERT INTO QNA VALUES(5,'hong',2,'환불문의','환불문의','2022/08/05',0);
+INSERT INTO QNA VALUES(6,'hong',3,'결제문의','결제문의','2022/08/06',0);
+INSERT INTO QNA VALUES(7,'chang',1,'상품문의','상품문의','2022/08/07',0);
+INSERT INTO QNA VALUES(8,'chang',2,'결제문의','결제문의','2022/08/08',0);
 
 
-INSERT INTO BOARDS VALUES(17,'yun',1,'정말 이뻐요','정말 이뻐요','2022/08/01','REVIEW',0);
-INSERT INTO BOARDS VALUES(18,'yun',2,'대박','대박','2022/08/02','REVIEW',0);
-INSERT INTO BOARDS VALUES(19,'yun',3,'의상 인증','인증합니다','2022/08/03','REVIEW',0);
-INSERT INTO BOARDS VALUES(20,'hong',1,'또 사고싶어요','사이즈 적당히 잘 맞는거 같아요','2022/08/04','REVIEW',0);
-INSERT INTO BOARDS VALUES(21,'hong',2,'또 이용할게요','감사합니다','2022/08/05','REVIEW',0);
-INSERT INTO BOARDS VALUES(22,'hong',3,'인증샷','정말 이뻐요','2022/08/06','REVIEW',0);
-INSERT INTO BOARDS VALUES(23,'chang',1,'정말 멋져요','또사고싶어요','2022/08/07','REVIEW',0);
-INSERT INTO BOARDS VALUES(24,'chang',2,'착샷','또살게요','2022/08/08','REVIEW',0);                            
+INSERT INTO REVIEW VALUES(1,'yun',1,'정말 이뻐요','정말 이뻐요','2022/08/01',0);
+INSERT INTO REVIEW VALUES(2,'yun',2,'대박','대박','2022/08/02',0);
+INSERT INTO REVIEW VALUES(3,'yun',3,'의상 인증','인증합니다','2022/08/03',0);
+INSERT INTO REVIEW VALUES(4,'hong',1,'또 사고싶어요','사이즈 적당히 잘 맞는거 같아요','2022/08/04',0);
+INSERT INTO REVIEW VALUES(5,'hong',2,'또 이용할게요','감사합니다','2022/08/05',0);
+INSERT INTO REVIEW VALUES(6,'hong',3,'인증샷','정말 이뻐요','2022/08/06',0);
+INSERT INTO REVIEW VALUES(7,'chang',1,'정말 멋져요','또사고싶어요','2022/08/07',0);
+INSERT INTO REVIEW VALUES(8,'chang',2,'착샷','또살게요','2022/08/08',0);                            
 
 commit;

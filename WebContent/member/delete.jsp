@@ -78,12 +78,12 @@
 	</div>
 <br><br>
 					<div align="center">	
-						<button  style="border:none; background-color: #FOFOFO; width: 200px; height: 50px;"
+						<button  style="cursor:pointer; border:none; background-color: #FOFOFO; width: 200px; height: 50px;"
 							type="button" onclick="javascript:history.back();">
 								<b style="font-size: 17px; color: black;">뒤로가기</b>
 						</button>
 							&nbsp;&nbsp;
-						<button style="background-color: black; width: 200px; height: 50px;"
+						<button style="cursor:pointer; background-color: black; width: 200px; height: 50px;"
 							type="button" onclick="deleteValue();">
 								<a style="font-size: 17px; color: white;">탈&nbsp;퇴</a>
 						</button>	

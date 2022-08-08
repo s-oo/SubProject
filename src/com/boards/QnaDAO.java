@@ -6,11 +6,13 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BoardsDAO {
+import com.product.ProductDAO;
+
+public class QnaDAO {
 
 	private Connection conn;
 
-	public BoardsDAO(Connection conn) {
+	public QnaDAO(Connection conn) {
 		this.conn = conn;
 	}
 
@@ -25,7 +27,7 @@ public class BoardsDAO {
 
 		try {
 
-			sql = "select nvl(max(boardNum),0) from boards";
+			sql = "select nvl(max(boardNum),0) from qna";
 
 			pstmt = conn.prepareStatement(sql);
 
@@ -47,7 +49,7 @@ public class BoardsDAO {
 	}
 
 	// 입력
-	public int insertData(BoardsDTO dto) {
+	public int insertData(QnaDTO dto) {
 
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -55,9 +57,9 @@ public class BoardsDAO {
 
 		try {
 
-			sql = "insert into boards (boardNum,userId,productNum,subject,content,";
-			sql += " postDate,community,hits) ";
-			sql += "values (?,?,?,?,?,sysdate,?,0)";
+			sql = "insert into qna (boardNum,userId,productNum,subject,content,";
+			sql += " postDate,hits) ";
+			sql += "values (?,?,?,?,?,sysdate,0)";
 
 			pstmt = conn.prepareStatement(sql);
 
@@ -66,7 +68,6 @@ public class BoardsDAO {
 			pstmt.setInt(3, dto.getProductNum());
 			pstmt.setString(4, dto.getSubject());
 			pstmt.setString(5, dto.getContent());
-			pstmt.setString(6, dto.getCommunity());
 
 			result = pstmt.executeUpdate();
 
@@ -81,9 +82,9 @@ public class BoardsDAO {
 	}
 
 	// 전체데이터 가져오기
-	public List<BoardsDTO> getLists(int start, int end, String searchKey, String searchValue, String community) {
+	public List<QnaDTO> getLists(int start, int end, String searchKey, String searchValue) {
 
-		List<BoardsDTO> lists = new ArrayList<BoardsDTO>();
+		List<QnaDTO> lists = new ArrayList<>();
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -95,32 +96,33 @@ public class BoardsDAO {
 
 			sql = "select * from  (";
 			sql += "select rownum rnum,data.* from (";
-			sql += "select boardNum,userId,subject,hits,";
+			sql += "select boardNum,userId,productNum,subject,hits,";
 			sql += "to_char(postDate,'YYYY-MM-DD') postDate ";
 			// sql+= "from board order by num desc) data) ";
-			sql += "from boards where " + searchKey + " like ? and community=? order by boardNum desc) data) ";
+			sql += "from qna where " + searchKey + " like ? order by boardNum desc) data) ";
 			sql += "where rnum>=? and rnum<=?";
 
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, searchValue);
-			pstmt.setString(2, community);
-			pstmt.setInt(3, start);
-			pstmt.setInt(4, end);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
 
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 
-				BoardsDTO dto = new BoardsDTO();
+				QnaDTO dto = new QnaDTO();
 
 				dto.setBoardNum(rs.getInt("boardNum"));
 				dto.setUserId(rs.getString("userId"));
+				dto.setProductNum(rs.getInt("productNum"));
 				dto.setSubject(rs.getString("subject"));
 				dto.setHits(rs.getInt("hits"));
 				dto.setPostDate(rs.getString("postDate"));
-				dto.setRnum(rs.getInt("rnum"));
 
+				dto.setProductDTO(new ProductDAO(conn).getReadData(rs.getInt("productNum")));
+				
 				lists.add(dto);
 
 			}
@@ -137,7 +139,7 @@ public class BoardsDAO {
 	}
 
 	// 전체데이터의 갯수
-	public int getDataCount(String searchKey, String searchValue, String community) {
+	public int getDataCount(String searchKey, String searchValue) {
 
 		int dataCount = 0;
 
@@ -149,13 +151,12 @@ public class BoardsDAO {
 
 			searchValue = "%" + searchValue + "%";
 
-			sql = "select nvl(count(*),0) from boards ";
-			sql += "where " + searchKey + " like ? and community=?";
+			sql = "select nvl(count(*),0) from qna ";
+			sql += "where " + searchKey + " like ?";
 
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, searchValue);
-			pstmt.setString(2, community);
 
 			rs = pstmt.executeQuery();
 
@@ -176,17 +177,17 @@ public class BoardsDAO {
 	}
 
 	// boardNum으로 한개의 데이터 가져오기
-	public BoardsDTO getReadData(int boardNum) {
+	public QnaDTO getReadData(int boardNum) {
 
-		BoardsDTO dto = null;
+		QnaDTO dto = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql;
 
 		try {
 
-			sql = "select boardNum,userId,subject, content,postDate,";
-			sql += "community,hits from boards where boardNum=?";
+			sql = "select boardNum,userId,subject, content,postDate,hits ";
+			sql += "from qna where boardNum=?";
 
 			pstmt = conn.prepareStatement(sql);
 
@@ -196,15 +197,17 @@ public class BoardsDAO {
 
 			if (rs.next()) {
 
-				dto = new BoardsDTO();
+				dto = new QnaDTO();
 
 				dto.setBoardNum(rs.getInt("boardNum"));
 				dto.setUserId(rs.getString("userId"));
+				dto.setProductNum(rs.getInt("productNum"));
 				dto.setSubject(rs.getString("subject"));
 				dto.setContent(rs.getString("content"));
 				dto.setPostDate(rs.getString("postDate"));
-				dto.setCommunity(rs.getString("community"));
 				dto.setHits(rs.getInt("hits"));
+				
+				dto.setProductDTO(new ProductDAO(conn).getReadData(rs.getInt("productNum")));
 
 			}
 
@@ -228,7 +231,7 @@ public class BoardsDAO {
 
 		try {
 
-			sql = "update boards set hits = hits + 1 where boardNum=?";
+			sql = "update qna set hits = hits + 1 where boardNum=?";
 
 			pstmt = conn.prepareStatement(sql);
 
@@ -289,7 +292,7 @@ public class BoardsDAO {
 
 		try {
 
-			sql = "delete boards where boardNum=?";
+			sql = "delete qna where boardNum=?";
 
 			pstmt = conn.prepareStatement(sql);
 
