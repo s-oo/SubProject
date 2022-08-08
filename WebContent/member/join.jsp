@@ -63,11 +63,11 @@
 			return;
 		}
 		
-		if(!f.userEmail.value){
+		/* if(!f.userEmail.value){
 			alert("E-Mail 입력해 주세요.");
 			f.userEmail.focus();
 			return;
-		}
+		} */
 		f.action = "<%=cp%>/shop/member/join_ok.do"
 		f.submit();
 		
@@ -160,10 +160,10 @@
                   <div class="box row">
                   
                   <div class="box label">
-                        <label for="userId"><span>I&nbsp;&nbsp;D</span></label>
+                        <label for="userId" ><span >I&nbsp;&nbsp;D</span></label>
                      </div>
                    <div class="box input">
-                        <input type="text" name="userId" id="userId"placeholder="아이디"/>
+                        <input onKeyup="this.value=this.value.replace(/[^a-zA-Z0-9]/g,'');" type="text" name="userId" id="userId"placeholder="아이디"/>
                         <!-- <button type="button" onclick="id_check();">중복확인</button>
                         <input type="hidden" name="idDuplication" value="idUncheck"> -->
 
@@ -264,10 +264,10 @@
                   </div>
                   <div class="box row">
                      <div class="box label">
-                        <label for="userEmail"><span>E-MAIL</span></label>
+                        <label for="userEmail"><span>E-MAIL</span><a>(선택)</a></label>
                      </div>
                      <div class="box input">
-                        <input type="text" name="userEmail" id="userEmail" placeholder="이메일"/>
+                        <input type="text" name="userEmail" id="userEmail" placeholder="이메일 (선택사항)"/>
                      </div>
                   </div>
                 </div>

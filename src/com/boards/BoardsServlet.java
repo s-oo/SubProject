@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.boards.BoardsDTO;
 import com.orders.OrdersDAO;
 import com.orders.OrdersDTO;
 import com.product.ProductDAO;
@@ -47,6 +46,10 @@ public class BoardsServlet extends HttpServlet {
 		PrintWriter out = resp.getWriter();
 
 		Connection conn = DBConn.getConnection();
+		
+		NoticeDAO NoticeDAO = new NoticeDAO(conn);
+		QnaDAO QnaDAO = new QnaDAO(conn);
+		ReviewDAO ReviewDAO = new ReviewDAO(conn);
 
 		MyPage myPage = new MyPage();
 
@@ -83,7 +86,7 @@ public class BoardsServlet extends HttpServlet {
 				}
 			}
 
-			int dataCount = dao.getDataCount(searchKey, searchValue, community);
+			int dataCount = QnaDAO.getDataCount(searchKey, searchValue);
 
 			int numPerPage = 5;
 
@@ -96,7 +99,7 @@ public class BoardsServlet extends HttpServlet {
 			int start = (currentPage - 1) * numPerPage + 1;
 			int end = currentPage * numPerPage;
 
-			List<BoardsDTO> lists = dao.getLists(start, end, searchKey, searchValue, community);
+			List<QnaDTO> lists = QnaDAO.getLists(start, end, searchKey, searchValue);
 
 			String param = "";
 
@@ -151,7 +154,7 @@ public class BoardsServlet extends HttpServlet {
 				}
 			}
 
-			int dataCount = dao.getDataCount(searchKey, searchValue, community);
+			int dataCount = NoticeDAO.getDataCount(searchKey, searchValue);
 			
 			int numPerPage = 5;
 
@@ -164,7 +167,7 @@ public class BoardsServlet extends HttpServlet {
 			int start = (currentPage - 1) * numPerPage + 1;
 			int end = currentPage * numPerPage;
 
-			List<BoardsDTO> lists = dao.getLists(start, end, searchKey, searchValue, community);
+			List<NoticeDTO> lists = NoticeDAO.getLists(start, end, searchKey, searchValue);
 
 			String param = "";
 
@@ -219,7 +222,7 @@ public class BoardsServlet extends HttpServlet {
 				}
 			}
 
-			int dataCount = dao.getDataCount(searchKey, searchValue, community);
+			int dataCount = ReviewDAO.getDataCount(searchKey, searchValue);
 
 			int numPerPage = 5;
 
@@ -232,7 +235,7 @@ public class BoardsServlet extends HttpServlet {
 			int start = (currentPage - 1) * numPerPage + 1;
 			int end = currentPage * numPerPage;
 
-			List<BoardsDTO> lists = dao.getLists(start, end, searchKey, searchValue, community);
+			List<ReviewDTO> lists = ReviewDAO.getLists(start, end, searchKey, searchValue);
 
 			String param = "";
 
