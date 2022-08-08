@@ -68,7 +68,7 @@ public class ProductServlet extends HttpServlet{
 			
 			int dataCount = dao.getDataCount(searchKey, searchValue);
 			
-			int numPerPage = 3;
+			int numPerPage = 6;
 			
 			int totalPage = myPage.getPageCount(numPerPage, dataCount);
 			
