@@ -284,7 +284,7 @@ public class BoardsServlet extends HttpServlet {
 			NoticeDTO dto = NoticeDAO.getReadData(boardNum);
 
 			if (dto == null) {
-				url = cp + "/shop/notice.do";
+				url = cp + "/shop/boards/notice.do";
 
 				resp.sendRedirect(url);
 			}
@@ -315,20 +315,22 @@ public class BoardsServlet extends HttpServlet {
 			
 			int boardNum = Integer.parseInt(req.getParameter("boardNum"));
 			String pageNum = req.getParameter("pageNum");
-
+			int productNum = Integer.parseInt(req.getParameter("productNum"));//
+			
 			String searchKey = req.getParameter("searchKey");
 			String searchValue = req.getParameter("searchValue");
 
+			
 			if (searchValue != null && !searchValue.equals("")) {
 				searchValue = URLDecoder.decode(searchValue, "UTF-8");
 			}
 			
-			NoticeDAO.updatehits(boardNum);
+			QnaDAO.updatehits(boardNum);
 
-			NoticeDTO dto = NoticeDAO.getReadData(boardNum);
-
+			QnaDTO dto = QnaDAO.getReadData(boardNum);
+			dto.setProductNum(productNum);
 			if (dto == null) {
-				url = cp + "/shop/notice.do";
+				url = cp + "/shop/boards/qna.do";
 
 				resp.sendRedirect(url);
 			}
@@ -345,13 +347,18 @@ public class BoardsServlet extends HttpServlet {
 				param += "&searchValue=" + URLEncoder.encode(searchValue, "UTF-8");
 
 			}
-
+			System.out.println(boardNum);
+			System.out.println(pageNum);
+			System.out.println(productNum);
+			System.out.println(searchKey);
+			System.out.println(searchValue);
 			req.setAttribute("dto", dto);
 			req.setAttribute("params", param);
 			req.setAttribute("lineSu", lineSu);
 			req.setAttribute("pageNum", pageNum);
+			req.setAttribute("productNum", productNum);//
 
-			url = "/boards/noticeView.jsp";
+			url = "/boards/qnaView.jsp";
 			forward(req, resp, url);
 			
 			// review view
@@ -372,7 +379,7 @@ public class BoardsServlet extends HttpServlet {
 			ReviewDTO dto = ReviewDAO.getReadData(boardNum);
 
 			if (dto == null) {
-				url = cp + "/shop/review.do";
+				url = cp + "/shop/boards/review.do";
 
 				resp.sendRedirect(url);
 			}
@@ -438,7 +445,7 @@ public class BoardsServlet extends HttpServlet {
 				searchValue = URLDecoder.decode(searchValue, "UTF-8");
 			}
 			
-			NoticeDAO.deleteData(boardNum);
+			QnaDAO.deleteData(boardNum);
 			
 			String param = "pageNum=" + pageNum;
 			
@@ -450,7 +457,7 @@ public class BoardsServlet extends HttpServlet {
 			}
 			
 			url = "/sub/shop/boards/qna.do";
-			resp.sendRedirect(url);		
+			resp.sendRedirect(url);
 
 			// review Delete_ok
 		} else if (uri.indexOf("reviewDelete_ok.do") != -1) {
@@ -465,7 +472,7 @@ public class BoardsServlet extends HttpServlet {
 				searchValue = URLDecoder.decode(searchValue, "UTF-8");
 			}
 			
-			NoticeDAO.deleteData(boardNum);
+			ReviewDAO.deleteData(boardNum);
 			
 			String param = "pageNum=" + pageNum;
 			
@@ -477,7 +484,7 @@ public class BoardsServlet extends HttpServlet {
 			}
 			
 			url = "/sub/shop/boards/review.do";
-			resp.sendRedirect(url);			
+			resp.sendRedirect(url);
 
 			// Write
 		} 
