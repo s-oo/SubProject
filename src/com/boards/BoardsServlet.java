@@ -61,9 +61,77 @@ public class BoardsServlet extends HttpServlet {
 		if (sessionUserId != null) {
 			userId = sessionUserId;
 		}
-		
-			// QnA list
-		if (uri.indexOf("qna.do") != -1) {
+
+			// notice list
+		if (uri.indexOf("notice.do") != -1) {
+			
+			String community = "notice";
+			String pageNum = req.getParameter("pageNum");
+
+			int currentPage = 1;
+
+			if (pageNum != null) {
+				currentPage = Integer.parseInt(pageNum);
+			}
+
+			String searchKey = req.getParameter("searchKey");
+			String searchValue = req.getParameter("searchValue");
+
+			if (searchValue == null) {
+				searchKey = "subject";
+				searchValue = "";
+			} else {
+				if (req.getMethod().equalsIgnoreCase("GET")) {
+					searchValue = URLDecoder.decode(searchValue, "UTF-8");
+				}
+			}
+			
+			int dataCount = NoticeDAO.getDataCount(searchKey, searchValue);
+			
+			int numPerPage = 5;
+
+			int totalPage = myPage.getPageCount(numPerPage, dataCount);
+			
+			if (currentPage > totalPage) {
+				currentPage = totalPage;
+			}
+
+			int start = (currentPage - 1) * numPerPage + 1;
+			int end = currentPage * numPerPage;
+
+			List<NoticeDTO> lists = NoticeDAO.getLists(start, end, searchKey, searchValue);
+
+			String param = "";
+
+			if (searchValue != null && !searchValue.equals("")) {
+				param = "searchKey=" + searchKey;
+				param += "&searchValue=" + URLEncoder.encode(searchValue, "UTF-8");
+			}
+			
+			String listUrl = cp + "/shop/boards/notice.do";
+
+			if (!param.equals("")) {
+				listUrl += "?" + param;
+			}
+
+			String pageIndexList = myPage.pageIndexList(currentPage, totalPage, listUrl);
+
+			String viewUrl = cp + "/shop/boards/noticeView.do?pageNum=" + currentPage;
+
+			if (!param.equals("")) {
+				viewUrl += "&" + param;
+			}
+
+			req.setAttribute("lists", lists);
+			req.setAttribute("pageIndexList", pageIndexList);
+			req.setAttribute("viewUrl", viewUrl);
+			req.setAttribute("dataCount", dataCount);
+
+			url = "/boards/notice.jsp";
+			forward(req, resp, url);
+			
+		// QnA list
+		}else if (uri.indexOf("qna.do") != -1) {
 			
 			String community = "qna";
 			String pageNum = req.getParameter("pageNum");
@@ -128,74 +196,6 @@ public class BoardsServlet extends HttpServlet {
 			req.setAttribute("dataCount", dataCount);
 
 			url = "/boards/qna.jsp";
-			forward(req, resp, url);
-
-			// notice list
-		} else if (uri.indexOf("notice.do") != -1) {
-			
-			String community = "notice";
-			String pageNum = req.getParameter("pageNum");
-
-			int currentPage = 1;
-
-			if (pageNum != null) {
-				currentPage = Integer.parseInt(pageNum);
-			}
-
-			String searchKey = req.getParameter("searchKey");
-			String searchValue = req.getParameter("searchValue");
-
-			if (searchValue == null) {
-				searchKey = "subject";
-				searchValue = "";
-			} else {
-				if (req.getMethod().equalsIgnoreCase("GET")) {
-					searchValue = URLDecoder.decode(searchValue, "UTF-8");
-				}
-			}
-
-			int dataCount = NoticeDAO.getDataCount(searchKey, searchValue);
-			
-			int numPerPage = 5;
-
-			int totalPage = myPage.getPageCount(numPerPage, dataCount);
-
-			if (currentPage > totalPage) {
-				currentPage = totalPage;
-			}
-
-			int start = (currentPage - 1) * numPerPage + 1;
-			int end = currentPage * numPerPage;
-
-			List<NoticeDTO> lists = NoticeDAO.getLists(start, end, searchKey, searchValue);
-
-			String param = "";
-
-			if (searchValue != null && !searchValue.equals("")) {
-				param = "searchKey=" + searchKey;
-				param += "&searchValue=" + URLEncoder.encode(searchValue, "UTF-8");
-			}
-			
-			String listUrl = cp + "/shop/boards/notice.do";
-
-			if (!param.equals("")) {
-				listUrl += "?" + param;
-			}
-
-			String pageIndexList = myPage.pageIndexList(currentPage, totalPage, listUrl);
-
-			String viewUrl = cp + "/shop/boards/noticeView.do?pageNum=" + currentPage;
-
-			if (!param.equals("")) {
-				viewUrl += "&" + param;
-			}
-
-			req.setAttribute("lists", lists);
-			req.setAttribute("pageIndexList", pageIndexList);
-			req.setAttribute("viewUrl", viewUrl);
-			req.setAttribute("dataCount", dataCount);
-
-			url = "/boards/notice.jsp";
 			forward(req, resp, url);
 
 			// review list
@@ -266,12 +266,54 @@ public class BoardsServlet extends HttpServlet {
 			url = "/boards/review.jsp";
 			forward(req, resp, url);
 
+			// notice view
+		} else if (uri.indexOf("noticeView.do") != -1) {
+			
+			int boardNum = Integer.parseInt(req.getParameter("boardNum"));
+			String pageNum = req.getParameter("pageNum");
+
+			String searchKey = req.getParameter("searchKey");
+			String searchValue = req.getParameter("searchValue");
+
+			if (searchValue != null && !searchValue.equals("")) {
+				searchValue = URLDecoder.decode(searchValue, "UTF-8");
+			}
+			
+			NoticeDAO.updatehits(boardNum);
+
+			NoticeDTO dto = NoticeDAO.getReadData(boardNum);
+
+			if (dto == null) {
+				url = cp + "/shop/notice.do";
+
+				resp.sendRedirect(url);
+			}
+
+			int lineSu = dto.getContent().split("\n").length;
+
+			dto.setContent(dto.getContent().replaceAll("\r", "<br/>"));
+
+			String param = "pageNum=" + pageNum;
+
+			if (searchValue != null && !searchValue.equals("")) {
+
+				param += "&searchKey=" + searchKey;
+				param += "&searchValue=" + URLEncoder.encode(searchValue, "UTF-8");
+
+			}
+
+			req.setAttribute("dto", dto);
+			req.setAttribute("params", param);
+			req.setAttribute("lineSu", lineSu);
+			req.setAttribute("pageNum", pageNum);
+
+			url = "/boards/noticeView.jsp";
+			forward(req, resp, url);
+
 			// QnA view
 		} else if (uri.indexOf("qnaView.do") != -1) {
 
-			// notice view
-		} else if (uri.indexOf("noticeView.do") != -1) {
-
+			
 			// review view
 		} else if (uri.indexOf("reviewView.do") != -1) {
 			
