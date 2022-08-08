@@ -22,8 +22,8 @@ td {
 
 <script type="text/javascript" src="<%=cp%>/boards/js/util.js"></script>
 <script type="text/javascript">
-	function select(orderNum) {
-		window.opener.location.href = "<%=cp%>/shop/boards/reviewWrite.do?orderNum=" + orderNum;
+	function select(productNum) {
+		window.opener.location.href = "<%=cp%>/shop/boards/qnaWrite.do?productNum=" + productNum;
 		window.close();
 	}
 </script>
@@ -41,25 +41,17 @@ td {
 							</td>
 							<td id="productName">
 								${dto.productName }<br/>
-								<span class="productOption">[옵션 : ${dto.orderColor }/${dto.orderSize }]</span>
 							</td>
 							<td id="select">
 								<div style="border: 1px solid; width: 50px; padding: 5px;">
-									<a href="javascript:select(${dto.orderNum })">선택</a>
+									<a href="javascript:select(${dto.productNum })">선택</a>
 								</div>
 							</td>
 						</tr>
 					</c:forEach>
-					<c:if test="${empty list }">
-						<tr align="center">
-							<td>구입한 상품이 없습니다.</td>
-						</tr>
-					</c:if>
 				</tbody>
 			</table>
 		</form>
 	</div>
-	
-	
 </body>
 </html>

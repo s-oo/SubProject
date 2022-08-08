@@ -67,26 +67,9 @@ public class MemberServlet extends HttpServlet {
 
 				url = "/member/join.jsp";
 				forward(req, resp, url);
-//아이디 중복확인--------------------------------------------------
-			}/*else if(uri.indexOf("idCheck.do")!=-1){
-				
-				userId = req.getParameter("userId");
 
-				MemberDAO dao = new MemberDAO(conn)
-				boolean result = mService.selectIdCheck(userId);
-
-				RequestDispatcher view = req.getRequestDispatcher("/views/member/idCheck.jsp");
-				req.setAttribute("idCheck", result); // true 또는 false
-				req.setAttribute("userId", userId);	// jsp 페이지에서 id값을 사용할 수 있도록 보내줌
 				
-				view.forward(req, resp);
-				
-				
-				url = "/member/idCheck.jsp";
-				forward(req, resp, url);
-//-------------------------------------------------------------------		
-				// 회원가입 실행
-			}*/else if (uri.indexOf("join_ok.do") != -1) {
+			}else if (uri.indexOf("join_ok.do") != -1) {
 
 				int result;
 				MemberDTO dto = new MemberDTO();
