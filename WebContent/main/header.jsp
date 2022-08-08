@@ -22,9 +22,11 @@
 				<div id="display1" class="display">
 					<div class="display_elements">
 						<a href="/sub/shop/product/list.do">ALL</a><br/>
-						<a href="/sub/shop/product/list.do?productCategory=outer">OUTER</a><br />
-						<a href="/sub/shop/product/list.do?productCategory=top">TOP</a><br />
-						<a href="/sub/shop/product/list.do?productCategory=pants">PANTS</a><br />
+						<a href="/sub/shop/product/list.do?productCategory=outer">OUTER</a><br/>
+						<a href="/sub/shop/product/list.do?productCategory=top">TOP</a><br/>
+						<a href="/sub/shop/product/list.do?productCategory=bottom">BOTTOM</a><br/>
+						<a href="/sub/shop/product/list.do?productCategory=dress">DRESS</a><br/>
+						<a href="/sub/shop/product/list.do?productCategory=acc">ACC</a><br/>
 					</div>
 				</div>
 			</div>
