@@ -29,7 +29,7 @@
 		}
 		f.subject.value = str;
 		
-		f.action = "<%=cp%>/shop/boards/noticeWrite_ok.do";
+		f.action = "<%=cp%>/shop/boards/noticeUpdate_ok.do";
 		f.submit();
 		
 	}
@@ -60,10 +60,10 @@
 						<a href="<%=cp %>/shop/boards/notice.do">목록</a>
 					</div>
 					<div style="border: 1px solid; width: 50px; padding: 5px; float: right; margin-right: 30px;">
-						<a href="<%=cp %>/shop/boards/notice.do">취소</a>
+						<a href="<%=cp %>/shop/boards/noticeView.do?boardNum?=${dto.boardNum }">취소</a>
 					</div>
 					<div style="border: 1px solid; width: 50px; padding: 5px; float: right; margin-right: 10px;">
-						<a href="<%=cp %>/shop/boards/noticeWrite_ok.do">등록</a>
+						<a href="<%=cp %>/shop/boards/noticeWrite_ok.do">수정</a>
 					</div>
 				</div>
 			</div>
