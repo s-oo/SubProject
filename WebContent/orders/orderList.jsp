@@ -51,6 +51,9 @@
 								<td id="totalProductPrice">
 									${dto.productPrice * dto.orderQuantity }KRW
 								</td>
+								<td id="reviewWrite">
+									<a href="<%=cp %>/shop/boards/reviewWrite.do?orderNum=${dto.orderNum}">REVIEW</a>
+								</td>
 							</tr>
 							<c:set var="sum" value="${sum + dto.productPrice }"/>
 							<c:set var="tot" value="${tot + dto.productPrice }"/>

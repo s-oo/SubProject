@@ -31,7 +31,7 @@ td {
 </head>
 <body>
 	<div id="content" align="center" style="display: block; width:auto;">
-		<form action="" method="post" name="searchListForm">
+		<form action="" method="post" name="searchListForm" style="width: 900px;">
 			<table width="400px;">
 				<tbody>
 					<c:forEach var="dto" items="${list }">

@@ -80,7 +80,7 @@
 				</c:if>
 			</table>
 			<!-- 결제정보 -->
-			<div  id="right_area" style="display: inline-block; width: 300px; float: right; padding-right: 60px;">
+			<div id="right_area" style="display: inline-block; width: 300px; float: right; padding-right: 60px;">
 				<div class="box row" style="width: 300px;" align="left" >
 					<h3 style="margin: 0px;">결재정보</h3>
 				</div>
