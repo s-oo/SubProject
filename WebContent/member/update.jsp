@@ -31,44 +31,69 @@
 
 	function sendIt() {
 		var f = document.myForm;
+		
+		
+		
+		if(!f.userGender.value){
+			alert("성별을 입력해 주세요.");
+			f.userGender.focus();
+			return;
+		}
+		if(!f.userBirth[0].value){
+			alert("생년월일을 입력해 주세요.");
+			f.userBirth[0].focus();
+			return;
+		}
+		 if(!f.userBirth[1].value){
+			alert("월을 입력해 주세요.");
+			f.userBirth[1].focus();
+			return;
+		}
+		if(!f.userBirth[2].value){
+			alert("일을 입력해 주세요.");
+			f.userBirth[2].focus();
+			return;
+		}
+	
 			
 		f.action = "<%=cp%>/shop/member/update_ok.do";
 		f.submit();
 	}
-	</script>	
 	
+	</script>
 	
-	
-	<%-- <script type="text/javascript">
-	
-		function selected() {
-			var f = document.myForm;
-			var month = f.userBirth[];
-			var gender = f.userGender;
+<!-- <script type="text/javascript">
+	function selected() {
+		var f = document.myForm;
+		/* var month = f.userBirth[]; */
+		/* var gender = f.userGender; */
+		
+		for(i=0;i<12;i++){
 			
-			for(i=0;i<12;i++){
-				
-				if(month[1].value == <%=dto.getUserBirth() %>){
-					month[1].selected =true;
-				}
-				
-				
+			if(f.userBirth[i].value == ${dto.userBirth }){
+				f.userBirth[i].selected =true;
 			}
-			
-			for(i=0;i<4;i++){
-				
-				if(gender[i].value =="<%=dto.getUserGender()%>"){
-					gender[i].selected = true;
-				}
-			}
-			
 			
 			
 		}
+		
+		for(i=0;i<4;i++){
+			
+			if(f.userGender[i].value ==${dto.userGender}){
+				f.userGender[i].selected = true;
+			}
+		}
+		
+		
+		
+	}
+
+	
+
 	
 	
+	</script> -->
 	
-	</script> --%>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     function sample6_execDaumPostcode() {
@@ -125,7 +150,7 @@
 
 
 </head>
-<body >
+<body>
   <jsp:include page="../main/header.jsp"/>
    
    <div id="content" align="center">
@@ -163,6 +188,7 @@
 	                     </div>
 	                     <div class="box input">
 	                        <input type="password" name="userPwd" id="userName" value="${dto.userPwd }"/>
+	                        
 	                     </div>
              		</div>
                   	  <div class="box row">
@@ -170,7 +196,13 @@
 	                        <label for="userName"><span><b>GENDER</b></span></label>
 	                     </div>
 	                     <div class="box input">
-	                        <input type="text" name="userGender" id="userGender" value="${dto.userGender }"/>
+	                       <%--  <input type="text" name="userGender" id="userGender" value="${dto.userGender }"/> --%>
+	                       <select style="border: none; width: 80; height: 30; margin-left: -235px;" name="userGender">
+	                       		<option value="">선택</option>
+	                        	<option value="선택안함">선택안함</option>
+	                        	<option value="남자">남자</option>
+	                        	<option value="여자">여자</option>	                        
+	                        </select>
 	                     </div>
              		</div>
                    <div class="box row">
@@ -178,7 +210,8 @@
 	                        <label for="userBirth"><span><b>BIRTH</b></span></label>
 	                     </div>
 	                       <div class="box input">
-	                  		<input maxlength="4" style="width: 50px; vertical-align: middle;" type="text" name="userBirth" id="userBirth" placeholder="년도" value="${dto.userBirth[0] }"> 
+	                  		<input onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="4" style="width: 50px; vertical-align: middle;" 
+	                  		type="text" name="userBirth" id="userBirth" placeholder="년도" value="${dto.userBirth[0] }"> 
 		                  
 		                    <select style="border: none; width: 80; height: 30; margin-left: -330px;" name="userBirth" id="userBirth">
 							<option value="">월</option>
@@ -195,30 +228,30 @@
 							<option value="11">11</option>
 							<option value="12">12</option></select>
 							
-							<input maxlength="2" style="margin-left: 100px; width: 50px; vertical-align: middle;" type="text" name="userBirth" id="userBirth" placeholder="일" value="${dto.userBirth[2] }"/> 
+							<input onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="2" style="margin-left: 100px; width: 50px; vertical-align: middle;" type="text" name="userBirth" id="userBirth" placeholder="일" value="${dto.userBirth[2] }"/> 
                     
 	                    </div>
              		</div>
                   
                   <div class="box row" style="height: 110px;">
                      <div class="box label" style="height: 80px;">
-                        <label for="userAddress"><span><b>ADDRESS</b></span></label>
+                        <label  style="margin-left: -20px;"for="userAddress"><span><b>ADDRESS</b></span></label>
                      </div>
                      <div class="box input" style="padding: 0px;">
-                      <div class="box input" style="padding: 5px;">
+                      <div class="box input" style="padding: 5px; margin-left: -5px;">
                            <input type="text" name="userAddr" id="sample6_postcode" class="input-2" placeholder="우편번호" value="${dto.userAddr[0] }">
                            <input type="button" onclick="sample6_execDaumPostcode()" class="input-2 right" value="우편번호 찾기">
                         </div>
                        
-                        <div class="box input" style="padding: 5px;">
+                        <div class="box input" style="padding: 5px; margin-left: -5px;" >
                            <input type="text" name="userAddr" id="sample6_address" placeholder="주소" value="${dto.userAddr[1] }">
                         </div>
                        
-                        <div class="box input" style="padding: 5px;">
+                        <div class="box input" style="padding: 5px;margin-left: -5px;">
                            <input type="text" name="userAddr" id="sample6_detailAddress" placeholder="상세주소" value="${dto.userAddr[2] }">
                           <br>
                           
-                        <div class="box input" style="padding: 5px;">  
+                        <div class="box input" style="padding: 5px;margin-left: -5px;">  
                            <input type="text"  name="userAddr"id="sample6_extraAddress" placeholder="참고항목" value="${dto.userAddr[3] }">
                         </div>
                         </div>
