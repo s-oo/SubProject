@@ -37,15 +37,23 @@ p {
 	color: #484848;
 }
 
-.viewTitle{
-	font-size: 12pt;
-}
-
 .viewContent{
 	min-height: 120px;
 }
 
-.element{
+.button{
 	display: inline;
 	font-weight: 700;
+}
+
+.elementLeft{
+	float: left;
+}
+
+.elementRight{
+	float: right;
+}
+
+.element{
+	padding-right: 10pt;
 }
