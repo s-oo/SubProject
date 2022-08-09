@@ -83,12 +83,14 @@
 				<div class="elementLeft">
 						<a href="<%=cp %>/shop/boards/qna.do">LIST</a>
 				</div>
-				<div class="elementRight">
-					<a href="<%=cp %>/shop/boards/qnaUpdate.do?boardNum=${dto.boardNum }&${params }';"
-					class="element">EDIT</a>
-					<a href="<%=cp %>/shop/boards/qnaDelete_ok.do?boardNum=${dto.boardNum }&${params }';"
-					class="element">DELETE</a>
-				</div>
+				<c:if test="${dto.userId == userId }">
+					<div class="elementRight">
+						<a href="<%=cp %>/shop/boards/qnaUpdate.do?boardNum=${dto.boardNum }&${params }';"
+						class="element">EDIT</a>
+						<a href="<%=cp %>/shop/boards/qnaDelete_ok.do?boardNum=${dto.boardNum }&${params }';"
+						class="element">DELETE</a>
+					</div>
+				</c:if>
 			</div>
 		</div>
 

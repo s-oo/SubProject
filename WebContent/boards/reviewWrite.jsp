@@ -54,7 +54,7 @@
 							<img alt="noimage" src="<%=cp %>/boards/img/noimage.png" style="margin: 10px; display: inline;">
 							<div class="box">
 								<div style="border: 1px solid; width: 100px; padding: 5px;">
-									<a href="javascript:window.open('<%=cp %>/shop/boards/reviewSearchList.do','상품정보 선택','width=600, height=500, status=yes, top=100, left=100')">상품정보 선택</a>
+									<a href="javascript:window.open('<%=cp %>/shop/boards/reviewSearchList.do','상품정보 선택','width=600, height=800, status=yes, top=100, left=100')">상품정보 선택</a>
 								</div>
 							</div>
 						</c:if>

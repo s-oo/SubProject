@@ -100,6 +100,11 @@
 				</form>
 			</div>			
 		</div>
+		
+		<div class="elementRight" style="float: right;">
+			<a href="<%=cp %>/shop/boards/qnaWrite.do"
+			class="element">WRITE</a>
+		</div>
 	</div>
 </div>
 

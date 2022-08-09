@@ -80,7 +80,6 @@
 				<c:if test="${dataCount!=0 }">${pageIndexList }</c:if>
 			</p>
 		</div>
-		
 		<!-- search -->
 		<div id="sub_wrap">
 			<div id="sub">
@@ -97,8 +96,15 @@
 						</fieldset>
 					</div>
 				</form>
-			</div>			
+			</div>
 		</div>
+		
+		<c:if test="${userId == 'KRISTAL'}">
+			<div class="elementRight" style="float: right;">
+				<a href="<%=cp %>/shop/boards/noticeWrite.do?';"
+				class="element">WRITE</a>
+			</div>
+		</c:if>	
 	</div>
 </div>
 
