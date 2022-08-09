@@ -78,8 +78,7 @@ public class CommentsServlet extends HttpServlet {
 				out.print("</script>");
 			}
 
-			url = cp + "/shop/boards/" + community + "View.do?boardNum=" + boardNum;
-			resp.sendRedirect(url);
+			resp.sendRedirect(referer);
 
 		} else if (uri.indexOf("update_ok.do") != -1) {
 
@@ -100,8 +99,7 @@ public class CommentsServlet extends HttpServlet {
 				out.print("</script>");
 			}
 
-			url = cp + "/shop/boards/" + community + "View.do?boardNum=" + boardNum;
-			resp.sendRedirect(url);
+			resp.sendRedirect(referer);
 
 		} else if (uri.indexOf("delete_ok.do") != -1) {
 
@@ -117,8 +115,7 @@ public class CommentsServlet extends HttpServlet {
 				out.print("</script>");
 			}
 
-			url = cp + "/shop/boards/" + community + "View.do?boardNum=" + boardNum;
-			resp.sendRedirect(url);
+			resp.sendRedirect(referer);
 
 		}
 
