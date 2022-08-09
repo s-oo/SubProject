@@ -17,12 +17,10 @@
 
 <script type="text/javascript">
 	function chk() {
-		 var req = document.form.req.checked;
-		 var num = 0;
-		 if(req == true){
-		  num = 1;
-		 }
-		 if(num==1){
+		 var req1 = document.form.req2.checked;
+		 var req2 = document.form.req2.checked;
+	
+		 if(req1 == true && req2 == true){
 		  document.form.submit();
 		 }else{
 		  alert("개인정보 약관에 동의하셔야 합니다.");
@@ -46,7 +44,7 @@
 					<td width="100%" height="50%" align="center">
 						<ul class="terms_bx_list">
 							<li class="terms_bx"><span class="input_chk">
-								<input type="checkbox" id="termsService" name="req" class="chk">
+								<input type="checkbox" id="termsService" name="req1" class="chk">
 								<label for="termsService">Kristal 이용약관 동의
 								<span class="terms_necessary">(필수)</span>
 								</label>
@@ -403,7 +401,7 @@
 									</div>
 								</div></li>
 							<li class="terms_bx"><span class="input_chk"> <input
-									type="checkbox" id="termsPrivacy" name="req"
+									type="checkbox" id="termsPrivacy" name="req2"
 									class="chk"> <label for="termsPrivacy"
 									class="collect_personal">개인정보 수집 및 이용 동의<span
 										class="terms_choice">(필수)</span></label> <a href="#" id="termForChild"
@@ -556,7 +554,7 @@
 									</div>
 								</div></li>
 							<li class="terms_bx"><span class="input_chk"> <input
-									type="checkbox" id="termsLocation" name="req"
+									type="checkbox" id="termsLocation" name="req3"
 									value="Y" class="chk"> <label for="termsLocation">위치기반서비스
 										이용약관 동의<span class="terms_choice terms_no">(선택)</span>
 								</label>
