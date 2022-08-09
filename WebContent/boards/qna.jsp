@@ -92,6 +92,7 @@
 								<option value="subject">SUBJECT</option>
 								<option value="userId">ID</option>
 								<option value="content">CONTENT</option>
+								<option value="productNum">PRODUCTNUM</option>
 							</select>
 							<input type="text" name="searchValue" class="textField">
 							<input type="button" value="SEARCH" class="button" onclick="sendIt();"/>
