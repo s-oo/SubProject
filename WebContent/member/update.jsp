@@ -160,7 +160,7 @@
    
 
 
-<form action="" method="post" name="myForm">
+<form action="" method="post" name="myForm" >
 <div id="left_area" style="display: inline-block;" >
                <div id="update_area" style="width: 600px;">
                   <div class="box row">
@@ -179,16 +179,16 @@
 	                        <label for="userName"><span><b>NAME</b></span></label>
 	                     </div>
 	                     <div class="box input">
-	                        <input type="text" name="userName" id="userName" value="${dto.userName }"/>
+	                        <input type="text"  name="userName" id="userName" readonly="readonly" value="${dto.userName }"/>
 	                     </div>
              		</div>
                   
                     <div class="box row">
 	                     <div class="box label">
-	                        <label for="userName"><span><b>PASSWORD</b></span></label>
+	                        <label for="userName"><span><b>PASSWORD</b></span><a>(변경가능)</a></label>
 	                     </div>
-	                     <div class="box input">
-	                        <input type="password" name="userPwd" id="userName" value="${dto.userPwd }"/>
+	                     <div class="box input" style="border-top: 1px solid #DBDBDB; border-bottom: 1px solid #DBDBDB; border-left:1px solid #DBDBDB; border-right: 1px solid #DBDBDB;" >
+	                        <input  autofocus type="password" name="userPwd" id="userName" value="${dto.userPwd }"/>
 	                        
 	                     </div>
              		</div>
@@ -198,13 +198,13 @@
 	                     </div>
 	                     <div class="box input">
 	                      
-	                     
-	                   <select style="border: none; width: 80; height: 30; margin-left: -235px;" name="userGender" id="userGender">
+	                     <input type="text"  name="userGender" id="userGender" readonly="readonly" value="${dto.userGender }"/>
+	                  <!--  <select style="border: none; width: 80; height: 30; margin-left: -235px;" name="userGender" id="userGender">
 	                       		<option value="">선택</option>
 	                        	<option value="선택안함">선택안함</option>
 	                       		 <option value="남자" >남자</option>
 	                        	<option value="여자">여자</option>	                        
-	                        </select> 
+	                        </select>  -->
 	                     </div>
              		</div>
                    <div class="box row">
@@ -212,67 +212,60 @@
 	                        <label for="userBirth"><span><b>BIRTH</b></span></label>
 	                     </div>
 	                       <div class="box input">
-	                  		<input onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="4" style="width: 50px; vertical-align: middle;" 
+	                  		<input readonly="readonly" maxlength="4" style="width: 50px; vertical-align: middle;" 
 	                  		type="text" name="userBirth" id="userBirth" placeholder="년도" value="${dto.userBirth[0] }"> 
 		                  
-		                    <select style="border: none; width: 80; height: 30; margin-left: -330px;" name="userBirth" id="userBirth">
-							<option value="">월</option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>
-							<option value="9">9</option>
-							<option value="10">10</option>
-							<option value="11">11</option>
-							<option value="12">12</option></select>
+		                   <input readonly="readonly" maxlength="2" style="width: 50px; vertical-align: middle;" 
+	                  		type="text" name="userBirth" id="userBirth" placeholder="년도" value="${dto.userBirth[1] }"> 
 							
-							<input onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="2" style="margin-left: 100px; width: 50px; vertical-align: middle;" type="text" name="userBirth" id="userBirth" placeholder="일" value="${dto.userBirth[2] }"/> 
+							<input readonly="readonly" maxlength="2" style="margin-left: 100px; width: 50px; vertical-align: middle;" type="text" name="userBirth" id="userBirth" placeholder="일" value="${dto.userBirth[2] }"/> 
                     
 	                    </div>
              		</div>
-                  
-                  <div class="box row" style="height: 110px;">
-                     <div class="box label" style="height: 80px;">
-                        <label  style="margin-left: -20px;"for="userAddress"><span><b>ADDRESS</b></span></label>
+                 
+                  <div class="box row" style="height: 200px;">
+                     <div class="box label" >
+                        <label  style="margin-left: -20px;"for="userAddress"><span><b>ADDRESS</b></span><a>(변경가능)</a></label>
                      </div>
-                     <div class="box input" style="padding: 0px;">
-                      <div class="box input" style="padding: 5px; margin-left: -5px;">
-                           <input type="text" name="userAddr" id="sample6_postcode" class="input-2" placeholder="우편번호" value="${dto.userAddr[0] }">
+                     <div class="box input" >
+                      <div class="box input" style="width: 80px; padding: 5px; margin-left: -5px; border-top: 1px solid #DBDBDB; border-bottom: 1px solid #DBDBDB; border-left:1px solid #DBDBDB; border-right: 1px solid #DBDBDB;" >
+                           <input maxlength="6" type="text" name="userAddr" id="sample6_postcode" class="input-2" placeholder="우편번호" value="${dto.userAddr[0] }">
                            <input type="button" onclick="sample6_execDaumPostcode()" class="input-2 right" value="우편번호 찾기">
                         </div>
                        
                         <div class="box input" style="padding: 5px; margin-left: -5px;" >
-                           <input type="text" name="userAddr" id="sample6_address" placeholder="주소" value="${dto.userAddr[1] }">
+                           <input type="text" name="userAddr" id="sample6_address" placeholder="주소" value="${dto.userAddr[1] }"
+                           style="border-top: 1px solid #DBDBDB; border-bottom: 1px solid #DBDBDB; border-left:1px solid #DBDBDB; border-right: 1px solid #DBDBDB;">
                         </div>
                        
                         <div class="box input" style="padding: 5px;margin-left: -5px;">
-                           <input type="text" name="userAddr" id="sample6_detailAddress" placeholder="상세주소" value="${dto.userAddr[2] }">
+                           <input type="text" name="userAddr" id="sample6_detailAddress" placeholder="상세주소" value="${dto.userAddr[2] }"
+                           style="border-top: 1px solid #DBDBDB; border-bottom: 1px solid #DBDBDB; border-left:1px solid #DBDBDB; border-right: 1px solid #DBDBDB;">
                           <br>
                           
                         <div class="box input" style="padding: 5px;margin-left: -5px;">  
-                           <input type="text"  name="userAddr"id="sample6_extraAddress" placeholder="참고항목" value="${dto.userAddr[3] }">
+                           <input type="text" maxlength="50" name="userAddr"id="sample6_extraAddress" placeholder="참고항목" value="${dto.userAddr[3] }"
+                           style="border-top: 1px solid #DBDBDB; border-bottom: 1px solid #DBDBDB; border-left:1px solid #DBDBDB; border-right: 1px solid #DBDBDB;">
                         </div>
                         </div>
                      </div>
                   </div>
                 <div class="box row">
-                     <div class="box label">
-                        <label for="userTel"><span><b>TEL</b></span></label>
+                     <div class="box label" style="margin-top: 10px;">
+                        <label for="userTel"><span><b>TEL</b></span><a>(변경가능)</a></label>
                      </div>
                      <div class="box input">
-                        <input type="text" name="userTel" id="userTel" value="${dto.userTel }"/>
+                        <input type="text" name="userTel" id="userTel" value="${dto.userTel }"
+                        style="border-top: 1px solid #DBDBDB; border-bottom: 1px solid #DBDBDB; border-left:1px solid #DBDBDB; border-right: 1px solid #DBDBDB;"/>
                      </div>
                   </div>
                   <div class="box row">
                      <div class="box label">
-                        <label for="userEmail"><span><b>E-MAIL</b></span></label>
+                        <label for="userEmail"><span><b>E-MAIL</b></span><a>(변경가능)</a></label>
                      </div>
                      <div class="box input">
-                        <input type="text" name="userEmail" id="userEmail" value="${dto.userEmail }"/>
+                        <input type="text" name="userEmail" id="userEmail" value="${dto.userEmail }"
+                        style="border-top: 1px solid #DBDBDB; border-bottom: 1px solid #DBDBDB; border-left:1px solid #DBDBDB; border-right: 1px solid #DBDBDB;"/>
                      </div>
                   </div>
                 </div>
@@ -285,16 +278,14 @@
 						<b style="font-size: 17px; color: black;">뒤로가기</b>
 				</button>
 				&nbsp;&nbsp;
-				<button style="cursor:pointer; background-color: black; width: 200px; height: 50px;"
-					type="button" onclick="sendIt();"
+				<button style="cursor:pointer; background-color: black; width: 200px; height: 50px;" type="button" onclick="sendIt();"
 					onmouseover=this.style.backgroundColor='#6E6E6E' onmouseout=this.style.backgroundColor='black'>
 						<b style="font-size: 17px; color: white;">수정완료</b>
 				</button>	
 			</div>				
 			<br>
 				<div class="box input">	
-					<button style="cursor:pointer; border:0.5; background-color: white; width: 100px; height: 25px;"
-							type="button" onclick="javascript:location.href='<%=cp%>/shop/member/delete.do';"
+					<button style="cursor:pointer; border:0.5; background-color: white; width: 100px; height: 25px;" type="button" onclick="javascript:location.href='<%=cp%>/shop/member/delete.do';"
 							onmouseover=this.style.backgroundColor='#F0F0F0' onmouseout=this.style.backgroundColor='white'>
 						<b style="font-size: 13px; color: black;">회원탈퇴</b>
 					</button>

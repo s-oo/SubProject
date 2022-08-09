@@ -75,19 +75,7 @@
 		
 	}
 	
-	function checkNumber(event) {
-		  if(event.key >= 0 && event.key <= 9) {
-		    return true;
-		  }
-		  alert("0~9까지 숫자 4자리만 입력해주세요.")
-		  return false;
-		}
-	
-	function id_check() {
-		  //window.open("팝업될 문서 경로", "팝업될 문서 이름", "옵션");
-		  window.open("<%=cp%>/shop/member/idCheck.do", "idCheck", "width=600, height=200, left=200, top=100");
-		}
-	
+
 </script>
     
 
@@ -154,19 +142,19 @@
 	</div>
 	
 	<form action="" method="post" name="myForm">
-	
+	 
+	  
 	<div id="left_area" style="display: inline-block;" >
                <div id="update_area" style="width: 600px;">
                   <div class="box row">
+                
                   
                   <div class="box label">
                         <label for="userId" ><span >I&nbsp;&nbsp;D</span></label>
                      </div>
                    <div class="box input">
-                        <input onKeyup="this.value=this.value.replace(/[^a-zA-Z0-9]/g,'');" type="text" name="userId" id="userId"placeholder="아이디"/>
-                        <!-- <button type="button" onclick="id_check();">중복확인</button>
-                        <input type="hidden" name="idDuplication" value="idUncheck"> -->
-
+                        <input autofocus onKeyup="this.value=this.value.replace(/[^a-zA-Z0-9]/g,'');" type="text" name="userId" id="userId" placeholder="아이디"/>
+                     
                      </div>
                    </div>
                    <div class="box row">
@@ -174,7 +162,7 @@
 	                        <label for="userName"><span>PASSWORD</span></label>
 	                     </div>
 	                     <div class="box input">
-	                        <input type="text" name="userPwd" id="userPwd" placeholder="비밀번호"/>
+	                        <input type="password" name="userPwd" id="userPwd" placeholder="비밀번호"/>
 	                     </div>
              		</div>
                    
@@ -236,7 +224,7 @@
                      </div>
                      <div class="box input" style="padding: 0px;">
                       <div class="box input" style="padding: 5px; margin-left: -5px;">
-                           <input type="text" name="userAddr" id="sample6_postcode" class="input-2" placeholder="우편번호" ">
+                           <input maxlength="6" type="text" name="userAddr" id="sample6_postcode" class="input-2" placeholder="우편번호" ">
                            <input style="cursor:pointer; border: black; width: 80; height: 30; margin-left: -100px;" type="button" 
                            onclick="sample6_execDaumPostcode()" class="input-2 right" value="우편번호 찾기">
                         </div>
@@ -249,7 +237,7 @@
                            <input type="text" name="userAddr" id="sample6_detailAddress" placeholder="상세주소" >
                                                    
                         <div class="box input" style="padding: 5px; margin-left: -6px;">  
-                           <input type="text"  name="userAddr"id="sample6_extraAddress" placeholder="참고항목">
+                           <input type="text" maxlength="50"  name="userAddr"id="sample6_extraAddress" placeholder="참고항목">
                         </div>
                         </div>
                      </div>
