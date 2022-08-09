@@ -81,7 +81,7 @@
 			</div>
 			<div class="button">
 				<div class="elementLeft">
-						<a href="<%=cp %>/shop/boards/qna.do">LIST</a>
+					<a href="<%=cp %>/shop/boards/qna.do">LIST</a>
 				</div>
 				<c:if test="${dto.userId == userId }">
 					<div class="elementRight">
@@ -93,11 +93,118 @@
 				</c:if>
 			</div>
 		</div>
-
+		<br/>
+		<div class="boardContent" align="center">
+			<table border="0">
+				<colgroup>
+					<col style="width: 130px;">
+					<col style="width: auto;">
+				</colgroup>
+				<tbody>
+					<c:if test="${!empty commentsDTO }">
+						<tr class="viewTitle">
+							<td colspan="3">
+								<div class="name">
+									<p>${commentsDTO.userId } | ${commentsDTO.postDate }</p>
+								</div>
+							</td>
+						</tr>
+						<tr class="viewContents">
+							<td colspan="3">
+								<div class="">
+									<!-- CONTENT -->
+									<div class="viewContent" style="min-height: auto;">${commentsDTO.content }</div>
+								</div>
+							</td>
+						</tr>
+					</c:if>
+				</tbody>
+				<tfoot>
+					<tr class="viewTitle">
+						<td colspan="3">
+							<form action="" method="post" name="myForm">
+								<c:if test="${empty commentsDTO }">
+									<div class="name" id="msg">
+										<p>댓글이 존재하지 않습니다.</p>
+									</div>
+								</c:if>
+								<c:if test="${userId == 'KRISTAL'}">
+									<div class="name" id="textarea" style="display: none;">CONTENT
+										<textarea name="content" style="width: 600px; height: 130px; resize: none; border-color: #dfdfdf;">${commentsDTO.content }</textarea>
+									</div>
+									<div class="elementRight">
+										<c:if test="${empty commentsDTO }">
+											<a href="javascript:write()" class="element" id="write-bnt">WRITE</a>
+											<a href="javascript:sendItWrite()" class="element" id="register-bnt1" style="display: none;">REGISTER</a>
+											<a href="javascript:cancel1()" class="element" id="cancel-bnt1" style="display: none;">CANCEL</a>
+										</c:if>
+										<c:if test="${!empty commentsDTO }">
+											<a href="javascript:edit()" class="element" id="edit-bnt">EDIT</a>
+											<a href="javascript:sendItEdit)" class="element" id="delete-bnt">DELETE</a>
+											<a href="javascript:sendItDelete()" class="element" id="register-bnt2" style="display: none;">REGISTER</a>
+											<a href="javascript:cancel2()" class="element" id="cancel-bnt2" style="display: none;">CANCEL</a>
+										</c:if>
+									</div>
+								</c:if>
+								<input type="hidden" name="boardNum" value="${dto.boardNum }"/>
+								<input type="hidden" name="community" value="qna"/>
+							</form>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
 	</div>
 </div>
 
 <jsp:include page="../main/footer.jsp"/>
 
 </body>
+<script type="text/javascript">
+	function write() {
+		document.getElementById('msg').style.display = "none";
+		document.getElementById('textarea').style.display = "inline-block";
+		document.getElementById('write-bnt').style.display = "none";
+		document.getElementById('register-bnt1').style.display = "inline-block";
+		document.getElementById('cancel-bnt1').style.display = "inline-block";
+	}
+	function cancel1() {
+		document.getElementById('msg').style.display = "inline-block";
+		document.getElementById('textarea').style.display = "none";
+		document.getElementById('write-bnt').style.display = "inline-block";
+		document.getElementById('register-bnt1').style.display = "none";
+		document.getElementById('cancel-bnt1').style.display = "none";
+	}
+	function edit() {
+		document.getElementById('msg').style.display = "none";
+		document.getElementById('textarea').style.display = "inline-block";
+		document.getElementById('edit-bnt').style.display = "none";
+		document.getElementById('delete-bnt').style.display = "none";
+		document.getElementById('register-bnt2').style.display = "inline-block";
+		document.getElementById('cancel-bnt2').style.display = "inline-block";
+	}
+	function cancel2() {
+		document.getElementById('msg').style.display = "inline-block";
+		document.getElementById('textarea').style.display = "none";
+		document.getElementById('edit-bnt').style.display = "inline-block";
+		document.getElementById('delete-bnt').style.display = "inline-block";
+		document.getElementById('register-bnt2').style.display = "none";
+		document.getElementById('cancel-bnt2').style.display = "none";
+	}
+	function sendItWrite() {
+		var f = document.myForm;
+		f.action="<%=cp %>/shop/comments/write_ok.do";
+		f.submit();
+	}
+	function sendItEdit() {
+		var f = document.myForm;
+		f.action="<%=cp %>/shop/comments/upadte_ok.do";
+		f.submit();
+	}
+	function sendItDelete() {
+		var f = document.myForm;
+		f.action="<%=cp %>/shop/comments/delete_ok.do";
+		f.submit();
+	}
+</script>
 </html>

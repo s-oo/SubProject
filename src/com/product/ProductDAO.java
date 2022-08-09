@@ -263,7 +263,7 @@ public class ProductDAO {
 		try {
 			
 			sql = "select productNum,productName,productPrice,productCategory,";
-			sql+= "saveFileName,originalFileName,productSize,productColor ";
+			sql+= "saveFileName,originalFileName,productSize,productColor,description ";
 			sql+= "from product where productNum=?";
 			
 			pstmt = conn.prepareStatement(sql);
@@ -284,7 +284,7 @@ public class ProductDAO {
 				dto.setOriginalFileName(rs.getString("originalFileName").split(","));
 				dto.setProductSize(rs.getString("productSize").split(","));
 				dto.setProductColor(rs.getString("productColor").split(","));
-				
+				dto.setDescription(rs.getString("description"));
 			}
 			
 			rs.close();

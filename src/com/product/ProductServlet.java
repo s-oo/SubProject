@@ -159,6 +159,13 @@ public class ProductServlet extends HttpServlet{
 			int originalLength = dto.getOriginalFileName().length;
 			int sizeLength = dto.getProductSize().length;
 			int colorLength = dto.getProductColor().length;
+
+			String sessionUserId = (String) req.getSession().getAttribute("userId");
+			String userId = null;
+			
+			if (sessionUserId != null) {
+				userId = sessionUserId;
+			}
 			
 			req.setAttribute("dto", dto);
 			req.setAttribute("params", param);
@@ -168,6 +175,7 @@ public class ProductServlet extends HttpServlet{
 			req.setAttribute("originalLength", originalLength);
 			req.setAttribute("sizeLength", sizeLength);
 			req.setAttribute("colorLength", colorLength);
+			req.setAttribute("userId", userId);
 			
 			url = "/product/detail.jsp";
 			forward(req, resp, url);
