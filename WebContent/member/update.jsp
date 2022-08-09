@@ -154,15 +154,15 @@
 <body >
   <jsp:include page="../main/header.jsp"/>
    
-   <div id="content" align="center">
+   <div id="content" align="center" >
    
       
    
 
 
-<form action="" method="post" name="myForm" >
+<form action="" method="post" name="myForm" style="height: " >
 <div id="left_area" style="display: inline-block;" >
-               <div id="update_area" style="width: 600px;">
+               <div id="update_area" style="width: 600px; height: 1000px;">
                   <div class="box row">
                   
                   <div class="box label">
