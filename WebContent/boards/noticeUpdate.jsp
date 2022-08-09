@@ -40,33 +40,36 @@
 <body>
 	<jsp:include page="../main/header.jsp"/>
 		<div id="content" align="center">
-			<div style="display: inline-block; margin: auto;" align="left">
-				<div class="box row" style="margin: 0px; border-top: 1px solid #DBDBDB;">
-					<div class="box label"><label for="subject">SUBJECT</label></div>
-					<div class="box input"><input type="text" name="subject" value="${dto.subject }"></div>
-				</div>
-				<div class="box row" style="margin: 0px;">
-					<div class="box label"><label for="userId">ID</label></div>
-					<div class="box text">${dto.userId }</div>
-				</div>
-				<div class="box row">
-					<label for="userId">CONTENT</label><br/>
-					<div class="box input">
-						<textarea rows="" cols="">${dto.content }</textarea>
+			<form action="" method="post" name="myForm">
+				<div style="display: inline-block; margin: auto;" align="left">
+					<div class="box row" style="margin: 0px; border-top: 1px solid #DBDBDB;">
+						<div class="box label"><label for="subject">SUBJECT</label></div>
+						<div class="box input"><input type="text" name="subject" value="${dto.subject }"></div>
+					</div>
+					<div class="box row" style="margin: 0px;">
+						<div class="box label"><label for="userId">ID</label></div>
+						<div class="box text">${dto.userId }</div>
+					</div>
+					<div class="box row">
+						<label for="userId">CONTENT</label><br/>
+						<div class="box input">
+							<textarea rows="" cols="">${dto.content }</textarea>
+						</div>
+					</div>
+					<div class="box row" align="center">
+						<div style="border: 1px solid; width: 50px; padding: 5px; float: left; margin-left: 30px;">
+							<a href="<%=cp %>/shop/boards/notice.do">목록</a>
+						</div>
+						<div style="border: 1px solid; width: 50px; padding: 5px; float: right; margin-right: 30px;">
+							<a href="<%=cp %>/shop/boards/noticeView.do?boardNum?=${dto.boardNum }">취소</a>
+						</div>
+						<div style="border: 1px solid; width: 50px; padding: 5px; float: right; margin-right: 10px;">
+							<a href="<%=cp %>/shop/boards/noticeWrite_ok.do">수정</a>
+							<input type="hidden" name="boardNum" value="${dto.boardNum }"/>
+						</div>
 					</div>
 				</div>
-				<div class="box row" align="center">
-					<div style="border: 1px solid; width: 50px; padding: 5px; float: left; margin-left: 30px;">
-						<a href="<%=cp %>/shop/boards/notice.do">목록</a>
-					</div>
-					<div style="border: 1px solid; width: 50px; padding: 5px; float: right; margin-right: 30px;">
-						<a href="<%=cp %>/shop/boards/noticeView.do?boardNum?=${dto.boardNum }">취소</a>
-					</div>
-					<div style="border: 1px solid; width: 50px; padding: 5px; float: right; margin-right: 10px;">
-						<a href="<%=cp %>/shop/boards/noticeWrite_ok.do">수정</a>
-					</div>
-				</div>
-			</div>
+			</form>
 		</div>
 	<jsp:include page="../main/footer.jsp"/>
 </body>

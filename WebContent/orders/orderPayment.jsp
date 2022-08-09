@@ -87,11 +87,6 @@
 			f.deliveryTel.focus();
 			return;
 		}
-		if(!f.deliveryEmail.value) {
-			alert('이메일을 입력해주세요');
-			f.deliveryEmail.focus();
-			return;
-		}
 		
 		f.action = "<%=cp%>/shop/orders/orderPayment_ok.do";
 		f.submit();

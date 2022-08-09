@@ -22,7 +22,7 @@ public class MemberDAO {
 
 		try {
 
-			sql = "insert into member values(?,?,?,?,?,?,?,?)";
+			sql = "insert into member values(?,?,?,?,?,?,?,?,1)";
 
 			pstmt=conn.prepareStatement(sql);
 
@@ -31,8 +31,8 @@ public class MemberDAO {
 			pstmt.setString(3, dto.getUserName());
 			pstmt.setString(4, dto.getUserGender());
 			pstmt.setString(5, String.join(",", dto.getUserBirth()));
-			pstmt.setString(6, String.join(",", dto.getUserAddr()));			
-			pstmt.setString(7, String.join(",", dto.getUserEmail()));
+			pstmt.setString(6, String.join("/", dto.getUserAddr()));			
+			pstmt.setString(7, dto.getUserEmail());
 			pstmt.setString(8, dto.getUserTel());
 
 			result=pstmt.executeUpdate();
@@ -57,7 +57,7 @@ public class MemberDAO {
 		try {
 
 			sql = "update member set userPwd=?, userName=?, userGender=?, userBirth=?  , userAddr=?, userEmail=?, userTel=? ";
-			sql +="where userId=?";
+			sql +="where userId=? and registration = 1";
 
 
 			pstmt=conn.prepareStatement(sql);
@@ -66,8 +66,8 @@ public class MemberDAO {
 			pstmt.setString(2, dto.getUserName());
 			pstmt.setString(3, dto.getUserGender());
 			pstmt.setString(4, String.join(",", dto.getUserBirth()));
-			pstmt.setString(5, String.join(",", dto.getUserAddr()));			
-			pstmt.setString(6, String.join(",", dto.getUserEmail()));
+			pstmt.setString(5, String.join("/", dto.getUserAddr()));			
+			pstmt.setString(6,  dto.getUserEmail());
 			pstmt.setString(7, dto.getUserTel());
 			pstmt.setString(8, dto.getUserId());
 
@@ -94,8 +94,9 @@ public class MemberDAO {
 
 		try {
 
-			sql = "delete member where userId=?";
-
+			sql = "update member set userPwd = null, userName = null, userGender = null, userBirth = null, ";
+			sql += "userAddr = null, userEmail = null, userTel = null, registration = 0 ";
+			sql += "where userId=?";
 
 			pstmt=conn.prepareStatement(sql);
 
@@ -127,7 +128,7 @@ public class MemberDAO {
 
 		try {
 			sql = "select userId,userPwd,userName,userGender,to_char(userBirth,'YYYY,MM,DD') userBirth,";
-			sql+= "userAddr,userEmail,userTel from member where userName=?";
+			sql+= "userAddr,userEmail,userTel from member where userName=? and registration = 1";
 
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, userName);
@@ -143,7 +144,7 @@ public class MemberDAO {
 				dto.setUserName(rs.getString("userName"));
 				dto.setUserGender(rs.getString("userGender"));
 				dto.setUserBirth(rs.getString("userBirth").split(","));
-				dto.setUserAddr(rs.getString("userAddr").split(","));
+				dto.setUserAddr(rs.getString("userAddr").split("/"));
 				dto.setUserEmail(rs.getString("userEmail"));
 				dto.setUserTel(rs.getString("userTel"));				
 			}
@@ -171,7 +172,7 @@ public class MemberDAO {
 
 		try {
 			sql = "select userId,userPwd,userName,userGender,to_char(userBirth,'YYYY,MM,DD') userBirth,";
-			sql+= "userAddr,userEmail,userTel from member where userId=?";
+			sql+= "userAddr,userEmail,userTel from member where userId=? and registration = 1";
 
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
@@ -187,7 +188,7 @@ public class MemberDAO {
 				dto.setUserName(rs.getString("userName"));
 				dto.setUserGender(rs.getString("userGender"));
 				dto.setUserBirth(rs.getString(5).split(","));
-				dto.setUserAddr(rs.getString("userAddr").split(","));
+				dto.setUserAddr(rs.getString("userAddr").split("/"));
 				dto.setUserEmail(rs.getString("userEmail"));
 				dto.setUserTel(rs.getString("userTel"));				
 			}
