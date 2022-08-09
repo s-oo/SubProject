@@ -63,7 +63,7 @@
 						<td>${dto.boardNum }</td>
 						<!-- SUBJECT -->
 						<td>
-						<a href="${viewUrl }&boardNum=${dto.boardNum}">${dto.subject }</a>
+						<a href="${viewUrl }&boardNum=${dto.boardNum}&orderNum=${dto.orderNum}">${dto.subject }</a>
 						</td>
 						<!-- ID -->
 						<td>${dto.userId }</td>

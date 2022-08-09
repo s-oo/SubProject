@@ -315,12 +315,10 @@ public class BoardsServlet extends HttpServlet {
 			
 			int boardNum = Integer.parseInt(req.getParameter("boardNum"));
 			String pageNum = req.getParameter("pageNum");
-			int productNum = Integer.parseInt(req.getParameter("productNum"));//
-			
+
 			String searchKey = req.getParameter("searchKey");
 			String searchValue = req.getParameter("searchValue");
 
-			
 			if (searchValue != null && !searchValue.equals("")) {
 				searchValue = URLDecoder.decode(searchValue, "UTF-8");
 			}
@@ -328,7 +326,7 @@ public class BoardsServlet extends HttpServlet {
 			QnaDAO.updatehits(boardNum);
 
 			QnaDTO dto = QnaDAO.getReadData(boardNum);
-			dto.setProductNum(productNum);
+
 			if (dto == null) {
 				url = cp + "/shop/boards/qna.do";
 
@@ -347,16 +345,11 @@ public class BoardsServlet extends HttpServlet {
 				param += "&searchValue=" + URLEncoder.encode(searchValue, "UTF-8");
 
 			}
-			System.out.println(boardNum);
-			System.out.println(pageNum);
-			System.out.println(productNum);
-			System.out.println(searchKey);
-			System.out.println(searchValue);
+
 			req.setAttribute("dto", dto);
 			req.setAttribute("params", param);
 			req.setAttribute("lineSu", lineSu);
 			req.setAttribute("pageNum", pageNum);
-			req.setAttribute("productNum", productNum);//
 
 			url = "/boards/qnaView.jsp";
 			forward(req, resp, url);
