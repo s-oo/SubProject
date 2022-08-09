@@ -196,6 +196,14 @@
 							<div>
 								<a href="#none" class="add_button" onclick="sendItCartList();">ADD TO BAG</a>
 							</div>
+							
+							<div>
+							<br/>
+							<br/>
+							<p>${dto.description}</p>
+							
+							</div>
+							
 						</div>
 					</div>
 				</div>
