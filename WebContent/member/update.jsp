@@ -166,7 +166,7 @@
                   <div class="box row">
                   
                   <div class="box label">
-                        <label for="userName"><span><b>I&nbsp;&nbsp;D</b></span></label>
+                        <label for="userName"><span>ID</span></label>
                      </div>
                    <div class="box input">
                         <input type="text" name="userId" id="userId"  readonly="readonly" value="${dto.userId }" />
@@ -176,7 +176,7 @@
                    
                     <div class="box row">
 	                     <div class="box label">
-	                        <label for="userName"><span><b>NAME</b></span></label>
+	                        <label for="userName"><span>NAME</span></label>
 	                     </div>
 	                     <div class="box input">
 	                        <input type="text"  name="userName" id="userName" readonly="readonly" value="${dto.userName }"/>
@@ -185,7 +185,7 @@
                   
                     <div class="box row">
 	                     <div class="box label">
-	                        <label for="userName"><span><b>PASSWORD</b></span><a>(변경가능)</a></label>
+	                        <label for="userName"><span>PASSWORD</span><a>(변경가능)</a></label>
 	                     </div>
 	                     <div class="box input" style="border-top: 1px solid #DBDBDB; border-bottom: 1px solid #DBDBDB; border-left:1px solid #DBDBDB; border-right: 1px solid #DBDBDB;" >
 	                        <input  autofocus type="password" name="userPwd" id="userName" value="${dto.userPwd }"/>
@@ -194,7 +194,7 @@
              		</div>
                   	  <div class="box row">
 	                     <div class="box label">
-	                        <label for="userName"><span><b>GENDER</b></span></label>
+	                        <label for="userName"><span>GENDER</span></label>
 	                     </div>
 	                     <div class="box input">
 	                      
@@ -209,7 +209,7 @@
              		</div>
                    <div class="box row">
 	                     <div class="box label">
-	                        <label for="userBirth"><span><b>BIRTH</b></span></label>
+	                        <label for="userBirth"><span>BIRTH</span></label>
 	                     </div>
 	                       <div class="box input">
 	                  		<input readonly="readonly" maxlength="4" style="width: 50px; vertical-align: middle;" 
@@ -218,14 +218,14 @@
 		                   <input readonly="readonly" maxlength="2" style="width: 50px; vertical-align: middle;" 
 	                  		type="text" name="userBirth" id="userBirth" placeholder="년도" value="${dto.userBirth[1] }"> 
 							
-							<input readonly="readonly" maxlength="2" style="margin-left: 100px; width: 50px; vertical-align: middle;" type="text" name="userBirth" id="userBirth" placeholder="일" value="${dto.userBirth[2] }"/> 
+							<input readonly="readonly" maxlength="2" style="margin-left: 1px; width: 50px; vertical-align: middle;" type="text" name="userBirth" id="userBirth" placeholder="일" value="${dto.userBirth[2] }"/> 
                     
 	                    </div>
              		</div>
                  
                   <div class="box row" style="height: 200px;">
                      <div class="box label" >
-                        <label  style="margin-left: -20px;"for="userAddress"><span><b>ADDRESS</b></span><a>(변경가능)</a></label>
+                        <label  style="margin-left: -20px;"for="userAddress"><span>ADDRESS</span><a>(변경가능)</a></label>
                      </div>
                      <div class="box input" >
                       <div class="box input" style="width: 80px; padding: 5px; margin-left: -5px; border-top: 1px solid #DBDBDB; border-bottom: 1px solid #DBDBDB; border-left:1px solid #DBDBDB; border-right: 1px solid #DBDBDB;" >
@@ -252,7 +252,7 @@
                   </div>
                 <div class="box row">
                      <div class="box label" style="margin-top: 10px;">
-                        <label for="userTel"><span><b>TEL</b></span><a>(변경가능)</a></label>
+                        <label for="userTel"><span>TEL</span><a>(변경가능)</a></label>
                      </div>
                      <div class="box input">
                         <input type="text" name="userTel" id="userTel" value="${dto.userTel }"
@@ -261,7 +261,7 @@
                   </div>
                   <div class="box row">
                      <div class="box label">
-                        <label for="userEmail"><span><b>E-MAIL</b></span><a>(변경가능)</a></label>
+                        <label for="userEmail"><span>E-MAIL</span><a>(변경가능)</a></label>
                      </div>
                      <div class="box input">
                         <input type="text" name="userEmail" id="userEmail" value="${dto.userEmail }"
@@ -272,20 +272,20 @@
             </div>
 				<br><br>
 			<div align="center">	
-				<button  style="cursor:pointer; border:0.5; background-color: white; width: 200px; height: 50px;"
+				<button  style="cursor:pointer; border:0.5; background-color: white; width: 140px; height: 50px;"
 					type="button" onclick="javascript:history.back();"
 					onmouseover=this.style.backgroundColor='#F0F0F0' onmouseout=this.style.backgroundColor='white'>
-						<b style="font-size: 17px; color: black;">뒤로가기</b>
+						<b style="font-size: 15px; color: black;">뒤로가기</b>
 				</button>
 				&nbsp;&nbsp;
-				<button style="cursor:pointer; background-color: black; width: 200px; height: 50px;" type="button" onclick="sendIt();"
+				<button style="cursor:pointer; background-color: black; width: 140px; height: 50px;" type="button" onclick="sendIt();"
 					onmouseover=this.style.backgroundColor='#6E6E6E' onmouseout=this.style.backgroundColor='black'>
-						<b style="font-size: 17px; color: white;">수정완료</b>
+						<b style="font-size: 15px; color: white;">수정완료</b>
 				</button>	
 			</div>				
 			<br>
 				<div class="box input">	
-					<button style="cursor:pointer; border:0.5; background-color: white; width: 100px; height: 25px;" type="button" onclick="javascript:location.href='<%=cp%>/shop/member/delete.do';"
+					<button style="cursor:pointer; border:0.5; background-color: white; width: 100px; height: 50px;" type="button" onclick="javascript:location.href='<%=cp%>/shop/member/delete.do';"
 							onmouseover=this.style.backgroundColor='#F0F0F0' onmouseout=this.style.backgroundColor='white'>
 						<b style="font-size: 13px; color: black;">회원탈퇴</b>
 					</button>
