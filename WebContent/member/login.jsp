@@ -50,7 +50,7 @@
                   <div class="box row">
                   
                   <div class="box label">
-                        <label for="userId" ><span><a style=" font-size: 8px; color: #484848;" >MEMBER&nbsp;ID</a></span></label>
+                        <label for="userId" ><span><a style=" font-size: 8px; color: #484848; margin-left: 30px;" >MEMBER&nbsp;ID</a></span></label>
                      </div>
                    <div class="box input">
                         <input maxlength="20" type="text" name="userId" id="userId" autofocus />
@@ -61,7 +61,7 @@
 					 <div class="box row">
                   
 	                  <div class="box label">
-	                        <label for="userPwd" ><span><a style=" font-size: 8px; color: #484848;" >PASSWORD</a></span></label>
+	                        <label for="userPwd" ><span><a style=" font-size: 8px; color: #484848; margin-left: 30px;" >PASSWORD</a></span></label>
 	                     </div>
 	                   <div class="box input">
 	                        <input maxlength="20" type="password" name="userPwd" id="userPwd"/>
@@ -72,14 +72,14 @@
 				</div>
 			</div>
 			<div align="center">	
-				<button   style=" cursor:pointer; margin-top:10PX; border:1px solid #BDBDBD; background-color: #FFFFFF; width: 200px; line-height: 48px;" type="button" onclick="login();" 
+				<button   style=" cursor:pointer; margin-top:-10PX; border:1px solid #BDBDBD; background-color: #FFFFFF; width: 200px; line-height: 48px;" type="button" onclick="login();" 
 				onmouseover=this.style.backgroundColor='#F0F0F0' onmouseout=this.style.backgroundColor='white'>
 						<a style=" font-size: 8px; color: #484848;" >SIGN IN</a>
 				</button>				
 			</div>
 				
 				
-			<div  style="font-size: 11px; margin-top: 10px; margin-left: 300px;   text-align:center; ">
+			<div  style="font-size: 11px; margin-top: 10px; margin-left: 10px;   text-align:center; ">
 				<a href="<%=cp%>/shop/member/findId.do" style="font-size: 8px; ">SEARCH&nbsp;ID</a> <span>/&nbsp;</span> 
 				<a href="<%=cp%>/shop/member/find.do" style="font-size: 8px; ">PASSWORD</a>
 			</div>	
