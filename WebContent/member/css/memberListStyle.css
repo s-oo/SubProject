@@ -47,6 +47,114 @@ b {
    width: 100px;
 }
 
+
+#userId{
+	
+	display: inline-block;
+    width: 200px;
+    font-size: 13px;
+    border: none;
+    float: left;
+    outline: none;
+}
+
+#userName {
+	
+	display: inline-block;
+    width: 300px;
+    font-size: 13px;
+    border: none;
+    float: left;
+    outline: none;
+    
+    
+
+
+
+	
+}
+
+#userGender{
+	display: inline-block;
+    width: 300px;
+    font-size: 13px;
+    border: none;
+    float: left;
+    outline: none;
+}
+#userGender{
+	display: inline-block;
+    width: 300px;
+    font-size: 13px;
+    border: none;
+    float: left;
+    outline: none;
+}
+#userBirth{
+	display: inline-block;
+    width: 300px;
+    font-size: 13px;
+    border: none;
+    float: left;
+    outline: none;
+}
+#userAddress{
+	display: inline-block;
+    width: 100px;
+    font-size: 13px;
+    border: none;
+    float: ;
+    outline: none;
+}
+#userAddr{
+	display: inline-block;
+    width: 200px;
+    font-size: 13px;
+    border: none;
+    float: left;
+    outline: none;
+}
+#userTel{
+	display: inline-block;
+    width: 150px;
+    font-size: 13px;
+    border: none;
+    float: left;
+    outline: none;
+}
+#userEmail{
+	display: inline-block;
+    width: 150px;
+    font-size: 13px;
+    border: none;
+    float: left;
+    outline: none;
+}
+
+#sample6_address{
+	display: inline-block;
+    width: 200px;
+    font-size: 13px;
+    border: none;
+    float: left;
+    outline: none;
+}
+#sample6_detailAddress{
+	display: inline-block;
+    width: 200px;
+    font-size: 13px;
+    border: none;
+    float: left;
+    outline: none;
+}
+#sample6_extraAddress{
+	display: inline-block;
+    width: 200px;
+    font-size: 13px;
+    border: none;
+    float: left;
+    outline: none;
+}
 td {
    width: 150px;
    
@@ -90,15 +198,16 @@ label span {
 }
 
 .box.input {
-   width: 300px;
+   width: 195px;
    vertical-align: middle;
-   font: 8px 'S-CoreDream-3Light','NeueHaasDisplay','Roboto','Noto Sans KR','Helvetica','Malgun Gothic',sans-serif;
-   height: 20px;
+   font: 10px 'S-CoreDream-3Light','NeueHaasDisplay','Roboto','Noto Sans KR','Helvetica','Malgun Gothic',sans-serif;
+   height: 25px;
+  
 }
 
 
 .update.input {
-   width: 300px;
+   width: 200px;
    vertical-align: middle;
    font: 8px 'S-CoreDream-3Light','NeueHaasDisplay','Roboto','Noto Sans KR','Helvetica','Malgun Gothic',sans-serif;
    height: 20px;
@@ -131,16 +240,16 @@ label span {
 input {
    display: inline-block;
    width: 300px;
-   font-size: 15px;
+   font-size: 13px;
    border: none;
    float: left;
    outline: none;
 }
 
 input.input-2 {
-   width: 110px;
+   width: 85px;
    vertical-align: middle;
-   padding-right: 30px;
+   padding-right: 20px;
 }
 
 .input-2.right {

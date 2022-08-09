@@ -50,7 +50,7 @@
                   <div class="box row">
                   
                   <div class="box label">
-                        <label for="userId" ><span><a style=" font-size: 8px; color: #484848;" >MEMBER&nbsp;I&nbsp;D</a></span></label>
+                        <label for="userId" ><span><a style=" font-size: 8px; color: #484848;" >MEMBER&nbsp;ID</a></span></label>
                      </div>
                    <div class="box input">
                         <input maxlength="20" type="text" name="userId" id="userId" autofocus />
