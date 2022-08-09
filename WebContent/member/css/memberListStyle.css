@@ -81,7 +81,7 @@ td {
   text-decoration: none;
     color: #000000;
     font-size: 8pt;
-  font-style: italic;
+  font-style: normal;
   text-align: left;
   
 }
@@ -94,6 +94,20 @@ label span {
    vertical-align: middle;
    font: 8px 'S-CoreDream-3Light','NeueHaasDisplay','Roboto','Noto Sans KR','Helvetica','Malgun Gothic',sans-serif;
    height: 20px;
+}
+
+
+.update.input {
+   width: 300px;
+   vertical-align: middle;
+   font: 8px 'S-CoreDream-3Light','NeueHaasDisplay','Roboto','Noto Sans KR','Helvetica','Malgun Gothic',sans-serif;
+   height: 20px;
+   border-top: 1px solid #DBDBDB; 
+   border-bottom: 1px solid #DBDBDB; 
+   border-left:1px solid #DBDBDB; 
+   border-right: 1px solid #DBDBDB;"
+   
+   
 }
 
 .box.op {

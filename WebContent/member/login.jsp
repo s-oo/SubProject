@@ -53,7 +53,9 @@
                         <label for="userId" ><span><a style=" font-size: 8px; color: #484848;" >MEMBER&nbsp;I&nbsp;D</a></span></label>
                      </div>
                    <div class="box input">
-                        <input type="text" name="userId" id="userId" />
+                        <input maxlength="20" type="text" name="userId" id="userId" autofocus />
+                    
+                        
                      </div>
                    </div>
 					 <div class="box row">
@@ -62,7 +64,7 @@
 	                        <label for="userPwd" ><span><a style=" font-size: 8px; color: #484848;" >PASSWORD</a></span></label>
 	                     </div>
 	                   <div class="box input">
-	                        <input type="password" name="userPwd" id="userPwd"/>
+	                        <input maxlength="20" type="password" name="userPwd" id="userPwd"/>
                      </div>
                    </div>
 				
