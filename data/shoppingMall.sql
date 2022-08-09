@@ -205,9 +205,6 @@ INSERT INTO PRODUCT VALUES(18,'Terry tube top',58500,'top','23c5def6d90b1e6e3af6
 ||CHR(10)||CHR(13)||'[COTTON 82% POLYESTER 18%]'||CHR(10)||CHR(13)||'? DRY CLEAN ONLY'||CHR(10)||CHR(13)||
 '? DO NOT TUMBLE DRY'||CHR(10)||CHR(13)||'? DO NOT BLEACH');
 
-
-
-
 INSERT INTO PRODUCT VALUES(19,'Classic wool slacks',133200,'bottom','60e28027cd1babf9096f1c8a60f3787a.jpg,34a4492a43ceba35053d9496114f6f70.jpg,7d5ec2242375b8f62930f56a045150fe.jpg,71c0dd292b3642363956ef7e13275991.jpg,1f5a7446ba7df7001f2def2726854bba.jpg,3ac655a9876de550d8b59e74ca7147e8.jpg','60e28027cd1babf9096f1c8a60f3787a.jpg,34a4492a43ceba35053d9496114f6f70.jpg,7d5ec2242375b8f62930f56a045150fe.jpg,71c0dd292b3642363956ef7e13275991.jpg,1f5a7446ba7df7001f2def2726854bba.jpg,3ac655a9876de550d8b59e74ca7147e8.jpg','CHARCOAL','SMALL,MEDIUM,LARGE',
 '클래식한 디자인의 슬랙스입니다.'||CHR(10)||CHR(13)||'도톰한 울 혼방 소재로 보온성을 자랑하며,' ||CHR(10)||CHR(13)||
 '딱 떨어지는 핏으로 한층 더 고급스러운 룩을 완성시켜줄 상품입니다.'||CHR(10)||CHR(13)||
@@ -253,9 +250,6 @@ INSERT INTO PRODUCT VALUES(27,'Terry half sweat pants',67500,'bottom','f1d3b64a5
 '부드럽고 시원한 테리소재가 편안한 착용감을 자랑하는 제품입니다.' ||CHR(10)||CHR(13)||'[COTTON 82% POLYESTER 18%]'
  ||CHR(10)||CHR(13)||'? DRY CLEAN ONLY'||CHR(10)||CHR(13)||'? DO NOT TUMBLE DRY' ||CHR(10)||CHR(13)||'? DO NOT BLEACH'
 );
-
-
-
 
 INSERT INTO PRODUCT VALUES(28,'Vacation cancan dress',179100,'dress','c59cddb8952562aadaea34082fec8a37.jpg,5aba83232d2e29a7a685bb2e1739f0ef.jpg,de7975d9018d6f2ae745eb0a8ec25555.jpg,255f26e4322d6741aac1b440e47d0353.jpg,4ed38d1ba2a25ff81575902f8a4dc223.jpg,9c4508d850b97f46b69be711260eace0.jpg','c59cddb8952562aadaea34082fec8a37.jpg,5aba83232d2e29a7a685bb2e1739f0ef.jpg,de7975d9018d6f2ae745eb0a8ec25555.jpg,255f26e4322d6741aac1b440e47d0353.jpg,4ed38d1ba2a25ff81575902f8a4dc223.jpg,9c4508d850b97f46b69be711260eace0.jpg','WHITE','SMALL,MEDIUM,LARGE',
 '러블리한 매력이 물씬 느껴지는 원피스입니다.'||CHR(10)||CHR(13)||'여유있는 핏감으로 체형커버는 물론 편안한 착용감을 자랑하며' ||CHR(10)||CHR(13)||
@@ -308,7 +302,39 @@ INSERT INTO PRODUCT VALUES(36,'Jasmine strap dress',170100,'dress','cb0a0ecdb000
 ||CHR(10)||CHR(13)||'[RAYON 82% NYLON 18%]'||CHR(10)||CHR(13)||'? DRY CLEAN ONLY'||CHR(10)||CHR(13)||
 '? DO NOT TUMBLE DRY'||CHR(10)||CHR(13)||'? DO NOT BLEACH');
 
+INSERT INTO PRODUCT VALUES(37,'Simple Fox Short Muffler',52000,'acc','6f915f607a17a4b32ab031c5ca2582e9.jpg,8f84ed90a14810478f97c06194e4ed52.jpg,09b75f83180cadac507a320c5b248244.jpg,c321e69af4999b998ce82e4d960e30f2.jpg,d7deed19215f21395769116d1129341f.jpg','6f915f607a17a4b32ab031c5ca2582e9.jpg,8f84ed90a14810478f97c06194e4ed52.jpg,09b75f83180cadac507a320c5b248244.jpg,c321e69af4999b998ce82e4d960e30f2.jpg,d7deed19215f21395769116d1129341f.jpg','BROWN','FREE','');
 
+INSERT INTO PRODUCT VALUES(38,'Simple Fox Short Muffler',52000,'acc','30891f794f281b8b120a356e7c6b902a.jpg,586c1450ddf3a5a8db870c705e5d75c1.jpg,4bafc1fcf20af0838e4fcb36ddfe3921.jpg,8bb6750a26464b5e0bb89ea3d1ec6db6.jpg','30891f794f281b8b120a356e7c6b902a.jpg,586c1450ddf3a5a8db870c705e5d75c1.jpg,4bafc1fcf20af0838e4fcb36ddfe3921.jpg,8bb6750a26464b5e0bb89ea3d1ec6db6.jpg','GREY','FREE','');
+
+INSERT INTO PRODUCT VALUES(39,'modern two-strap bag',178500,'acc','a3aba87bf2570f884baff41dc0b9cb80.jpg,11b59bdcdab5948063a953a47b6459d4.jpg,be30996617fe75a806547beb09cd607c.jpg,5fcb6c02b52da4dbc9a6063d9c80339b.jpg,90ecfb0caaebabcb9013daf65f40ed09.jpg,6fac43c905dde685c0ea812cec865eb8.jpg','a3aba87bf2570f884baff41dc0b9cb80.jpg,11b59bdcdab5948063a953a47b6459d4.jpg,be30996617fe75a806547beb09cd607c.jpg,5fcb6c02b52da4dbc9a6063d9c80339b.jpg,90ecfb0caaebabcb9013daf65f40ed09.jpg,6fac43c905dde685c0ea812cec865eb8.jpg','IVORY','FREE','');
+
+INSERT INTO PRODUCT VALUES(40,'Reversible Wool Hood Muffle',75000,'acc','9dabf6d2db210201d6945ee837522cc6.jpg,a9a82c5c35d8ca75f54f7e066bf30611.jpg,6ddb80b6000e8a716c621233505f32c2.jpg,b3f32b83cba1448cfcb845015e7f5e43.jpg,f353967c95590ff80f110d2d6742f1e0.jpg','9dabf6d2db210201d6945ee837522cc6.jpg,a9a82c5c35d8ca75f54f7e066bf30611.jpg,6ddb80b6000e8a716c621233505f32c2.jpg,b3f32b83cba1448cfcb845015e7f5e43.jpg,f353967c95590ff80f110d2d6742f1e0.jpg','GRAY','FREE','');
+
+INSERT INTO PRODUCT VALUES(41,'Reversible Wool Hood Muffle',75000,'acc','226b3e858575517f6808ef1af0e0da98.jpg,5c35f3ad3d19c89489a6ba0bbc9074f6.jpg,aba2ee9232a9cd9964d3b66b8ed6ad87.jpg,e5a55c625a694f3de9468a75d85b9f3f.jpg,9ed1760f28081c8c2effe51eed6243e1.jpg,3f62fe1ac9884eb259ea0a8f9a75faf5.jpg','226b3e858575517f6808ef1af0e0da98.jpg,5c35f3ad3d19c89489a6ba0bbc9074f6.jpg,aba2ee9232a9cd9964d3b66b8ed6ad87.jpg,e5a55c625a694f3de9468a75d85b9f3f.jpg,9ed1760f28081c8c2effe51eed6243e1.jpg,3f62fe1ac9884eb259ea0a8f9a75faf5.jpg','BEIGE','FREE','');
+
+INSERT INTO PRODUCT VALUES(42,'Whole garment layered knit shawl',88200,'acc','e926dfae8dc4b2e707204bd4c2298ea4.jpg,c81574dc7fb78153af14e5769201c5ad.jpg,7e4ef91d8373e2fa990dc027a9a4406e.jpg,c96e8eccafe0d01b8445be2f58047195.jpg,1fe12944143f751e3f9b29b27bbb9161.jpg,03e1573afd668a06811338a9aa4e66ee.jpg','e926dfae8dc4b2e707204bd4c2298ea4.jpg,c81574dc7fb78153af14e5769201c5ad.jpg,7e4ef91d8373e2fa990dc027a9a4406e.jpg,c96e8eccafe0d01b8445be2f58047195.jpg,1fe12944143f751e3f9b29b27bbb9161.jpg,03e1573afd668a06811338a9aa4e66ee.jpg','PINK','FREE',
+'사랑스러운 포인트가 되어줄 니트 숄입니다.' ||CHR(10)||CHR(13)||'어떤룩에나 자연스럽게 매치하기 좋으며,'||CHR(10)||CHR(13)||
+'보온성도 높아 간절기에 하나쯤 소장하기 좋은 상품입니다.'||CHR(10)||CHR(13)||'[ACRYLIC 100%]'||CHR(10)||CHR(13)||
+'? DRY CLEAN ONLY' ||CHR(10)||CHR(13)||'? DO NOT TUMBLE DRY' ||CHR(10)||CHR(13)||'? DO NOT BLEACH'
+);
+
+INSERT INTO PRODUCT VALUES(43,'Whole garment layered knit shawl',88200,'acc','1f693e8ffd9ff05b431002b72ab60151.jpg,4ad6b891ed69f8affa18dde5420d676d.jpg,e3733f8630d49427bc53b6b7721d9d39.jpg,38fe4bf8c7c9f87dc8e91d8449fdeec4.jpg,a73876b896a31c99ab2f32d23d6d5f36.jpg,9252bc2af87eb5158939b70c893f82bf.jpg','1f693e8ffd9ff05b431002b72ab60151.jpg,4ad6b891ed69f8affa18dde5420d676d.jpg,e3733f8630d49427bc53b6b7721d9d39.jpg,38fe4bf8c7c9f87dc8e91d8449fdeec4.jpg,a73876b896a31c99ab2f32d23d6d5f36.jpg,9252bc2af87eb5158939b70c893f82bf.jpg','SKYBLUE','FREE',
+'사랑스러운 포인트가 되어줄 니트 숄입니다.' ||CHR(10)||CHR(13)||'어떤룩에나 자연스럽게 매치하기 좋으며,'||CHR(10)||CHR(13)||
+'보온성도 높아 간절기에 하나쯤 소장하기 좋은 상품입니다.'||CHR(10)||CHR(13)||'[ACRYLIC 100%]'||CHR(10)||CHR(13)||
+'? DRY CLEAN ONLY' ||CHR(10)||CHR(13)||'? DO NOT TUMBLE DRY' ||CHR(10)||CHR(13)||'? DO NOT BLEACH'
+);
+
+INSERT INTO PRODUCT VALUES(44,'Whole garment layered knit shawl',88200,'acc','505dd9f40436fab1a380140c24e627a4.jpg,e82085b944ad3bba24b742c6c10e11bb.jpg,10b09c045e07e55f83df0185fbd7151b.jpg,0a5b9a30e2e9df3bfe6436079fc1ab23.jpg,8f414b83c5bc4080968aca00c6ac999a.jpg,847258a35d3da5fd61c36294c4a11d8d.jpg','505dd9f40436fab1a380140c24e627a4.jpg,e82085b944ad3bba24b742c6c10e11bb.jpg,10b09c045e07e55f83df0185fbd7151b.jpg,0a5b9a30e2e9df3bfe6436079fc1ab23.jpg,8f414b83c5bc4080968aca00c6ac999a.jpg,847258a35d3da5fd61c36294c4a11d8d.jpg','BLACK','FREE',
+'사랑스러운 포인트가 되어줄 니트 숄입니다.' ||CHR(10)||CHR(13)||'어떤룩에나 자연스럽게 매치하기 좋으며,'||CHR(10)||CHR(13)||
+'보온성도 높아 간절기에 하나쯤 소장하기 좋은 상품입니다.'||CHR(10)||CHR(13)||'[ACRYLIC 100%]'||CHR(10)||CHR(13)||
+'? DRY CLEAN ONLY' ||CHR(10)||CHR(13)||'? DO NOT TUMBLE DRY' ||CHR(10)||CHR(13)||'? DO NOT BLEACH'
+);
+
+INSERT INTO PRODUCT VALUES(45,'Whole garment layered knit shawl',88200,'acc','d00182135028109f8ff40f9141223197.jpg,1e3b0f33841d3ffe17e9ae7a0cce95e2.jpg,1d04039e337fa0dda44f4e51552901b7.jpg,9538a37c7d8cadfc7c1ee14441545674.jpg,b88c4f0f20a88e897ad5050caca3fa85.jpg,32598147fcc645fffdd5ac683a762774.jpg','d00182135028109f8ff40f9141223197.jpg,1e3b0f33841d3ffe17e9ae7a0cce95e2.jpg,1d04039e337fa0dda44f4e51552901b7.jpg,9538a37c7d8cadfc7c1ee14441545674.jpg,b88c4f0f20a88e897ad5050caca3fa85.jpg,32598147fcc645fffdd5ac683a762774.jpg','IVORY','FREE',
+'사랑스러운 포인트가 되어줄 니트 숄입니다.' ||CHR(10)||CHR(13)||'어떤룩에나 자연스럽게 매치하기 좋으며,'||CHR(10)||CHR(13)||
+'보온성도 높아 간절기에 하나쯤 소장하기 좋은 상품입니다.'||CHR(10)||CHR(13)||'[ACRYLIC 100%]'||CHR(10)||CHR(13)||
+'? DRY CLEAN ONLY' ||CHR(10)||CHR(13)||'? DO NOT TUMBLE DRY' ||CHR(10)||CHR(13)||'? DO NOT BLEACH'
+);
 
 
 INSERT INTO PRODUCT VALUES(37,'Simple Fox Short Muffler',52000,'acc','6f915f607a17a4b32ab031c5ca2582e9.jpg,8f84ed90a14810478f97c06194e4ed52.jpg,09b75f83180cadac507a320c5b248244.jpg,c321e69af4999b998ce82e4d960e30f2.jpg,d7deed19215f21395769116d1129341f.jpg','6f915f607a17a4b32ab031c5ca2582e9.jpg,8f84ed90a14810478f97c06194e4ed52.jpg,09b75f83180cadac507a320c5b248244.jpg,c321e69af4999b998ce82e4d960e30f2.jpg,d7deed19215f21395769116d1129341f.jpg','BROWN','FREE','');
