@@ -35,9 +35,9 @@
 			f.content.focus();
 			return;
 		}
-		f.subject.value = str;
+		f.content.value = str;
 		
-		f.action = "<%=cp%>/shop/boards/reviewUpdate_ok.do";
+		f.action = "<%=cp%>/shop/boards/reviewUpdate_ok.do?";
 		f.submit();
 		
 	}
@@ -76,7 +76,7 @@
 					<div class="box row">
 						<label for="userId">CONTENT</label><br/>
 						<div class="box input">
-							<textarea name="content">${dto.content }</textarea>
+							<textarea  name="content">${dto.content }</textarea>
 						</div>
 					</div>
 					<div class="box row" align="center">
