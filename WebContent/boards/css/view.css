@@ -30,8 +30,7 @@ p {
 }
 
 .boardContent {
-	border-top: 1px solid #dfdfdf;
-	border-bottom: 1px solid #dfdfdf;
+	border: 1px solid #dfdfdf;
 	padding: 20px 30px 30px;
 	width: 600px;
 	color: #484848;
