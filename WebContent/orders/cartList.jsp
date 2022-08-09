@@ -20,6 +20,24 @@
 		f.action = "<%=cp%>/shop/orders/orderPayment.do";
 		f.submit();
 	}
+	
+	
+	
+	function checkAll(){
+		
+		
+		
+		   if(document.getElementById("all").checked==true){  //id 를 사용하여 하나의 객체만을 호출
+		         for(var i=0;i<orderNum.length;i++) document.getElementsByName("orderNum")[i].checked=true;   //name 을 사용하여 배열 형태로 담아 호출
+		      }
+		      if(document.getElementById("all").checked==false){
+		         for(var i=0;i<orderNum.length;i++) document.getElementsByName("orderNum")[i].checked=false;  
+		      }
+		}
+		
+		
+	
+	
 </script>
 
 </head>
@@ -27,8 +45,15 @@
 	<jsp:include page="../main/header.jsp"/>
 	<div id="content" align="center" style="display: block;">
 		<form action="" method="post" name="cartListForm">
+			<div>
+			<input type="checkbox" id="all" name="all" onclick="checkAll()" ><a>이름을 무엇으로 지을까요?(체크시 전체선택 해제시 전체해제)</a>
+			</div>
+		
+		
 			<table id="cartList" style="border-top: 1px solid #DBDBDB; border-bottom: 1px solid #DBDBDB; padding: 20px 0px 20px 0px; margin-bottom: 50px;">
 				<tbody>
+				
+				
 					<c:set var="sum" value="0"/>
 					<c:set var="tot" value="0"/>
 					<c:forEach var="dto" items="${list }">
