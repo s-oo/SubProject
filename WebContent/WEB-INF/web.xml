@@ -60,4 +60,14 @@
   	<url-pattern>/shop/boards/*</url-pattern>
   </servlet-mapping>
   
+  <!-- comments -->
+  <servlet>
+  	<servlet-name>commentsServlet</servlet-name>
+  	<servlet-class>com.comments.CommentsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>commentsServlet</servlet-name>
+  	<url-pattern>/shop/comments/*</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

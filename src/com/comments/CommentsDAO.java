@@ -4,18 +4,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import com.orders.OrdersDTO;
 import com.util.DBConn;
 
-public class CommentDAO {
+public class CommentsDAO {
 
 	private Connection conn = DBConn.getConnection();
 
-	public CommentDAO(Connection conn) {
+	public CommentsDAO(Connection conn) {
 		this.conn = conn;
 	}
 	
-	public int insertData(CommentDTO dto) {
+	public int insertData(CommentsDTO dto) {
 		
 		int result = 0;
 		PreparedStatement pstmt;
@@ -44,7 +43,7 @@ public class CommentDAO {
 		
 	}
 	
-	public int updateData(CommentDTO dto) {
+	public int updateData(CommentsDTO dto) {
 
 		int result = 0;
 		PreparedStatement pstmt;
@@ -98,16 +97,16 @@ public class CommentDAO {
 	}
 
 
-	public CommentDTO getReadData(int boardNum, String community) {
+	public CommentsDTO getReadData(int boardNum, String community) {
 
-		CommentDTO dto = null;
+		CommentsDTO dto = null;
 		PreparedStatement pstmt;
 		ResultSet rs;
 		String sql;
 
 		try {
 
-			sql = "SELECT BOARDNUM, COMMUNITY, USERID, POSTDATE, CONTENT";
+			sql = "SELECT BOARDNUM, COMMUNITY, USERID, POSTDATE, CONTENT ";
 			sql += "FROM COMMENTS ";
 			sql += "WHERE BOARDNUM = ? AND COMMUNITY = ?";
 
@@ -119,7 +118,7 @@ public class CommentDAO {
 
 			if (rs.next()) {
 				
-				dto = new CommentDTO();
+				dto = new CommentsDTO();
 				
 				dto.setBoardNum(rs.getInt("BOARDNUM"));
 				dto.setCommunity(rs.getString("COMMUNITY"));
