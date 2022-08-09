@@ -188,8 +188,8 @@
 									<input type="text" id="amount" class="amount" value="1" size="3" readonly="readonly">
 								</span>
 								</div>
-							</form>
-						</div>
+							</div>
+						</form>
 
 						<!-- add bag -->
 						<div class="addBag">
