@@ -215,10 +215,10 @@ public class MemberServlet extends HttpServlet {
 				}
 				
 				// 오류
-			} else {
+			}else {
 
 				out.print("<script>");
-				out.print("alert('잘못된 접근 : 로그인을 해주세요');");
+				out.print("alert('잘못된 접근 :12로그인을 해주세요');");
 				out.print("location.href='" + cp + "/shop/member/login.do';");
 				out.print("</script>");
 				
@@ -301,7 +301,7 @@ public class MemberServlet extends HttpServlet {
 				session.removeAttribute("userId");
 				session.invalidate();
 
-				url = cp + "/shop/main/main.do";
+				url = cp + "/shop/member/delete_result.do";
 				resp.sendRedirect(url);
 				
 			}else if(uri.indexOf("delete_result.do")!=-1) {
