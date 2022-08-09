@@ -10,6 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
+
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/shopStyle.css" />
 <link rel="stylesheet" href="<%=cp%>/member/css/style.css"
 	type="text/css">
@@ -31,7 +32,7 @@
 
 	function nochk() {
 		alert("동의하지 않으면 가입하실 수 없습니다");
-		location.href="<%=cp%>/shop/main/main.do";}
+		location.href="<%=cp%>/shop/member/terms.do";}
 </script>
 
 </head>

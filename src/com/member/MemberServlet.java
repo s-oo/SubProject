@@ -43,7 +43,7 @@ public class MemberServlet extends HttpServlet {
 		MemberDAO dao = new MemberDAO(conn);
 
 		String url;
-
+		String referer = (String) req.getHeader("REFERER");
 		String sessionUserId = (String) req.getSession().getAttribute("userId");
 		String userId = null;
 		
@@ -118,7 +118,9 @@ public class MemberServlet extends HttpServlet {
 
 			// 로그인 실행
 			} else if (uri.indexOf("login_ok.do") != -1) {
-
+				
+				
+				
 				userId = req.getParameter("userId");
 				String userPwd = req.getParameter("userPwd");
 
@@ -133,6 +135,8 @@ public class MemberServlet extends HttpServlet {
 					
 					req.setAttribute("message", "아이디 또는 패스워드를 정확히 입력하세요.");
 					req.setAttribute("searchpw", "비밀번호 찾기");
+					
+					
 					url = "/member/login.jsp";
 					forward(req, resp, url);
 					return;
@@ -142,9 +146,12 @@ public class MemberServlet extends HttpServlet {
 
 					req.getSession().setAttribute("userId", userId);
 
-					url = cp + "/main/main.jsp";
-					resp.sendRedirect(url);
-
+					
+					url = req.getHeader("REFERER");
+					System.out.println(url);
+					/*url = cp + "/shop/main/main.do";*/
+					resp.sendRedirect(req.getHeader("referer"));
+					
 				}
 			
 			}else if(uri.indexOf("findId.do")!=-1) {
@@ -215,10 +222,10 @@ public class MemberServlet extends HttpServlet {
 				}
 				
 				// 오류
-			} else {
+			}else {
 
 				out.print("<script>");
-				out.print("alert('잘못된 접근 : 로그인을 해주세요');");
+				out.print("alert('잘못된 접근 :12로그인을 해주세요');");
 				out.print("location.href='" + cp + "/shop/member/login.do';");
 				out.print("</script>");
 				
@@ -301,7 +308,7 @@ public class MemberServlet extends HttpServlet {
 				session.removeAttribute("userId");
 				session.invalidate();
 
-				url = cp + "/shop/main/main.do";
+				url = cp + "/shop/member/delete_result.do";
 				resp.sendRedirect(url);
 				
 			}else if(uri.indexOf("delete_result.do")!=-1) {

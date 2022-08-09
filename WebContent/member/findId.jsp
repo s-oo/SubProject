@@ -62,7 +62,7 @@
 							<label for="userName"><span><b>NAME</b></span></label>
 						</div>
 						<div class="box input">
-							<input type="text" name="userName" id="userName" placeholder="이름" />
+							<input autofocus maxlength="10" type="text" name="userName" id="userName" placeholder="이름" />
 						</div>
 					</div>
 
@@ -71,7 +71,7 @@
 							<label for="userTel"><span><b>TEL</b></span></label>
 						</div>
 						<div class="box input">
-							<input type="text" name="userTel" id="userTel"
+							<input maxlength="11" type="text" name="userTel" id="userTel"
 								placeholder="(-)없이 숫자만 입력해주세요." />
 						</div>
 					</div>

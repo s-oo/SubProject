@@ -18,11 +18,56 @@
 	function sendItCartList() {
 		var f = document.detailForm;
 		
+		
+		if(f.option1.value=="*"){
+			alert("컬러를 입력해 주세요.");
+			f.option1.focus();
+			return;
+		}
+		
+		if(f.option2.value=="*"){
+			alert("사이즈를 입력해 주세요.");
+			f.option2.focus();
+			return;
+		
+		}
+		
+		
 		f.productNum
 		
 		f.action = "<%=cp%>/shop/orders/addOrder_ok.do";
 		f.submit();
 	}
+	
+	function sendItWishList() {
+		var f = document.detailForm;
+		
+		/* 
+		if(f.option1.value=="*"){
+			alert("컬러를 입력해 주세요.");
+			f.option1.focus();
+			return;
+		}
+		
+		if(f.option2.value=="*"){
+			alert("사이즈를 입력해 주세요.");
+			f.option2.focus();
+			return;
+		
+		} */
+		
+		
+		f.productNum
+		
+		f.action = "<%=cp%>/shop/orders/addOrder_ok.do?progress=wishList";
+		f.submit();
+	}
+	
+	
+	
+	
+	
+	
 </script>
 
 </head>
@@ -53,6 +98,7 @@
 							<h2>${dto.productPrice }KRW</h2>
 						</div>
 						<!-- choose option(color,size) -->
+						<form name="detailForm" method="post">
 						<table border="0" class="option" id="option">
 							<tbody class="optionColor" id="optionColor">
 								<tr>
@@ -83,9 +129,9 @@
 						
 						<!-- selected option(color,size) -->
 						<div>
-							<form name="detailForm" method="post">
+						<!-- 	<form name="detailForm" method="post"> -->
 							<input type="hidden" name="productNum" value="${dto.productNum }">
-							<input type="hidden" name="progress" value="cartList">
+							<input  name="progress" value="cartList" onclick="sendItWishList()">
 								<table class="totalProduct" border="1" summary="">
 									<colgroup>
 										<col style="width: 20%;">
@@ -164,7 +210,7 @@
 
  
  	<!-- bag box (new window) -->
-	<div class="bagBox">
+	<%-- <div class="bagBox">
 		<div class="">
 			<h3>BAG (1) ITEM</h3><!-- countItem -->
 		</div>
@@ -201,10 +247,9 @@
 		<a class="close" onclick="$('#confirmLayer').remove();">
 			<img src="//img.echosting.cafe24.com/skin/base/common/btn_close.gif" alt="닫기">
 		</a>
-	</div>
+	</div> --%>
 
 
 </body>
 </html>
-
 

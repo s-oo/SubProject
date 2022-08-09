@@ -55,13 +55,8 @@ public class OrdersServlet extends HttpServlet {
 		if (userId == null) {
 			out.print("<script>");
 			out.print("alert('로그인을 해주세요');");
-//			out.print("locasion:href='/sub/shop/member/login.do';");
+			out.print("locasion.href='/sub/shop/member/login.do';");
 			out.print("</script>");
-			
-			url = "/sub/shop/member/login.do";
-			resp.sendRedirect(url);
-			
-			return;
 		}
 
 		// cart/wish 추가
@@ -100,7 +95,7 @@ public class OrdersServlet extends HttpServlet {
 				out.print("</script>");
 			}
 
-			url = "/orders/cartList.do";
+			url = cp +"/shop/orders/cartList.do";
 			resp.sendRedirect(url);
 //			resp.sendRedirect(referer);
 

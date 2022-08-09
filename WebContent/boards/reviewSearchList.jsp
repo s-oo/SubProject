@@ -65,7 +65,7 @@ td {
 					</c:forEach>
 					<c:if test="${empty list }">
 						<tr align="center">
-							<td>구입한 상품이 없습니다.</td>
+							<td colspan="3">구입한 상품이 없습니다.</td>
 						</tr>
 					</c:if>
 				</tbody>
