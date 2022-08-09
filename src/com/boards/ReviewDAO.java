@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.orders.OrdersDAO;
+import com.orders.OrdersDTO;
 
 public class ReviewDAO {
 
@@ -119,11 +120,16 @@ public class ReviewDAO {
 				dto.setSubject(rs.getString("subject"));
 				dto.setHits(rs.getInt("hits"));
 				dto.setPostDate(rs.getString("postDate"));
-				
-				dto.setOrdersDTO(new OrdersDAO(conn).getReadData(rs.getInt("orderNum")));
+
+				OrdersDTO ordersDTO = new OrdersDAO(conn).getReadData(rs.getInt("orderNum"));
+
+				dto.setOrdersDTO(ordersDTO);
+				dto.setProductName(ordersDTO.getProductName());
+				dto.setProductCategory(ordersDTO.getProductCategory());
+				dto.setSaveFileName(ordersDTO.getSaveFileName());
 
 				lists.add(dto);
-				
+
 			}
 
 			rs.close();
@@ -161,9 +167,8 @@ public class ReviewDAO {
 
 			if (rs.next()) {
 				dataCount = rs.getInt(1);
-				System.out.println(dataCount);
 			}
-			
+
 			rs.close();
 			pstmt.close();
 
@@ -205,7 +210,7 @@ public class ReviewDAO {
 				dto.setContent(rs.getString("content"));
 				dto.setPostDate(rs.getString("postDate"));
 				dto.setHits(rs.getInt("hits"));
-				
+
 				dto.setOrdersDTO(new OrdersDAO(conn).getReadData(rs.getInt("orderNum")));
 
 			}
@@ -254,29 +259,28 @@ public class ReviewDAO {
 		int result = 0;
 		PreparedStatement pstmt;
 		String sql;
-		
+
 		try {
-			
+
 			sql = "UPDATE REVIEW SET SUBJECT = ?, CONTENT = ?, POSTDATE = SYSDATE ";
 			sql += "WHERE BOARDNUM = ?";
-			
+
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, dto.getSubject());
 			pstmt.setString(2, dto.getContent());
 			pstmt.setInt(3, dto.getBoardNum());
-			
+
 			result = pstmt.executeUpdate();
-			
+
 			pstmt.close();
-				
-			
+
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
-		
-		return result;		
-		
+
+		return result;
+
 	}
 
 	// ªË¡¶

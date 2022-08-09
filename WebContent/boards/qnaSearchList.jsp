@@ -64,6 +64,12 @@ td {
 					</c:forEach>
 				</tbody>
 			</table>
+			<!-- paging -->
+			<div id="paging">
+				<p>
+					<c:if test="${dataCount!=0 }">${pageIndexList }</c:if>
+				</p>
+			</div>
 		</form>
 	</div>
 </body>
