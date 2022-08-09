@@ -44,7 +44,7 @@ public class OrdersServlet extends HttpServlet {
 		Connection conn = DBConn.getConnection();
 		OrdersDAO dao = new OrdersDAO(conn);
 		DeliveryDAO ddao = new DeliveryDAO(conn);
-
+		
 		String sessionUserId = (String) req.getSession().getAttribute("userId");
 		String userId = null;
 
