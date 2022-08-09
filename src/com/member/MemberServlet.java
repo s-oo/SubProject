@@ -142,7 +142,7 @@ public class MemberServlet extends HttpServlet {
 
 					req.getSession().setAttribute("userId", userId);
 
-					url = cp + "/main/main.jsp";
+					url = cp + "/shop/main/main.do";
 					resp.sendRedirect(url);
 
 				}
