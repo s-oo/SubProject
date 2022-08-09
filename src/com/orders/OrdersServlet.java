@@ -100,7 +100,7 @@ public class OrdersServlet extends HttpServlet {
 				out.print("</script>");
 			}
 
-			url = "/orders/cartList.do";
+			url = cp +"/shop/orders/cartList.do";
 			resp.sendRedirect(url);
 //			resp.sendRedirect(referer);
 
