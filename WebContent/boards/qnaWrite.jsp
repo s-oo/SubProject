@@ -28,6 +28,15 @@
 			return;
 		}
 		f.subject.value = str;
+
+		str = f.content.value;
+		str = str.trim();
+		if(!str){
+			alert("\n내용을 입력하세요.");
+			f.content.focus();
+			return;
+		}
+		f.content.value = str;
 		
 		f.action = "<%=cp%>/shop/boards/qnaWrite_ok.do";
 		f.submit();
@@ -47,7 +56,7 @@
 							<img alt="noimage" src="<%=cp %>/boards/img/noimage.png" style="margin: 10px; display: inline;">
 							<div class="box">
 								<div style="border: 1px solid; width: 100px; padding: 5px;">
-									<a href="javascript:window.open('<%=cp %>/shop/boards/qnaSearchList.do','상품정보 선택','width=600, height=500, status=yes, top=100, left=100')">상품정보 선택</a>
+									<a href="javascript:window.open('<%=cp %>/shop/boards/qnaSearchList.do','상품정보 선택','width=600, height=800, status=yes, top=100, left=100')">상품정보 선택</a>
 								</div>
 							</div>
 						</c:if>
@@ -76,12 +85,12 @@
 					</div>
 					<div class="box row" style="margin: 0px;">
 						<div class="box label"><label for="userId">ID</label></div>
-						<div class="box text">${dto.userId }</div>
+						<div class="box text">${userId }</div>
 					</div>
 					<div class="box row">
-						<label for="userId">CONTENT</label><br/>
+						<label for="content">CONTENT</label><br/>
 						<div class="box input">
-							<textarea rows="" cols=""></textarea>
+							<textarea name="content"></textarea>
 						</div>
 					</div>
 					<div class="box row" align="center">
@@ -92,7 +101,7 @@
 							<a href="<%=cp %>/shop/boards/qna.do">취소</a>
 						</div>
 						<div style="border: 1px solid; width: 50px; padding: 5px; float: right; margin-right: 10px;">
-							<a href="<%=cp %>/shop/boards/qnaWrite_ok.do">등록</a>
+							<a href="javascript:sendIt();">등록</a>
 							<input type="hidden" name="productNum" value="${productDTO.productNum }"/>
 						</div>
 					</div>

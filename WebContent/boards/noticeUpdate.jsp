@@ -28,6 +28,15 @@
 			return;
 		}
 		f.subject.value = str;
+
+		str = f.content.value;
+		str = str.trim();
+		if(!str){
+			alert("\n내용을 입력하세요.");
+			f.content.focus();
+			return;
+		}
+		f.content.value = str;
 		
 		f.action = "<%=cp%>/shop/boards/noticeUpdate_ok.do";
 		f.submit();
@@ -53,7 +62,7 @@
 					<div class="box row">
 						<label for="userId">CONTENT</label><br/>
 						<div class="box input">
-							<textarea rows="" cols="">${dto.content }</textarea>
+							<textarea  name="content">${dto.content }</textarea>
 						</div>
 					</div>
 					<div class="box row" align="center">
@@ -64,7 +73,7 @@
 							<a href="<%=cp %>/shop/boards/noticeView.do?boardNum?=${dto.boardNum }">취소</a>
 						</div>
 						<div style="border: 1px solid; width: 50px; padding: 5px; float: right; margin-right: 10px;">
-							<a href="<%=cp %>/shop/boards/noticeWrite_ok.do">수정</a>
+							<a href="javascript:sendIt();">수정</a>
 							<input type="hidden" name="boardNum" value="${dto.boardNum }"/>
 						</div>
 					</div>

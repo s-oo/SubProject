@@ -37,7 +37,8 @@
 		<table class="boardContent">
 			<colgroup>
 				<col style="width: 80px;">
-				<col style="width: auto;">
+				<col style="width: 150px;">
+				<col style="width: auto">
 				<col style="width: 100px;">
 				<col style="width: 100px;">
 				<col style="width: 80px;">
@@ -45,7 +46,8 @@
 			<thead>
 				<tr>
 					<th scope="col">NO</th>
-					<th scope="col">SUBJECT</th>
+					<th scope="col">IMAGE</th>
+					<th scope="col">PRODUCT</th>
 					<th scope="col">ID</th>
 					<th scope="col">DATE</th>
 					<th scope="col">HITS</th>
@@ -63,7 +65,10 @@
 						<td>${dto.boardNum }</td>
 						<!-- SUBJECT -->
 						<td>
-						<a href="${viewUrl }&boardNum=${dto.boardNum}&orderNum=${dto.orderNum}">${dto.subject }</a>
+							<img src="<%=cp %>/product/image/${dto.productCategory}/${dto.saveFileName[0]}" width="100px;" height="100px;">
+						</td>
+						<td>	
+							<a href="${viewUrl }&boardNum=${dto.boardNum}&orderNum=${dto.orderNum}">${dto.subject }</a>
 						</td>
 						<!-- ID -->
 						<td>${dto.userId }</td>
@@ -98,6 +103,11 @@
 					</div>
 				</form>
 			</div>			
+		</div>
+		
+		<div class="elementRight" style="float: right;">
+			<a href="<%=cp %>/shop/boards/reviewWrite.do"
+			class="element">WRITE</a>
 		</div>
 	</div>
 </div>

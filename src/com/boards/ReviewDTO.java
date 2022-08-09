@@ -13,6 +13,9 @@ public class ReviewDTO {
 	private int hits;
 
 	private OrdersDTO ordersDTO;
+	private String productName;
+	private String productCategory;
+	private String[] saveFileName;
 
 	public int getBoardNum() {
 		return boardNum;
@@ -76,6 +79,30 @@ public class ReviewDTO {
 
 	public void setOrdersDTO(OrdersDTO ordersDTO) {
 		this.ordersDTO = ordersDTO;
+	}
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	public String getProductCategory() {
+		return productCategory;
+	}
+
+	public void setProductCategory(String productCategory) {
+		this.productCategory = productCategory;
+	}
+
+	public String[] getSaveFileName() {
+		return saveFileName;
+	}
+
+	public void setSaveFileName(String[] saveFileName) {
+		this.saveFileName = saveFileName;
 	}
 
 }
