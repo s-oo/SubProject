@@ -9,7 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Product list</title>
-
+<link rel="stylesheet" type="text/css"href="<%=cp%>/css/shopStyle.css" />
 <link rel="stylesheet" type="text/css" href="<%=cp %>/product/data/style.css"/>
 
 </head>
