@@ -16,8 +16,8 @@
 	<div id="header_bg"></div>
 	<div class="cboth">
 		<div class="left_area">
-			<div>
-				<a href="javascript:display1();">PRODUCT</a>
+			<div style="width: 60px;">
+				<a style="cursor: pointer;" onclick="display1();" onmouseover="display1(); this.style.fontWeight='bold'" onmouseout="this.style.fontWeight=''">PRODUCT</a>
 				<!-- <b>PRODUCT</b> -->
 				<div id="display1" class="display">
 					<div class="display_elements">
@@ -31,13 +31,13 @@
 				</div>
 			</div>
 			<br/>
-			<div>
-				<a href="javascript:display2();">BORAD</a>
+			<div style="width: 65px;">
+				<a style="cursor: pointer;"onclick="display2();" onmouseover="display2(); this.style.fontWeight='bold'" onmouseout="this.style.fontWeight=''">BORAD</a><br/>
 				<div id="display2" class="display">
 					<div class="display_elements">
-						<a href="/sub/shop/boards/notice.do" style="display: block;">NOTICE</a>
-						<a href="/sub/shop/boards/qna.do" style="display: block;">Q/A</a>
-						<a href="/sub/shop/boards/review.do" style="display: block;">REVIEW</a>
+						<a href="/sub/shop/boards/notice.do" style="display: block;">NOTICE</a><br/>
+						<a href="/sub/shop/boards/qna.do" style="display: block;">Q/A</a><br/>
+						<a href="/sub/shop/boards/review.do" style="display: block;">REVIEW</a><br/>
 					</div>
 				</div>
 			</div>
