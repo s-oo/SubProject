@@ -50,7 +50,7 @@
 					
 	<br>
 				<button style="cursor:pointer; margin-top:10PX; border:1px solid #000; background-color: #FFFFFF; width: 480px; line-height: 48px;"
-						type="button" onclick="location.href='<%=cp%>/shop/boards/list.do?community=QnA';"
+						type="button" onclick="location.href='<%=cp%>/shop/boards/qna.do';"
 						onmouseover=this.style.backgroundColor='#F0F0F0' onmouseout=this.style.backgroundColor='white'>
 							<b style="font-size: 17px; color: black;"> Q/A </b>
 					</button>
