@@ -38,6 +38,36 @@
 		f.action = "<%=cp%>/shop/orders/addOrder_ok.do";
 		f.submit();
 	}
+	
+	function sendItWishList() {
+		var f = document.detailForm;
+		
+		/* 
+		if(f.option1.value=="*"){
+			alert("컬러를 입력해 주세요.");
+			f.option1.focus();
+			return;
+		}
+		
+		if(f.option2.value=="*"){
+			alert("사이즈를 입력해 주세요.");
+			f.option2.focus();
+			return;
+		
+		} */
+		
+		
+		f.productNum
+		
+		f.action = "<%=cp%>/shop/orders/addOrder_ok.do?progress=wishList";
+		f.submit();
+	}
+	
+	
+	
+	
+	
+	
 </script>
 
 </head>
@@ -101,7 +131,7 @@
 						<div>
 						<!-- 	<form name="detailForm" method="post"> -->
 							<input type="hidden" name="productNum" value="${dto.productNum }">
-							<input type="hidden" name="progress" value="cartList">
+							<input  name="progress" value="cartList" onclick="sendItWishList()">
 								<table class="totalProduct" border="1" summary="">
 									<colgroup>
 										<col style="width: 20%;">
