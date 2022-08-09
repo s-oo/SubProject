@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.comments.CommentsDAO;
+import com.comments.CommentsDTO;
 import com.orders.OrdersDAO;
 import com.orders.OrdersDTO;
 import com.product.ProductDAO;
@@ -346,12 +348,16 @@ public class BoardsServlet extends HttpServlet {
 				param += "&searchValue=" + URLEncoder.encode(searchValue, "UTF-8");
 
 			}
+			
+			String community = "qna";
+			CommentsDTO commentsDTO = new CommentsDAO(conn).getReadData(boardNum, community);
 
 			req.setAttribute("userId", userId);
 			req.setAttribute("dto", dto);
 			req.setAttribute("params", param);
 			req.setAttribute("lineSu", lineSu);
 			req.setAttribute("pageNum", pageNum);
+			req.setAttribute("commentsDTO", commentsDTO);
 
 			url = "/boards/qnaView.jsp";
 			forward(req, resp, url);
@@ -391,12 +397,16 @@ public class BoardsServlet extends HttpServlet {
 				param += "&searchValue=" + URLEncoder.encode(searchValue, "UTF-8");
 
 			}
+			
+			String community = "review";
+			CommentsDTO commentsDTO = new CommentsDAO(conn).getReadData(boardNum, community);
 
 			req.setAttribute("userId", userId);
 			req.setAttribute("dto", dto);
 			req.setAttribute("params", param);
 			req.setAttribute("lineSu", lineSu);
 			req.setAttribute("pageNum", pageNum);
+			req.setAttribute("commentsDTO", commentsDTO);
 
 			url = "/boards/reviewView.jsp";
 			forward(req, resp, url);

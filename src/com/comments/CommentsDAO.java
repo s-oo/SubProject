@@ -106,7 +106,7 @@ public class CommentsDAO {
 
 		try {
 
-			sql = "SELECT BOARDNUM, COMMUNITY, USERID, POSTDATE, CONTENT";
+			sql = "SELECT BOARDNUM, COMMUNITY, USERID, POSTDATE, CONTENT ";
 			sql += "FROM COMMENTS ";
 			sql += "WHERE BOARDNUM = ? AND COMMUNITY = ?";
 
