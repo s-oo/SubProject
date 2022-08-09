@@ -1,6 +1,6 @@
 package com.comments;
 
-public class CommentDTO {
+public class CommentsDTO {
 
 	private int boardNum;
 	private String community;
