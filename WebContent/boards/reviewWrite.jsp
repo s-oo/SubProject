@@ -35,9 +35,9 @@
 			f.content.focus();
 			return;
 		}
-		f.subject.value = str;
+		f.content.value = str;
 		
-		f.action = "<%=cp%>/shop/boards/reviewWrite_ok.do";
+		f.action = "<%=cp%>/shop/boards/reviewWrite_ok.do?ordeerNum=${dto.ordeerNum }";
 		f.submit();
 		
 	}
