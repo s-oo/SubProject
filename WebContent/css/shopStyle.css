@@ -1,17 +1,5 @@
 @charset "EUC-KR";
 
-a {
-	text-decoration: none;
-    color: #484848;
-    font-size: 8pt;
-    margin: 0;
-    padding: 0;
-  	font-style: inherit;
-  	
-  
-}
-
-
 body {
 	max-width: 1561px;
     margin: 0 auto;
@@ -26,17 +14,13 @@ body {
 div {
 	margin: 0;
     padding: 0;
-    
-    
 }
 
 h2{
-	
-	 text-decoration: none;
+	text-decoration: none;
     color: #484848;
     font-size: 9pt;
 }
-
 
 button{
 	
@@ -47,19 +31,16 @@ button{
     background-color: white;
     width: 200px;
     line-height: 48px;
-    
-	
 }
 
-span {
+/* span {
 	text-decoration: none;
     color: #000000;
     font-size: 8pt;
   font-style: italic;
   text-align: left;
     
-}
-
+} */
 
 b {
   text-decoration: none;
@@ -90,15 +71,43 @@ b {
   font-style: italic;
 }
 
-
-
 #header .left_area {
-   text-decoration: none;
+	position: absolute;
+    left: 0px;
+    top: 56px;
+    width: 150px;
+    z-index: 3000;
+    width: 60px;
+}
+
+#header .item{
+	width: 60px;
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+}
+
+#header .left_area a {
+	text-decoration: none;
     color: #484848;
     font-size: 8pt;
     margin: 0;
     padding: 0;
   	font-style: inherit;
+  	display: block;
+	line-height: 18px;
+	display: block;
+}
+
+#header .display_elements a{
+	padding-left: 10px;
+	text-decoration: none;
+	color: #484848;
+	display: block;
+}
+
+#header .display{
+	display: none;
+	padding-top: 5px;
 }
 
 #header .top_logo {
@@ -117,8 +126,9 @@ b {
     z-index: 3000;
 }
 
-#header .display{
-	display: none;
+#header .right_area a{
+	text-decoration: none;
+    color: #484848;
 }
 
 #footer {
@@ -173,12 +183,12 @@ b {
 	padding: 3px;
 }
 
-.box {
+/* .box {
 	display: inline-block;
 	padding: 10px;
 	width: 500px;
 }
-
+ */
 
 
 

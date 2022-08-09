@@ -16,31 +16,26 @@
 	<div id="header_bg"></div>
 	<div class="cboth">
 		<div class="left_area">
-			<div style="width: 60px;">
-				<a style="cursor: pointer;" onclick="display1();" onmouseover="display1(); this.style.fontWeight='bold'" onmouseout="this.style.fontWeight=''">PRODUCT</a>
+				<a onclick="display1();">PRODUCT</a>
 				<!-- <b>PRODUCT</b> -->
 				<div id="display1" class="display">
 					<div class="display_elements">
-						<a href="/sub/shop/product/list.do">ALL</a><br/>
-						<a href="/sub/shop/product/list.do?productCategory=outer">OUTER</a><br/>
-						<a href="/sub/shop/product/list.do?productCategory=top">TOP</a><br/>
-						<a href="/sub/shop/product/list.do?productCategory=bottom">BOTTOM</a><br/>
-						<a href="/sub/shop/product/list.do?productCategory=dress">DRESS</a><br/>
-						<a href="/sub/shop/product/list.do?productCategory=acc">ACC</a><br/>
-					</div>
+						<a href="/sub/shop/product/list.do">ALL</a>
+						<a href="/sub/shop/product/list.do?productCategory=outer">OUTER</a>
+						<a href="/sub/shop/product/list.do?productCategory=top">TOP</a>
+						<a href="/sub/shop/product/list.do?productCategory=bottom">BOTTOM</a>
+						<a href="/sub/shop/product/list.do?productCategory=dress">DRESS</a>
+						<a href="/sub/shop/product/list.do?productCategory=acc">ACC</a>
+					</div><br/>
 				</div>
-			</div>
-			<br/>
-			<div style="width: 65px;">
-				<a style="cursor: pointer;"onclick="display2();" onmouseover="display2(); this.style.fontWeight='bold'" onmouseout="this.style.fontWeight=''">BORAD</a><br/>
+				<a onclick="display2();">BORAD</a>
 				<div id="display2" class="display">
 					<div class="display_elements">
-						<a href="/sub/shop/boards/notice.do" style="display: block;">NOTICE</a><br/>
-						<a href="/sub/shop/boards/qna.do" style="display: block;">Q/A</a><br/>
-						<a href="/sub/shop/boards/review.do" style="display: block;">REVIEW</a><br/>
+						<a href="/sub/shop/boards/notice.do">NOTICE</a>
+						<a href="/sub/shop/boards/qna.do">Q/A</a>
+						<a href="/sub/shop/boards/review.do">REVIEW</a>
 					</div>
 				</div>
-			</div>
 			<!-- <a href="#none" id="search_btn">SEARCH</a>
 			<form id="searchBarForm" name="" action="/product/search.html"
 				method="get" target="_self" enctype="multipart/form-data">

@@ -1,4 +1,3 @@
-
 @charset "EUC-KR";
 
 body {
@@ -49,10 +48,9 @@ b {
 
 
 #userId{
-	
+	font: 9pt 'S-CoreDream-3Light','NeueHaasDisplay','Roboto','Noto Sans KR','Helvetica','Malgun Gothic',sans-serif;
 	display: inline-block;
     width: 100px;
-    font-size: 13px;
     border: none;
     float: left;
     outline: none;
@@ -62,7 +60,7 @@ b {
 #userPwd{
 	display: inline-block;
     width: 100px;
-    font-size: 13px;
+    font: 9pt 'S-CoreDream-3Light','NeueHaasDisplay','Roboto','Noto Sans KR','Helvetica','Malgun Gothic',sans-serif;
     border: none;
     float: left;
     outline: none;
@@ -173,50 +171,12 @@ td {
    
 }
 
-.box {
-   display: inline-block;
-   padding: 10px;
-   width: 500px;
-}
 
-.box.row {
-   
-   
-   position: relative;
-    display: block;
-    width: 300px;
-    margin: 0 0 24px;
-    padding: 3px 5px 3px 80px;
-    box-sizing: border-box;
-   /*  border-bottom: 1px solid #000; */
-    border-radius: 0;
-    border-bottom: 1px solid #DBDBDB;
- 	text-decoration: none;
-    color: #484848;
-    font-size: 8pt;
- 
- 
-}
-
-.box.label {
-  text-decoration: none;
-    color: #000000;
-    font-size: 8pt;
-  font-style: normal;
-  text-align: left;
-  
-}
 
 label span {
 }
 
-.box.input {
-   width: 195px;
-   vertical-align: middle;
-   font: 10px 'S-CoreDream-3Light','NeueHaasDisplay','Roboto','Noto Sans KR','Helvetica','Malgun Gothic',sans-serif;
-   height: 25px;
-  
-}
+
 
 
 .update.input {
@@ -228,8 +188,6 @@ label span {
    border-bottom: 1px solid #DBDBDB; 
    border-left:1px solid #DBDBDB; 
    border-right: 1px solid #DBDBDB;"
-   
-   
 }
 
 .box.op {
