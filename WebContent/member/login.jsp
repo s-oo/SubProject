@@ -42,6 +42,10 @@
 <jsp:include page="../main/header.jsp" />
 
 <div id="content" align="center">
+
+	<br> <br>
+		<h2>로그인</h2>
+		<br> <br>
 	<form action="" method="post" name="myForm" class="loginForm">
 		<div id="left_area" style="display: inline-block;" >
          	<div id="update_area">
@@ -81,7 +85,7 @@
 			
 			
 		<div class="search" style="font-size: 11px; margin-top: 10px; margin-left: 10px;   text-align:center; ">
-			<a href="<%=cp%>/shop/member/findId.do">SEARCH ID</a> <span>/&nbsp;</span> 
+			<a href="<%=cp%>/shop/member/findId.do">SEARCH ID</a> <span>&nbsp;/&nbsp;</span> 
 			<a href="<%=cp%>/shop/member/find.do">PASSWORD</a>
 		</div>	
 			

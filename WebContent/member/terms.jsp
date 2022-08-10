@@ -38,14 +38,17 @@
 	<jsp:include page="../main/header.jsp" />
 
 	<div id="content" align="center">
+	<div class="joinTitle" align="center" style="font-weight: 700;padding-top: 15px;font: 10pt;">회원가입</div>
+		
 		<form action="<%=cp%>/shop/member/join.do" name="form" method="post">
 			<table class="joinCheck" width="600" height="650">
 				<tr>
 					<td width="100%" height="50%" align="center">
 						<ul class="terms_bx_list">
-							<li class="terms_bx"><span class="input_chk">
+							<li class="terms_bx">
+							<span class="input_chk">
 								<input type="checkbox" id="termsService" name="req1" class="chk">
-								<label for="termsService">Kristal 이용약관 동의
+								<label for="termsService" style="font: 8pt;vertical-align: middle;">Kristal 이용약관 동의
 								<span class="terms_necessary">(필수)</span>
 								</label>
 							</span>
@@ -403,14 +406,14 @@
 							<li class="terms_bx"><span class="input_chk"> <input
 									type="checkbox" id="termsPrivacy" name="req2"
 									class="chk"> <label for="termsPrivacy"
-									class="collect_personal">개인정보 수집 및 이용 동의<span
+									class="collect_personal" style="vertical-align: middle;">개인정보 수집 및 이용 동의<span
 										class="terms_choice">(필수)</span></label> <a href="#" id="termForChild"
 									class="easy_guide" role="button" target="_blank"></a>
 							</span>
 								<div class="terms_box" tabindex="0" id="divPrivacy">
 									<!-- 개인정보 수집 및 이용에 대한 안내 -->
-									<div class="policy_summary">
-										<p class="policy_summary__text">개인정보보호법에 따라 Kristal에 회원가입
+									<div class="policy_summary" >
+										<p class="policy_summary__text" style="font: 12pt;">개인정보보호법에 따라 Kristal에 회원가입
 											신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간, 동의
 											거부권 및 동의 거부 시 불이익에 관한 사항을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.</p>
 									</div>
@@ -555,7 +558,7 @@
 								</div></li>
 							<li class="terms_bx"><span class="input_chk"> <input
 									type="checkbox" id="termsLocation" name="req3"
-									value="Y" class="chk"> <label for="termsLocation">위치기반서비스
+									value="Y" class="chk"> <label for="termsLocation" style="vertical-align: middle;">위치기반서비스
 										이용약관 동의<span class="terms_choice terms_no">(선택)</span>
 								</label>
 							</span> <!-- tg-lang=>"ko" -->
@@ -789,11 +792,12 @@
 				<tr>
 					<td align="center" valign="top">
 						<div class="selectAgree">
-							<input style="font-size: 10pt" type="button" value=" 동의 " onclick="chk()" />&nbsp;&nbsp;&nbsp;
-							<input style="font-size: 10pt" type="button" value=" 비동의 " onclick="nochk()" />
+							<input class="btn" style="font-size: 10pt" type="button" value=" 동의 " onclick="chk()" />&nbsp;&nbsp;&nbsp;
+							<input class="btn"  style="font-size: 10pt" type="button" value=" 비동의 " onclick="nochk()" />
 						</div>
 					</td>
 				</tr>
+
 			</table>
 		</form>
 

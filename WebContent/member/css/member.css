@@ -12,7 +12,7 @@
 }
 
 .loginForm{
-	margin-top: 90px;
+	/* margin-top: 30px; */
 }
 
 #left_area{
@@ -77,7 +77,7 @@ li{
 
 .terms_bx {
     display: block;
-    padding-top: 30px;
+    padding-top: 20px;
 }
 
 .chk{
@@ -96,7 +96,7 @@ li{
     /* display: block; */
     width: 100%;
     padding-left: 15px;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 700;
     line-height: 21px;
     cursor: pointer;
@@ -108,7 +108,7 @@ li{
 	vertical-align: middle;
     position: relative;
     overflow: auto;
-    height: 88px;
+    height: 110px;
     margin-top: 8px;
     padding: 12px;
     border: 1px solid #dadada;
@@ -132,7 +132,7 @@ li{
 .terms_box .article {
     font-size: 12px;
     line-height: 16px;
-    color: #666;
+    color: #333;
 }
 
 .article {
@@ -147,7 +147,7 @@ li{
     font-weight: 700;
     line-height: 16px;
     padding-bottom: 8px;
-    color: #666;
+    color: #333;
 }
 
 .selectAgree{
@@ -231,4 +231,7 @@ li{
 	width: 300px;
 }
 
-
+.btn{
+	border: 0;
+	outline: 0;
+}
