@@ -112,7 +112,7 @@
 				<table width="200;">
 					<tr height="30">
 						<td colspan="2" align="center"><font color="red">
-							<b>${message }</b></font>
+							<b style="color: red;">${message }</b></font>
 						</td>
 					</tr>
 				</table>

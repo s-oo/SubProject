@@ -224,10 +224,10 @@
 								style="margin-top: 10px; margin-bottom: 15px; height: 80px;">
 								<div style="padding-bottom: 8px;">
 									<input maxlength="6" type="text" name="userAddr" id="sample6_postcode"
-									style="float: left; padding-right: 0; padding-bottom:8pt; display: block;vertical-align: middle;font-size: 9pt;"
+									style="float: left; padding-right: 0; padding-bottom:10pt; display: block;vertical-align: middle;font-size: 9pt;"
 									class="input-2" placeholder="우편번호">
 									<input class="join_button" type="button" onclick="sample6_execDaumPostcode()"
-									style="display: block;vertical-align: middle; height: 15pt;font-size: 9pt;float: left;wi" value="우편번호 찾기">
+									style="display: block;vertical-align: middle; height: 15pt;font-size: 9pt;float: left;line-height: 4px;" value="우편번호 찾기">
 								</div>
 								<div class="box input" style="display:block; padding-bottom: 15px;">
 									<input type="text" name="userAddr" id="sample6_address" placeholder="주소" style="padding-bottom:8pt;font-size: 9pt;">
