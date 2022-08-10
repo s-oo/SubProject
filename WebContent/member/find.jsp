@@ -103,7 +103,7 @@
 
 			<table>
 				<tr height="30">
-					<td colspan="2" align="center"><font color="red"><b>
+					<td colspan="2" align="center"><font color="red"><b style="color: red;">
 								${message }</b></font></td>
 				</tr>
 			</table>
