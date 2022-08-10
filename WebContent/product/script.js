@@ -78,3 +78,17 @@ function printName()  {
 	  const name = document.getElementById('name').value;
 	  document.getElementById("result").innerText = name;
 	}
+
+function reviewView(boardNum) {
+	if (document.getElementById("reviewContent" + boardNum).style.display != "none")
+		document.getElementById("reviewContent" + boardNum).style.display = "none";
+	else if (document.getElementById("reviewContent" + boardNum).style.display == "none")
+		document.getElementById("reviewContent" + boardNum).style.display = "table-row";
+}
+
+function qnaView(boardNum) {
+	if (document.getElementById("qnaContent" + boardNum).style.display != "none")
+		document.getElementById("qnaContent" + boardNum).style.display = "none";
+	else if (document.getElementById("qnaContent" + boardNum).style.display == "none")
+		document.getElementById("qnaContent" + boardNum).style.display = "table-row";
+}
