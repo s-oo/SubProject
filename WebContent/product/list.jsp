@@ -37,7 +37,7 @@
 							<div class="productPrice">
 								<ul>
 									<li style="list-style: none;">
-										<span>${dto.productPrice }</span>
+										<span>${dto.productPrice }KRW</span>
 									</li>
 								</ul>
 							</div>

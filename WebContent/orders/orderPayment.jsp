@@ -231,7 +231,7 @@
 							<label for="deliveryName"><span>NAME</span></label>
 						</div>
 						<div class="box input" align="left">
-							<input type="text" name="deliveryName" class="inputStyle"/>
+							<input type="text" name="deliveryName" class="inputStyle" placeholder="이름"/>
 						</div>
 					</div>
 					<div class="box row" style="height: 120px;">
@@ -239,7 +239,7 @@
 							<label for="deliveryAddr"><span>ADDRESS</span></label>
 						</div>
 						<div class="box input" style="padding: 0px;" align="left">
-							<div class="box input" style="padding: 5px 10px 5px 10px;">
+							<div class="box input" style="padding: 5px 10px 5px 10px; width: 100%">
 								<input type="text" name="deliveryAddr" class="input-2 inputStyle" id="sample6_postcode" placeholder="우편번호"/>
 								<input type="button" onclick="sample6_execDaumPostcode()" class="join_button" style="float: right;" value="우편번호 찾기">
 							</div>
@@ -259,7 +259,7 @@
 							<label for="deliveryTel"><span>TEL</span></label>
 						</div>
 						<div class="box input">
-							<input type="text" name="deliveryTel" class="inputStyle"/>
+							<input type="text" name="deliveryTel" class="inputStyle" placeholder="전화번호"/>
 						</div>
 					</div>
 					<div class="box row">
@@ -267,7 +267,7 @@
 							<label for="deliveryEmail"><span>E-MAIL</span></label>
 						</div>
 						<div class="box input">
-							<input type="text" name="deliveryEmail" class="inputStyle"/>
+							<input type="text" name="deliveryEmail" class="inputStyle" placeholder="이메일"/>
 						</div>
 					</div>
 				</div>
