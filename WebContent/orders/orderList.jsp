@@ -23,6 +23,10 @@
 				<div class="box row" style="width: 900px;">
 					<h3 style="float: left; padding-left: 30px;">${ddto.deliveryDate } 주문</h3>
 					<h3 style="float: left; padding-left: 30px;">도착예정일 : ${ddto.arriveDate }</h3>
+					<h3 style="float: right; padding-right: 30px;">
+						<a href="<%=cp%>/shop/orders/changeDelivery_ok.do?progress=cancelList&deliveryNum=${ddto.deliveryNum}"
+							onclick="if(!confirm('주문을 취소하시겠습니까??')){return false;}">cancel</a>
+					</h3>
 				</div>
 				<table id="cartList">
 					<tbody>
