@@ -9,13 +9,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>kristal 아이디찾기</title>
-
+<link rel="stylesheet" type="text/css" href="<%=cp%>/member/css/memberListStyle.css" />
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/shopStyle.css" />
-<link rel="stylesheet" type="text/css"
-	href="<%=cp%>/member/css/memberListStyle.css" />
+
+<link rel="stylesheet" type="text/css" href="<%=cp%>/member/css/find.css" />
+<link rel="stylesheet" type="text/css" href="<%=cp%>/member/css/member.css" />
 
 <script type="text/javascript">
-	function searchpw(){
+	function searchid(){
 	
 	var f = document.myForm;
 	
@@ -47,73 +48,67 @@
 	<div id="content" align="center">
 
 		<br> <br>
-
-
-
 		<h2>아이디 찾기</h2>
 
 		<br> <br>
 		<form action="" method="post" name="myForm">
 			<div id="left_area" style="display: inline-block;">
-				<div id="update_area" style="width: 600px;">
-					<div class="box row">
-
+				<div id="update_area" >
+					<div style="width: 300px; height: 39; " class="box row">
 						<div class="box label">
-							<label for="userName"><span><b>NAME</b></span></label>
+							<label for="userName">
+								<span>
+									<a>NAME</a>
+								</span>
+							</label>
 						</div>
 						<div class="box input">
 							<input autofocus maxlength="10" type="text" name="userName" id="userName" placeholder="이름" />
 						</div>
 					</div>
-
-					<div class="box row">
+					<div  style="width: 300px; height: 39;" class="box row">
 						<div class="box label">
-							<label for="userTel"><span><b>TEL</b></span></label>
+							<label for="userTel">
+								<span>
+									<a>TEL</a>
+								</span>
+							</label>
 						</div>
 						<div class="box input">
-							<input maxlength="11" type="text" name="userTel" id="userTel"
-								placeholder="(-)없이 숫자만 입력해주세요." />
+							<input maxlength="11" type="text" name="userTel" id="userTel" placeholder="(-)없이 숫자만 입력해주세요." />
 						</div>
 					</div>
-
-
 				</div>
 			</div>
-			<br> <br> <br>
-			<div align="center">
-				<button
-					style="cursor:pointer; border: 0.5; background-color: white; width: 200px; height: 50px;"
-					type="button" onclick="location.href='<%=cp%>/shop/member/login.do';"
-					onmouseover=this.style.backgroundColor='#F0F0F0' onmouseout=this.style.backgroundColor='white'>
-					<b style="font-size: 17px; color: black;">뒤로가기</b>
-				</button>
-				&nbsp;&nbsp;
-				<button style="cursor:pointer; background-color: black; width: 200px; height: 50px;"
-					type="button" onclick="searchpw();">
-					<b style="font-size: 17px; color: white;">찾기</b>
+			
+			<div class="button" align="center">
+				
+				<button   style=" cursor:pointer; border:1px solid #BDBDBD; background-color: #FFFFFF; width: 200px; line-height: 48px;" type="button" 
+					onclick="location.href='<%=cp%>/shop/member/login.do';" onmouseover=this.style.backgroundColor='#F0F0F0' onmouseout=this.style.backgroundColor='#FFFFFF'>
+					<a style=" font-size: 8px; color: #484848;" >BACK</a>
+				</button>	
+				
+				<button   style=" cursor:pointer; border:1px solid #BDBDBD; background-color: #000000; width: 200px; line-height: 48px;" type="button" 
+					onclick="searchid();" onmouseover=this.style.backgroundColor='#303030' onmouseout=this.style.backgroundColor='#000000'>
+					<a style=" font-size: 8px; color: #FFFFFF;" >SEARCH</a>
 				</button>
 			</div>
 			<table width="200;">
 				<tr height="30">
-					<td colspan="2" align="center"><font color="red"><b>
-								${message }</b></font></td>
+					<td colspan="2" align="center"><font color="red">
+						<b>${message }</b></font>
+					</td>
 				</tr>
 			</table>
 			<table style="margin: auto;">
-
 				<tr height="30">
-					<td colspan="2" align="center"><a
-						href="<%=cp%>/shop/member/findId.do"><b>${lego }</b></a></td>
+					<td colspan="2" align="center"><a href="<%=cp%>/shop/member/login.do"><b>${lego }</b></a>
+					</td>
 				</tr>
 			</table>
-
-
 		</form>
 	</div>
-	<br>
-	<br>
-	<br>
-	<br>
+
 	<jsp:include page="../main/footer.jsp" />
 </body>
 </html>

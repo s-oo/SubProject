@@ -35,9 +35,24 @@
 		      }
 		}
 		
-		
 	
-	
+	/* function chkDel() {
+		var chkObj = document.getElementsByName("orderNum");
+		var chkDelStr = "";
+		for (var i = 0; i < chkObj.length; i++) {
+			var chkObjElement = chkObj[i];
+
+			if (chkObjElement.checked) {
+				chkDelStr = chkDelStr + chkObjElement.value + "/";
+			}
+		}
+
+		if (chkDelStr == "") {
+
+			alert("선택된 항목이 없습니다.");
+			return false;
+		}
+	} */
 </script>
 
 </head>
@@ -47,6 +62,7 @@
 		<form action="" method="post" name="cartListForm">
 			<div>
 			<input type="checkbox" id="all" name="all" onclick="checkAll()" ><a>이름을 무엇으로 지을까요?(체크시 전체선택 해제시 전체해제)</a>
+			
 			</div>
 		
 		
