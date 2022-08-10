@@ -1,0 +1,154 @@
+@charset "UTF-8";
+
+.button{
+	height: 70px;
+	margin-top: 10px;
+}
+
+.search a{
+	text-decoration: none;
+	color: #484848;
+	font-size: 8px;
+}
+
+.loginForm{
+	margin-top: 90px;
+}
+
+#left_area{
+	width: 320px;
+}
+
+.box.row {
+   position: relative;
+   display: block;
+   box-sizing: border-box;
+   color: #484848;
+   border: none;
+   border-bottom: 1px solid #ddd;
+   margin: 10px;
+}
+
+/* .box {
+   display: inline-block;
+   padding: 10px;
+   width: 500px;
+} */
+
+.box.label {
+	text-align: left;
+	display: inline-block;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	vertical-align: middle;
+}
+
+.box.input {
+   /* height: 25px; */
+   width: 40%;
+   text-align: left;
+   display: inline-block;
+   vertical-align: middle;
+}
+
+.update_area{
+	width: 100%;
+}
+
+/* terms.jsp */
+.terms_bx_list {
+    margin-top: 4px;
+    float: left;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    -webkit-text-size-adjust: none;
+}
+
+li{
+	margin: 0;
+    padding: 0;
+    -webkit-text-size-adjust: none;
+}
+
+.terms_bx {
+    display: block;
+    padding-top: 30px;
+}
+
+.chk{
+	vertical-align: middle;
+}
+
+.input_chk {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    padding-bottom: 10px;
+}
+
+.input_chk label {
+    position: relative;
+    /* display: block; */
+    width: 100%;
+    padding-left: 15px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 21px;
+    cursor: pointer;
+    color: #333;
+    box-sizing: border-box;
+}
+
+.terms_box {
+	vertical-align: middle;
+    position: relative;
+    overflow: auto;
+    height: 88px;
+    margin-top: 8px;
+    padding: 12px;
+    border: 1px solid #dadada;
+    background: #fff;
+    box-sizing: border-box;
+    scrollbar-base-color: #d9d9d9;
+    scrollbar-arrow-color: #8e8e8e;
+    scrollbar-3dlight-color: #d9d9d9;
+    scrollbar-darkshadow-color: #d9d9d9;
+    scrollbar-face-color: #d9d9d9;
+    scrollbar-highlight-color: #d9d9d9;
+    scrollbar-shadow-color: #d9d9d9;
+    scrollbar-track-color: #f2f2f2;
+    -webkit-overflow-scrolling: touch;
+}
+
+.article:first-child {
+    margin-top: 0;
+}
+
+.terms_box .article {
+    font-size: 12px;
+    line-height: 16px;
+    color: #666;
+}
+
+.article {
+    margin-top: 15px;
+    font-size: 12px;
+    line-height: 16px;
+    color: #666;
+}
+
+.article .article__title {
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 16px;
+    padding-bottom: 8px;
+    color: #666;
+}
+
+.selectAgree{
+	padding-top: 30px;
+}

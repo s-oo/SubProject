@@ -106,14 +106,13 @@ CREATE TABLE COMMENTS (
 	CONTENT VARCHAR2(1024),
 	CONSTRAINT FK_COMMENT_USERID FOREIGN KEY (USERID) REFERENCES MEMBER(USERID));
 
-
-
 INSERT INTO MEMBER VALUES('KRISTAL','sss','관리자','여자','1993/02/14','06234/서울 강남구 테헤란로 124/4층/(역삼동)','kristal@naver.com','01055861420',1);
 INSERT INTO MEMBER VALUES('yun','asd','yun','남자','95/04/01','12334/서울 강남구 테헤란로 124/4층/(역삼동)','yun@naver.com','01020893971',1);
 INSERT INTO MEMBER VALUES('hong','asd','hong','남자','90/01/01','06234/서울 강남구 테헤란로 124/4층/(역삼동)','hong@naver.com','01068755530',1);
 INSERT INTO MEMBER VALUES('chang','asd','chang','남자','88/07/07','06234/서울 강남구 테헤란로 124/4층/(역삼동)','chang@naver.com','01041643687',1);
 INSERT INTO MEMBER VALUES('asd','asd','asdName','남자',SYSDATE,'06234/서울 강남구 테헤란로 124/4층/(역삼동)','asd@asd.asd','01012341234',1);
 INSERT INTO MEMBER VALUES('qwe','qwe','qweName','남자',SYSDATE,'11111/서울 역삼/4층/(역삼동)','qwe@qwe.qwe','01012341234',1);
+
 
 INSERT INTO PRODUCT VALUES(1,'Half-sleeve linen Jacket',139500,'outer','44d34ec9996559ad8ccc723232d7ea46.jpg,97501c74e01b25dc9609a62b52db502c.jpg,54c688722a8a2c464bc8c03463055344.jpg,c10b47ebdd58e09ba4affbf5ba01051a.jpg,65f284088a5db1291351c3e9ac6cbc7b.jpg','44d34ec9996559ad8ccc723232d7ea46.jpg,97501c74e01b25dc9609a62b52db502c.jpg,54c688722a8a2c464bc8c03463055344.jpg,c10b47ebdd58e09ba4affbf5ba01051a.jpg,65f284088a5db1291351c3e9ac6cbc7b.jpg','BEIGE','SMALL,MEDIUM,LARGE','깔끔한 디자인의 린넨 자켓입니다.'||CHR(10)||CHR(13)||'슬림한 핏과 크롭 기장으로 여성스러운 포인트를 더했으며,'
 ||CHR(10)||CHR(13)||'어디에나 잘 어울려 여름 시즌 가볍게 걸치기 좋은 상품입니다.'||CHR(10)||CHR(13)||'FABRIC : LINEN 55% COTTON 45%'
@@ -346,14 +345,12 @@ INSERT INTO PRODUCT VALUES(45,'Whole garment layered knit shawl',88200,'acc','d0
 '보온성도 높아 간절기에 하나쯤 소장하기 좋은 상품입니다.'||CHR(10)||CHR(13)||'[ACRYLIC 100%]'||CHR(10)||CHR(13)||
 '• DRY CLEAN ONLY' ||CHR(10)||CHR(13)||'• DO NOT TUMBLE DRY' ||CHR(10)||CHR(13)||'• DO NOT BLEACH'
 );
-
 INSERT INTO ORDERS VALUES(1,'yun',1,2,'red','L','2022/08/01','cartList');
 INSERT INTO ORDERS VALUES(2,'yun',2,3,'red','L','2022/08/02','wishList');
 INSERT INTO ORDERS VALUES(3,'hong',1,1,'red','L','2022/08/03','cartList');
 INSERT INTO ORDERS VALUES(4,'hong',2,2,'red','L','2022/08/04','wishList');
 INSERT INTO ORDERS VALUES(5,'chang',1,3,'red','L','2022/08/05','cartList');
 INSERT INTO ORDERS VALUES(6,'chang',2,4,'red','L','2022/08/06','wishList');
-
 
 INSERT INTO NOTICE VALUES(1,'KRISTAL','고객 보상 지원 제도 시행 안내','고객 보상 지원 제도 시행 안내','2022/08/01',0);
 INSERT INTO NOTICE VALUES(2,'KRISTAL','상의 일부 상품의 권장 소비자 가격이 변경됨을 안내드립니다.','상의 일부 상품의 권장 소비자 가격이 변경됨을 안내드립니다.','2022/08/03',0);
@@ -363,7 +360,6 @@ INSERT INTO NOTICE VALUES(5,'KRISTAL','대리구매 이용 자제를 당부드�
 INSERT INTO NOTICE VALUES(6,'KRISTAL','5년이상 미 사용 적립금 소멸 관련 공지사항입니다.','5년이상 미 사용 적립금 소멸 관련 공지사항입니다.','2022/11/27',0);
 INSERT INTO NOTICE VALUES(7,'KRISTAL','[사과문] 후속 조치에 대해 말씀드립니다.','[사과문] 후속 조치에 대해 말씀드립니다.','2022/08/01',0);
 INSERT INTO NOTICE VALUES(8,'KRISTAL','장바구니 상품 보관 정책 변경 안내','장바구니 상품 보관 정책 변경 안내','2022/12/25',0);
-
 
 INSERT INTO QNA VALUES(1,'yun',1,'상품문의','상품문의','2022/08/01',0);
 INSERT INTO QNA VALUES(2,'yun',2,'환불문의','환불문의','2022/08/02',0);
@@ -384,7 +380,6 @@ INSERT INTO REVIEW VALUES(7,'chang',1,'정말 멋져요','또사고싶어요','2
 INSERT INTO REVIEW VALUES(8,'chang',2,'착샷','또살게요','2022/08/08',0);                            
 
 commit;
-
 
 
 
