@@ -16,73 +16,60 @@
 </head>
 <body>
 	<jsp:include page="../main/header.jsp"/>
-	<div id="content" align="center">
-		<div align="right">
-			<form action="" method="post" name="cartListForm">
-				<table id="cartList">
-					<colgroup>
-						<col width="10%"><col width="15%"><col width="15%"><col width="15%"><col width="15%"><col width="15%">
-					</colgroup>
-					<tbody>
-						<c:set var="sum" value="0"/>
-						<c:set var="tot" value="0"/>
-						<c:forEach var="dto" items="${list }">
-							<tr align="center">
-								<td id="saveFileName">
-									<a href="<%=cp %>/shop/product/detail.do?productNum=${dto.productNum }">
-										<img src="<%=cp %>/product/image/${dto.productCategory }/${dto.saveFileName[0] }" height="100px;">
-									</a>
-								</td>
-								<td id="productName">
-									<a href="<%=cp %>/shop/product/detail.do?productNum=${dto.productNum }">
-										${dto.productName }
-									</a><br/>
-									<span class="productOption">[옵션 : ${dto.orderColor }/${dto.orderSize }]</span>
-								</td>
-								<td id="productPrice">
-									<span style="text-decoration: line-through;">${dto.productPrice }KRW</span><br/>
-									<span>${dto.productPrice }KRW</span>
-								</td>
-								<td id="productQuantity">
-									${dto.orderQuantity }&nbsp;&nbsp;&nbsp;
-									<a href="<%=cp%>/shop/orders/modifyList_ok.do?orderNum=${dto.orderNum }&orderQuantity=${dto.orderQuantity + 1 }">
-										+</a>&nbsp;
-									<a href="<%=cp%>/shop/orders/modifyList_ok.do?orderNum=${dto.orderNum }&orderQuantity=${dto.orderQuantity - 1 }">
-										-</a>
-								</td>
-								<td id="addOrder&delete">
-									<a href="<%=cp%>/shop/orders/addOrder_ok.do?orderNum=${dto.orderNum }">추가</a>&nbsp;&nbsp;&nbsp;
-									<a href="<%=cp%>/shop/orders/delete_ok.do?orderNum=${dto.orderNum }">X</a>
-								</td>
-							</tr>
-							<c:set var="sum" value="${sum + dto.productPrice }"/>
-							<c:set var="tot" value="${tot + dto.productPrice }"/>
-						</c:forEach>
-					</tbody>
+	<div id="content" align="center" style="display: block;">
+		<form action="" method="post" name="cartListForm">
+			<table id="cartList" style="border-top: 1px solid #DBDBDB; border-bottom: 1px solid #DBDBDB; padding: 20px 0px 20px 0px; margin-bottom: 50px;">
+				<tbody>
+					<c:set var="sum" value="0"/>
+					<c:set var="tot" value="0"/>
+					<c:forEach var="dto" items="${list }">
+						<tr align="center">
+							<td id="saveFileName">
+								<a href="<%=cp %>/shop/product/detail.do?productNum=${dto.productNum }">
+									<img src="<%=cp %>/product/image/${dto.productCategory }/${dto.saveFileName[0] }" height="100px;">
+								</a>
+							</td>
+							<td id="productName">
+								<a href="<%=cp %>/shop/product/detail.do?productNum=${dto.productNum }">
+									${dto.productName }
+								</a><br/>
+								<span class="productOption">[옵션 : ${dto.orderColor }/${dto.orderSize }]</span>
+							</td>
+							<td id="productPrice">
+								<span style="text-decoration: line-through;">${dto.productPrice }KRW</span><br/>
+								<span>${dto.productPrice }KRW</span>
+							</td>
+							<td id="productQuantity">
+								${dto.orderQuantity }&nbsp;&nbsp;&nbsp;
+								<a href="<%=cp%>/shop/orders/changeOrder_ok.do?orderNum=${dto.orderNum }&orderQuantity=${dto.orderQuantity + 1 }">
+									+</a>&nbsp;
+								<a href="<%=cp%>/shop/orders/changeOrder_ok.do?orderNum=${dto.orderNum }&orderQuantity=${dto.orderQuantity - 1 }">
+									-</a>
+							</td>
+							<td id="totalProductPrice">
+								${dto.productPrice * dto.orderQuantity }KRW
+							</td>
+							<td id="delete">
+							<a href="<%=cp%>/shop/orders/changeOrder_ok.do?orderNum=${dto.orderNum }&progress=cartList">추가</a>&nbsp;&nbsp;&nbsp;
+								<a href="<%=cp%>/shop/orders/deleteOrder_ok.do?orderNum=${dto.orderNum }"
+									onclick="if(!confirm('찜리스트에서 삭제 하시겠습니까??')){return false;}">X</a>
+							</td>
+						</tr>
+						<c:set var="sum" value="${sum + dto.productPrice * dto.orderQuantity }"/>
+						<c:set var="tot" value="${tot + dto.productPrice * dto.orderQuantity }"/>
+					</c:forEach>
+				</tbody>
+				<c:if test="${empty list }">
 					<tfoot>
-						<tr id="listBox" class="item" style="list-style: none;width: 300px;display: inline-block;">
-							<td class="box_wrap" style="display: inline-block;font-size: 10pt;color: #555555;">
-								<c:if test="${empty list }">
-									등록된 상품이 없음
-								</c:if>
+						<tr align="center">
+							<td style="font-size: 10pt;color: #555555;">
+								찜한 상품이 없습니다.
 							</td>
 						</tr>
 					</tfoot>
-				</table>
-				<div style="display: inline-block;">
-					<div id="paymentBox" align="right">
-						<div>PRICE</div><div>${sum }KRW</div><br/>
-						<div>SHIPPNG</div><div>0KRW</div><br/>
-						<div>TOTAL</div><div>${tot }KRW</div><br/>
-					</div>
-					<div style="float: right;">
-						<div style="border: 1px solid; width: 80px; height: 50px; padding: 35px 5px 0px 5px;" align="center">
-							<a href="<%=cp%>/shop/orders/orderList.do">ORDER</a>
-						</div>
-					</div>
-				</div>
-			</form>
-		</div>
+				</c:if>
+			</table>
+		</form>
 	</div>
 	<jsp:include page="../main/footer.jsp"/>
 </body>
