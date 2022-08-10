@@ -499,14 +499,10 @@ public class BoardsServlet extends HttpServlet {
 
 			out.print("<script>");
 			out.print("alert('로그인을 해주세요');");
-//			out.print("locasion:href='"+ cp + "/shop/member/login.do';");
+			out.print("location.href='/sub/shop/member/login.do';");
 			out.print("</script>");
 
-			url = cp + "/shop/member/login.do";
-			resp.sendRedirect(url);
-
 		} else {
-//			http://localhost:8080/sub/shop/boards/noticeWrite.do
 
 			if (uri.indexOf("qnaWrite.do") != -1) {
 
@@ -530,7 +526,7 @@ public class BoardsServlet extends HttpServlet {
 					System.out.println(userId);
 					out.print("<script>");
 					out.print("alert('접근권한이 없습니다.');");
-					out.print("location.href = '/sub/shop/boards/notice.do';");
+					out.print("location.href='/sub/shop/boards/notice.do';");
 					out.print("</script>");
 				}
 
@@ -551,14 +547,14 @@ public class BoardsServlet extends HttpServlet {
 					if (ordersDTO == null) {
 						out.print("<script>");
 						out.print("alert('존재하지 않는 주문번호입니다.');");
-						out.print("location.href = '/sub/shop/boards/review.do';");
+						out.print("location.href='/sub/shop/boards/review.do';");
 						out.print("</script>");
 					}
 					
 					if (!userId.equals(ordersDTO.getUserId())) {
 						out.print("<script>");
 						out.print("alert('접근권한이 없습니다.');");
-						out.print("location.href = '/sub/shop/boards/review.do';");
+						out.print("location.href='/sub/shop/boards/review.do';");
 						out.print("</script>");
 					}
 
@@ -907,6 +903,7 @@ public class BoardsServlet extends HttpServlet {
 			}
 
 		}
+		
 	}
 
 }
