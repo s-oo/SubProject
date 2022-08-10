@@ -789,18 +789,22 @@
 						<b style="font-size: 10pt">개인정보 수집 및 이용에동의합니다.</b> -->
 					</td>
 				</tr>
-				<tr>
-					<td align="center" valign="top">
-						<div class="selectAgree">
-							<input class="btn" style="font-size: 10pt" type="button" value=" 동의 " onclick="chk()" />&nbsp;&nbsp;&nbsp;
-							<input class="btn"  style="font-size: 10pt" type="button" value=" 비동의 " onclick="nochk()" />
-						</div>
-					</td>
-				</tr>
-
 			</table>
+			<div align="center">
+				<div style="float: left; padding-left: 370px; padding-right: 10px;">	
+					<button class="add_button" type="button" style="width: 170px;" onclick="nochk();">
+						<a style=" font-size: 8px; color: #484848;">비동의</a>
+					</button>
+				</div>
+				
+				<div style="float: left;">
+					<button class="add_button" type="button" style="width: 170px;" onclick="chk();">
+						<a style=" font-size: 8px; color: #484848;">동의</a>
+					</button>	
+				</div>
+			</div>
 		</form>
-
+		
 
 	</div>
 

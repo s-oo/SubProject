@@ -31,17 +31,19 @@
 <b>kristal 회원가입을 진심으로 환영합니다.</b><br>
 <br>
 <br>
-	<div align="center">	
-				<button  style="border:none; background-color: #FOFOFO; width: 200px; height: 50px;"
-					type="button" onclick="javascript:location.href='<%=cp%>/shop/main/main.do';">
-						<b style="font-size: 17px; color: black;">메인으로</b>
-				</button>
-				&nbsp;&nbsp;
-				<button style="background-color: black; width: 200px; height: 50px;"
-					type="button" onclick="javascript:location.href='<%=cp%>/shop/member/login.do';">
-						<b style="font-size: 17px; color: white;">로그인하기</b>
-				</button>	
-			</div>
+	<div align="center">
+		<div style="float: left; padding-left: 370px; padding-right: 10px;">	
+			<button class="add_button" type="button" style="width: 170px;" onclick="javascript:location.href='<%=cp%>/shop/main/main.do';">
+				<a style=" font-size: 8px; color: #484848;">메인으로</a>
+			</button>
+		</div>
+		
+		<div style="float: left;">
+			<button class="add_button" type="button" style="width: 170px;" onclick="javascript:location.href='<%=cp%>/shop/member/login.do';">
+				<a style=" font-size: 8px; color: #484848;">로그인하기</a>
+			</button>	
+		</div>
+	</div>
 	<br><br>
 <br><br>
 <br><br>
