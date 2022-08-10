@@ -17,6 +17,7 @@
 <body>
 	<jsp:include page="../main/header.jsp"/>
 	<div id="content" align="center" style="display: block;">
+		<div align="center" style="font-weight: 700; padding-top: 15px; font: 10pt;"><h3>WISH LIST</h3></div>
 		<form action="" method="post" name="cartListForm">
 			<table id="cartList" style="border-top: 1px solid #DBDBDB; border-bottom: 1px solid #DBDBDB; padding: 20px 0px 20px 0px; margin-bottom: 50px;">
 				<tbody>

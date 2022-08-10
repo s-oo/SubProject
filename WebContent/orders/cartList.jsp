@@ -59,6 +59,7 @@
 <body>
 	<jsp:include page="../main/header.jsp"/>
 	<div id="content" align="center" style="display: block;">
+		<div align="center" style="font-weight: 700; padding-top: 15px; font: 10pt;"><h3>CART LIST</h3></div>
 		<form action="" method="post" name="cartListForm">
 			<c:if test="${!empty list } ">
 				<div style="padding-left: 80px;" align="left">
