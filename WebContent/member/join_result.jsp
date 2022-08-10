@@ -25,8 +25,7 @@
 <br><br>
 <br><br>
 
-<h1>${userName }님 반갑습니다</h1>
-<br><br>
+<h3>${userName }님 반갑습니다</h3><br/>
 
 <b>kristal 회원가입을 진심으로 환영합니다.</b><br>
 <br>
