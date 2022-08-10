@@ -43,7 +43,7 @@ public class MemberServlet extends HttpServlet {
 		MemberDAO dao = new MemberDAO(conn);
 
 		String url;
-		String referer = (String) req.getHeader("REFERER");
+		/*String referer = (String) req.getHeader("REFERER");*/
 		String sessionUserId = (String) req.getSession().getAttribute("userId");
 		String userId = null;
 		
@@ -147,11 +147,11 @@ public class MemberServlet extends HttpServlet {
 					req.getSession().setAttribute("userId", userId);
 
 					
-					url = req.getHeader("REFERER");
-					System.out.println(url);
-					/*url = cp + "/shop/main/main.do";*/
-					resp.sendRedirect(req.getHeader("referer"));
-					
+					/*url = req.getHeader("REFERER");
+					System.out.println(url);*/
+					url = cp + "/shop/main/main.do";
+					/*resp.sendRedirect(req.getHeader("referer"));*/
+					resp.sendRedirect(url);
 				}
 			
 			}else if(uri.indexOf("findId.do")!=-1) {
@@ -183,7 +183,7 @@ public class MemberServlet extends HttpServlet {
 				}else {
 				req.setAttribute("message", "아이디는 ["+ dto.getUserId() + "] 입니다.");
 				req.setAttribute("lego", "로그인");
-				url = "/shop/member/find.do";
+				url = "/shop/member/findId.do";
 				forward(req, resp, url);
 			
 				}
