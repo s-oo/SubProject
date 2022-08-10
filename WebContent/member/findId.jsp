@@ -75,15 +75,15 @@
 							</label>
 						</div>
 						<div class="box input">
-							<input maxlength="11" type="text" name="userTel" id="userTel" placeholder="(-)없이 숫자만 입력해주세요." />
+							<input maxlength="11" type="text" name="userTel" id="userTel" placeholder="(-)없이 숫자만 입력해주세요."
+							style="width: 170px;"/>
 						</div>
 					</div>
 				</div>
 			</div>
 			
-			<div class="button" align="center">
-				
-				<button   style=" cursor:pointer; border:1px solid #BDBDBD; background-color: #FFFFFF; width: 200px; line-height: 48px;" type="button" 
+			<%-- <div class="button" align="center">
+				<button style=" cursor:pointer; border:1px solid #BDBDBD; background-color: #FFFFFF; width: 200px; line-height: 48px;" type="button" 
 					onclick="location.href='<%=cp%>/shop/member/login.do';" onmouseover=this.style.backgroundColor='#F0F0F0' onmouseout=this.style.backgroundColor='#FFFFFF'>
 					<a style=" font-size: 8px; color: #484848;" >BACK</a>
 				</button>	
@@ -92,20 +92,37 @@
 					onclick="searchid();" onmouseover=this.style.backgroundColor='#303030' onmouseout=this.style.backgroundColor='#000000'>
 					<a style=" font-size: 8px; color: #FFFFFF;" >SEARCH</a>
 				</button>
+			</div> --%>
+			
+			<div class="findButton">
+				<div style="float: left; padding-left: 370px; padding-right: 10px;">	
+					<button class="add_button" type="button" style="width: 170px;" onclick="location.href='<%=cp%>/shop/member/login.do';">
+						<a style=" font-size: 8px; color: #484848;">BACK</a>
+					</button>
+				</div>
+				
+				<div style="float: left;">
+					<button class="add_button" type="button" style="width: 170px;" onclick="searchid();">
+						<a style=" font-size: 8px; color: #484848;">SEARCH</a>
+					</button>	
+				</div>
 			</div>
-			<table width="200;">
-				<tr height="30">
-					<td colspan="2" align="center"><font color="red">
-						<b>${message }</b></font>
-					</td>
-				</tr>
-			</table>
-			<table style="margin: auto;">
-				<tr height="30">
-					<td colspan="2" align="center"><a href="<%=cp%>/shop/member/login.do"><b>${lego }</b></a>
-					</td>
-				</tr>
-			</table>
+			
+			<div class="findResult">
+				<table width="200;">
+					<tr height="30">
+						<td colspan="2" align="center"><font color="red">
+							<b>${message }</b></font>
+						</td>
+					</tr>
+				</table>
+				<table style="margin: auto;">
+					<tr height="30">
+						<td colspan="2" align="center"><a href="<%=cp%>/shop/member/login.do"><b>${lego }</b></a>
+						</td>
+					</tr>
+				</table>
+			</div>
 		</form>
 	</div>
 

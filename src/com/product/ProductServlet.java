@@ -128,6 +128,7 @@ public class ProductServlet extends HttpServlet{
 			int productNum = Integer.parseInt(req.getParameter("productNum"));
 			String pageNum = req.getParameter("pageNum");
 			
+			
 			String searchKey = req.getParameter("searchKey");
 			String searchValue = req.getParameter("searchValue");
 			

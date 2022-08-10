@@ -143,6 +143,58 @@ public class ReviewDAO {
 
 	}
 
+	public List<ReviewDTO> getLists(int productNum) {
+
+		List<ReviewDTO> lists = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql;
+
+		try {
+
+			sql = "SELECT BOARDNUM, USERID, ORDERNUM, SUBJECT, CONTENT, POSTDATE, HITS ";
+			sql += "FROM REVIEW WHERE ORDERNUM IN (";
+			sql += "SELECT ORDERNUM FROM ORDERS O, PRODUCT P WHERE O.PRODUCTNUM = P.PRODUCTNUM AND O.PRODUCTNUM = ?)";
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, productNum);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				ReviewDTO dto = new ReviewDTO();
+
+				dto.setBoardNum(rs.getInt("boardNum"));
+				dto.setUserId(rs.getString("userId"));
+				dto.setOrderNum(rs.getInt("orderNum"));
+				dto.setSubject(rs.getString("subject"));
+				dto.setContent(rs.getString("CONTENT"));
+				dto.setHits(rs.getInt("hits"));
+				dto.setPostDate(rs.getString("postDate"));
+
+				OrdersDTO ordersDTO = new OrdersDAO(conn).getReadData(rs.getInt("orderNum"));
+
+				dto.setOrdersDTO(ordersDTO);
+				dto.setProductName(ordersDTO.getProductName());
+				dto.setProductCategory(ordersDTO.getProductCategory());
+				dto.setSaveFileName(ordersDTO.getSaveFileName());
+
+				lists.add(dto);
+
+			}
+
+			rs.close();
+			pstmt.close();
+
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+
+		return lists;
+
+	}
+
 	// 전체데이터의 갯수
 	public int getDataCount(String searchKey, String searchValue) {
 
