@@ -13,6 +13,9 @@ public class QnaDTO {
 	private int hits;
 
 	private ProductDTO productDTO;
+	private String productName;
+	private String productCategory;
+	private String[] saveFileName;
 
 	public int getBoardNum() {
 		return boardNum;
@@ -76,6 +79,30 @@ public class QnaDTO {
 
 	public void setProductDTO(ProductDTO productDTO) {
 		this.productDTO = productDTO;
+	}
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	public String getProductCategory() {
+		return productCategory;
+	}
+
+	public void setProductCategory(String productCategory) {
+		this.productCategory = productCategory;
+	}
+
+	public String[] getSaveFileName() {
+		return saveFileName;
+	}
+
+	public void setSaveFileName(String[] saveFileName) {
+		this.saveFileName = saveFileName;
 	}
 
 }
