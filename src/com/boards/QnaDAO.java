@@ -6,7 +6,10 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.orders.OrdersDAO;
+import com.orders.OrdersDTO;
 import com.product.ProductDAO;
+import com.product.ProductDTO;
 
 public class QnaDAO {
 
@@ -137,6 +140,59 @@ public class QnaDAO {
 		return lists;
 
 	}
+	
+	public List<QnaDTO> getLists(int productNum) {
+
+		List<QnaDTO> lists = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql;
+
+		try {
+
+			sql = "SELECT BOARDNUM, USERID, PRODUCTNUM, SUBJECT, CONTENT, POSTDATE, HITS ";
+			sql += "FROM QNA WHERE PRODUCTNUM IN (";
+			sql += "SELECT PRODUCTNUM FROM PRODUCT WHERE PRODUCTNUM = ?)";
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, productNum);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				QnaDTO dto = new QnaDTO();
+
+				dto.setBoardNum(rs.getInt("boardNum"));
+				dto.setUserId(rs.getString("userId"));
+				dto.setProductNum(rs.getInt("PRODUCTNUM"));
+				dto.setSubject(rs.getString("subject"));
+				dto.setContent(rs.getString("CONTENT"));
+				dto.setHits(rs.getInt("hits"));
+				dto.setPostDate(rs.getString("postDate"));
+
+				ProductDTO productDTO = new ProductDAO(conn).getReadData(rs.getInt("productNum"));
+
+				dto.setProductDTO(productDTO);
+				dto.setProductName(productDTO.getProductName());
+				dto.setProductCategory(productDTO.getProductCategory());
+				dto.setSaveFileName(productDTO.getSaveFileName());
+
+				lists.add(dto);
+
+			}
+
+			rs.close();
+			pstmt.close();
+
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+
+		return lists;
+
+	}
+	
 
 	// 전체데이터의 갯수
 	public int getDataCount(String searchKey, String searchValue) {

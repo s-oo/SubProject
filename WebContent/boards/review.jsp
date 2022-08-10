@@ -65,7 +65,9 @@
 						<td>${dto.boardNum }</td>
 						<!-- SUBJECT -->
 						<td>
-							<img src="<%=cp %>/product/image/${dto.productCategory}/${dto.saveFileName[0]}" width="100px;" height="100px;">
+							<a href="<%=cp %>/shop/product/detail.do?productNum=${dto.ordersDTO.getProductNum()}">
+								<img src="<%=cp %>/product/image/${dto.productCategory}/${dto.saveFileName[0]}" width="100px;" height="100px;">
+							</a>
 						</td>
 						<td>	
 							<a href="${viewUrl }&boardNum=${dto.boardNum}&orderNum=${dto.orderNum}">${dto.subject }</a>
