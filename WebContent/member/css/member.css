@@ -16,7 +16,7 @@
 }
 
 #left_area{
-	width: 320px;
+	width: 350px;
 }
 
 .box.row {
@@ -35,12 +35,13 @@
    width: 500px;
 } */
 
-.box.label {
-	text-align: left;
-	display: inline-block;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	vertical-align: middle;
+.box.label {	
+	width: 100px;
+    text-align: left;
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    vertical-align: middle;
 }
 
 .box.input {
@@ -151,4 +152,69 @@ li{
 
 .selectAgree{
 	padding-top: 30px;
+}
+
+
+
+/* join */
+.join_wrap{
+	width: 400px;
+}
+
+.add_button {
+    /* text-align: center;
+    width: 100px;
+    box-sizing: border-box;
+    height: 30px;
+    line-height: 28px;
+    background-color: #fff;
+    font-size: 13px;
+    vertical-align: middle;
+    padding: 0;
+    font-weight: 400;
+    border: 1px solid #000;
+    margin-bottom: 10px;
+    display: block;
+    float: left; */
+    border: 1px solid rgb(189, 189, 189);
+    background-color: white;
+    line-height: 48px;
+    font-size: 8pt cursor: pointer;
+    margin-top: 10px;
+    border: 1px solid rgb(189, 189, 189);
+    background-color: white;
+    width: 200px;
+    line-height: 48px;
+}
+
+.joinTitle {
+    font-weight: 700;
+    font: 13px'S-CoreDream-3Light','NeueHaasDisplay','Roboto','Noto Sans KR','Helvetica','Malgun Gothic',sans-serif;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.joinLabel{
+	width: 100px;
+	text-align: left;
+	display: inline-block;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	vertical-align: middle;
+}
+
+.inputStyle{
+	font: 9pt 'S-CoreDream-3Light','NeueHaasDisplay','Roboto','Noto Sans KR','Helvetica','Malgun Gothic',sans-serif;
+	display: inline-block;
+    width: 100px;
+    border: none;
+    float: left;
+    outline: none;
+}
+
+.join_button{
+	border: black;
+	width: 100px;
+	float: left;
+	/* margin-left: 200px; */
 }
