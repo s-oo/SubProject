@@ -44,19 +44,19 @@
 	function sendItWishList() {
 		var f = document.detailForm;
 		
-		/* 
+		/*
 		if(f.option1.value=="*"){
 			alert("컬러를 입력해 주세요.");
 			f.option1.focus();
 			return;
-		}
+		}*/
 		
-		if(f.option2.value=="*"){
-			alert("사이즈를 입력해 주세요.");
-			f.option2.focus();
+		if(f.vlaue=="wishlist"){
+			alert("바보");
+			f.focus();
 			return;
 		
-		} */
+		} 
 		
 		
 		f.productNum
@@ -89,9 +89,13 @@
 						</c:forEach>
 					</div>
 				</div>
+				
 				<!-- product detail -->
 				<div class="productMenu" align="center">
+				
 					<div class="productInfo">
+					<img alt="wishlist" src="<%=cp %>/product/image/wishlist/wishlistSc.PNG"  name="progress" onclick="sendItWishList()"
+				style="float: right; width:30px; height:25px; margin-top: -5px;"/>
 						<!-- product name, price  -->
 						<div class="productName">
 							<span>${dto.productName }</span> 
@@ -133,7 +137,14 @@
 						<div>
 						<!-- 	<form name="detailForm" method="post"> -->
 							<input type="hidden" name="productNum" value="${dto.productNum }">
-							<input  name="progress" value="cartList" onclick="sendItWishList()">
+							 
+							 
+							
+							 
+							 
+							 
+							 
+						
 								<table class="totalProduct" border="1" summary="">
 									<colgroup>
 										<col style="width: 20%;">
