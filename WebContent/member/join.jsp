@@ -211,7 +211,7 @@
 								<option value="12">12</option></select>
 							</span>
 							<span style="float: left;vertical-align: middle;padding-left: 20px;">
-								<input maxlength="2" style="width: 50px;margin-bottom: 5px;font-style: italic;" type="text" name="userBirth" id="userBirth" placeholder="일"/> 
+								<input maxlength="2" style="width: 50px;margin-bottom: 5px;font-style: italic; vertical-align: middle;" type="text" name="userBirth" id="userBirth" placeholder="일"/> 
 	                    	</span>
 		                    </div>
 	             		</div>
