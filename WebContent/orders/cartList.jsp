@@ -45,15 +45,14 @@
 	<jsp:include page="../main/header.jsp"/>
 	<div id="content" align="center" style="display: block;">
 		<form action="" method="post" name="cartListForm">
-			<div>
-			<input type="checkbox" id="all" name="all" onclick="checkAll()" ><a>이름을 무엇으로 지을까요?(체크시 전체선택 해제시 전체해제)</a>
-			</div>
-		
-		
+			<c:if test="${!empty list } ">
+				<div style="padding-left: 80px;" align="left">
+					<input type="checkbox" id="all" name="all" onclick="checkAll()" checked="checked">
+					<a>전체선택/해제</a>
+				</div>
+			</c:if>
 			<table id="cartList" style="border-top: 1px solid #DBDBDB; border-bottom: 1px solid #DBDBDB; padding: 20px 0px 20px 0px; margin-bottom: 50px;">
 				<tbody>
-				
-				
 					<c:set var="sum" value="0"/>
 					<c:set var="tot" value="0"/>
 					<c:forEach var="dto" items="${list }">
@@ -87,7 +86,8 @@
 								${dto.productPrice * dto.orderQuantity }KRW
 							</td>
 							<td id="delete">
-								<a href="<%=cp%>/shop/orders/deleteOrder_ok.do?orderNum=${dto.orderNum }">X</a>
+								<a href="<%=cp%>/shop/orders/deleteOrder_ok.do?orderNum=${dto.orderNum }"
+									onclick="if(!confirm('장바구니에서 삭제 하시겠습니까??')){return false;}">X</a>
 							</td>
 						</tr>
 						<c:set var="sum" value="${sum + dto.productPrice * dto.orderQuantity }"/>

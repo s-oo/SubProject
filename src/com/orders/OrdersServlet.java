@@ -290,7 +290,53 @@ public class OrdersServlet extends HttpServlet {
 			url = "/orders/cancelList.jsp";
 			forward(req, resp, url);
 
-		}
+			// cart/wish/order/cancel 수정
+		} else if (uri.indexOf("changeDelivery_ok.do") != -1) {
+
+			System.out.println("asd");
+			String referer = (String) req.getHeader("REFERER");
+			int result = 0;
+
+			int deliveryNum = Integer.parseInt(req.getParameter("deliveryNum"));
+			String deliveryName = req.getParameter("deliveryName");
+			String deliveryTel = req.getParameter("deliveryTel");
+			String[] deliveryAddr = req.getParameterValues("deliveryAddr");
+			String progress = req.getParameter("progress");
+
+			DeliveryDTO ddto = ddao.getReadData(deliveryNum);
+			
+			if (deliveryName != null && !deliveryName.equals(""))
+				ddto.setDeliveryName(deliveryName);
+			if (deliveryTel != null && !deliveryTel.equals(""))
+				ddto.setDeliveryTel(deliveryTel);
+			if (deliveryAddr != null && !deliveryAddr.equals(""))
+				ddto.setDeliveryAddr(deliveryAddr);
+			if (progress != null && !progress.equals("")) {
+				ddto.setProgress(progress);
+				
+				String[] orderNum =  ddto.getOrderNum();
+				
+				for (int i = 0; i < orderNum.length; i++) {
+					OrdersDTO dto = dao.getReadData(Integer.parseInt(orderNum[i]));
+					dto.setProgress(progress);
+					dao.updateData(dto);
+				}
+			
+			}
+
+			result = ddao.updateData(ddto);
+
+			if (result == 0) {
+				out.print("<script>");
+				out.print("alert('오류');");
+				out.print("history.back()");
+				out.print("</script>");
+				return;
+			}
+
+			resp.sendRedirect(referer);
+			
+		} 
 
 	}
 
