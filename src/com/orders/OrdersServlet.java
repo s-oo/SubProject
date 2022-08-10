@@ -37,9 +37,9 @@ public class OrdersServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		resp.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = resp.getWriter();
-		String cp = req.getContextPath();
 		String uri = req.getRequestURI();
 		String url;
+		String cp = req.getContextPath();
 
 		Connection conn = DBConn.getConnection();
 		OrdersDAO dao = new OrdersDAO(conn);
@@ -52,10 +52,11 @@ public class OrdersServlet extends HttpServlet {
 			userId = sessionUserId;
 		}
 
-		if (userId == null) {
+		
+		if (userId == null || userId.equals("")) {
 			out.print("<script>");
 			out.print("alert('로그인을 해주세요');");
-			out.print("locasion.href='/sub/shop/member/login.do';");
+			out.print("location.href='/sub/shop/member/login.do';");
 			out.print("</script>");
 		}
 

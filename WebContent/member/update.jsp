@@ -25,6 +25,8 @@
 <title>kristal회원정보수정</title>
 <link rel="stylesheet" type="text/css"href="<%=cp%>/css/shopStyle.css" />
 <link rel="stylesheet" type="text/css"href="<%=cp%>/member/css/memberListStyle.css" />
+<link rel="stylesheet" type="text/css" href="<%=cp%>/member/css/member.css" />
+
 
 
 <script type="text/javascript">
@@ -161,136 +163,188 @@
 
 
 <form action="" method="post" name="myForm" style="height: " >
-<div id="left_area" style="display: inline-block;" >
-               <div id="update_area" style="width: 600px; height: 1000px;">
-                  <div class="box row">
-                  
-                  <div class="box label">
-                        <label for="userName"><span>ID</span></label>
-                     </div>
-                   <div class="box input">
-                        <input type="text" name="userId" id="userId"  readonly="readonly" value="${dto.userId }" />
-                     </div>
-                   </div>
-                   
-                   
-                    <div class="box row">
-	                     <div class="box label">
-	                        <label for="userName"><span>NAME</span></label>
+
+		<div id="left_area" style="display: inline-block; width: 400px;padding-bottom: 25px;">
+	               <div id="update_area">
+	                  <div class="box row">
+	                  <div class="joinLabel">
+	                        <label for="userId"><span>ID</span></label>
+	                     </div>
+	                   <div class="box input">
+	                        <input readonly="readonly" autofocus onKeyup="this.value=this.value.replace(/[^a-zA-Z0-9]/g,'');" type="text" 
+	                        name="userId" class="inputStyle" placeholder="아이디" value="${dto.userId }"/>
+	                     
+	                     </div>
+	                   </div>
+	                   <div class="box row">
+		                     <div class="joinLabel">
+		                        <label for="userName"><span>PASSWORD</span><br><a>(선택가능)</a></label>
+		                     </div>
+		                     <div class="box input">
+		                        <input type="password" name="userPwd" class="inputStyle" placeholder="비밀번호"/>
+		                     </div>
+	             		</div>
+	                   
+	                    <div class="box row">
+		                     <div class="joinLabel">
+		                        <label for="userName"><span>NAME</span></label>
+		                     </div>
+		                     <div class="box input">
+		                        <input type="text" name="userName" class="inputStyle" placeholder="이름" value="${dto.userName }" readonly="readonly"/>
+		                     </div>
+	             		</div>
+	                  
+	                    
+	                  	  <div class="box row">
+		                     <div class="joinLabel">
+		                        <label for="userName""><span>GENDER</span></label>
+		                     </div>
+		                     <div class="box input">
+		                     <input type="text" name="userGender" id="userGender" value="${dto.userGender }" readonly="readonly"/>
+		                       <!--  <select style="border: none; width: 80; height: 30; font-size: 8pt;font-style: italic;"name="userGender">
+		                       		 -->
+		                     </div>
+	             		</div>
+	                   <div class="box row">
+		                     <div class="joinLabel">
+		                        <label for="userName"><span>BIRTH</span></label>
+		                     </div>
+		                     <div class="box input">
+		                     <span style="float: left;vertical-align: middle;">
+		                  		<input readonly="readonly"  maxlength="4" style="width: 100px;" type="text" 
+		                  		name="userBirth" class="inputStyle"  value="${dto.userBirth[0]} 년 ${dto.userBirth[1]} 월 ${dto.userBirth[2]} 일 " />
+		                  		<%-- <input readonly="readonly" maxlength="4" style="width: 50px;" type="text" 
+		                  		name="userBirth" class="inputStyle"  value="${dto.userBirth[1]}" /><a>월</a>
+			                	<input readonly="readonly"  maxlength="4" style="width: 50px;" type="text" 
+		                  		name="userBirth" class="inputStyle"  value="${dto.userBirth[2]} + ${dto.userBirth[0]}" /><a>일</a> --%>
+			                 </span>
+			                 
+			                 
+			                 
+			            <!--      <span style="float: left;vertical-align: middle;">
+			    
+			                 
+			                 
+			                 
+			                   
+							</span> -->
+							<!-- <span style="float: left;vertical-align: middle;padding-left: 20px;">
+								<input maxlength="2" style="width: 50px;margin-bottom: 5px;font-style: italic;" type="text" name="userBirth" id="userBirth" placeholder="일"/> 
+	                    	</span> -->
+		                    </div>
+	             		</div>
+
+						<div class="box row" style="height: 110px;">
+							<div class="joinLabel" style="height: 80px;">
+								<label style="" for="userAddress"><span>ADDRESS</span><br><a>(선택가능)</a></label>
+							</div>
+							<div class="box input"
+								style="margin-top: 10px; margin-bottom: 15px; height: 80px;">
+								<div style="padding-bottom: 8px;">
+									<input maxlength="6" type="text" name="userAddr" id="sample6_postcode"
+									style="float: left; padding-right: 0; padding-bottom:10pt; display: block;vertical-align: middle;font-size: 9pt;"
+									class="input-2" placeholder="우편번호" value="${dto.userAddr[0] }">
+									<input class="join_button" type="button" onclick="sample6_execDaumPostcode()"
+									style="display: block;vertical-align: middle; height: 15pt;font-size: 9pt;float: left;line-height: 4px;" value="우편번호 찾기">
+								</div>
+								<div class="box input" style="display:block; padding-bottom: 15px;">
+									<input type="text" name="userAddr" id="sample6_address" placeholder="주소" style="padding-bottom:8pt;font-size: 9pt;" value="${dto.userAddr[1] }">
+								</div>
+								<div class="box input"
+									style="display: block; padding-bottom: 15px;">
+									<input type="text" name="userAddr" id="sample6_detailAddress" placeholder="상세주소" style="padding-bottom: 8pt;font-size: 9pt;" value="${dto.userAddr[2] }">
+
+									<div class="box input">
+										<input type="text" maxlength="50" name="userAddr" id="sample6_extraAddress" placeholder="참고항목" value="${dto.userAddr[3] }">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+	                <div class="box row">
+	                     <div class="joinLabel">
+	                        <label for="userTel"><span>TEL</span><a>(선택가능)</a></label>
 	                     </div>
 	                     <div class="box input">
-	                        <input type="text"  name="userName" id="userName" readonly="readonly" value="${dto.userName }"/>
+	                        <input onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="11" type="text" name="userTel" id="userTel" 
+	                        placeholder="(-)없이 숫자만 입력해주세요." value="${dto.userTel }"/>
 	                     </div>
-             		</div>
-                  
-                    <div class="box row">
-	                     <div class="box label">
-	                        <label for="userName"><span>PASSWORD</span><a>(변경가능)</a></label>
-	                     </div>
-	                     <div class="box input" style="border-top: 1px solid #DBDBDB; border-bottom: 1px solid #DBDBDB; border-left:1px solid #DBDBDB; border-right: 1px solid #DBDBDB;" >
-	                        <input  autofocus type="password" name="userPwd" id="userName" value="${dto.userPwd }"/>
-	                        
-	                     </div>
-             		</div>
-                  	  <div class="box row">
-	                     <div class="box label">
-	                        <label for="userName"><span>GENDER</span></label>
+	                  </div>
+	                  <div class="box row">
+	                     <div class="joinLabel">
+	                        <label for="userEmail"><span>E-MAIL</span><a>(선택가능)</a></label>
 	                     </div>
 	                     <div class="box input">
-	                      
-	                     <input type="text"  name="userGender" id="userGender" readonly="readonly" value="${dto.userGender }"/>
-	                  <!--  <select style="border: none; width: 80; height: 30; margin-left: -235px;" name="userGender" id="userGender">
-	                       		<option value="">선택</option>
-	                        	<option value="선택안함">선택안함</option>
-	                       		 <option value="남자" >남자</option>
-	                        	<option value="여자">여자</option>	                        
-	                        </select>  -->
+	                        <input type="text" name="userEmail" id="userEmail" placeholder="이메일 (선택사항)" value="${dto.userEmail }"/>
 	                     </div>
-             		</div>
-                   <div class="box row">
-	                     <div class="box label">
-	                        <label for="userBirth"><span>BIRTH</span></label>
-	                     </div>
-	                       <div class="box input">
-	                  		<input readonly="readonly" maxlength="4" style="width: 50px; vertical-align: middle;" 
-	                  		type="text" name="userBirth" id="userBirth" placeholder="년도" value="${dto.userBirth[0] }"> 
-		                  
-		                   <input readonly="readonly" maxlength="2" style="width: 50px; vertical-align: middle;" 
-	                  		type="text" name="userBirth" id="userBirth" placeholder="년도" value="${dto.userBirth[1] }"> 
-							
-							<input readonly="readonly" maxlength="2" style="margin-left: 1px; width: 50px; vertical-align: middle;" type="text" name="userBirth" id="userBirth" placeholder="일" value="${dto.userBirth[2] }"/> 
-                    
-	                    </div>
-             		</div>
-                 
-                  <div class="box row" style="height: 200px;">
-                     <div class="box label" >
-                        <label  style="margin-left: -20px;"for="userAddress"><span>ADDRESS</span><a>(변경가능)</a></label>
-                     </div>
-                     <div class="box input" >
-                      <div class="box input" style="width: 80px; padding: 5px; margin-left: -5px; border-top: 1px solid #DBDBDB; border-bottom: 1px solid #DBDBDB; border-left:1px solid #DBDBDB; border-right: 1px solid #DBDBDB;" >
-                           <input maxlength="6" type="text" name="userAddr" id="sample6_postcode" class="input-2" placeholder="우편번호" value="${dto.userAddr[0] }">
-                           <input type="button" onclick="sample6_execDaumPostcode()" class="input-2 right" value="우편번호 찾기">
-                        </div>
-                       
-                        <div class="box input" style="padding: 5px; margin-left: -5px;" >
-                           <input type="text" name="userAddr" id="sample6_address" placeholder="주소" value="${dto.userAddr[1] }"
-                           style="border-top: 1px solid #DBDBDB; border-bottom: 1px solid #DBDBDB; border-left:1px solid #DBDBDB; border-right: 1px solid #DBDBDB;">
-                        </div>
-                       
-                        <div class="box input" style="padding: 5px;margin-left: -5px;">
-                           <input type="text" name="userAddr" id="sample6_detailAddress" placeholder="상세주소" value="${dto.userAddr[2] }"
-                           style="border-top: 1px solid #DBDBDB; border-bottom: 1px solid #DBDBDB; border-left:1px solid #DBDBDB; border-right: 1px solid #DBDBDB;">
-                          <br>
-                          
-                        <div class="box input" style="padding: 5px;margin-left: -5px;">  
-                           <input type="text" maxlength="50" name="userAddr"id="sample6_extraAddress" placeholder="참고항목" value="${dto.userAddr[3] }"
-                           style="border-top: 1px solid #DBDBDB; border-bottom: 1px solid #DBDBDB; border-left:1px solid #DBDBDB; border-right: 1px solid #DBDBDB;">
-                        </div>
-                        </div>
-                     </div>
-                  </div>
-                <div class="box row">
-                     <div class="box label" style="margin-top: 10px;">
-                        <label for="userTel"><span>TEL</span><a>(변경가능)</a></label>
-                     </div>
-                     <div class="box input">
-                        <input type="text" name="userTel" id="userTel" value="${dto.userTel }"
-                        style="border-top: 1px solid #DBDBDB; border-bottom: 1px solid #DBDBDB; border-left:1px solid #DBDBDB; border-right: 1px solid #DBDBDB;"/>
-                     </div>
-                  </div>
-                  <div class="box row">
-                     <div class="box label">
-                        <label for="userEmail"><span>E-MAIL</span><a>(변경가능)</a></label>
-                     </div>
-                     <div class="box input">
-                        <input type="text" name="userEmail" id="userEmail" value="${dto.userEmail }"
-                        style="border-top: 1px solid #DBDBDB; border-bottom: 1px solid #DBDBDB; border-left:1px solid #DBDBDB; border-right: 1px solid #DBDBDB;"/>
-                     </div>
-                  </div>
-                </div>
-            </div>
-				<br><br>
-			<div align="center">	
-				<button  style="cursor:pointer; border:0.5; background-color: white; width: 140px; height: 50px;"
-					type="button" onclick="javascript:history.back();"
-					onmouseover=this.style.backgroundColor='#F0F0F0' onmouseout=this.style.backgroundColor='white'>
-						<b style="font-size: 15px; color: black;">뒤로가기</b>
-				</button>
-				&nbsp;&nbsp;
-				<button style="cursor:pointer; background-color: black; width: 140px; height: 50px;" type="button" onclick="sendIt();"
-					onmouseover=this.style.backgroundColor='#6E6E6E' onmouseout=this.style.backgroundColor='black'>
-						<b style="font-size: 15px; color: white;">수정완료</b>
-				</button>	
-			</div>				
-			<br>
-				<div class="box input">	
-					<button style="cursor:pointer; border:0.5; background-color: white; width: 100px; height: 50px;" type="button" onclick="javascript:location.href='<%=cp%>/shop/member/delete.do';"
-							onmouseover=this.style.backgroundColor='#F0F0F0' onmouseout=this.style.backgroundColor='white'>
-						<b style="font-size: 13px; color: black;">회원탈퇴</b>
-					</button>
-				</div>
-</form>
+	                  </div>
+	                </div>
+	            </div>
+
+	<div align="center">
+
+
+		<button
+			style="cursor: pointer; border: 1px solid #BDBDBD; background-color: #FFFFFF; width: 200px; line-height: 48px;"
+			type="button" onclick="javascript:history.back();"
+			onmouseover=this.style.backgroundColor='#F0F0F0' onmouseout=this.style.backgroundColor='white'>
+			<a style="font-size: 8px; color: #484848;">BACK</a>
+		</button>
+
+		<button
+			style="cursor: pointer; border: 1px solid #BDBDBD; background-color: #FFFFFF; width: 200px; line-height: 48px;"
+			type="button" onclick="sendIt();"
+			onmouseover=this.style.backgroundColor='#F0F0F0' onmouseout=this.style.backgroundColor='white'>
+			<a style="font-size: 8px; color: #484848;">완료</a>
+		</button>
+		
+		<button
+			style="cursor: pointer; border: 1px solid #BDBDBD; background-color: #FFFFFF; width: 200px; line-height: 48px;"
+			type="button" onclick="javascript:location.href='<%=cp%>/shop/member/delete.do';"
+			onmouseover=this.style.backgroundColor='#F0F0F0' onmouseout=this.style.backgroundColor='white'>
+			<a style="font-size: 8px; color: #484848;">회원탈퇴</a>
+		</button>
+
+
+		<!-- 	<button
+			style="cursor: pointer; border: 0.5; background-color: white; width: 200px; height: 50px;"
+			type="button" onclick="javascript:history.back();"
+			onmouseover=this.style.backgroundColor=
+			'#F0F0F0' onmouseout=this.style.backgroundColor='white'>
+			<b style="font-size: 17px; color: black;">뒤로가기</b>
+		</button> -->
+		<!-- &nbsp;&nbsp; -->
+	<%-- 	<button
+			style="cursor: pointer; background-color: black; width: 200px; height: 50px;"
+			type="button" onclick="sendIt();"
+			onmouseover=this.style.backgroundColor=
+			'#6E6E6E' onmouseout=this.style.backgroundColor='black'>
+			<b style="font-size: 17px; color: white;">수정완료</b>
+		</button>
+	</div>
+	<br>
+	<div class="box input">
+		<button
+			style="cursor: pointer; border: 0.5; background-color: white; width: 100px; height: 25px;"
+			type="button"
+			onclick="javascript:location.href='<%=cp%>/shop/member/delete.do';"
+			onmouseover=this.style.backgroundColor=
+			'#F0F0F0' onmouseout=this.style.backgroundColor='white'>
+			<b style="font-size: 13px; color: black;">회원탈퇴</b>
+		</button>
+	</div>
+ --%>
+
+
+
+
+
+
+
+
+
+
+	</form>
  
 </div>
 
