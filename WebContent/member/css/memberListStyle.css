@@ -144,7 +144,7 @@ b {
 
 #sample6_address{
 	display: inline-block;
-    width: 200px;
+    width: 220px;
     font-size: 13px;
     border: none;
     float: left;
@@ -211,7 +211,7 @@ label span {
 input {
    display: inline-block;
    width: 300px;
-   font-size: 13px;
+   font-size: 9px;
    border: none;
    float: left;
    outline: none;
@@ -228,11 +228,10 @@ input.input-2 {
 }
 
 input::-webkit-input-placeholder {
- text-decoration: none;
-    color: #484848;
-    font-size: 8pt;
-  font-style: italic;
-  text-align: left;
+	text-decoration: none;
+	color: #484848;
+	font-size: 8pt;
+	text-align: left;
 }
 
 
