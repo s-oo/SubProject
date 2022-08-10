@@ -53,7 +53,7 @@
 	                       	</span>
 	                	</label>
 	                 </div>
-	                 <div class="box input">
+	                 <div class="box input" style="width: 100px;">
 	                 	<input maxlength="20" type="text" name="userId" id="userId" autofocus/>
 	                 </div>
                  </div>
