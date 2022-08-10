@@ -297,6 +297,8 @@ public class ProductDAO {
 		return dto;
 		
 	}
+	
+
 
 	public int getDataCount(String searchKey,String searchValue,String productCategory) {
 		

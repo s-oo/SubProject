@@ -290,6 +290,7 @@ input{
     border: 1px solid #000;
     margin-bottom: 10px;
     display: block;
+    text-decoration: none;
 }
 
 .bagImage{
@@ -318,7 +319,6 @@ input{
 
 .boardTitle{
 	height: 10pt;
-	margin-top: 30px;
 	margin-bottom: 10px;
 }
 
