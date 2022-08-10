@@ -101,7 +101,7 @@
 							<span>${dto.productName }</span> 
 						</div>
 						<div>
-							<h2>${dto.productPrice }KRW</h2>
+							<h3>${dto.productPrice }KRW</h3>
 						</div>
 						<!-- choose option(color,size) -->
 						<form name="detailForm" method="post">
@@ -161,7 +161,7 @@
 											<!-- choose quantity -->
 											<td>
 												<span>
-													<input type=hidden name="productPrice" value="${dto.productPrice }">
+													<input type=hidden name="productPrice"  value="${dto.productPrice }">
 													<input type="text" name="orderQuantity" class="orderQuantity" value="1" size="3" >
 													<a>
 														<img src="//img.echosting.cafe24.com/design/skin/default/product/btn_count_up.gif"
