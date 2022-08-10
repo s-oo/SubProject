@@ -16,6 +16,7 @@
 <body>
 <jsp:include page="../main/header.jsp"/>
 	<div id="content" align="center">
+		<div align="center" style="font-weight: 700; padding-top: 15px; font: 10pt;"><h3>CANCEL LIST</h3></div>
 		<form action="" method="post" name="paymentForm">
 			<c:forEach var="ddto" items="${list }">
 				<div class="box row" style="width: 900px;">
