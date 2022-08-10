@@ -287,24 +287,21 @@
 		<button
 			style="cursor: pointer; border: 1px solid #BDBDBD; background-color: #FFFFFF; width: 200px; line-height: 48px;"
 			type="button" onclick="javascript:history.back();"
-			onmouseover=this.style.backgroundColor=
-			'#F0F0F0' onmouseout=this.style.backgroundColor='white'>
+			onmouseover=this.style.backgroundColor='#F0F0F0' onmouseout=this.style.backgroundColor='white'>
 			<a style="font-size: 8px; color: #484848;">BACK</a>
 		</button>
 
 		<button
 			style="cursor: pointer; border: 1px solid #BDBDBD; background-color: #FFFFFF; width: 200px; line-height: 48px;"
 			type="button" onclick="sendIt();"
-			onmouseover=this.style.backgroundColor=
-			'#F0F0F0' onmouseout=this.style.backgroundColor='white'>
+			onmouseover=this.style.backgroundColor='#F0F0F0' onmouseout=this.style.backgroundColor='white'>
 			<a style="font-size: 8px; color: #484848;">완료</a>
 		</button>
 		
 		<button
 			style="cursor: pointer; border: 1px solid #BDBDBD; background-color: #FFFFFF; width: 200px; line-height: 48px;"
 			type="button" onclick="javascript:location.href='<%=cp%>/shop/member/delete.do';"
-			onmouseover=this.style.backgroundColor=
-			'#F0F0F0' onmouseout=this.style.backgroundColor='white'>
+			onmouseover=this.style.backgroundColor='#F0F0F0' onmouseout=this.style.backgroundColor='white'>
 			<a style="font-size: 8px; color: #484848;">회원탈퇴</a>
 		</button>
 
