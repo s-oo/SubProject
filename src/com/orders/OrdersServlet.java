@@ -95,7 +95,7 @@ public class OrdersServlet extends HttpServlet {
 				out.print("</script>");
 			}
 
-			url = cp +"/shop/orders/cartList.do";
+			url = cp +"/shop/orders/" + progress +".do";
 			resp.sendRedirect(url);
 //			resp.sendRedirect(referer);
 
