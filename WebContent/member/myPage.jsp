@@ -27,63 +27,118 @@ button.add_button {
 	color: black;
 }
 </style>
-<script type="text/javascript" src="<%=cp%>/member/js/checkBox.js"></script>
+<%-- <script type="text/javascript" src="<%=cp%>/member/js/checkBox.js"> --%>
+<script type="text/javascript">
+
+function sendItCartList() {
+	var f = document.myPageForm;
+	
+	
+	f.action = "<%=cp%>/shop/orders/cartList.do?progress=cartList";
+	f.submit();
+}
+
+
+function sendItWishList() {
+	var f = document.myPageForm;
+	
+	
+	f.action = "<%=cp%>/shop/orders/wishList.do";
+	f.submit();
+}
+
+function sendItOrder() {
+	var f = document.myPageForm;
+	
+	
+	f.action = "<%=cp%>/shop/orders/orderList.do";
+	f.submit();
+}
+
+function sendItCancle() {
+	var f = document.myPageForm;
+	
+	
+	f.action = "<%=cp%>/shop/orders/cancelList.do?progress=cancelList";
+	f.submit();
+}
+
+function sendProfile() {
+	var f = document.myPageForm;
+	
+	
+	f.action = "<%=cp%>/shop/member/update.do";
+	f.submit();
+}
+
+function sendItMain() {
+	var f = document.myPageForm;
+	
+	
+	f.action = "<%=cp%>/shop/main/main.do";
+	f.submit();
+}
+
+
+
+
+</script>
+
+
+
+
+
+
 </head>
 <body>
 	<jsp:include page="../main/header.jsp"/>
+	<form name="myPageForm" method="post">
 	<div id="content" align="center">
 		<div style="margin-top: 100px;">
-			<button class="add_button" type="button" onclick="sendIt();">
-				<b>CART</b>
+			<button class="add_button" type="button" onclick="sendItCartList()();"> 
+				<b>CART</b> 
 				<span>
 					<br>관심상품으로 등록하신 상품의 목록을 보여드립니다.
 				</span>
 			</button>	
-			<button class="add_button" type="button" onclick="sendIt();">
+			<button class="add_button" type="button" onclick="sendItWishList();">
+				<b>WISH</b>
 				<span>
 				
 				</span>
 			</button>	
 		</div>
 		<div>
-			<button class="add_button" type="button" onclick="sendIt();">
+			<button class="add_button" type="button" onclick="sendItOrder();">
 				<span>
 					<b>ORDER</b><br>고객님꼐서 주문하신 상품의 주문내역을 확인하실 수 있습니다.
 				</span>
 			</button>	
-			<button class="add_button" type="button" onclick="sendIt();">
+			<button class="add_button" type="button" onclick="sendItCancle();">
 				<span>
+					<b>CANCLE</b>
 
 				</span>
 			</button>	
 		</div>
+		
 		<div>
-			<button class="add_button" type="button" onclick="sendIt();">
-				<span>
-					<b>QnA</b><br>고객님께서 작성하신 질문을 관리하는 공간입니다.
-						<!-- 고객님께서 작성하신 글을 한눈에 관리하실 수 있습니다. -->
-				</span>
-			</button>	
-			<button class="add_button" type="button" onclick="sendIt();">
-				<span>
-				
-				</span>
-			</button>	
-		</div>
-		<div>
-			<button class="add_button" type="button" onclick="sendIt();">
+			<button class="add_button" type="button" onclick="sendProfile();">
 				<span>
 					<b>PROFILE</b><br>회원이신 고객님의 개인정보를 관리하는 공간입니다.
 						<!-- 개인정보를 최신정보로 유지하시면 보다 간편히 쇼핑을 즐기실수 있습니다. -->
 				</span>
 			</button>	
-			<button class="add_button" type="button" onclick="sendIt();">
+			<button class="add_button" type="button" onclick="sendItMain();">
 				<span>
 					<b>MAIN</b>
 				</span>
 			</button>	
 		</div>
+		
+		
 	</div>
+	</form>
 	<jsp:include page="../main/footer.jsp"/>
 </body>
 </html>
