@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<% pageContext.setAttribute("replaceChar", "\n"); %>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
@@ -194,14 +196,14 @@
 						<!-- add bag -->
 						<div class="addBag">
 							<div>
-								<a href="#none" class="add_button" onclick="sendItCartList();">ADD TO BAG</a>
+								<a href="#none" class="add_button"  onclick="sendItCartList();">ADD TO BAG</a>
 							</div>
 							
 							<div>
 							<br/>
 							<br/>
-							<p>${dto.description}</p>
-							
+					<%-- 		<p>${dto.description }</p> --%>
+							<p align="left">${fn:replace(dto.description, replaceChar, "<br/>")}</p>
 							</div>
 							
 						</div>
