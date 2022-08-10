@@ -11,7 +11,16 @@ body{
     background: #fff;
 }
 
-a{
+.image a{
+	text-decoration: none;
+    color: #484848;
+    font-size: 8pt;
+    margin: 0;
+    padding: 0;
+  	font-style: inherit;
+}
+
+.productName a{
 	text-decoration: none;
     color: #484848;
     font-size: 8pt;
@@ -49,7 +58,7 @@ li{
 }
 
 .left_area {
-     text-decoration: none;
+    text-decoration: none;
     color: #484848;
     font-size: 8pt;
     margin: 0;
@@ -72,7 +81,6 @@ li{
     top: 0px;
     z-index: 3000;
 }
-
 
 
 #footer {

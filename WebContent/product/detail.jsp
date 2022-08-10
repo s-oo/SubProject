@@ -188,14 +188,22 @@
 									<input type="text" id="amount" class="amount" value="1" size="3" readonly="readonly">
 								</span>
 								</div>
-							</form>
-						</div>
+							</div>
+						</form>
 
 						<!-- add bag -->
 						<div class="addBag">
 							<div>
 								<a href="#none" class="add_button" onclick="sendItCartList();">ADD TO BAG</a>
 							</div>
+							
+							<div>
+							<br/>
+							<br/>
+							<p>${dto.description}</p>
+							
+							</div>
+							
 						</div>
 					</div>
 				</div>

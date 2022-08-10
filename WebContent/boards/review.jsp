@@ -46,8 +46,8 @@
 			<thead>
 				<tr>
 					<th scope="col">NO</th>
-					<th scope="col">IMAGE</th>
 					<th scope="col">PRODUCT</th>
+					<th scope="col">SUBJECT</th>
 					<th scope="col">ID</th>
 					<th scope="col">DATE</th>
 					<th scope="col">HITS</th>
@@ -96,6 +96,7 @@
 								<option value="subject">SUBJECT</option>
 								<option value="userId">ID</option>
 								<option value="content">CONTENT</option>
+								<option value="productNum">PRODUCTNUM</option>
 							</select>
 							<input type="text" name="searchValue" class="textField">
 							<input type="button" value="SEARCH" class="button" onclick="sendIt();"/>

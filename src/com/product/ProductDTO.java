@@ -10,6 +10,8 @@ public class ProductDTO {
 	private String[] originalFileName;
 	private String[] productSize;
 	private String[] productColor;
+	private String description;
+	
 	
 	public int getProductNum() {
 		return productNum;
@@ -58,6 +60,13 @@ public class ProductDTO {
 	}
 	public void setProductColor(String[] productColor) {
 		this.productColor = productColor;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 }
