@@ -173,11 +173,11 @@
 	                    
 	                  	  <div class="box row">
 		                     <div class="joinLabel">
-		                        <label for="userName"><span>GENDER</span></label>
+		                        <label for="userGender"><span>GENDER</span></label>
 		                     </div>
 		                     <div class="box input">
 		                     <!--  <input type="text" name="userGender" id="userGender"/> -->
-		                        <select style="border: none; width: 80; height: 30; font-size: 8pt;font-style: italic; name="userGender">
+		                        <select style="border: none; width: 80; height: 30; font-size: 8pt;font-style: italic;"name="userGender">
 		                       		<option value="">선택</option>
 		                        	<option value="선택안함">선택안함</option>
 		                        	<option value="남자">남자</option>

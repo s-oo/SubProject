@@ -37,7 +37,7 @@
 		
 		f.productNum
 		
-		f.action = "<%=cp%>/shop/orders/addOrder_ok.do";
+		f.action = "<%=cp%>/shop/orders/addOrder_ok.do?progress=cartList";
 		f.submit();
 	}
 	
@@ -138,13 +138,6 @@
 						<!-- 	<form name="detailForm" method="post"> -->
 							<input type="hidden" name="productNum" value="${dto.productNum }">
 							 
-							 
-							
-							 
-							 
-							 
-							 
-						
 								<table class="totalProduct" border="1" summary="">
 									<colgroup>
 										<col style="width: 20%;">
