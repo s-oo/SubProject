@@ -177,7 +177,7 @@
 		                     </div>
 		                     <div class="box input">
 		                     <!--  <input type="text" name="userGender" id="userGender"/> -->
-		                        <select style="border: none; width: 80; height: 30; font-size: 8pt; name="userGender">
+		                        <select style="border: none; width: 80; height: 30; font-size: 8pt;font-style: italic; name="userGender">
 		                       		<option value="">선택</option>
 		                        	<option value="선택안함">선택안함</option>
 		                        	<option value="남자">남자</option>
@@ -189,11 +189,13 @@
 		                     <div class="joinLabel">
 		                        <label for="userName"><span>BIRTH</span></label>
 		                     </div>
-		                     <div class="box input" style="width: 150px;">
-		                  		<input onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="4" style="width: 50px; vertical-align: middle;" 
+		                     <div class="box input">
+		                     <span style="float: left;vertical-align: middle;">
+		                  		<input onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="4" style="width: 50px;" 
 		                  		type="text" name="userBirth" class="inputStyle" placeholder="년도"/> 
-			                  
-			                    <select style="border: none; width: 80; height: 30; font-size: 8pt; name="userBirth" >
+			                 </span>
+			                 <span style="float: left;vertical-align: middle;">
+			                    <select style="border: none; width: 80; height: 30; font-size: 8pt;font-style: italic;" name="userBirth">
 								<option value="">월</option>
 								<option value="1">1</option>
 								<option value="2">2</option>
@@ -207,9 +209,10 @@
 								<option value="10">10</option>
 								<option value="11">11</option>
 								<option value="12">12</option></select>
-								
-								<input maxlength="2" style="width: 50px; vertical-align: middle;" type="text" name="userBirth" id="userBirth" placeholder="일"/> 
-	                    
+							</span>
+							<span style="float: left;vertical-align: middle;padding-left: 20px;">
+								<input maxlength="2" style="width: 50px;margin-bottom: 5px;font-style: italic;" type="text" name="userBirth" id="userBirth" placeholder="일"/> 
+	                    	</span>
 		                    </div>
 	             		</div>
 
@@ -218,13 +221,13 @@
 								<label style="" for="userAddress"><span>ADDRESS</span></label>
 							</div>
 							<div class="box input"
-								style="margin-top: 10px; margin-bottom: 15px; height: 80px">
+								style="margin-top: 10px; margin-bottom: 15px; height: 80px;">
 								<div style="padding-bottom: 8px;">
 									<input maxlength="6" type="text" name="userAddr" id="sample6_postcode"
-									style="float: left; padding-right: 0; padding-bottom:8pt; width: 50px;display: block;vertical-align: middle;font-size: 9pt;"
+									style="float: left; padding-right: 0; padding-bottom:8pt; display: block;vertical-align: middle;font-size: 9pt;"
 									class="input-2" placeholder="우편번호">
 									<input class="join_button" type="button" onclick="sample6_execDaumPostcode()"
-									style="display: block;vertical-align: middle; height: 15pt;font-size: 9pt;float: left;" value="우편번호 찾기">
+									style="display: block;vertical-align: middle; height: 15pt;font-size: 9pt;float: left;wi" value="우편번호 찾기">
 								</div>
 								<div class="box input" style="display:block; padding-bottom: 15px;">
 									<input type="text" name="userAddr" id="sample6_address" placeholder="주소" style="padding-bottom:8pt;font-size: 9pt;">
@@ -260,18 +263,18 @@
 	            </div>
 		</form>
 		<div align="center">
-		<div style="float: left; padding-left: 370px; padding-right: 20px;">	
-			<button class="add_button" type="button" style="width: 170px;" onclick="javascript:history.back();">
-				<a style=" font-size: 8px; color: #484848;">BACK</a>
-			</button>
+			<div style="float: left; padding-left: 370px; padding-right: 10px;">	
+				<button class="add_button" type="button" style="width: 170px;" onclick="javascript:history.back();">
+					<a style=" font-size: 8px; color: #484848;">BACK</a>
+				</button>
+			</div>
+			
+			<div style="float: left;">
+				<button class="add_button" type="button" style="width: 170px;" onclick="sendIt();">
+					<a style=" font-size: 8px; color: #484848;">JOIN</a>
+				</button>	
+			</div>
 		</div>
-		
-		<div style="float: left;">
-			<button class="add_button" type="button" style="width: 170px;" onclick="sendIt();">
-				<a style=" font-size: 8px; color: #484848;">JOIN</a>
-			</button>	
-		</div>
-	</div>
 	</div>
 </div>
    
