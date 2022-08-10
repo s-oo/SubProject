@@ -41,7 +41,7 @@
 	<div class="joinTitle" align="center" style="font-weight: 700;padding-top: 15px;font: 10pt;">회원가입</div>
 		
 		<form action="<%=cp%>/shop/member/join.do" name="form" method="post">
-			<table class="joinCheck" width="600" height="650">
+			<table class="joinCheck" width="600" height="580">
 				<tr>
 					<td width="100%" height="50%" align="center">
 						<ul class="terms_bx_list">
@@ -792,14 +792,14 @@
 			</table>
 			<div align="center">
 				<div style="float: left; padding-left: 370px; padding-right: 10px;">	
-					<button class="add_button" type="button" style="width: 170px;" onclick="nochk();">
-						<a style=" font-size: 8px; color: #484848;">비동의</a>
+					<button class="add_button" type="button" style="width: 170px;" onclick="chk();">
+						<a style=" font-size: 8px; color: #484848;">동의</a>
 					</button>
 				</div>
 				
 				<div style="float: left;">
-					<button class="add_button" type="button" style="width: 170px;" onclick="chk();">
-						<a style=" font-size: 8px; color: #484848;">동의</a>
+					<button class="add_button" type="button" style="width: 170px;" onclick="nochk();">
+						<a style=" font-size: 8px; color: #484848;">비동의</a>
 					</button>	
 				</div>
 			</div>
