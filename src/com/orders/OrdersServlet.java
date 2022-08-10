@@ -290,10 +290,9 @@ public class OrdersServlet extends HttpServlet {
 			url = "/orders/cancelList.jsp";
 			forward(req, resp, url);
 
-			// cart/wish/order/cancel 수정
+			// delivery 수정
 		} else if (uri.indexOf("changeDelivery_ok.do") != -1) {
 
-			System.out.println("asd");
 			String referer = (String) req.getHeader("REFERER");
 			int result = 0;
 
