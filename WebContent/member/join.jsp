@@ -262,6 +262,9 @@
 	                </div>
 	            </div>
 		</form>
+		
+		
+		
 		<div align="center">
 			<div style="float: left; padding-left: 370px; padding-right: 10px;">	
 				<button class="add_button" type="button" style="width: 170px;" onclick="javascript:history.back();">

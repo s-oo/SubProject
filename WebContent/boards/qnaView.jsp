@@ -139,9 +139,9 @@
 											<a href="javascript:cancel1()" class="element" id="cancel-bnt1" style="display: none;">CANCEL</a>
 										</c:if>
 										<c:if test="${!empty commentsDTO }">
-											<a href="javascript:edit()" class="element" id="edit-bnt">EDIT</a>
-											<a href="javascript:sendItEdit)" class="element" id="delete-bnt">DELETE</a>
-											<a href="javascript:sendItDelete()" class="element" id="register-bnt2" style="display: none;">REGISTER</a>
+											<a href="javascript:sendItEdit()" class="element" id="edit-bnt">EDIT</a>
+											<a href="javascript:sendItDelete()" class="element" id="delete-bnt">DELETE</a>
+											<a href="javascript:sendItWrite()" class="element" id="register-bnt2" style="display: none;">REGISTER</a>
 											<a href="javascript:cancel2()" class="element" id="cancel-bnt2" style="display: none;">CANCEL</a>
 										</c:if>
 									</div>
