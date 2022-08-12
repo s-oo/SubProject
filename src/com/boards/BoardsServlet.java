@@ -352,12 +352,15 @@ public class BoardsServlet extends HttpServlet {
 			String community = "qna";
 			CommentsDTO commentsDTO = new CommentsDAO(conn).getReadData(boardNum, community);
 
+			ProductDTO productDTO = dto.getProductDTO();
+			
 			req.setAttribute("userId", userId);
 			req.setAttribute("dto", dto);
 			req.setAttribute("params", param);
 			req.setAttribute("lineSu", lineSu);
 			req.setAttribute("pageNum", pageNum);
 			req.setAttribute("commentsDTO", commentsDTO);
+			req.setAttribute("productDTO", productDTO);
 
 			url = "/boards/qnaView.jsp";
 			forward(req, resp, url);
@@ -400,13 +403,16 @@ public class BoardsServlet extends HttpServlet {
 			
 			String community = "review";
 			CommentsDTO commentsDTO = new CommentsDAO(conn).getReadData(boardNum, community);
-
+			
+			OrdersDTO ordersDTO = dto.getOrdersDTO();
+			
 			req.setAttribute("userId", userId);
 			req.setAttribute("dto", dto);
 			req.setAttribute("params", param);
 			req.setAttribute("lineSu", lineSu);
 			req.setAttribute("pageNum", pageNum);
 			req.setAttribute("commentsDTO", commentsDTO);
+			req.setAttribute("ordersDTO", ordersDTO);
 
 			url = "/boards/reviewView.jsp";
 			forward(req, resp, url);
