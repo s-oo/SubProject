@@ -54,7 +54,7 @@
 					</tr>
 					<tr id="qnaContent${qnaDTO.boardNum }" style="display: none;">
 						<td colspan="5" class="qnarev_cnt">
-							<div>
+							<div style="padding: 10px 0px 10px 0px;">
 								${qnaDTO.content }
 								<div class="btn" align="right">
 									<c:if test="${qnaDTO.userId.equals(userId) || userId == 'KRISTAL' }">
@@ -119,7 +119,7 @@
 					</tr>
 					<tr id="reviewContent${reviewDTO.boardNum }" style="display: none;">
 						<td colspan="5" class="qnarev_cnt">
-							<div>
+							<div style="padding: 10px 0px 10px 0px;">
 								${reviewDTO.content }
 								<div class="btn" align="right">
 									<c:if test="${reviewDTO.userId.equals(userId) || userId == 'KRISTAL' }">
