@@ -523,7 +523,6 @@ public class BoardsServlet extends HttpServlet {
 			} else if (uri.indexOf("noticeWrite.do") != -1) {
 
 				if (!userId.equals("KRISTAL")) {
-					System.out.println(userId);
 					out.print("<script>");
 					out.print("alert('접근권한이 없습니다.');");
 					out.print("location.href='/sub/shop/boards/notice.do';");
