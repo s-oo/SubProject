@@ -512,6 +512,9 @@ public class BoardsServlet extends HttpServlet {
 
 			if (uri.indexOf("qnaWrite.do") != -1) {
 
+				String subject = req.getParameter("subject");
+				String content = req.getParameter("content");
+				
 				String str = req.getParameter("productNum");
 				
 				if (str != null) {
@@ -521,6 +524,8 @@ public class BoardsServlet extends HttpServlet {
 				}
 
 				req.setAttribute("userId", userId);
+				req.setAttribute("subject", subject);
+				req.setAttribute("content", content);
 
 				url = "/boards/qnaWrite.jsp";
 				forward(req, resp, url);
@@ -542,6 +547,9 @@ public class BoardsServlet extends HttpServlet {
 
 				// review Write
 			} else if (uri.indexOf("reviewWrite.do") != -1) {
+				
+				String subject = req.getParameter("subject");
+				String content = req.getParameter("content");
 
 				String str = req.getParameter("orderNum");
 
@@ -567,6 +575,8 @@ public class BoardsServlet extends HttpServlet {
 				}
 
 				req.setAttribute("userId", userId);
+				req.setAttribute("subject", subject);
+				req.setAttribute("content", content);
 
 				url = "/boards/reviewWrite.jsp";
 				forward(req, resp, url);
@@ -826,6 +836,7 @@ public class BoardsServlet extends HttpServlet {
 
 				// QnA SearchList
 			} else if (uri.indexOf("qnaSearchList.do") != -1) {
+				
 				String community = "qna";
 				String pageNum = req.getParameter("pageNum");
 				String productCategory = "";
@@ -886,6 +897,11 @@ public class BoardsServlet extends HttpServlet {
 				ProductDAO productDAO = new ProductDAO(conn);
 				List<ProductDTO> list = productDAO.getLists(start, end, searchKey, searchValue);
 
+				String subject = req.getParameter("subject");
+				String content = req.getParameter("content");
+				req.setAttribute("subject", subject);
+				req.setAttribute("content", content);
+				
 				req.setAttribute("lists", lists);
 				req.setAttribute("pageIndexList", pageIndexList);
 				req.setAttribute("searchListUrl", searchListUrl);
@@ -897,9 +913,16 @@ public class BoardsServlet extends HttpServlet {
 				// review SearchList
 			} else if (uri.indexOf("reviewSearchList.do") != -1) {
 
+				String subject = req.getParameter("subject");
+				String content = req.getParameter("content");
+				
+				System.out.println("SearchList subject : " + subject);
+				
 				OrdersDAO ordersDAO = new OrdersDAO(conn);
 				List<OrdersDTO> list = ordersDAO.getList(userId, "orderList");
 
+				req.setAttribute("subject", subject);
+				req.setAttribute("content", content);
 				req.setAttribute("list", list);
 
 				url = "/boards/reviewSearchList.jsp";
