@@ -219,7 +219,7 @@ public class OrdersServlet extends HttpServlet {
 			String[] deliveryAddr = req.getParameterValues("deliveryAddr");
 			String deliveryTel = req.getParameter("deliveryTel");
 			String deliveryEmail = req.getParameter("deliveryEmail");
-			int totalPrice = Integer.parseInt(req.getParameter("totalPrice"));
+			int totalPrice = Integer.parseInt(req.getParameter("tot"));
 			String progress = "orderList";
 			
 			OrdersDTO dto = new OrdersDTO();

@@ -21,7 +21,7 @@
 		<div align="center" style="font-weight: 700; padding-top: 15px; font: 10pt;"><h3>ORDER LIST</h3></div>
 		<form action="" method="post" name="paymentForm">
 			<c:forEach var="ddto" items="${list }">
-				<div class="box row" style="width: 900px;">
+				<div class="box row" style="width: 1000px;">
 					<h3 style="float: left; padding-left: 30px;">${ddto.deliveryDate } 주문</h3>
 					<h3 style="float: left; padding-left: 30px;">도착예정일 : ${ddto.arriveDate }</h3>
 					<h3 style="float: right; padding-right: 30px;">
@@ -30,6 +30,15 @@
 					</h3>
 				</div>
 				<table id="cartList">
+					<thead>
+						<tr>
+							<th colspan="2">PRODUCT</th>
+							<th>PRICE</th>
+							<th>QUANTITY</th>
+							<th>TOTTAL PRICE</th>
+							<th>REVIEW</th>
+						</tr>
+					</thead>
 					<tbody>
 						<c:forEach var="dto" items="${ddto.orderList }">
 							<tr align="center">
@@ -61,7 +70,7 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				<div class="box row" style="width: 900px; margin-bottom: 50px;">
+				<div class="box row" style="width: 1000px; margin-bottom: 50px;">
 					<h4 style="float: right; padding-right: 30px;">TOTAL : ${ddto.totalPrice }</h4>
 				</div>
 			</c:forEach>
