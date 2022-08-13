@@ -76,6 +76,8 @@
 		
 	}
 	
+	
+
 
 </script>
     
@@ -149,7 +151,7 @@
 	                     </div>
 	                   <div class="box input">
 	                        <input autofocus onKeyup="this.value=this.value.replace(/[^a-zA-Z0-9]/g,'');" type="text" name="userId" class="inputStyle" placeholder="아이디"/>
-	                     
+	                     	<input type="button" value="중복확인" class="inputStyle"  onclick="checkid()"/> 
 	                     </div>
 	                   </div>
 	                   <div class="box row">
