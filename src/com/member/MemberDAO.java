@@ -171,7 +171,7 @@ public class MemberDAO {
 		String sql;
 
 		try {
-			sql = "select userId,userPwd,userName,userGender,to_char(userBirth,'YYYY,MM,DD') userBirth,";
+			sql = "select userId,userPwd,userName,userGender,to_char(userBirth,'YYYY-MM-DD') userBirth,";
 			sql+= "userAddr,userEmail,userTel from member where userId=? and registration = 1";
 
 			pstmt=conn.prepareStatement(sql);
@@ -192,6 +192,7 @@ public class MemberDAO {
 				dto.setUserEmail(rs.getString("userEmail"));
 				dto.setUserTel(rs.getString("userTel"));				
 			}
+			
 
 			rs.close();
 			pstmt.close();
