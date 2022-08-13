@@ -77,6 +77,24 @@
 	}
 	
 	
+function checkid(){
+		
+		var f = document.myForm;
+		
+		f.action = "<%=cp%>/shop/member/idcheck.do"
+			f.submit();
+		
+		
+		}
+		
+function idCheck(){
+	
+	
+ window.open("<%=cp%>/shop/member/idcheck.do","_blank","width=300px height=200px left=800px top=350px"); 
+	
+	
+	
+}
 
 
 </script>
@@ -151,7 +169,7 @@
 	                     </div>
 	                   <div class="box input">
 	                        <input autofocus onKeyup="this.value=this.value.replace(/[^a-zA-Z0-9]/g,'');" type="text" name="userId" class="inputStyle" placeholder="아이디"/>
-	                     	<input type="button" value="중복확인" class="inputStyle"  onclick="checkid()"/> 
+	                     	<input type="button" value="중복확인" class="inputStyle"  onclick="idCheck()"/> 
 	                     </div>
 	                   </div>
 	                   <div class="box row">

@@ -206,6 +206,40 @@ public class MemberDAO {
 
 
 	}
+	
+	
+	// 아이디 검증
+		public boolean idcheck(String userId) {
+
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = null;
+			boolean result = false;
+			try {
+
+				sql = "select count(userId) from member where userId = ?";
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, userId);
+				rs = pstmt.executeQuery();
+					
+				//true면 중복이고 이미 있는 아이디
+				if (rs.next()) {
+					if(rs.getInt(1) != 0) {
+						result = true;
+					}
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
+			return result;
+		}
+	
+	
+	
+	
+	
 
 	/*public boolean confirmId(String userId) {
 		PreparedStatement pstmt;
