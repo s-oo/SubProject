@@ -36,10 +36,10 @@ public class OrdersServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		resp.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = resp.getWriter();
 		String uri = req.getRequestURI();
 		String url;
 		String cp = req.getContextPath();
+		PrintWriter out = resp.getWriter();
 
 		Connection conn = DBConn.getConnection();
 		OrdersDAO dao = new OrdersDAO(conn);
@@ -58,6 +58,7 @@ public class OrdersServlet extends HttpServlet {
 			out.print("alert('로그인을 해주세요');");
 			out.print("location.href='/sub/shop/member/login.do';");
 			out.print("</script>");
+			return;
 		}
 
 		// cart/wish 추가
