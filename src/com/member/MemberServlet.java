@@ -112,14 +112,15 @@ public class MemberServlet extends HttpServlet {
 				
 			// 로그인 화면
 			} else if (uri.indexOf("login.do") != -1) {
-
+				
+//				String preUrl = req.getHeader("REFERER");
+//				req.getSession().setAttribute("preUrl", preUrl);
+				
 				url = "/member/login.jsp";
 				forward(req, resp, url);
 
 			// 로그인 실행
 			} else if (uri.indexOf("login_ok.do") != -1) {
-				
-				
 				
 				userId = req.getParameter("userId");
 				String userPwd = req.getParameter("userPwd");
@@ -136,7 +137,6 @@ public class MemberServlet extends HttpServlet {
 					req.setAttribute("message", "아이디 또는 패스워드를 정확히 입력하세요.");
 					req.setAttribute("searchpw", "비밀번호 찾기");
 					
-					
 					url = "/member/login.jsp";
 					forward(req, resp, url);
 					return;
@@ -144,14 +144,16 @@ public class MemberServlet extends HttpServlet {
 					
 				} else {
 
-					req.getSession().setAttribute("userId", userId);
-
+					HttpSession session = req.getSession();
 					
-					/*url = req.getHeader("REFERER");
-					System.out.println(url);*/
+//					url = (String) session.getAttribute("preUrl");
+//					session.removeAttribute("preUrl");
+
+					session.setAttribute("userId", userId);
+					
 					url = cp + "/shop/main/main.do";
-					/*resp.sendRedirect(req.getHeader("referer"));*/
 					resp.sendRedirect(url);
+					
 				}
 			
 			}else if(uri.indexOf("findId.do")!=-1) {
