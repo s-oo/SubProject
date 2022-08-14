@@ -79,18 +79,18 @@ function printName()  {
 	  document.getElementById("result").innerText = name;
 	}
 
-function qnaView(boardNum) {
-	if (document.getElementById("qnaContent" + boardNum).style.display != "none"){
-		document.getElementById("qnaContent" + boardNum).style.display = "none";
-		document.getElementById("qnaComment" + boardNum).style.display = "none";
+function qnaView(rnum) {
+	if (document.getElementById("qnaContent" + rnum).style.display != "none"){
+		document.getElementById("qnaContent" + rnum).style.display = "none";
+		document.getElementById("qnaComment" + rnum).style.display = "none";
 	}
-	else if (document.getElementById("qnaContent" + boardNum).style.display == "none")
-		document.getElementById("qnaContent" + boardNum).style.display = "table-row";
+	else if (document.getElementById("qnaContent" + rnum).style.display == "none")
+		document.getElementById("qnaContent" + rnum).style.display = "table-row";
 }
 
-function reviewView(boardNum) {
+function reviewView(rnum) {
 	
-	/*var contents = document.getElementById("reviewContent" + boardNum);
+	/*var contents = document.getElementById("reviewContent" + rnum);
 	
 	for(var i=0;i<contents.length;i++){
 		contents[i].style.display = 'none';
@@ -99,35 +99,83 @@ function reviewView(boardNum) {
 	var contentsShow = element.id.replace(/(\d)/g, '-$1');
     document.getElementById(contentsShow).style.display = 'block';*/
 	
-	if (document.getElementById("reviewContent" + boardNum).style.display != "none"){
-		document.getElementById("reviewContent" + boardNum).style.display = "none";
-		document.getElementById("reviewComment" + boardNum).style.display = "none";
+	if (document.getElementById("reviewContent" + rnum).style.display != "none"){
+		document.getElementById("reviewContent" + rnum).style.display = "none";
+		document.getElementById("reviewComment" + rnum).style.display = "none";
 	}
 	
-	else if (document.getElementById("reviewContent" + boardNum).style.display == "none"){
-		document.getElementById("reviewContent" + boardNum).style.display = "table-row";
+	else if (document.getElementById("reviewContent" + rnum).style.display == "none"){
+		document.getElementById("reviewContent" + rnum).style.display = "table-row";
 		
 		
-	/*if (!((document.getElementById("reviewContent" + boardNum)).contains(target)))
-		document.getElementById("reviewContent" + boardNum).style.display = "none";*/
+	/*if (!((document.getElementById("reviewContent" + rnum)).contains(target)))
+		document.getElementById("reviewContent" + rnum).style.display = "none";*/
 	}
 	
 }
 
-function qnaClick(boardNum) {
-	if (document.getElementById("qnaComment" + boardNum).style.display != "none")
-		document.getElementById("qnaComment" + boardNum).style.display = "none";
+function qnaClick(rnum) {
+	if (document.getElementById("qnaComment" + rnum).style.display != "none")
+		document.getElementById("qnaComment" + rnum).style.display = "none";
 	
-	else if (document.getElementById("qnaComment" + boardNum).style.display == "none")
-		document.getElementById("qnaComment" + boardNum).style.display = "table-row";
+	else if (document.getElementById("qnaComment" + rnum).style.display == "none")
+		document.getElementById("qnaComment" + rnum).style.display = "table-row";
 	
 }
 
-function reviewClick(boardNum) {
-	if (document.getElementById("reviewComment" + boardNum).style.display != "none")
-		document.getElementById("reviewComment" + boardNum).style.display = "none";
+function reviewClick(rnum) {
+	if (document.getElementById("reviewComment" + rnum).style.display != "none")
+		document.getElementById("reviewComment" + rnum).style.display = "none";
 	
-	else if (document.getElementById("reviewComment" + boardNum).style.display == "none")
-		document.getElementById("reviewComment" + boardNum).style.display = "table-row";
+	else if (document.getElementById("reviewComment" + rnum).style.display == "none")
+		document.getElementById("reviewComment" + rnum).style.display = "table-row";
 	
+}
+
+//Comment of Product Board
+function write() {
+	document.getElementById('msg').style.display = "none";
+	document.getElementById('textarea').style.display = "inline-block";
+	document.getElementById('write-bnt').style.display = "none";
+	document.getElementById('register-bnt1').style.display = "inline-block";
+	document.getElementById('cancel-bnt1').style.display = "inline-block";
+}
+function cancel1() {
+	document.getElementById('msg').style.display = "inline-block";
+	document.getElementById('textarea').style.display = "none";
+	document.getElementById('write-bnt').style.display = "inline-block";
+	document.getElementById('register-bnt1').style.display = "none";
+	document.getElementById('cancel-bnt1').style.display = "none";
+	textContent.value="";
+}
+function edit() {
+	document.getElementById('msg').style.display = "none";
+	document.getElementById('textarea').style.display = "inline-block";
+	document.getElementById('edit-bnt').style.display = "none";
+	document.getElementById('delete-bnt').style.display = "none";
+	document.getElementById('register-bnt2').style.display = "inline-block";
+	document.getElementById('cancel-bnt2').style.display = "inline-block";
+}
+function cancel2() {
+	document.getElementById('msg').style.display = "inline-block";
+	document.getElementById('textarea').style.display = "none";
+	document.getElementById('edit-bnt').style.display = "inline-block";
+	document.getElementById('delete-bnt').style.display = "inline-block";
+	document.getElementById('register-bnt2').style.display = "none";
+	document.getElementById('cancel-bnt2').style.display = "none";
+}
+function sendItWrite() {
+	var f = document.myForm;
+	f.action="/sub/shop/comments/write_ok.do";
+	f.submit();
+}
+function sendItEdit() {
+	var f = document.myForm;
+	f.action="/sub/shop/comments/upadte_ok.do";
+	f.submit();
+}
+function sendItDelete() {
+	var f = document.myForm;
+	f.action="/sub/shop/comments/delete_ok.do";
+	f.submit();
 }
