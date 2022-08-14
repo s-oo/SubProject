@@ -42,7 +42,7 @@
 		}
 		f.content.value = str;
 		
-		f.action = "<%=cp%>/shop/boards/reviewWrite_ok.do?ordeerNum=${dto.ordeerNum }";
+		f.action = "<%=cp%>/shop/boards/reviewWrite_ok.do?orderNum=${dto.orderNum }";
 		f.submit();
 		
 	}
@@ -50,6 +50,9 @@
 	function searchList() {
 		
 		window.open('<%=cp %>/shop/boards/reviewSearchList.do','상품정보 선택','width=600, height=500, status=yes, top=100, left=100');
+
+		openWin.document.getElementById("subject").value = document.getElementById("subject").value;
+		o.content.value = f.content.value;
 		
 	}
 	
@@ -85,7 +88,7 @@
 										<a href="<%=cp %>/shop/product/detail.do?productNum=${ordersDTO.productNum }">상품정보 보기</a>
 									</div>
 									<div style="border: 1px solid; width: 80px; padding: 5px; display: inline-block;">
-										<a href="searchList()">상품정보 선택</a>
+										<a href="javascript:searchList()">상품정보 선택</a>
 									</div>
 								</div>
 							</div>
@@ -93,7 +96,7 @@
 					</div>
 					<div class="box row" style="margin: 0px;">
 						<div class="box label"><label for="subject">SUBJECT</label></div>
-						<div class="box input"><input type="text" name="subject" value="${subject }"></div>
+						<div class="box input"><input type="text" id="subject" name="subject" value="${subject }"></div>
 					</div>
 					<div class="box row" style="margin: 0px;">
 						<div class="box label"><label for="userId">ID</label></div>
