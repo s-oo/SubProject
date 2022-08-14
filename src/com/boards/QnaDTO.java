@@ -1,5 +1,6 @@
 package com.boards;
 
+import com.comments.CommentsDTO;
 import com.product.ProductDTO;
 
 public class QnaDTO {
@@ -16,6 +17,7 @@ public class QnaDTO {
 	private String productName;
 	private String productCategory;
 	private String[] saveFileName;
+	private CommentsDTO commentsDTO;
 
 	public int getBoardNum() {
 		return boardNum;
@@ -103,6 +105,14 @@ public class QnaDTO {
 
 	public void setSaveFileName(String[] saveFileName) {
 		this.saveFileName = saveFileName;
+	}
+
+	public CommentsDTO getCommentsDTO() {
+		return commentsDTO;
+	}
+
+	public void setCommentsDTO(CommentsDTO commentsDTO) {
+		this.commentsDTO = commentsDTO;
 	}
 
 }
