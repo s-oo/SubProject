@@ -30,15 +30,13 @@
 		<table class="boardContent">
 			<colgroup>
 				<col style="width: 5%;">
-				<col style="width: 5%;">
-				<col style="width: 10%;">
+				<col style="width: 20%;">
 				<col style="width: 5%;">
 				<col style="width: 5%;">
 			</colgroup>
 			<thead>
 				<tr>
 					<th scope="col">NO</th>
-					<th scope="col">PRODUCT</th>
 					<th scope="col">SUBJECT</th>
 					<th scope="col">ID</th>
 					<th scope="col">DATE</th>
@@ -46,60 +44,73 @@
 			</thead>
 			<tbody>
 				<c:if test="${empty qnaList }">
-						<tr>
-							<td colspan="5" class="empty">등록된 상품 문의가 없습니다.</td>
-						</tr>
+					<tr>
+						<td colspan="4" class="empty">등록된 상품 문의가 없습니다.</td>
+					</tr>
 				</c:if>
 				<c:forEach var="qnaDTO" items="${qnaList }">
-						<tr style="margin: 10pt 0pt 10pt;">
-							<td>${qnaDTO.boardNum }</td>
-							<td>${qnaDTO.productName }</td>
-							<td>
-								<div onclick="qnaView('${qnaDTO.boardNum }');">
+					<tr style="margin: 10pt 0pt 10pt;">
+						<td>${qnaDTO.rnum }</td>
+						<td>
+							<div onclick="qnaView('${qnaDTO.boardNum }');">
 								<a href="#none">${qnaDTO.subject }</a>
-									<%-- <a href="javascript:qnaView('${qnaDTO.boardNum }');">${qnaDTO.subject }</a> --%>
+								<%-- <a href="javascript:qnaView('${qnaDTO.boardNum }');">${qnaDTO.subject }</a> --%>
+							</div>
+						<!-- <img src="https://www.lememe.co.kr/_skin/lememe_220520/img/shop/i_new.gif" border="0" alt="최신"> -->
+						</td>
+						<td>${qnaDTO.userId }</td>
+						<td>${qnaDTO.postDate }</td>
+					</tr>
+					<tr id="qnaContent${qnaDTO.boardNum }" style="display: none;">
+						<td colspan="4" class="qnarev_cnt">
+							<div style="padding: 10px 10px 10px 10px;text-align: left;min-height: 50px;">
+								${qnaDTO.content }
+								<div class="btn">
+									<%-- <c:if test="${qnaDTO.userId.equals(userId) || userId == 'KRISTAL' }"> --%>
+									<span>
+										<a href="<%=cp %>/shop/boards/qnaUpdate.do?boardNum=${qnaDTO.boardNum }&${params }';">EDIT</a>
+									</span>
+									<span>
+										<a></a>
+										<a href="<%=cp %>/shop/boards/qnaDelete_ok.do?boardNum=${qnaDTO.boardNum }&${params }';"
+										onclick="if(!confirm('정말 삭제하시겠습니까?')){return false;}">DELETE</a>
+									</span>
+									<%-- </c:if> --%>
 								</div>
-							<!-- <img src="https://www.lememe.co.kr/_skin/lememe_220520/img/shop/i_new.gif" border="0" alt="최신"> -->
-							</td>
-							<td>${qnaDTO.userId }</td>
-							<td>${qnaDTO.postDate }</td>
-						</tr>
-						<tr id="qnaContent${qnaDTO.boardNum }" style="display: none;">
-							<td colspan="5" class="qnarev_cnt">
-								<div style="padding: 10px 0px 10px 0px;">
-									${qnaDTO.content }
-									<div align="right" onclick="qnaClick('${qnaDTO.boardNum }');">
-										<a href="#none" >댓글${contentNum }</a>
-									</div>
-									<div class="btn" align="right">
-										<c:if test="${qnaDTO.userId.equals(userId) || userId == 'KRISTAL' }">
-											<span>
-												<a href="<%=cp %>/shop/boards/qnaUpdate.do?boardNum=${qnaDTO.boardNum }&${params }';">EDIT</a>
-											</span>
-											<span>
-												<a></a>
-												<a href="<%=cp %>/shop/boards/qnaDelete_ok.do?boardNum=${qnaDTO.boardNum }&${params }';"
-												onclick="if(!confirm('정말 삭제하시겠습니까??')){return false;}">DELETE</a>
-											</span>
-										</c:if>
-									</div>
+								<div class="boardComment" onclick="qnaClick('${qnaDTO.boardNum }');">
+									<a href="#none" >COMMENT
+									<c:if test="${empty qnaDTO.commentsDTO }">0</c:if>
+									<c:if test="${!empty qnaDTO.commentsDTO }">1</c:if>
+									</a>
 								</div>
-							</td>
-						</tr>
-						<tr id="qnaComment${qnaDTO.boardNum }" style="display: none;">
-						<td colspan="5" >
+							</div>
+						</td>
+					</tr>
+					<tr id="qnaComment${qnaDTO.boardNum }" style="display: none;">
+						<td colspan="4" >
 							<form action="" method="post" name="myForm">
+								<!-- 댓글 존재X -->
 								<c:if test="${empty qnaDTO.commentsDTO }">
 									<div class="name" id="msg">
 										<p>댓글이 존재하지 않습니다.</p>
 									</div>
 								</c:if>
+								<!-- 댓글 존재 -->
 								<c:if test="${!empty qnaDTO.commentsDTO }">
-									<div class="name" id="textarea" >CONTENT
-										<textarea name="content" style="width: 600px; height: 130px; resize: none; border-color: #dfdfdf;">${qnaDTO.commentsDTO.getContent() }</textarea>
+								<div class="commentContent">
+									<div class="name">
+										<p>${qnaDTO.commentsDTO.userId } | ${qnaDTO.commentsDTO.postDate }</p>
 									</div>
+									<div class="name" id="textarea">
+										<div>${qnaDTO.commentsDTO.getContent() }</div>
+									</div>
+								</div>
 								</c:if>
+								<!-- 관리자 댓글 권한 -->
 								<c:if test="${userId == 'KRISTAL'}">
+									<div class="name" id="textarea" style="display: none;">COMMENT
+										<textarea id="textContent" name="content" style="width: 600px; height: 130px; resize: none; border-color: #dfdfdf;">${qnaDTO.commentsDTO.content }</textarea>
+									</div>
 									<div class="elementRight">
 										<c:if test="${empty qnaDTO.commentsDTO }">
 											<a href="javascript:write()" class="element" id="write-bnt">WRITE</a>
@@ -108,14 +119,15 @@
 										</c:if>
 										<c:if test="${!empty qnaDTO.commentsDTO }">
 											<a href="javascript:edit()" class="element" id="edit-bnt">EDIT</a>
-											<a href="javascript:sendItEdit)" class="element" id="delete-bnt">DELETE</a>
-											<a href="javascript:sendItDelete()" class="element" id="register-bnt2" style="display: none;">REGISTER</a>
+											<a href="javascript:sendItDelete()" class="element" id="delete-bnt"
+											onclick="if(!confirm('정말 삭제하시겠습니까?')){return false;}">DELETE</a>
+											<a href="javascript:sendItWrite()" class="element" id="register-bnt2" style="display: none;">REGISTER</a>
 											<a href="javascript:cancel2()" class="element" id="cancel-bnt2" style="display: none;">CANCEL</a>
 										</c:if>
 									</div>
 								</c:if>
 								<input type="hidden" name="boardNum" value="${qnaDTO.boardNum }"/>
-								<input type="hidden" name="community" value="review"/>
+								<input type="hidden" name="community" value="qna"/>
 							</form>
 						</td>
 					</tr>
@@ -157,7 +169,7 @@
 				</c:if>
 				<c:forEach var="reviewDTO" items="${reviewList }">
 					<tr style="margin: 10pt 0pt 10pt;">
-						<td>${reviewDTO.boardNum }</td>
+						<td>${reviewDTO.rnum }</td>
 						
 						<%-- <td>
 							<a href="<%=cp%>/shop/product/detail.do?productNum=${reviewDTO.ordersDTO.getProductNum() }">
@@ -178,7 +190,10 @@
 							<div style="padding: 10px 0px 10px 0px;text-align: left;">
 								${reviewDTO.content }
 								<div align="right" onclick="reviewClick('${reviewDTO.boardNum }');">
-									<a href="#none" >댓글${contentNum }</a>
+									<a href="#none" >COMMENT
+									<c:if test="${empty qnaDTO.commentsDTO }">0</c:if>
+									<c:if test="${!empty qnaDTO.commentsDTO }">1</c:if>
+									</a>
 								</div>
 								<div class="btn" align="right">
 									<c:if test="${reviewDTO.userId.equals(userId) || userId == 'KRISTAL' }">
@@ -187,7 +202,7 @@
 										</span>
 										<span>
 											<a href="<%=cp %>/shop/boards/reviewDelete_ok.do?boardNum=${reviewDTO.boardNum }&${params }';"
-											onclick="if(!confirm('정말 삭제하시겠습니까??')){return false;}">DELETE</a>
+											onclick="if(!confirm('정말 삭제하시겠습니까?')){return false;}">DELETE</a>
 										</span>
 									</c:if>
 								</div>
@@ -197,17 +212,35 @@
 					<tr id="reviewComment${reviewDTO.boardNum }" style="display: none;">
 						<td colspan="5" >
 							<form action="" method="post" name="myForm">
+								<!-- 댓글 존재X -->
 								<c:if test="${empty reviewDTO.commentsDTO }">
 									<div class="name" id="msg">
 										<p>댓글이 존재하지 않습니다.</p>
 									</div>
 								</c:if>
+								<!-- 댓글 존재 -->
 								<c:if test="${!empty reviewDTO.commentsDTO }">
+									<tr class="viewTitle">
+										<td colspan="3">
+											<div class="name">
+												<p>${commentsDTO.userId }| ${commentsDTO.postDate }</p>
+											</div>
+										</td>
+									</tr>
+									<tr class="viewContents">
+										<td colspan="3">
+											<div class="">
+												<!-- CONTENT -->
+												<div class="viewContent" style="min-height: auto;">${commentsDTO.content }</div>
+											</div>
+										</td>
+									</tr>
+								</c:if>
+								<!-- 관리자 댓글 기능 -->
+								<c:if test="${userId == 'KRISTAL'}">
 									<div class="name" id="textarea" style="display: none;">CONTENT
 										<textarea name="content" style="width: 600px; height: 130px; resize: none; border-color: #dfdfdf;">${commentsDTO.content }</textarea>
-									</div>
-								</c:if>
-								<c:if test="${userId == 'KRISTAL'}">
+									</div>								
 									<div class="elementRight">
 										<c:if test="${empty reviewDTO.commentsDTO }">
 											<a href="javascript:write()" class="element" id="write-bnt">WRITE</a>
@@ -234,54 +267,5 @@
 </div>
 
 </body>
-
-
-<script type="text/javascript">
-	function write() {
-		document.getElementById('msg').style.display = "none";
-		document.getElementById('textarea').style.display = "inline-block";
-		document.getElementById('write-bnt').style.display = "none";
-		document.getElementById('register-bnt1').style.display = "inline-block";
-		document.getElementById('cancel-bnt1').style.display = "inline-block";
-	}
-	function cancel1() {
-		document.getElementById('msg').style.display = "inline-block";
-		document.getElementById('textarea').style.display = "none";
-		document.getElementById('write-bnt').style.display = "inline-block";
-		document.getElementById('register-bnt1').style.display = "none";
-		document.getElementById('cancel-bnt1').style.display = "none";
-	}
-	function edit() {
-		document.getElementById('msg').style.display = "none";
-		document.getElementById('textarea').style.display = "inline-block";
-		document.getElementById('edit-bnt').style.display = "none";
-		document.getElementById('delete-bnt').style.display = "none";
-		document.getElementById('register-bnt2').style.display = "inline-block";
-		document.getElementById('cancel-bnt2').style.display = "inline-block";
-	}
-	function cancel2() {
-		document.getElementById('msg').style.display = "inline-block";
-		document.getElementById('textarea').style.display = "none";
-		document.getElementById('edit-bnt').style.display = "inline-block";
-		document.getElementById('delete-bnt').style.display = "inline-block";
-		document.getElementById('register-bnt2').style.display = "none";
-		document.getElementById('cancel-bnt2').style.display = "none";
-	}
-	function sendItWrite() {
-		var f = document.myForm;
-		f.action="<%=cp %>/shop/comments/write_ok.do";
-		f.submit();
-	}
-	function sendItEdit() {
-		var f = document.myForm;
-		f.action="<%=cp %>/shop/comments/upadte_ok.do";
-		f.submit();
-	}
-	function sendItDelete() {
-		var f = document.myForm;
-		f.action="<%=cp %>/shop/comments/delete_ok.do";
-		f.submit();
-	}
-</script>
 
 </html>
