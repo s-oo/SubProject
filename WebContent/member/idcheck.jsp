@@ -20,7 +20,7 @@ function sendIt(){
 	var f = document.myForm;
 	
 	
-	f.action = "<%=cp%>/shop/member/idcheck_ok.do"
+	window.close();
 	f.submit();
 	
 	
@@ -38,16 +38,15 @@ function sendIt(){
 				
 			
 			
-			${dto.userId }
-			${userId }
-			 <c:if test="${userId == null }">
-			${message1 }
-			</c:if> 
 			
-			<c:if test="${empty! userId }">
 		
-			${message2 }
-			</c:if> 
+			${message }
+			
+			
+			
+		
+			
+			
 			
 	
 		
@@ -57,7 +56,7 @@ function sendIt(){
 			
 					<button class="add_button1"  type="button" name="userId" style="width: 170px;"
 						onclick="sendIt();">
-						<a style="font-size: 8px; color: #484848; float:center">중복확인</a>
+						<a style="font-size: 8px; color: #484848; float:center">사용하기</a>
 					</button>
 			
 
