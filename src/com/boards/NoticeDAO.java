@@ -247,7 +247,7 @@ public class NoticeDAO {
 		
 		try {
 			
-			sql = "UPDATE NOTICE SET SUBJECT = ?, CONTENT = ?, POSTDATE = SYSDATE ";
+			sql = "UPDATE NOTICE SET SUBJECT = ?, CONTENT = ? ";
 			sql += "WHERE BOARDNUM = ?";
 			
 			pstmt = conn.prepareStatement(sql);

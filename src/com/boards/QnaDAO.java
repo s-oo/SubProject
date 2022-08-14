@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.comments.CommentsDAO;
 import com.orders.OrdersDAO;
 import com.orders.OrdersDTO;
 import com.product.ProductDAO;
@@ -177,6 +178,8 @@ public class QnaDAO {
 				dto.setProductName(productDTO.getProductName());
 				dto.setProductCategory(productDTO.getProductCategory());
 				dto.setSaveFileName(productDTO.getSaveFileName());
+				
+				dto.setCommentsDTO(new CommentsDAO(conn).getReadData(dto.getBoardNum(), "qna"));
 
 				lists.add(dto);
 
@@ -313,7 +316,7 @@ public class QnaDAO {
 		
 		try {
 			
-			sql = "UPDATE QNA SET SUBJECT = ?, CONTENT = ?, POSTDATE = SYSDATE ";
+			sql = "UPDATE QNA SET SUBJECT = ?, CONTENT = ? ";
 			sql += "WHERE BOARDNUM = ?";
 			
 			pstmt = conn.prepareStatement(sql);
