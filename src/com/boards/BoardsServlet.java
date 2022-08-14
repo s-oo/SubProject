@@ -542,6 +542,9 @@ public class BoardsServlet extends HttpServlet {
 
 				// notice Write
 			} else if (uri.indexOf("noticeWrite.do") != -1) {
+				
+				String subject = req.getParameter("subject");
+				String content = req.getParameter("content");
 
 				if (!userId.equals("KRISTAL")) {
 					out.print("<script>");
@@ -561,8 +564,6 @@ public class BoardsServlet extends HttpServlet {
 				String subject = req.getParameter("subject");
 				String content = req.getParameter("content");
 				
-				System.out.println("reviewWrite subject : " + subject);
-
 				String str = req.getParameter("orderNum");
 
 				if (str != null) {
@@ -934,8 +935,6 @@ public class BoardsServlet extends HttpServlet {
 
 				String subject = req.getParameter("subject");
 				String content = req.getParameter("content");
-				
-				System.out.println("SearchList subject : " + subject);
 				
 				OrdersDAO ordersDAO = new OrdersDAO(conn);
 				List<OrdersDTO> list = ordersDAO.getList(userId, "orderList", 0);
