@@ -314,7 +314,7 @@ public class ReviewDAO {
 
 		try {
 
-			sql = "UPDATE REVIEW SET SUBJECT = ?, CONTENT = ?, POSTDATE = SYSDATE ";
+			sql = "UPDATE REVIEW SET SUBJECT = ?, CONTENT = ? ";
 			sql += "WHERE BOARDNUM = ?";
 
 			pstmt = conn.prepareStatement(sql);
