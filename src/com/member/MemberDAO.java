@@ -66,7 +66,8 @@ public class MemberDAO {
 			pstmt.setString(2, dto.getUserName());
 			pstmt.setString(3, dto.getUserGender());
 			pstmt.setString(4, String.join(",", dto.getUserBirth()));
-			pstmt.setString(5, String.join("/", dto.getUserAddr()));			
+			pstmt.setString(5, String.join("/", dto.getUserAddr()));
+		/*	pstmt.setString(6, String.join("/", dto.getUserAddr()));	*/		
 			pstmt.setString(6,  dto.getUserEmail());
 			pstmt.setString(7, dto.getUserTel());
 			pstmt.setString(8, dto.getUserId());
@@ -143,7 +144,7 @@ public class MemberDAO {
 				dto.setUserPwd(rs.getString("userPwd"));
 				dto.setUserName(rs.getString("userName"));
 				dto.setUserGender(rs.getString("userGender"));
-				dto.setUserBirth(rs.getString("userBirth").split(","));
+				dto.setUserBirth(rs.getString(5).split(","));
 				dto.setUserAddr(rs.getString("userAddr").split("/"));
 				dto.setUserEmail(rs.getString("userEmail"));
 				dto.setUserTel(rs.getString("userTel"));				
@@ -187,6 +188,7 @@ public class MemberDAO {
 				dto.setUserPwd(rs.getString("userPwd"));
 				dto.setUserName(rs.getString("userName"));
 				dto.setUserGender(rs.getString("userGender"));
+				
 				dto.setUserBirth(rs.getString(5).split(","));
 				dto.setUserAddr(rs.getString("userAddr").split("/"));
 				dto.setUserEmail(rs.getString("userEmail"));
@@ -236,6 +238,9 @@ public class MemberDAO {
 			return result;
 		}
 	
+		
+	
+
 	
 	
 	

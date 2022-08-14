@@ -86,10 +86,7 @@
 				
 				<!-- product detail -->
 				<div class="productMenu" align="center">
-				
 					<div class="productInfo">
-					<img alt="wishlist" src="<%=cp %>/product/image/wishlist/wishlistSc.PNG"  name="progress" onclick="sendItWishList()"
-				style="float: right; width:30px; height:25px; margin-top: -5px;"/>
 						<!-- product name, price  -->
 						<div class="productName">
 							<span>${dto.productName }</span> 
@@ -190,18 +187,22 @@
 								</div>
 							</div>
 						</form>
-
+						
 						<!-- add bag -->
 						<div class="addBag">
-							<div>
-								<a href="#none" class="add_button"  onclick="sendItCartList();">ADD TO BAG</a>
+						 	<div class="button_wrap">
+								<div class="add_button">
+									<a href="#none" onclick="sendItCartList();">ADD TO BAG</a>
+								</div>
+								<div class="add_button">
+									<a href="#none" name="progress" onclick="sendItWishList()">WISHLIST</a>
+									<%-- <img alt="wishlist" src="<%=cp %>/product/image/wishlist/wishlistSc.PNG" 
+									name="progress" onclick="sendItWishList()"
+									style="float: right; width:30px; height:25px; margin-top: -5px;"/> --%>
+								</div>
 							</div>
-							
-							<div>
-							<br/>
-							<br/>
-					<%-- 		<p>${dto.description }</p> --%>
-							<p align="left">${fn:replace(dto.description, replaceChar, "<br/>")}</p>
+							<div class="descriptions">
+							<p>${fn:replace(dto.description, replaceChar, "<br/>")}</p>
 							</div>
 							
 						</div>

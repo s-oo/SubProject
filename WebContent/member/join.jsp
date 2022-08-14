@@ -96,6 +96,13 @@ function idCheck(){
 	
 }
 
+/* function idCheck2(){
+	
+	opener.myForm.userId.value="d";
+	opener.myForm.userId
+	
+} */
+
 
 </script>
     
