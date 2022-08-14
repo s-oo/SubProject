@@ -24,8 +24,9 @@
 			return false;
 		}
 		f.action = "<%=cp%>/shop/member/delete_ok.do";
+		alert(" 정말로 회원 탈퇴 하시겠습니까?");
 		f.submit();
-		
+		alert("회원 탈퇴 완료");
 		
 	}
 
