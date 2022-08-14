@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <% request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
@@ -9,9 +9,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
-<link rel="stylesheet" type="text/css"href="<%=cp%>/css/shopStyle.css" />
-<link rel="stylesheet" type="text/css"href="<%=cp%>/member/css/memberListStyle.css" />
-<link rel="stylesheet" type="text/css" href="<%=cp%>/member/css/member.css" />
+<link rel="stylesheet" type="text/css" href="<%=cp%>/css/shopStyle.css" />
+<link rel="stylesheet" type="text/css"
+	href="<%=cp%>/member/css/memberListStyle.css" />
+<link rel="stylesheet" type="text/css"
+	href="<%=cp%>/member/css/member.css" />
 
 <script type="text/javascript">
 
@@ -34,33 +36,32 @@ function sendIt(){
 </head>
 <body>
 
-<form action="" method="post" name="myForm">
-				
-			
-			
-			
-		
-			${message }
-			
-			
-			
-		
-			
-			
-			
-	
-		
-				
-				
-				
-			
-					<button class="add_button1"  type="button" name="userId" style="width: 170px;"
-						onclick="sendIt();">
-						<a style="font-size: 8px; color: #484848; float:center">사용하기</a>
-					</button>
-			
+	<form action="" method="post" name="myForm">
 
-</form>
+
+
+
+
+		
+
+	<input type="hidden" name="userId" >${message }
+	
+
+
+
+
+	
+
+
+
+
+		<button class="add_button1" type="button" name="userId"
+			style="width: 170px;" onclick="sendIt();">
+			<a style="font-size: 8px; color: #484848; float: center">사용하기</a>
+		</button>
+
+
+	</form>
 
 
 </body>
