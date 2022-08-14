@@ -16,6 +16,7 @@ public class OrdersDTO {
 	private int productPrice;
 	private String productCategory;
 	private String[] saveFileName;
+	private int boardNum;
 
 	public int getOrderNum() {
 		return orderNum;
@@ -119,6 +120,14 @@ public class OrdersDTO {
 
 	public void setSaveFileName(String[] saveFileName) {
 		this.saveFileName = saveFileName;
+	}
+
+	public int getBoardNum() {
+		return boardNum;
+	}
+
+	public void setBoardNum(int boardNum) {
+		this.boardNum = boardNum;
 	}
 
 }

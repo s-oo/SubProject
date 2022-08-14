@@ -86,7 +86,7 @@ public class QnaDAO {
 	}
 
 	// 전체데이터 가져오기
-	public List<QnaDTO> getLists(int start, int end, String searchKey, String searchValue) {
+	public List<QnaDTO> getLists(int start, int end, String searchKey, String searchValue, String userId) {
 
 		List<QnaDTO> lists = new ArrayList<>();
 
@@ -103,19 +103,20 @@ public class QnaDAO {
 			sql += "select boardNum,userId,productNum,subject,hits,";
 			sql += "to_char(postDate,'YYYY-MM-DD') postDate ";
 			// sql+= "from board order by num desc) data) ";
-			sql += "from qna where " + searchKey + " like ? order by boardNum desc) data) ";
+			sql += "from qna where UPPER(" + searchKey + ") like UPPER(?) AND ? IN (USERID, 'KRISTAL') order by boardNum desc) data) ";
 			sql += "where rnum>=? and rnum<=?";
 
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, searchValue);
-			pstmt.setInt(2, start);
-			pstmt.setInt(3, end);
+			pstmt.setString(2, userId);
+			pstmt.setInt(3, start);
+			pstmt.setInt(4, end);
 
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-
+				
 				QnaDTO dto = new QnaDTO();
 
 				dto.setBoardNum(rs.getInt("boardNum"));
@@ -253,7 +254,7 @@ public class QnaDAO {
 	
 
 	// 전체데이터의 갯수
-	public int getDataCount(String searchKey, String searchValue) {
+	public int getDataCount(String searchKey, String searchValue, String userId) {
 
 		int dataCount = 0;
 
@@ -267,11 +268,17 @@ public class QnaDAO {
 
 			sql = "select nvl(count(*),0) from qna ";
 			sql += "where " + searchKey + " like ?";
-
+			if (!userId.equals("KRISTAL")) {
+				sql += " AND USERID = ?";
+			}
+			
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, searchValue);
-
+			if (!userId.equals("KRISTAL")) {
+				pstmt.setString(2, userId);
+			}
+			
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
