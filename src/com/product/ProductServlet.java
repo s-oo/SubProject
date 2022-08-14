@@ -132,7 +132,6 @@ public class ProductServlet extends HttpServlet{
 			int productNum = Integer.parseInt(req.getParameter("productNum"));
 			String pageNum = req.getParameter("pageNum");
 			
-			
 			String searchKey = req.getParameter("searchKey");
 			String searchValue = req.getParameter("searchValue");
 			
@@ -166,7 +165,7 @@ public class ProductServlet extends HttpServlet{
 			int colorLength = dto.getProductColor().length;
 
 			String sessionUserId = (String) req.getSession().getAttribute("userId");
-			String userId = null;
+			String userId = "";
 			
 			if (sessionUserId != null) {
 				userId = sessionUserId;

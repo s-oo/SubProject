@@ -600,6 +600,7 @@ public class BoardsServlet extends HttpServlet {
 				String subject = req.getParameter("subject");
 				String content = req.getParameter("content");
 				int productNum = Integer.parseInt(req.getParameter("productNum"));
+				int rnum = Integer.parseInt(req.getParameter("rnum"));
 
 				QnaDTO dto = new QnaDTO();
 
@@ -608,6 +609,7 @@ public class BoardsServlet extends HttpServlet {
 				dto.setSubject(subject);
 				dto.setContent(content);
 				dto.setProductNum(productNum);
+				dto.setRnum(rnum);
 
 				int result = dao.insertData(dto);
 

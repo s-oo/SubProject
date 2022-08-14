@@ -47,9 +47,6 @@ li{
 	margin: 80pt;
 }
 
-
-
-
 /*  */
 
 #header {
@@ -282,9 +279,14 @@ input{
 }
 
 /* 장바구니 */
+.button_wrap{
+	width: 100%;
+	display: inline-block;
+}
+
 .add_button{
 	text-align: center;
-    width: 100%;
+    width: 45%;
     box-sizing: border-box;
     height: 30px;
     line-height: 28px;
@@ -298,6 +300,12 @@ input{
     margin-bottom: 10px;
     display: block;
     text-decoration: none;
+    float: left;
+    margin-left: 5px;
+}
+
+.descriptions{
+	text-align: left;
 }
 
 .bagImage{
@@ -353,3 +361,16 @@ input{
 	text-align: center;
 }
 
+.commentContent{
+	text-align: left;
+	padding: 10px 10px 10px 10px;
+}
+
+.elementRight{
+	float: right;
+	padding: 0px 10px 10px 0px;
+}
+
+.btn{
+	float: right;
+}
