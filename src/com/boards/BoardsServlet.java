@@ -560,6 +560,8 @@ public class BoardsServlet extends HttpServlet {
 				
 				String subject = req.getParameter("subject");
 				String content = req.getParameter("content");
+				
+				System.out.println("reviewWrite subject : " + subject);
 
 				String str = req.getParameter("orderNum");
 
