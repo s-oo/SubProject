@@ -45,13 +45,12 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="qnaDTO" items="${qnaList }">
-					<c:if test="${qnaDTO.userId.equals(userId) || userId == 'KRISTAL' }">
-					<c:if test="${empty qnaList }">
+				<c:if test="${empty qnaList }">
 						<tr>
 							<td colspan="5" class="empty">등록된 상품 문의가 없습니다.</td>
 						</tr>
-					</c:if>
+				</c:if>
+				<c:forEach var="qnaDTO" items="${qnaList }">
 						<tr style="margin: 10pt 0pt 10pt;">
 							<td>${qnaDTO.boardNum }</td>
 							<td>${qnaDTO.productName }</td>
@@ -90,24 +89,24 @@
 						<tr id="qnaComment${qnaDTO.boardNum }" style="display: none;">
 						<td colspan="5" >
 							<form action="" method="post" name="myForm">
-								<c:if test="${empty commentsDTO }">
+								<c:if test="${empty qnaDTO.commentsDTO }">
 									<div class="name" id="msg">
 										<p>댓글이 존재하지 않습니다.</p>
 									</div>
 								</c:if>
-								<c:if test="${!empty commentsDTO }">
-									<div class="name" id="textarea" style="display: none;">CONTENT
-										<textarea name="content" style="width: 600px; height: 130px; resize: none; border-color: #dfdfdf;">${commentsDTO.content }</textarea>
+								<c:if test="${!empty qnaDTO.commentsDTO }">
+									<div class="name" id="textarea" >CONTENT
+										<textarea name="content" style="width: 600px; height: 130px; resize: none; border-color: #dfdfdf;">${qnaDTO.commentsDTO.getContent() }</textarea>
 									</div>
 								</c:if>
 								<c:if test="${userId == 'KRISTAL'}">
 									<div class="elementRight">
-										<c:if test="${empty commentsDTO }">
+										<c:if test="${empty qnaDTO.commentsDTO }">
 											<a href="javascript:write()" class="element" id="write-bnt">WRITE</a>
 											<a href="javascript:sendItWrite()" class="element" id="register-bnt1" style="display: none;">REGISTER</a>
 											<a href="javascript:cancel1()" class="element" id="cancel-bnt1" style="display: none;">CANCEL</a>
 										</c:if>
-										<c:if test="${!empty commentsDTO }">
+										<c:if test="${!empty qnaDTO.commentsDTO }">
 											<a href="javascript:edit()" class="element" id="edit-bnt">EDIT</a>
 											<a href="javascript:sendItEdit)" class="element" id="delete-bnt">DELETE</a>
 											<a href="javascript:sendItDelete()" class="element" id="register-bnt2" style="display: none;">REGISTER</a>
@@ -120,7 +119,6 @@
 							</form>
 						</td>
 					</tr>
-					</c:if>
 				</c:forEach>
 			</tbody>
 		</table><br><br>
@@ -199,24 +197,24 @@
 					<tr id="reviewComment${reviewDTO.boardNum }" style="display: none;">
 						<td colspan="5" >
 							<form action="" method="post" name="myForm">
-								<c:if test="${empty commentsDTO }">
+								<c:if test="${empty reviewDTO.commentsDTO }">
 									<div class="name" id="msg">
 										<p>댓글이 존재하지 않습니다.</p>
 									</div>
 								</c:if>
-								<c:if test="${!empty commentsDTO }">
+								<c:if test="${!empty reviewDTO.commentsDTO }">
 									<div class="name" id="textarea" style="display: none;">CONTENT
 										<textarea name="content" style="width: 600px; height: 130px; resize: none; border-color: #dfdfdf;">${commentsDTO.content }</textarea>
 									</div>
 								</c:if>
 								<c:if test="${userId == 'KRISTAL'}">
 									<div class="elementRight">
-										<c:if test="${empty commentsDTO }">
+										<c:if test="${empty reviewDTO.commentsDTO }">
 											<a href="javascript:write()" class="element" id="write-bnt">WRITE</a>
 											<a href="javascript:sendItWrite()" class="element" id="register-bnt1" style="display: none;">REGISTER</a>
 											<a href="javascript:cancel1()" class="element" id="cancel-bnt1" style="display: none;">CANCEL</a>
 										</c:if>
-										<c:if test="${!empty commentsDTO }">
+										<c:if test="${!empty reviewDTO.commentsDTO }">
 											<a href="javascript:edit()" class="element" id="edit-bnt">EDIT</a>
 											<a href="javascript:sendItEdit)" class="element" id="delete-bnt">DELETE</a>
 											<a href="javascript:sendItDelete()" class="element" id="register-bnt2" style="display: none;">REGISTER</a>

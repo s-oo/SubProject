@@ -142,7 +142,7 @@ public class QnaDAO {
 
 	}
 	
-	public List<QnaDTO> getLists(int productNum) {
+	public List<QnaDTO> getLists(int productNum) {//KRISTAL인 경우
 
 		List<QnaDTO> lists = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -157,6 +157,61 @@ public class QnaDAO {
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, productNum);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				QnaDTO dto = new QnaDTO();
+
+				dto.setBoardNum(rs.getInt("boardNum"));
+				dto.setUserId(rs.getString("userId"));
+				dto.setProductNum(rs.getInt("PRODUCTNUM"));
+				dto.setSubject(rs.getString("subject"));
+				dto.setContent(rs.getString("CONTENT"));
+				dto.setHits(rs.getInt("hits"));
+				dto.setPostDate(rs.getString("postDate"));
+
+				ProductDTO productDTO = new ProductDAO(conn).getReadData(rs.getInt("productNum"));
+
+				dto.setProductDTO(productDTO);
+				dto.setProductName(productDTO.getProductName());
+				dto.setProductCategory(productDTO.getProductCategory());
+				dto.setSaveFileName(productDTO.getSaveFileName());
+				
+				dto.setCommentsDTO(new CommentsDAO(conn).getReadData(dto.getBoardNum(), "qna"));
+
+				lists.add(dto);
+
+			}
+
+			rs.close();
+			pstmt.close();
+
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+
+		return lists;
+
+	}
+	
+	public List<QnaDTO> getLists(int productNum, String userId) {//일반 회원인 경우
+
+		List<QnaDTO> lists = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql;
+
+		try {
+
+			sql = "SELECT BOARDNUM, USERID, PRODUCTNUM, SUBJECT, CONTENT, POSTDATE, HITS ";
+			sql += "FROM QNA WHERE PRODUCTNUM IN (";
+			sql += "SELECT PRODUCTNUM FROM PRODUCT WHERE PRODUCTNUM = ? AND USERID = ?)";
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, productNum);
+			pstmt.setString(2, userId);
 
 			rs = pstmt.executeQuery();
 
