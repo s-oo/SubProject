@@ -89,10 +89,10 @@ public class DeliveryDAO {
 		try {
 			
 			String str = "";
-			if (dto.getProgress() == "orderList") {
+			if (dto.getProgress().equals("orderList")) {
 				str = " DELIVERYDATE = SYSDATE, ARRIVEDATE = ROUND(SYSDATE + 3),";
-			} else if (dto.getProgress() == "cancelList") {
-				str = " ARRIVEDATE = TO_DATE(SYSDATE, 'YYYY-MM-DD HH24:MI:SS' ),";
+			} else if (dto.getProgress().equals("cancelList")) {
+				str = " ARRIVEDATE = SYSDATE,";
 			} 
 			
 			sql = "UPDATE DELIVERY SET DELIVERYNAME = ?, DELIVERYTEL = ?, DELIVERYADDR = ?, DELIVERYEMAIL = ?," + str + " PROGRESS = ? ";
@@ -137,7 +137,7 @@ public class DeliveryDAO {
 		try {
 
 			String str = "";
-			if (progress == "cancelList") {
+			if (progress.equals("cancelList")) {
 				str = " TO_CHAR(ARRIVEDATE, 'YYYY-MM-DD HH24:MI'),";
 			} else {
 				str = " TO_CHAR(ARRIVEDATE, 'YYYY-MM-DD'),";
