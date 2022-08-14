@@ -26,9 +26,9 @@ td {
 		
 		var f = document.searchListForm;
 
-		f.action = '<%=cp%>/shop/boards/reviewWrite.do?orderNum=' + orderNum;
+		f.action = '/sub/shop/boards/reviewWrite.do?orderNum=' + orderNum;
 		f.method = "post";
-		f.target = opener.window.name; 
+		f.target = opener.window.name;
 		f.submit();
 
 		self.close();
@@ -40,8 +40,8 @@ td {
 <body>
 	<div id="content" align="center" style="display: block; width:auto;">
 		<form action="" method="post" name="searchListForm">
-			<input type="text" name="subject" value="${subject }">
-			<input type="text" name="content" value="${content }">
+			<input type="hidden" name="subject" value="${subject }">
+			<input type="hidden" name="content" value="${content }">
 			<table style="width: 500px;">
 				<thead>
 					<tr align="center" style="border-bottom: 1px solid #AAAAAA;">
