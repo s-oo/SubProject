@@ -54,6 +54,8 @@ public class CommentsServlet extends HttpServlet {
 			out.print("alert('권한이 없습니다.');");
 			out.print("location.href='" + referer + "';");
 			out.print("</script>");
+			
+			return;
 		}
 
 		if (uri.indexOf("write_ok.do") != -1) {
@@ -76,6 +78,8 @@ public class CommentsServlet extends HttpServlet {
 				out.print("alert('오류');");
 				out.print("history.back()");
 				out.print("</script>");
+				
+				return;
 			}
 
 			resp.sendRedirect(referer);
@@ -97,6 +101,8 @@ public class CommentsServlet extends HttpServlet {
 				out.print("alert('오류');");
 				out.print("history.back()");
 				out.print("</script>");
+				
+				return;
 			}
 
 			resp.sendRedirect(referer);
@@ -113,6 +119,8 @@ public class CommentsServlet extends HttpServlet {
 				out.print("alert('오류');");
 				out.print("history.back()");
 				out.print("</script>");
+				
+				return;
 			}
 
 			resp.sendRedirect(referer);
