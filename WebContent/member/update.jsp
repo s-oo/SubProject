@@ -37,11 +37,6 @@
 		
 		
 		
-		if(!f.userPwd.value){
-			alert("패스워드를 입력해 주세요.");
-			f.userPwd.focus();
-			return;
-		}
 		
 		
 		
@@ -246,11 +241,11 @@
 		                     <div class="box input">
 		                     <span style="float: left;vertical-align: middle;">
 		                  		<input readonly="readonly"  maxlength="4" style="width: 100px;" type="text" 
-		                  		name="userBirth" class="inputStyle"  value="${dto.userBirth[0]} 년 ${dto.userBirth[1]} 월 ${dto.userBirth[2]} 일 " />
-		                  		<%-- <input readonly="readonly" maxlength="4" style="width: 50px;" type="text" 
-		                  		name="userBirth" class="inputStyle"  value="${dto.userBirth[1]}" /><a>월</a>
-			                	<input readonly="readonly"  maxlength="4" style="width: 50px;" type="text" 
-		                  		name="userBirth" class="inputStyle"  value="${dto.userBirth[2]} + ${dto.userBirth[0]}" /><a>일</a> --%>
+		                  		name="userBirth" class="inputStyle"  value="${dto.userBirth[0] } ${dto.userBirth[1] } ${dto.userBirth[2] } " />
+		                  		
+		                  		
+		                  		
+		                  		
 			                 </span>
 			                 
 			                 
