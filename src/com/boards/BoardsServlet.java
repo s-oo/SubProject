@@ -458,6 +458,8 @@ public class BoardsServlet extends HttpServlet {
 			}
 
 			QnaDAO.deleteData(boardNum);
+			
+			new CommentsDAO(conn).deleteData(boardNum, "qna");
 
 			String param = "pageNum=" + pageNum;
 
@@ -485,6 +487,8 @@ public class BoardsServlet extends HttpServlet {
 			}
 
 			ReviewDAO.deleteData(boardNum);
+			
+			new CommentsDAO(conn).deleteData(boardNum, "review");
 
 			String param = "pageNum=" + pageNum;
 
