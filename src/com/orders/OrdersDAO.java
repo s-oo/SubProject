@@ -486,4 +486,32 @@ public class OrdersDAO {
 
 	}
 
+	public boolean repetition(String userId, int productNum, String progress) {
+		
+		boolean result = false;
+		PreparedStatement pstmt;
+		ResultSet rs;
+		String sql;
+		
+		try {
+			
+			sql = "SELECT * FROM ORDERS WHERE USERID = ? AND PRODUCTNUM = ? AND PROGRESS = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, productNum);
+			pstmt.setString(3, progress);
+			
+			rs = pstmt.executeQuery();
+			
+			result = rs.next();
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return result;
+		
+	}
+	
 }

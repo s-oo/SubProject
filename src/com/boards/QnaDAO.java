@@ -128,6 +128,8 @@ public class QnaDAO {
 				
 				dto.setProductDTO(new ProductDAO(conn).getReadData(rs.getInt("productNum")));
 				
+				dto.setCommentsDTO(new CommentsDAO(conn).getReadData(dto.getBoardNum(), "qna"));
+				
 				lists.add(dto);
 
 			}
