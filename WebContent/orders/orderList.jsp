@@ -64,7 +64,12 @@
 									${dto.productPrice * dto.orderQuantity }KRW
 								</td>
 								<td id="reviewWrite">
-									<a href="<%=cp %>/shop/boards/reviewWrite.do?orderNum=${dto.orderNum}">REVIEW</a>
+									<c:if test="${dto.review == 0 }">
+										<a href="<%=cp %>/shop/boards/reviewWrite.do?orderNum=${dto.orderNum}">REVIEW</a>
+									</c:if>
+									<c:if test="${dto.review == 1 }">
+										<a href="<%=cp %>/shop/boards/reviewUpdate.do?orderNum=${dto.orderNum}">REVIEW</a>
+									</c:if>
 								</td>
 							</tr>
 						</c:forEach>
