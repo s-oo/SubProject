@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>ORDER LIST</title>
 
 <link rel="stylesheet" type="text/css"href="<%=cp%>/css/shopStyle.css" />
 <link rel="stylesheet" type="text/css"href="<%=cp%>/orders/css/cartListStyle.css" />
@@ -64,7 +64,12 @@
 									${dto.productPrice * dto.orderQuantity }KRW
 								</td>
 								<td id="reviewWrite">
-									<a href="<%=cp %>/shop/boards/reviewWrite.do?orderNum=${dto.orderNum}">REVIEW</a>
+									<c:if test="${dto.review == 0 }">
+										<a href="<%=cp %>/shop/boards/reviewWrite.do?orderNum=${dto.orderNum}">REVIEW</a>
+									</c:if>
+									<c:if test="${dto.review != 0 }">
+										<a href="<%=cp %>/shop/boards/reviewUpdate.do?boardNum=${dto.review}">REVIEW</a>
+									</c:if>
 								</td>
 							</tr>
 						</c:forEach>

@@ -47,9 +47,6 @@
 						<div style="border: 1px solid; width: 80px; padding: 5px; display: inline-block;">
 							<a href="<%=cp %>/shop/product/detail.do?productNum=${ordersDTO.productNum }">상품정보 보기</a>
 						</div>
-						<div style="border: 1px solid; width: 80px; padding: 5px; display: inline-block;">
-							<a href="javascript:window.open('<%=cp %>/shop/boards/reviewSearchList.do','상품정보 선택','width=600, height=500, status=yes, top=100, left=100')">상품정보 선택</a>
-						</div>
 					</div>
 				</div>
 				<table border="0">

@@ -20,6 +20,11 @@
 		
 		var f = document.myForm;
 		
+		if (${empty productDTO}) {
+			alert("qna를 작성할 상품을 선택하세요.");
+			return;
+		}
+		
 		str = f.subject.value;
 		str = str.trim();
 		if(!str){

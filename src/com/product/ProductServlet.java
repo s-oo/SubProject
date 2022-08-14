@@ -172,7 +172,14 @@ public class ProductServlet extends HttpServlet{
 				userId = sessionUserId;
 			}
 			
-			List<QnaDTO> qnaList = new QnaDAO(conn).getLists(productNum);
+			List<QnaDTO> qnaList;
+			
+			if(userId.equals("KRISTAL")) {
+				qnaList = new QnaDAO(conn).getLists(productNum);
+			}else {
+				qnaList = new QnaDAO(conn).getLists(productNum, userId);
+			}
+			
 			List<ReviewDTO> reviewList = new ReviewDAO(conn).getLists(productNum);
 			
 			req.setAttribute("dto", dto);

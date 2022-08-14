@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.comments.CommentsDAO;
 import com.orders.OrdersDAO;
 import com.orders.OrdersDTO;
 
@@ -179,6 +180,8 @@ public class ReviewDAO {
 				dto.setProductName(ordersDTO.getProductName());
 				dto.setProductCategory(ordersDTO.getProductCategory());
 				dto.setSaveFileName(ordersDTO.getSaveFileName());
+				
+				dto.setCommentsDTO(new CommentsDAO(conn).getReadData(dto.getBoardNum(), "reivew"));
 
 				lists.add(dto);
 
@@ -314,7 +317,7 @@ public class ReviewDAO {
 
 		try {
 
-			sql = "UPDATE REVIEW SET SUBJECT = ?, CONTENT = ?, POSTDATE = SYSDATE ";
+			sql = "UPDATE REVIEW SET SUBJECT = ?, CONTENT = ? ";
 			sql += "WHERE BOARDNUM = ?";
 
 			pstmt = conn.prepareStatement(sql);

@@ -23,7 +23,15 @@ td {
 <script type="text/javascript" src="<%=cp%>/boards/js/util.js"></script>
 <script type="text/javascript">
 	function select(orderNum) {
+		
 		window.opener.location.href = "<%=cp%>/shop/boards/reviewWrite.do?orderNum=" + orderNum;
+
+		opener.document.getElementById("subject").value = document.getElementById("subject").value;
+		
+		document.getElementById("cInput").value = opener.document.getElementById("pInput").value;
+		
+		opener.document.getElementById("pInput").value = document.getElementById("cInput").value;
+		
 		window.close();
 	}
 </script>
@@ -36,8 +44,8 @@ td {
 				<thead>
 					<tr align="center" style="border-bottom: 1px solid #AAAAAA;">
 						<th id="saveFileName" width="80px">
-							<input type="hidden" name="subject" value="${subject }">
-							<input type="hidden" name="content" value="${content }">
+							<input type="text" id="subject" name="subject">
+							<input type="text" id="content" name="content" value="${content }">
 							상품 이미지
 						</th>
 						<th id="productName">

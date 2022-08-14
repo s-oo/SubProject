@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.comments.CommentsDAO;
 import com.orders.OrdersDAO;
 import com.orders.OrdersDTO;
 import com.product.ProductDAO;
@@ -85,7 +86,7 @@ public class QnaDAO {
 	}
 
 	// 전체데이터 가져오기
-	public List<QnaDTO> getLists(int start, int end, String searchKey, String searchValue) {
+	public List<QnaDTO> getLists(int start, int end, String searchKey, String searchValue, String userId) {
 
 		List<QnaDTO> lists = new ArrayList<>();
 
@@ -102,19 +103,20 @@ public class QnaDAO {
 			sql += "select boardNum,userId,productNum,subject,hits,";
 			sql += "to_char(postDate,'YYYY-MM-DD') postDate ";
 			// sql+= "from board order by num desc) data) ";
-			sql += "from qna where " + searchKey + " like ? order by boardNum desc) data) ";
+			sql += "from qna where UPPER(" + searchKey + ") like UPPER(?) AND ? IN (USERID, 'KRISTAL') order by boardNum desc) data) ";
 			sql += "where rnum>=? and rnum<=?";
 
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, searchValue);
-			pstmt.setInt(2, start);
-			pstmt.setInt(3, end);
+			pstmt.setString(2, userId);
+			pstmt.setInt(3, start);
+			pstmt.setInt(4, end);
 
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-
+				
 				QnaDTO dto = new QnaDTO();
 
 				dto.setBoardNum(rs.getInt("boardNum"));
@@ -141,7 +143,7 @@ public class QnaDAO {
 
 	}
 	
-	public List<QnaDTO> getLists(int productNum) {
+	public List<QnaDTO> getLists(int productNum) {//KRISTAL인 경우
 
 		List<QnaDTO> lists = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -177,6 +179,63 @@ public class QnaDAO {
 				dto.setProductName(productDTO.getProductName());
 				dto.setProductCategory(productDTO.getProductCategory());
 				dto.setSaveFileName(productDTO.getSaveFileName());
+				
+				dto.setCommentsDTO(new CommentsDAO(conn).getReadData(dto.getBoardNum(), "qna"));
+
+				lists.add(dto);
+
+			}
+
+			rs.close();
+			pstmt.close();
+
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+
+		return lists;
+
+	}
+	
+	public List<QnaDTO> getLists(int productNum, String userId) {//일반 회원인 경우
+
+		List<QnaDTO> lists = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql;
+
+		try {
+
+			sql = "SELECT BOARDNUM, USERID, PRODUCTNUM, SUBJECT, CONTENT, POSTDATE, HITS ";
+			sql += "FROM QNA WHERE PRODUCTNUM IN (";
+			sql += "SELECT PRODUCTNUM FROM PRODUCT WHERE PRODUCTNUM = ? AND USERID = ?)";
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, productNum);
+			pstmt.setString(2, userId);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				QnaDTO dto = new QnaDTO();
+
+				dto.setBoardNum(rs.getInt("boardNum"));
+				dto.setUserId(rs.getString("userId"));
+				dto.setProductNum(rs.getInt("PRODUCTNUM"));
+				dto.setSubject(rs.getString("subject"));
+				dto.setContent(rs.getString("CONTENT"));
+				dto.setHits(rs.getInt("hits"));
+				dto.setPostDate(rs.getString("postDate"));
+
+				ProductDTO productDTO = new ProductDAO(conn).getReadData(rs.getInt("productNum"));
+
+				dto.setProductDTO(productDTO);
+				dto.setProductName(productDTO.getProductName());
+				dto.setProductCategory(productDTO.getProductCategory());
+				dto.setSaveFileName(productDTO.getSaveFileName());
+				
+				dto.setCommentsDTO(new CommentsDAO(conn).getReadData(dto.getBoardNum(), "qna"));
 
 				lists.add(dto);
 
@@ -195,7 +254,7 @@ public class QnaDAO {
 	
 
 	// 전체데이터의 갯수
-	public int getDataCount(String searchKey, String searchValue) {
+	public int getDataCount(String searchKey, String searchValue, String userId) {
 
 		int dataCount = 0;
 
@@ -209,11 +268,17 @@ public class QnaDAO {
 
 			sql = "select nvl(count(*),0) from qna ";
 			sql += "where " + searchKey + " like ?";
-
+			if (!userId.equals("KRISTAL")) {
+				sql += " AND USERID = ?";
+			}
+			
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, searchValue);
-
+			if (!userId.equals("KRISTAL")) {
+				pstmt.setString(2, userId);
+			}
+			
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
@@ -313,7 +378,7 @@ public class QnaDAO {
 		
 		try {
 			
-			sql = "UPDATE QNA SET SUBJECT = ?, CONTENT = ?, POSTDATE = SYSDATE ";
+			sql = "UPDATE QNA SET SUBJECT = ?, CONTENT = ? ";
 			sql += "WHERE BOARDNUM = ?";
 			
 			pstmt = conn.prepareStatement(sql);

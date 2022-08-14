@@ -10,11 +10,13 @@ public class OrdersDTO {
 	private String orderSize;
 	private String updatedDate;
 	private String progress;
+	private int review;
 
 	private String productName;
 	private int productPrice;
 	private String productCategory;
 	private String[] saveFileName;
+	private int boardNum;
 
 	public int getOrderNum() {
 		return orderNum;
@@ -80,6 +82,14 @@ public class OrdersDTO {
 		this.progress = progress;
 	}
 
+	public int getReview() {
+		return review;
+	}
+
+	public void setReview(int review) {
+		this.review = review;
+	}
+
 	public String getProductName() {
 		return productName;
 	}
@@ -110,6 +120,14 @@ public class OrdersDTO {
 
 	public void setSaveFileName(String[] saveFileName) {
 		this.saveFileName = saveFileName;
+	}
+
+	public int getBoardNum() {
+		return boardNum;
+	}
+
+	public void setBoardNum(int boardNum) {
+		this.boardNum = boardNum;
 	}
 
 }

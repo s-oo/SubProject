@@ -123,8 +123,8 @@ public class OrdersDAO {
 
 		try {
 
-			sql = "INSERT INTO ORDERS(ORDERNUM, USERID, PRODUCTNUM, ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, UPDATEDDATE, PROGRESS) ";
-			sql += "VALUES(?, ?, ?, ?, ?, ?, SYSDATE, ?)";
+			sql = "INSERT INTO ORDERS(ORDERNUM, USERID, PRODUCTNUM, ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, UPDATEDDATE, PROGRESS, REVIEW) ";
+			sql += "VALUES(?, ?, ?, ?, ?, ?, SYSDATE, ?, 0)";
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, dto.getOrderNum());
@@ -155,7 +155,7 @@ public class OrdersDAO {
 
 		try {
 
-			sql = "UPDATE ORDERS SET ORDERQUANTITY = ?, ORDERCOLOR = ?, ORDERSIZE = ?, UPDATEDDATE = SYSDATE, PROGRESS = ? ";
+			sql = "UPDATE ORDERS SET ORDERQUANTITY = ?, ORDERCOLOR = ?, ORDERSIZE = ?, UPDATEDDATE = SYSDATE, PROGRESS = ?, REVIEW = ? ";
 			sql += "WHERE ORDERNUM = ?";
 
 			pstmt = conn.prepareStatement(sql);
@@ -163,7 +163,8 @@ public class OrdersDAO {
 			pstmt.setString(2, dto.getOrderColor());
 			pstmt.setString(3, dto.getOrderSize());
 			pstmt.setString(4, dto.getProgress());
-			pstmt.setInt(5, dto.getOrderNum());
+			pstmt.setInt(5, dto.getReview());
+			pstmt.setInt(6, dto.getOrderNum());
 
 			result = pstmt.executeUpdate();
 
@@ -211,7 +212,7 @@ public class OrdersDAO {
 
 		try {
 
-			sql = "SELECT ORDERNUM, USERID, O.PRODUCTNUM, ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, UPDATEDDATE, PROGRESS, ";
+			sql = "SELECT ORDERNUM, USERID, O.PRODUCTNUM, ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, UPDATEDDATE, PROGRESS, REVIEW, ";
 			sql += "PRODUCTNAME, PRODUCTPRICE, PRODUCTCATEGORY, SAVEFILENAME ";
 			sql += "FROM ORDERS O, PRODUCT P ";
 			sql += "WHERE O.PRODUCTNUM = P.PRODUCTNUM AND USERID = ? AND PROGRESS = ? ORDER BY ORDERNUM DESC";
@@ -234,6 +235,62 @@ public class OrdersDAO {
 				dto.setOrderSize(rs.getString("ORDERSIZE"));
 				dto.setUpdatedDate(rs.getString("UPDATEDDATE"));
 				dto.setProgress(rs.getString("PROGRESS"));
+				dto.setReview(rs.getInt("REVIEW"));
+
+				dto.setProductName(rs.getString("PRODUCTNAME"));
+				dto.setProductPrice(rs.getInt("PRODUCTPRICE"));
+				dto.setProductCategory(rs.getString("PRODUCTCATEGORY"));
+				dto.setSaveFileName(rs.getString("SAVEFILENAME").split(","));
+
+				list.add(dto);
+
+			}
+
+			rs.close();
+			pstmt.close();
+
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+
+		return list;
+
+	}
+
+	public List<OrdersDTO> getList(String userId, String progress, int review) {
+
+		List<OrdersDTO> list = new ArrayList<>();
+		PreparedStatement pstmt;
+		ResultSet rs;
+		String sql;
+
+		try {
+
+			sql = "SELECT ORDERNUM, USERID, O.PRODUCTNUM, ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, UPDATEDDATE, PROGRESS, REVIEW, ";
+			sql += "PRODUCTNAME, PRODUCTPRICE, PRODUCTCATEGORY, SAVEFILENAME ";
+			sql += "FROM ORDERS O, PRODUCT P ";
+			sql += "WHERE O.PRODUCTNUM = P.PRODUCTNUM AND USERID = ? AND PROGRESS = ? AND REVIEW = ? ORDER BY ORDERNUM DESC";
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, progress);
+			pstmt.setInt(3, review);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				OrdersDTO dto = new OrdersDTO();
+
+				dto.setOrderNum(rs.getInt("ORDERNUM"));
+				dto.setUserId(rs.getString("USERID"));
+				dto.setProductNum(rs.getInt("PRODUCTNUM"));
+				dto.setOrderQuantity(rs.getInt("ORDERQUANTITY"));
+				dto.setOrderColor(rs.getString("ORDERCOLOR"));
+				dto.setOrderSize(rs.getString("ORDERSIZE"));
+				dto.setUpdatedDate(rs.getString("UPDATEDDATE"));
+				dto.setProgress(rs.getString("PROGRESS"));
+				dto.setReview(rs.getInt("REVIEW"));
 
 				dto.setProductName(rs.getString("PRODUCTNAME"));
 				dto.setProductPrice(rs.getInt("PRODUCTPRICE"));
@@ -269,7 +326,7 @@ public class OrdersDAO {
 				n += ", ?";
 			}
 
-			sql = "SELECT ORDERNUM, USERID, O.PRODUCTNUM, ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, UPDATEDDATE, PROGRESS, ";
+			sql = "SELECT ORDERNUM, USERID, O.PRODUCTNUM, ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, UPDATEDDATE, PROGRESS, REVIEW, ";
 			sql += "PRODUCTNAME, PRODUCTPRICE, PRODUCTCATEGORY, SAVEFILENAME ";
 			sql += "FROM ORDERS O, PRODUCT P ";
 			sql += "WHERE O.PRODUCTNUM = P.PRODUCTNUM AND ORDERNUM IN (" + n + ") ORDER BY ORDERNUM DESC";
@@ -293,6 +350,7 @@ public class OrdersDAO {
 				dto.setOrderSize(rs.getString("ORDERSIZE"));
 				dto.setUpdatedDate(rs.getString("UPDATEDDATE"));
 				dto.setProgress(rs.getString("PROGRESS"));
+				dto.setReview(rs.getInt("REVIEW"));
 
 				dto.setProductName(rs.getString("PRODUCTNAME"));
 				dto.setProductPrice(rs.getInt("PRODUCTPRICE"));
@@ -386,7 +444,7 @@ public class OrdersDAO {
 
 		try {
 
-			sql = "SELECT ORDERNUM, USERID, P.PRODUCTNUM, ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, UPDATEDDATE, PROGRESS, ";
+			sql = "SELECT ORDERNUM, USERID, P.PRODUCTNUM, ORDERQUANTITY, ORDERCOLOR, ORDERSIZE, UPDATEDDATE, PROGRESS, REVIEW, ";
 			sql += "PRODUCTNAME, PRODUCTPRICE, PRODUCTCATEGORY, SAVEFILENAME ";
 			sql += "FROM ORDERS O, PRODUCT P ";
 			sql += "WHERE O.PRODUCTNUM = P.PRODUCTNUM AND ORDERNUM = ?";
@@ -402,13 +460,14 @@ public class OrdersDAO {
 
 				dto.setOrderNum(rs.getInt("ORDERNUM"));
 				dto.setUserId(rs.getString("USERID"));
-				dto.setProductNum(rs.getInt(3));
+				dto.setProductNum(rs.getInt("PRODUCTNUM"));
 				dto.setOrderQuantity(rs.getInt("ORDERQUANTITY"));
-				dto.setProgress(rs.getString("PROGRESS"));
+				dto.setOrderColor(rs.getString("ORDERCOLOR"));
 				dto.setOrderSize(rs.getString("ORDERSIZE"));
 				dto.setUpdatedDate(rs.getString("UPDATEDDATE"));
-				dto.setOrderColor(rs.getString("ORDERCOLOR"));
-				
+				dto.setProgress(rs.getString("PROGRESS"));
+				dto.setReview(rs.getInt("REVIEW"));
+
 				dto.setProductName(rs.getString("PRODUCTNAME"));
 				dto.setProductPrice(rs.getInt("PRODUCTPRICE"));
 				dto.setProductCategory(rs.getString("PRODUCTCATEGORY"));
