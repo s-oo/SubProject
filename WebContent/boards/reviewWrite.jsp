@@ -42,20 +42,24 @@
 		}
 		f.content.value = str;
 		
-		f.action = "<%=cp%>/shop/boards/reviewWrite_ok.do?orderNum=${dto.orderNum }";
+		f.action = "<%=cp%>/shop/boards/reviewWrite_ok.do";
 		f.submit();
 		
 	}
 	
 	function searchList() {
 		
-		window.open('<%=cp %>/shop/boards/reviewSearchList.do','상품정보 선택','width=600, height=500, status=yes, top=100, left=100');
+		var f = document.myForm;
+		
+		window.open('', '상품정보 선택','width=600, height=500, top=100, left=100');
 
-		openWin.document.getElementById("subject").value = document.getElementById("subject").value;
-		o.content.value = f.content.value;
+		f.action = '<%=cp %>/shop/boards/reviewSearchList.do';
+		f.method = "post";
+		f.target = "상품정보 선택";
+		f.subject = "subject";
+		f.submit();
 		
 	}
-	
 	
 </script>
 
@@ -96,7 +100,7 @@
 					</div>
 					<div class="box row" style="margin: 0px;">
 						<div class="box label"><label for="subject">SUBJECT</label></div>
-						<div class="box input"><input type="text" id="subject" name="subject" value="${subject }"></div>
+						<div class="box input"><input type="text" name="subject"></div>
 					</div>
 					<div class="box row" style="margin: 0px;">
 						<div class="box label"><label for="userId">ID</label></div>

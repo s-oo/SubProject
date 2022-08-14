@@ -24,15 +24,15 @@ td {
 <script type="text/javascript">
 	function select(orderNum) {
 		
-		window.opener.location.href = "<%=cp%>/shop/boards/reviewWrite.do?orderNum=" + orderNum;
+		var f = document.searchListForm;
 
-		opener.document.getElementById("subject").value = document.getElementById("subject").value;
+		f.action = '<%=cp%>/shop/boards/reviewWrite.do?orderNum=' + orderNum;
+		f.method = "post";
+		f.target = opener.window.name; 
+		f.submit();
+
+		self.close();
 		
-		document.getElementById("cInput").value = opener.document.getElementById("pInput").value;
-		
-		opener.document.getElementById("pInput").value = document.getElementById("cInput").value;
-		
-		window.close();
 	}
 </script>
 
@@ -40,12 +40,12 @@ td {
 <body>
 	<div id="content" align="center" style="display: block; width:auto;">
 		<form action="" method="post" name="searchListForm">
+			<input type="text" name="subject" value="${subject }">
+			<input type="text" name="content" value="${content }">
 			<table style="width: 500px;">
 				<thead>
 					<tr align="center" style="border-bottom: 1px solid #AAAAAA;">
 						<th id="saveFileName" width="80px">
-							<input type="text" id="subject" name="subject">
-							<input type="text" id="content" name="content" value="${content }">
 							상품 이미지
 						</th>
 						<th id="productName">

@@ -18,6 +18,7 @@ public class ReviewDTO {
 	private String productCategory;
 	private String[] saveFileName;
 	private CommentsDTO commentsDTO;
+	private int rnum;
 
 	public int getBoardNum() {
 		return boardNum;
@@ -113,6 +114,14 @@ public class ReviewDTO {
 
 	public void setCommentsDTO(CommentsDTO commentsDTO) {
 		this.commentsDTO = commentsDTO;
+	}
+
+	public int getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 
 }

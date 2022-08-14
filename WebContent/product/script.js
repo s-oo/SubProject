@@ -79,18 +79,18 @@ function printName()  {
 	  document.getElementById("result").innerText = name;
 	}
 
-function qnaView(boardNum) {
-	if (document.getElementById("qnaContent" + boardNum).style.display != "none"){
-		document.getElementById("qnaContent" + boardNum).style.display = "none";
-		document.getElementById("qnaComment" + boardNum).style.display = "none";
+function qnaView(boardnum) {
+	if (document.getElementById("qnaContent" + boardnum).style.display != "none"){
+		document.getElementById("qnaContent" + boardnum).style.display = "none";
+		document.getElementById("qnaComment" + boardnum).style.display = "none";
 	}
-	else if (document.getElementById("qnaContent" + boardNum).style.display == "none")
-		document.getElementById("qnaContent" + boardNum).style.display = "table-row";
+	else if (document.getElementById("qnaContent" + boardnum).style.display == "none")
+		document.getElementById("qnaContent" + boardnum).style.display = "table-row";
 }
 
-function reviewView(boardNum) {
+function reviewView(boardnum) {
 	
-	/*var contents = document.getElementById("reviewContent" + boardNum);
+	/*var contents = document.getElementById("reviewContent" + boardnum);
 	
 	for(var i=0;i<contents.length;i++){
 		contents[i].style.display = 'none';
@@ -99,35 +99,84 @@ function reviewView(boardNum) {
 	var contentsShow = element.id.replace(/(\d)/g, '-$1');
     document.getElementById(contentsShow).style.display = 'block';*/
 	
-	if (document.getElementById("reviewContent" + boardNum).style.display != "none"){
-		document.getElementById("reviewContent" + boardNum).style.display = "none";
-		document.getElementById("reviewComment" + boardNum).style.display = "none";
+	if (document.getElementById("reviewContent" + boardnum).style.display != "none"){
+		document.getElementById("reviewContent" + boardnum).style.display = "none";
+		document.getElementById("reviewComment" + boardnum).style.display = "none";
 	}
 	
-	else if (document.getElementById("reviewContent" + boardNum).style.display == "none"){
-		document.getElementById("reviewContent" + boardNum).style.display = "table-row";
+	else if (document.getElementById("reviewContent" + boardnum).style.display == "none"){
+		document.getElementById("reviewContent" + boardnum).style.display = "table-row";
 		
 		
-	/*if (!((document.getElementById("reviewContent" + boardNum)).contains(target)))
-		document.getElementById("reviewContent" + boardNum).style.display = "none";*/
+	/*if (!((document.getElementById("reviewContent" + boardnum)).contains(target)))
+		document.getElementById("reviewContent" + boardnum).style.display = "none";*/
 	}
 	
 }
 
-function qnaClick(boardNum) {
-	if (document.getElementById("qnaComment" + boardNum).style.display != "none")
-		document.getElementById("qnaComment" + boardNum).style.display = "none";
+function qnaClick(boardnum) {
+	if (document.getElementById("qnaComment" + boardnum).style.display != "none")
+		document.getElementById("qnaComment" + boardnum).style.display = "none";
 	
-	else if (document.getElementById("qnaComment" + boardNum).style.display == "none")
-		document.getElementById("qnaComment" + boardNum).style.display = "table-row";
+	else if (document.getElementById("qnaComment" + boardnum).style.display == "none")
+		document.getElementById("qnaComment" + boardnum).style.display = "table-row";
 	
 }
 
-function reviewClick(boardNum) {
-	if (document.getElementById("reviewComment" + boardNum).style.display != "none")
-		document.getElementById("reviewComment" + boardNum).style.display = "none";
+function reviewClick(boardnum) {
+	if (document.getElementById("reviewComment" + boardnum).style.display != "none")
+		document.getElementById("reviewComment" + boardnum).style.display = "none";
 	
-	else if (document.getElementById("reviewComment" + boardNum).style.display == "none")
-		document.getElementById("reviewComment" + boardNum).style.display = "table-row";
+	else if (document.getElementById("reviewComment" + boardnum).style.display == "none")
+		document.getElementById("reviewComment" + boardnum).style.display = "table-row";
 	
+}
+
+//Comment of Product Board
+function write(boardnum) {
+	document.getElementById('msg'+ boardnum).style.display = "none";
+	document.getElementById('textarea'+ boardnum).style.display = "inline-block";
+	document.getElementById('write-bnt'+ boardnum).style.display = "none";
+	document.getElementById('register-bnt1'+ boardnum).style.display = "inline-block";
+	document.getElementById('cancel-bnt1'+ boardnum).style.display = "inline-block";
+}
+function cancel1(boardnum) {
+	document.getElementById('msg'+ boardnum).style.display = "inline-block";
+	document.getElementById('textarea'+ boardnum).style.display = "none";
+	document.getElementById('write-bnt'+ boardnum).style.display = "inline-block";
+	document.getElementById('register-bnt1'+ boardnum).style.display = "none";
+	document.getElementById('cancel-bnt1'+ boardnum).style.display = "none";
+	document.getElementById('textContent'+ boardnum).value="";
+}
+function edit(boardnum) {
+	document.getElementById('textareaResult'+ boardnum).style.display = "none";
+	document.getElementById('textarea'+ boardnum).style.display = "inline-block";
+	document.getElementById('edit-bnt'+ boardnum).style.display = "none";
+	document.getElementById('delete-bnt'+ boardnum).style.display = "none";
+	document.getElementById('register-bnt2'+ boardnum).style.display = "inline-block";
+	document.getElementById('cancel-bnt2'+ boardnum).style.display = "inline-block";
+}
+function cancel2(boardnum) {
+	document.getElementById('textareaResult'+ boardnum).style.display = "inline-block";
+	document.getElementById('textarea'+ boardnum).style.display = "none";
+	document.getElementById('edit-bnt'+ boardnum).style.display = "inline-block";
+	document.getElementById('delete-bnt'+ boardnum).style.display = "inline-block";
+	document.getElementById('register-bnt2'+ boardnum).style.display = "none";
+	document.getElementById('cancel-bnt2'+ boardnum).style.display = "none";
+	document.getElementById('textContent'+ boardnum).value=document.getElementById('textareaResult'+ boardnum).value
+}
+function sendItWrite(num) {
+	var f = document.qnaForm[num];
+	f.action="/sub/shop/comments/write_ok.do";
+	f.submit();
+}
+function sendItEdit(num) {
+	var f = document.qnaForm[num];
+	f.action="/sub/shop/comments/update_ok.do";
+	f.submit();
+}
+function sendItDelete(num) {
+	var f = document.qnaForm[num];
+	f.action="/sub/shop/comments/delete_ok.do";
+	f.submit();
 }

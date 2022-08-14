@@ -125,8 +125,10 @@ public class QnaDAO {
 				dto.setSubject(rs.getString("subject"));
 				dto.setHits(rs.getInt("hits"));
 				dto.setPostDate(rs.getString("postDate"));
-
+				
 				dto.setProductDTO(new ProductDAO(conn).getReadData(rs.getInt("productNum")));
+				
+				dto.setCommentsDTO(new CommentsDAO(conn).getReadData(dto.getBoardNum(), "qna"));
 				
 				lists.add(dto);
 
@@ -152,9 +154,9 @@ public class QnaDAO {
 
 		try {
 
-			sql = "SELECT BOARDNUM, USERID, PRODUCTNUM, SUBJECT, CONTENT, POSTDATE, HITS ";
+			sql = "SELECT * FROM (SELECT BOARDNUM, USERID, PRODUCTNUM, SUBJECT, CONTENT, POSTDATE, HITS, ROWNUM RNUM ";
 			sql += "FROM QNA WHERE PRODUCTNUM IN (";
-			sql += "SELECT PRODUCTNUM FROM PRODUCT WHERE PRODUCTNUM = ?)";
+			sql += "SELECT PRODUCTNUM FROM PRODUCT WHERE PRODUCTNUM = ?) ORDER BY BOARDNUM) ORDER BY RNUM DESC";
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, productNum);
@@ -172,6 +174,7 @@ public class QnaDAO {
 				dto.setContent(rs.getString("CONTENT"));
 				dto.setHits(rs.getInt("hits"));
 				dto.setPostDate(rs.getString("postDate"));
+				dto.setRnum(rs.getInt("rnum"));
 
 				ProductDTO productDTO = new ProductDAO(conn).getReadData(rs.getInt("productNum"));
 
@@ -205,11 +208,12 @@ public class QnaDAO {
 		String sql;
 
 		try {
-
-			sql = "SELECT BOARDNUM, USERID, PRODUCTNUM, SUBJECT, CONTENT, POSTDATE, HITS ";
+			
+			sql = "SELECT * FROM (SELECT BOARDNUM, USERID, PRODUCTNUM, SUBJECT, CONTENT, POSTDATE, HITS, ROWNUM RNUM ";
 			sql += "FROM QNA WHERE PRODUCTNUM IN (";
-			sql += "SELECT PRODUCTNUM FROM PRODUCT WHERE PRODUCTNUM = ? AND USERID = ?)";
+			sql += "SELECT PRODUCTNUM FROM PRODUCT WHERE PRODUCTNUM = ? AND USERID = ?) ORDER BY BOARDNUM) ORDER BY RNUM DESC";
 
+			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, productNum);
 			pstmt.setString(2, userId);
@@ -227,6 +231,7 @@ public class QnaDAO {
 				dto.setContent(rs.getString("CONTENT"));
 				dto.setHits(rs.getInt("hits"));
 				dto.setPostDate(rs.getString("postDate"));
+				dto.setRnum(rs.getInt("rnum"));
 
 				ProductDTO productDTO = new ProductDAO(conn).getReadData(rs.getInt("productNum"));
 

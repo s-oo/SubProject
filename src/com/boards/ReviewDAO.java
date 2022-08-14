@@ -129,6 +129,8 @@ public class ReviewDAO {
 				dto.setProductCategory(ordersDTO.getProductCategory());
 				dto.setSaveFileName(ordersDTO.getSaveFileName());
 
+				dto.setCommentsDTO(new CommentsDAO(conn).getReadData(dto.getBoardNum(), "reivew"));
+				
 				lists.add(dto);
 
 			}
