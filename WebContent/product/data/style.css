@@ -134,7 +134,7 @@ li{
 
 .detail_wrap{
 	width: 80%;
-	margin: 106px auto 0;
+	margin: 60px auto 0;
 	
 }
 
@@ -330,14 +330,18 @@ input{
 }
 
 .boardContent{
-	border-top: 0.5px solid;
+	/* border-top: 0.5px solid;
 	border-bottom: 0.5px solid;
-	border-color: #484848;
+	border-color: #484848; */
+	border: 0.5px solid #dfdfdf;
+    padding: 20px 30px 30px;
+    width: 600px;
+    color: #484848;
 }
 
 .boardContent tr{
-	border-bottom: 0.5px solid;
-	border-color: #484848;
+	border-bottom: 0.5px solid #dfdfdf;
+	/* border-color: #484848; */
 }
 
 .boardContent th{
