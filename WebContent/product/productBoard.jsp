@@ -88,10 +88,10 @@
 					</tr>
 					<tr id="qnaComment${qnaDTO.boardNum }" style="display: none;">
 						<td colspan="4" >
-							<form action="" method="post" name="myForm">
+							<form action="" method="post" name="qnaForm">
 								<!-- 댓글 존재X -->
 								<c:if test="${empty qnaDTO.commentsDTO }">
-									<div class="name" id="msg">
+									<div class="name" id="msg${qnaDTO.boardNum }">
 										<p>댓글이 존재하지 않습니다.</p>
 									</div>
 								</c:if>
@@ -101,28 +101,29 @@
 									<div class="name">
 										<p>${qnaDTO.commentsDTO.userId } | ${qnaDTO.commentsDTO.postDate }</p>
 									</div>
-									<div class="name" id="textarea">
-										<div>${qnaDTO.commentsDTO.getContent() }</div>
+									<div class="name"><!--  -->
+										<textarea id="textareaResult${qnaDTO.boardNum }" readonly="readonly"
+										style="resize: none;border: none;outline: none;">${qnaDTO.commentsDTO.getContent() }</textarea>
 									</div>
 								</div>
 								</c:if>
 								<!-- 관리자 댓글 권한 -->
 								<c:if test="${userId == 'KRISTAL'}">
-									<div class="name" id="textarea" style="display: none;">COMMENT
-										<textarea id="textContent" name="content" style="width: 600px; height: 130px; resize: none; border-color: #dfdfdf;">${qnaDTO.commentsDTO.content }</textarea>
+									<div class="name" id="textarea${qnaDTO.boardNum }" style="display: none;">COMMENT
+										<textarea id="textContent${qnaDTO.boardNum }" name="content" style="width: 600px; height: 130px; resize: none; border-color: #dfdfdf;">${qnaDTO.commentsDTO.content }</textarea>
 									</div>
 									<div class="elementRight">
 										<c:if test="${empty qnaDTO.commentsDTO }">
-											<a href="javascript:write()" class="element" id="write-bnt">WRITE</a>
-											<a href="javascript:sendItWrite()" class="element" id="register-bnt1" style="display: none;">REGISTER</a>
-											<a href="javascript:cancel1()" class="element" id="cancel-bnt1" style="display: none;">CANCEL</a>
+											<a href="javascript:write(${qnaDTO.boardNum })" class="element" id="write-bnt${qnaDTO.boardNum }">WRITE</a>
+											<a href="javascript:sendItWrite(${qnaList.size()-qnaDTO.rnum })" class="element" id="register-bnt1${qnaDTO.boardNum }" style="display: none;">REGISTER</a>
+											<a href="javascript:cancel1(${qnaDTO.boardNum } )" class="element" id="cancel-bnt1${qnaDTO.boardNum }" style="display: none;">CANCEL</a>
 										</c:if>
 										<c:if test="${!empty qnaDTO.commentsDTO }">
-											<a href="javascript:edit()" class="element" id="edit-bnt">EDIT</a>
-											<a href="javascript:sendItDelete()" class="element" id="delete-bnt"
+											<a href="javascript:edit(${qnaDTO.boardNum })" class="element" id="edit-bnt${qnaDTO.boardNum }">EDIT</a>
+											<a href="javascript:sendItDelete(${qnaList.size()-qnaDTO.rnum })" class="element" id="delete-bnt${qnaDTO.boardNum }"
 											onclick="if(!confirm('정말 삭제하시겠습니까?')){return false;}">DELETE</a>
-											<a href="javascript:sendItWrite()" class="element" id="register-bnt2" style="display: none;">REGISTER</a>
-											<a href="javascript:cancel2()" class="element" id="cancel-bnt2" style="display: none;">CANCEL</a>
+											<a href="javascript:sendItEdit(${qnaList.size()-qnaDTO.rnum })" class="element" id="register-bnt2${qnaDTO.boardNum }" style="display: none;">REGISTER</a>
+											<a href="javascript:cancel2(${qnaDTO.boardNum })" class="element" id="cancel-bnt2${qnaDTO.boardNum }" style="display: none;">CANCEL</a>
 										</c:if>
 									</div>
 								</c:if>
@@ -136,7 +137,7 @@
 		</table><br><br>
 		
 		<!-- Review -->
-		<div class="boardTitle">
+		<%-- <div class="boardTitle">
 			<div class="titleName" style="float: left; font-size: 10pt;">Review</div>
 			<div class="titleButton" style="float: right; text-align: right;">
 				<a href="<%=cp%>/shop/boards/reviewWrite.do">Write</a>
@@ -171,11 +172,11 @@
 					<tr style="margin: 10pt 0pt 10pt;">
 						<td>${reviewDTO.rnum }</td>
 						
-						<%-- <td>
+						<td>
 							<a href="<%=cp%>/shop/product/detail.do?productNum=${reviewDTO.ordersDTO.getProductNum() }">
 								<img src="<%=cp %>/product/image/${reviewDTO.productCategory}/${reviewDTO.saveFileName[0]}" width="100px;" height="100px;" style="margin-bottom: 15px;">
 							</a>
-						</td> --%>
+						</td>
 						
 						<td>${reviewDTO.productName } [${reviewDTO.ordersDTO.getOrderColor() }/${reviewDTO.ordersDTO.getOrderSize() }]</td>
 						<td>
@@ -262,7 +263,7 @@
 					</tr>					
 				</c:forEach>
 			</tbody>
-		</table>		
+		</table>	 --%>	
 	</div>
 </div>
 
