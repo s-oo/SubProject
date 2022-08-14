@@ -79,16 +79,55 @@ function printName()  {
 	  document.getElementById("result").innerText = name;
 	}
 
-function reviewView(boardNum) {
-	if (document.getElementById("reviewContent" + boardNum).style.display != "none")
-		document.getElementById("reviewContent" + boardNum).style.display = "none";
-	else if (document.getElementById("reviewContent" + boardNum).style.display == "none")
-		document.getElementById("reviewContent" + boardNum).style.display = "table-row";
-}
-
 function qnaView(boardNum) {
-	if (document.getElementById("qnaContent" + boardNum).style.display != "none")
+	if (document.getElementById("qnaContent" + boardNum).style.display != "none"){
 		document.getElementById("qnaContent" + boardNum).style.display = "none";
+		document.getElementById("qnaComment" + boardNum).style.display = "none";
+	}
 	else if (document.getElementById("qnaContent" + boardNum).style.display == "none")
 		document.getElementById("qnaContent" + boardNum).style.display = "table-row";
+}
+
+function reviewView(boardNum) {
+	
+	/*var contents = document.getElementById("reviewContent" + boardNum);
+	
+	for(var i=0;i<contents.length;i++){
+		contents[i].style.display = 'none';
+	}
+	
+	var contentsShow = element.id.replace(/(\d)/g, '-$1');
+    document.getElementById(contentsShow).style.display = 'block';*/
+	
+	if (document.getElementById("reviewContent" + boardNum).style.display != "none"){
+		document.getElementById("reviewContent" + boardNum).style.display = "none";
+		document.getElementById("reviewComment" + boardNum).style.display = "none";
+	}
+	
+	else if (document.getElementById("reviewContent" + boardNum).style.display == "none"){
+		document.getElementById("reviewContent" + boardNum).style.display = "table-row";
+		
+		
+	/*if (!((document.getElementById("reviewContent" + boardNum)).contains(target)))
+		document.getElementById("reviewContent" + boardNum).style.display = "none";*/
+	}
+	
+}
+
+function qnaClick(boardNum) {
+	if (document.getElementById("qnaComment" + boardNum).style.display != "none")
+		document.getElementById("qnaComment" + boardNum).style.display = "none";
+	
+	else if (document.getElementById("qnaComment" + boardNum).style.display == "none")
+		document.getElementById("qnaComment" + boardNum).style.display = "table-row";
+	
+}
+
+function reviewClick(boardNum) {
+	if (document.getElementById("reviewComment" + boardNum).style.display != "none")
+		document.getElementById("reviewComment" + boardNum).style.display = "none";
+	
+	else if (document.getElementById("reviewComment" + boardNum).style.display == "none")
+		document.getElementById("reviewComment" + boardNum).style.display = "table-row";
+	
 }

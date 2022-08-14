@@ -17,6 +17,7 @@
 <script type="text/javascript" src="<%=cp%>/product/script.js"></script>
 
 <script type="text/javascript">
+
 	function sendItCartList() {
 		var f = document.detailForm;
 		
@@ -62,6 +63,7 @@
 		f.action = "<%=cp%>/shop/orders/addOrder_ok.do?progress=wishList";
 		f.submit();
 	}
+	
 </script>
 
 </head>
