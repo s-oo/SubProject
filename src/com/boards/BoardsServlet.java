@@ -156,7 +156,7 @@ public class BoardsServlet extends HttpServlet {
 				}
 			}
 
-			int dataCount = QnaDAO.getDataCount(searchKey, searchValue);
+			int dataCount = QnaDAO.getDataCount(searchKey, searchValue, userId);
 
 			int numPerPage = 5;
 
@@ -169,7 +169,7 @@ public class BoardsServlet extends HttpServlet {
 			int start = (currentPage - 1) * numPerPage + 1;
 			int end = currentPage * numPerPage;
 
-			List<QnaDTO> lists = QnaDAO.getLists(start, end, searchKey, searchValue);
+			List<QnaDTO> lists = QnaDAO.getLists(start, end, searchKey, searchValue, userId);
 
 			String param = "";
 
@@ -485,6 +485,12 @@ public class BoardsServlet extends HttpServlet {
 			if (searchValue != null && !searchValue.equals("")) {
 				searchValue = URLDecoder.decode(searchValue, "UTF-8");
 			}
+			ReviewDTO reviewDTO = ReviewDAO.getReadData(boardNum);
+			
+			OrdersDAO ordersDAO = new OrdersDAO(conn);
+			OrdersDTO ordersDTO = ordersDAO.getReadData(reviewDTO.getOrderNum());
+			ordersDTO.setReview(0);
+			ordersDAO.updateData(ordersDTO);
 
 			ReviewDAO.deleteData(boardNum);
 			
@@ -662,6 +668,11 @@ public class BoardsServlet extends HttpServlet {
 				dto.setOrderNum(orderNum);
 
 				int result = dao.insertData(dto);
+				
+				OrdersDAO ordersDAO = new OrdersDAO(conn);
+				OrdersDTO ordersDTO = ordersDAO.getReadData(orderNum);
+				ordersDTO.setReview(boardNum);
+				ordersDAO.updateData(ordersDTO);
 
 				if (result == 0) {
 					out.print("<script>");
@@ -923,7 +934,7 @@ public class BoardsServlet extends HttpServlet {
 				System.out.println("SearchList subject : " + subject);
 				
 				OrdersDAO ordersDAO = new OrdersDAO(conn);
-				List<OrdersDTO> list = ordersDAO.getList(userId, "orderList");
+				List<OrdersDTO> list = ordersDAO.getList(userId, "orderList", 0);
 
 				req.setAttribute("subject", subject);
 				req.setAttribute("content", content);
