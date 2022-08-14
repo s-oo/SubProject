@@ -225,10 +225,10 @@ public class MemberDAO {
 				pstmt.setString(1, userId);
 				rs = pstmt.executeQuery();
 					
-				//true면 중복이고 이미 있는 아이디
+				
 				if (rs.next()) {
 					if(rs.getInt(1) != 0) {
-						result = true;
+						result = true;//중복
 					}
 				}
 
@@ -240,6 +240,35 @@ public class MemberDAO {
 	
 		
 	
+		public boolean confirmId(String userId) {
+			PreparedStatement pstmt;
+			ResultSet rs;
+			String sql;
+
+			boolean result = false;
+			try {
+				
+				sql="select userId from member where userId=?";
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, userId);
+				rs=pstmt.executeQuery();
+				
+				if(rs.next()) {
+					result = true;
+					
+				}
+				rs.close();
+				pstmt.close();
+				
+				
+			} catch (Exception e) {
+				System.out.println(e.toString());
+			}
+			
+			return result;
+					
+		}
 
 	
 	

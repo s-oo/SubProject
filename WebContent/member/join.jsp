@@ -88,9 +88,9 @@ function checkid(){
 		}
 		
 function idCheck(){
+	var id = document.myForm.userId.value;
 	
-	
- window.open("<%=cp%>/shop/member/idcheck.do","_blank","width=300px height=200px left=800px top=350px"); 
+ window.open("<%=cp%>/shop/member/idcheck.do?userId="+id,"_blank","width=300px height=200px left=800px top=350px"); 
 	
 	
 	
