@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>게 시 판</title>
+<title>REVIEW WRITE</title>
 
 <link rel="stylesheet" type="text/css"href="<%=cp%>/css/shopStyle.css" />
 <link rel="stylesheet" type="text/css"href="<%=cp%>/boards/css/writeStyle.css" />
@@ -18,8 +18,8 @@
 	function sendIt(){
 		
 	var f = document.myForm;
-		
-	if (${empty ordersDTO}) {
+	
+	if (${empty ordersDTO }) {
 		alert("리뷰를 작성할 상품을 선택하세요.");
 		return;
 	}
@@ -53,10 +53,9 @@
 		
 		window.open('', '상품정보 선택','width=600, height=500, top=100, left=100');
 
-		f.action = '<%=cp %>/shop/boards/reviewSearchList.do';
+		f.action = '/sub/shop/boards/reviewSearchList.do';
 		f.method = "post";
 		f.target = "상품정보 선택";
-		f.subject = "subject";
 		f.submit();
 		
 	}
@@ -74,7 +73,7 @@
 							<img alt="noimage" src="<%=cp %>/boards/img/noimage.png" style="margin: 10px; display: inline;">
 							<div class="box">
 								<div style="border: 1px solid; width: 100px; padding: 5px;">
-									<a href="javascript:window.open('<%=cp %>/shop/boards/reviewSearchList.do','상품정보 선택','width=600, height=800, status=yes, top=100, left=100')">상품정보 선택</a>
+									<a href="javascript:searchList()">상품정보 선택</a>
 								</div>
 							</div>
 						</c:if>
@@ -100,7 +99,7 @@
 					</div>
 					<div class="box row" style="margin: 0px;">
 						<div class="box label"><label for="subject">SUBJECT</label></div>
-						<div class="box input"><input type="text" name="subject"></div>
+						<div class="box input"><input type="text" name="subject" value="${subject }"></div>
 					</div>
 					<div class="box row" style="margin: 0px;">
 						<div class="box label"><label for="userId">ID</label></div>

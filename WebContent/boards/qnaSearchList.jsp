@@ -23,8 +23,16 @@ td {
 <script type="text/javascript" src="<%=cp%>/boards/js/util.js"></script>
 <script type="text/javascript">
 	function select(productNum) {
-		window.opener.location.href = "<%=cp%>/shop/boards/qnaWrite.do?productNum=" + productNum;
-		window.close();
+		
+		var f = document.searchListForm;
+
+		f.action = '/sub/shop/boards/qnaWrite.do?productNum=' + productNum;
+		f.method = "post";
+		f.target = opener.window.name;
+		f.submit();
+
+		self.close();
+		
 	}
 </script>
 
@@ -35,6 +43,8 @@ td {
 		<form action="" method="post" name="searchListForm">
 			<div class="search" style="border-top: 1px solid #AAAAAA; padding: 20px 0px 20px 0px; width: 500px;">
 				PRODUCT NAME
+				<input type="hidden" name="subject" value="${subject }">
+				<input type="hidden" name="content" value="${content }">
 				<input type="hidden" name="searchKey" value="productName"/>
 				<input type="text" name="searchValue" class="textField">
 				<input type="button" value="SEARCH" class="button" onclick="submit();"/>

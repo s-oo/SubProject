@@ -934,8 +934,6 @@ public class BoardsServlet extends HttpServlet {
 				String subject = req.getParameter("subject");
 				String content = req.getParameter("content");
 				
-				System.out.println("SearchList subject : " + subject);
-				
 				OrdersDAO ordersDAO = new OrdersDAO(conn);
 				List<OrdersDTO> list = ordersDAO.getList(userId, "orderList", 0);
 
