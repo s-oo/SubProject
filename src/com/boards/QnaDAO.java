@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.comments.CommentsDAO;
-import com.orders.OrdersDAO;
-import com.orders.OrdersDTO;
 import com.product.ProductDAO;
 import com.product.ProductDTO;
 
@@ -145,7 +143,7 @@ public class QnaDAO {
 
 	}
 	
-	public List<QnaDTO> getLists(int productNum) {//KRISTAL인 경우
+	public List<QnaDTO> getLists(int productNum) {//관리자(KRISTAL)인 경우
 
 		List<QnaDTO> lists = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -156,7 +154,7 @@ public class QnaDAO {
 
 			sql = "SELECT * FROM (SELECT BOARDNUM, USERID, PRODUCTNUM, SUBJECT, CONTENT, POSTDATE, HITS, ROWNUM RNUM ";
 			sql += "FROM QNA WHERE PRODUCTNUM IN (";
-			sql += "SELECT PRODUCTNUM FROM PRODUCT WHERE PRODUCTNUM = ?) ORDER BY BOARDNUM) ORDER BY RNUM DESC";
+			sql += "SELECT PRODUCTNUM FROM PRODUCT WHERE PRODUCTNUM = ?) ORDER BY POSTDATE DESC) ORDER BY RNUM DESC";
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, productNum);
