@@ -188,7 +188,7 @@ public class ReviewDAO {
 				dto.setProductCategory(ordersDTO.getProductCategory());
 				dto.setSaveFileName(ordersDTO.getSaveFileName());
 				
-				dto.setCommentsDTO(new CommentsDAO(conn).getReadData(dto.getBoardNum(), "reivew"));
+				dto.setCommentsDTO(new CommentsDAO(conn).getReadData(dto.getBoardNum(), "review"));
 
 				lists.add(dto);
 
@@ -245,7 +245,7 @@ public class ReviewDAO {
 				dto.setProductCategory(ordersDTO.getProductCategory());
 				dto.setSaveFileName(ordersDTO.getSaveFileName());
 				
-				dto.setCommentsDTO(new CommentsDAO(conn).getReadData(dto.getBoardNum(), "reivew"));
+				dto.setCommentsDTO(new CommentsDAO(conn).getReadData(dto.getBoardNum(), "review"));
 
 				lists.add(dto);
 
