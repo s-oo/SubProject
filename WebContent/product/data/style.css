@@ -373,11 +373,8 @@ input{
 
 .btn{
 	float: right;
-	position: relative;
 }
 
 .boardComment{
-	
-	bottom: 0;
-	right: 0;
+	float: right;
 }
