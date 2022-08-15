@@ -28,7 +28,8 @@ td {
 
 		f.action = '/sub/shop/boards/reviewWrite.do?orderNum=' + orderNum;
 		f.method = "post";
-		f.target = opener.window.name;
+		/* f.target = opener.window.name; */
+		f.target = "REVIEW WRITE";
 		f.submit();
 
 		self.close();

@@ -28,7 +28,8 @@ td {
 
 		f.action = '/sub/shop/boards/qnaWrite.do?productNum=' + productNum;
 		f.method = "post";
-		f.target = opener.window.name;
+		/* f.target = opener.window.name; */
+		f.target = "QNA WRITE";
 		f.submit();
 
 		self.close();
