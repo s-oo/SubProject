@@ -147,17 +147,21 @@ public class MemberServlet extends HttpServlet {
 				
 				if(dto==null)  {
 
-					req.setAttribute("message", "사용가능 아이디입니다.");
+					req.setAttribute("message1", "사용가능 아이디입니다.");
 					url = "/member/idcheck.jsp";
 					forward(req, resp, url);
 					return;
 
-				}else {
+				}
+				
+		
+				
+				else  {
 
-					req.setAttribute("message", "이미 사용중 아이디입니다.");
+					req.setAttribute("message2", "이미 사용중 아이디입니다.");
 					
 					
-					url = "/member/idcheck.jsp";
+					url = "/member/idcheckfail.jsp";
 					forward(req, resp, url);
 					return;
 				}

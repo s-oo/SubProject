@@ -210,7 +210,7 @@
 		                        <label for="userName"><span>PASSWORD</span><br><a>(선택가능)</a></label>
 		                     </div>
 		                     <div class="box input">
-		                        <input type="password" name="userPwd" class="inputStyle" placeholder="비밀번호"/>
+		                        <input type="password" name="userPwd" class="inputStyle" placeholder="비밀번호"/ value="${dto.userPwd }">
 		                     </div>
 	             		</div>
 	                   
