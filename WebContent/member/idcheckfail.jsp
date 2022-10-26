@@ -17,14 +17,9 @@
 
 <script type="text/javascript">
 
-
-
-
-
 function sendIt(){
 	
 	var f = document.myForm;
-	
 	
 	
 	window.close();
@@ -34,19 +29,8 @@ function sendIt(){
 	
 }
 
-	
-
- 
-
-	
-
 
 </script>
-
-
-
-
-
 
 
 </head>
@@ -54,22 +38,22 @@ function sendIt(){
 
 	<form action="" method="post" name="myForm">
 
+	
+  	
+	
+
+	
+
+	
+
+		${message2 }
 
 
-
-
-
-
-
-
-		${message1 }
-
- <input type="text" id="cInput">
-		<button class="add_button1" type="button" name="userId" 
-			value="idCheck" style="width: 170px;" onclick="sendIt();">
-			<a style="font-size: 8px; color: #484848; float: center">사용하기</a>
+		 <button class="add_button1" type="button" name="userId"
+			style="width: 170px;" onclick="sendIt();">
+			<a style="font-size: 8px; color: #484848; float: center">다시입력하기</a>
 		</button>
-	<!-- <input type="button" value="창닫기" onclick="window.close()"> -->
+
 
 	</form>
 

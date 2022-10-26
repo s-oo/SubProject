@@ -64,11 +64,15 @@
 			return;
 		}
 		
-		/* if(!f.userEmail.value){
-			alert("E-Mail 입력해 주세요.");
-			f.userEmail.focus();
-			return;
-		} */
+		
+		
+		
+		if(f.idDuplication.value !="idCheck"){
+		alert('아이디 중복확인 해주세요');
+		return false;
+		}
+		
+		
 		f.action = "<%=cp%>/shop/member/join_ok.do"
 		f.submit();
 		
@@ -79,6 +83,8 @@
 	
 function checkid(){
 		
+	
+	
 		var f = document.myForm;
 		
 		f.action = "<%=cp%>/shop/member/idcheck.do"
@@ -88,13 +94,25 @@ function checkid(){
 		}
 		
 function idCheck(){
+	
 	var id = document.myForm.userId.value;
+	var f = document.myForm;
+
+	if(!f.userId.value){
+		alert("아이디를 입력하세요");
+		f.userId.focus();
+		return;
+	}
 	
  window.open("<%=cp%>/shop/member/idcheck.do?userId="+id,"_blank","width=300px height=200px left=800px top=350px"); 
 	
-	
+ 
 	
 }
+
+
+
+
 
 /* function idCheck2(){
 	
@@ -176,7 +194,8 @@ function idCheck(){
 	                     </div>
 	                   <div class="box input">
 	                        <input autofocus onKeyup="this.value=this.value.replace(/[^a-zA-Z0-9]/g,'');" type="text" name="userId" class="inputStyle" placeholder="아이디"/>
-	                     	<input type="button" value="중복확인" class="inputStyle"  onclick="idCheck()"/> 
+	                     	<input type="button"   value="중복확인"  class="inputStyle"  onclick="idCheck();"/>
+	                     	<input type="hidden" name ="idDuplication" value="idUncheck"/>
 	                     </div>
 	                   </div>
 	                   <div class="box row">
@@ -299,11 +318,15 @@ function idCheck(){
 				</button>
 			</div>
 			
+			
+			
+			
 			<div style="float: left;">
 				<button class="add_button" type="button" style="width: 170px;" onclick="sendIt();">
 					<a style=" font-size: 8px; color: #484848;">JOIN</a>
 				</button>	
 			</div>
+			
 		</div>
 	</div>
 </div>

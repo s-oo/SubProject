@@ -65,23 +65,25 @@
 						<td colspan="4" class="qnarev_cnt">
 							<div style="padding: 10px 10px 10px 10px;text-align: left;min-height: 50px;">
 								${qnaDTO.content }
-								<div class="btn">
-									<%-- <c:if test="${qnaDTO.userId.equals(userId) || userId == 'KRISTAL' }"> --%>
-									<span>
-										<a href="<%=cp %>/shop/boards/qnaUpdate.do?boardNum=${qnaDTO.boardNum }&${params }';">EDIT</a>
-									</span>
-									<span>
-										<a></a>
-										<a href="<%=cp %>/shop/boards/qnaDelete_ok.do?boardNum=${qnaDTO.boardNum }&${params }';"
-										onclick="if(!confirm('정말 삭제하시겠습니까?')){return false;}">DELETE</a>
-									</span>
-									<%-- </c:if> --%>
-								</div>
-								<div class="boardComment" onclick="qnaClick('${qnaDTO.boardNum }');">
-									<a href="#none" >COMMENT
-									<c:if test="${empty qnaDTO.commentsDTO }">0</c:if>
-									<c:if test="${!empty qnaDTO.commentsDTO }">1</c:if>
-									</a>
+								<div>
+									<div class="btn">
+										<%-- <c:if test="${qnaDTO.userId.equals(userId) || userId == 'KRISTAL' }"> --%>
+										<span>
+											<a href="<%=cp %>/shop/boards/qnaUpdate.do?boardNum=${qnaDTO.boardNum }&${params }';">EDIT</a>
+										</span>
+										<span>
+											<a></a>
+											<a href="<%=cp %>/shop/boards/qnaDelete_ok.do?boardNum=${qnaDTO.boardNum }&${params }';"
+											onclick="if(!confirm('정말 삭제하시겠습니까?')){return false;}">DELETE</a>
+										</span>
+										<%-- </c:if> --%>
+									</div><br/>
+									<div class="boardComment" onclick="qnaClick('${qnaDTO.boardNum }');">
+										<a href="#none" >COMMENT
+										<c:if test="${empty qnaDTO.commentsDTO }">0</c:if>
+										<c:if test="${!empty qnaDTO.commentsDTO }">1</c:if>
+										</a>
+									</div>
 								</div>
 							</div>
 						</td>
@@ -101,7 +103,7 @@
 									<div class="name">
 										<p>${qnaDTO.commentsDTO.userId } | ${qnaDTO.commentsDTO.postDate }</p>
 									</div>
-									<div class="name"><!--  -->
+									<div class="name">
 										<textarea id="textareaResultQna${qnaDTO.boardNum }" readonly="readonly"
 										style="resize: none;border: none;outline: none;">${qnaDTO.commentsDTO.getContent() }</textarea>
 									</div>
@@ -180,23 +182,25 @@
 					<tr id="reviewContent${reviewDTO.boardNum }" style="display: none;">
 						<td colspan="4" class="qnarev_cnt">
 							<div style="padding: 10px 10px 10px 0px;text-align: left;min-height: 50px;">
+								<span style="display: block;">구매 상품: ${reviewDTO.productName } [${reviewDTO.ordersDTO.getOrderColor() }/${reviewDTO.ordersDTO.getOrderSize() }]</span>
 								<span>${reviewDTO.content }</span>
-								<span>${reviewDTO.productName } [${reviewDTO.ordersDTO.getOrderColor() }/${reviewDTO.ordersDTO.getOrderSize() }]</span>
-								<div class="btn">
-									<span>
-										<a href="<%=cp %>/shop/boards/reviewUpdate.do?boardNum=${reviewDTO.boardNum }&${params }';">EDIT</a>
-									</span>
-									<span>
-										<a></a>
-										<a href="<%=cp %>/shop/boards/reviewDelete_ok.do?boardNum=${reviewDTO.boardNum }&${params }';"
-										onclick="if(!confirm('정말 삭제하시겠습니까?')){return false;}">DELETE</a>
-									</span>
-								</div>								
-								<div class="boardComment" onclick="reviewClick('${reviewDTO.boardNum }');">
-									<a href="#none" >COMMENT
-									<c:if test="${empty reviewDTO.commentsDTO }">0</c:if>
-									<c:if test="${!empty reviewDTO.commentsDTO }">1</c:if>
-									</a>
+								<div align="right">
+									<div class="btn">
+										<span>
+											<a href="<%=cp %>/shop/boards/reviewUpdate.do?boardNum=${reviewDTO.boardNum }&${params }';">EDIT</a>
+										</span>
+										<span>
+											<a></a>
+											<a href="<%=cp %>/shop/boards/reviewDelete_ok.do?boardNum=${reviewDTO.boardNum }&${params }';"
+											onclick="if(!confirm('정말 삭제하시겠습니까?')){return false;}">DELETE</a>
+										</span>
+									</div><br/>			
+									<div class="boardComment" onclick="reviewClick('${reviewDTO.boardNum }');">
+										<a href="#none" >COMMENT
+										<c:if test="${empty reviewDTO.commentsDTO }">0</c:if>
+										<c:if test="${!empty reviewDTO.commentsDTO }">1</c:if>
+										</a>
+									</div>
 								</div>
 							</div>
 						</td>
