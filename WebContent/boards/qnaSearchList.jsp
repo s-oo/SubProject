@@ -23,26 +23,41 @@ td {
 <script type="text/javascript" src="<%=cp%>/boards/js/util.js"></script>
 <script type="text/javascript">
 	function select(productNum) {
-		window.opener.location.href = "<%=cp%>/shop/boards/qnaWrite.do?productNum=" + productNum;
-		window.close();
+		
+		var f = document.searchListForm;
+
+		f.action = '/sub/shop/boards/qnaWrite.do?productNum=' + productNum;
+		f.method = "post";
+		/* f.target = opener.window.name; */
+		f.target = "QNA WRITE";
+		f.submit();
+
+		self.close();
+		
 	}
 </script>
 
 </head>
 <body>
 	<div id="content" align="center" style="display: block; width: auto;">
+		<div align="center" style="font-weight: 700; padding-top: 15px; font: 10pt;"><h3>SEARCH LIST</h3></div>
 		<form action="" method="post" name="searchListForm">
+			<div class="search" style="border-top: 1px solid #AAAAAA; padding: 20px 0px 20px 0px; width: 500px;">
+				PRODUCT NAME
+				<input type="hidden" name="subject" value="${subject }">
+				<input type="hidden" name="content" value="${content }">
+				<input type="hidden" name="searchKey" value="productName"/>
+				<input type="text" name="searchValue" class="textField">
+				<input type="button" value="SEARCH" class="button" onclick="submit();"/>
+			</div>
 			<table style="width: 500px;">
 				<thead>
 					<tr align="center" style="border-bottom: 1px solid #AAAAAA;">
-						<th id="saveFileName" width="80px">
-							상품 이미지
-						</th>
-						<th id="productName">
-							상품 정보
+						<th id="saveFileName" colspan="2">
+							PRODUCT
 						</th>
 						<th id="select">
-							선택
+							SELECT
 						</th>
 					</tr>
 				</thead>

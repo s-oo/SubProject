@@ -48,7 +48,7 @@
 					<th scope="col">SUBJECT</th>
 					<th scope="col">ID</th>
 					<th scope="col">DATE</th>
-					<th scope="col">HITS</th>
+					<th scope="col">COMMENT</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -69,7 +69,14 @@
 						<!-- ID -->
 						<td>${dto.userId }</td>
 						<td>${dto.postDate }</td>
-						<td>${dto.hits }</td>
+						<td>
+							<c:if test="${empty dto.commentsDTO }">
+								답변 예정
+							</c:if>
+							<c:if test="${!empty dto.commentsDTO }">
+								답변 완료
+							</c:if>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>

@@ -23,8 +23,17 @@ td {
 <script type="text/javascript" src="<%=cp%>/boards/js/util.js"></script>
 <script type="text/javascript">
 	function select(orderNum) {
-		window.opener.location.href = "<%=cp%>/shop/boards/reviewWrite.do?orderNum=" + orderNum;
-		window.close();
+		
+		var f = document.searchListForm;
+
+		f.action = '/sub/shop/boards/reviewWrite.do?orderNum=' + orderNum;
+		f.method = "post";
+		/* f.target = opener.window.name; */
+		f.target = "REVIEW WRITE";
+		f.submit();
+
+		self.close();
+		
 	}
 </script>
 
@@ -32,6 +41,8 @@ td {
 <body>
 	<div id="content" align="center" style="display: block; width:auto;">
 		<form action="" method="post" name="searchListForm">
+			<input type="hidden" name="subject" value="${subject }">
+			<input type="hidden" name="content" value="${content }">
 			<table style="width: 500px;">
 				<thead>
 					<tr align="center" style="border-bottom: 1px solid #AAAAAA;">

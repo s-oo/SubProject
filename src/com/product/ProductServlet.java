@@ -12,6 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.boards.QnaDAO;
+import com.boards.QnaDTO;
+import com.boards.ReviewDAO;
+import com.boards.ReviewDTO;
 import com.util.DBConn;
 import com.util.MyPage;
 
@@ -128,7 +132,6 @@ public class ProductServlet extends HttpServlet{
 			int productNum = Integer.parseInt(req.getParameter("productNum"));
 			String pageNum = req.getParameter("pageNum");
 			
-			
 			String searchKey = req.getParameter("searchKey");
 			String searchValue = req.getParameter("searchValue");
 			
@@ -162,11 +165,21 @@ public class ProductServlet extends HttpServlet{
 			int colorLength = dto.getProductColor().length;
 
 			String sessionUserId = (String) req.getSession().getAttribute("userId");
-			String userId = null;
+			String userId = "";
 			
 			if (sessionUserId != null) {
 				userId = sessionUserId;
 			}
+			
+			List<QnaDTO> qnaList;
+			
+			if(userId.equals("KRISTAL")) {
+				qnaList = new QnaDAO(conn).getLists(productNum);
+			}else {
+				qnaList = new QnaDAO(conn).getLists(productNum, userId);
+			}
+			
+			List<ReviewDTO> reviewList = new ReviewDAO(conn).getLists(productNum);
 			
 			req.setAttribute("dto", dto);
 			req.setAttribute("params", param);
@@ -177,6 +190,8 @@ public class ProductServlet extends HttpServlet{
 			req.setAttribute("sizeLength", sizeLength);
 			req.setAttribute("colorLength", colorLength);
 			req.setAttribute("userId", userId);
+			req.setAttribute("qnaList", qnaList);
+			req.setAttribute("reviewList", reviewList);
 			
 			url = "/product/detail.jsp";
 			forward(req, resp, url);

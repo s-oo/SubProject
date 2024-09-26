@@ -36,10 +36,10 @@ public class OrdersServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		resp.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = resp.getWriter();
-		String cp = req.getContextPath();
 		String uri = req.getRequestURI();
 		String url;
+		String cp = req.getContextPath();
+		PrintWriter out = resp.getWriter();
 
 		Connection conn = DBConn.getConnection();
 		OrdersDAO dao = new OrdersDAO(conn);
@@ -52,17 +52,17 @@ public class OrdersServlet extends HttpServlet {
 			userId = sessionUserId;
 		}
 
-		if (userId == null) {
+		
+		if (userId == null || userId.equals("")) {
 			out.print("<script>");
 			out.print("alert('로그인을 해주세요');");
-			out.print("locasion.href='/sub/shop/member/login.do';");
+			out.print("location.href='/sub/shop/member/login.do';");
 			out.print("</script>");
+			return;
 		}
 
 		// cart/wish 추가
 		if (uri.indexOf("addOrder_ok.do") != -1) {
-
-//			String referer = (String) req.getHeader("REFERER");
 
 			int orderNum = dao.getMaxNum() + 1;
 			int productNum = Integer.parseInt(req.getParameter("productNum"));
@@ -76,6 +76,14 @@ public class OrdersServlet extends HttpServlet {
 				orderQuantity = Integer.parseInt(quantity);
 			}
 
+			if (dao.repetition(userId, productNum, progress) && (progress.equals("wishList") || progress.equals("cartList"))) {
+				out.print("<script>");
+				out.print("alert('이미 존재하는 상품입니다.');");
+				out.print("history.back()");
+				out.print("</script>");
+				return;
+			}
+			
 			OrdersDTO dto = new OrdersDTO();
 
 			dto.setOrderNum(orderNum);
@@ -97,7 +105,6 @@ public class OrdersServlet extends HttpServlet {
 
 			url = cp +"/shop/orders/" + progress +".do";
 			resp.sendRedirect(url);
-//			resp.sendRedirect(referer);
 
 			// cart/wish/order/cancel 수정
 		} else if (uri.indexOf("changeOrder_ok.do") != -1) {
@@ -110,8 +117,16 @@ public class OrdersServlet extends HttpServlet {
 			String orderColor = req.getParameter("orderColor");
 			String orderSize = req.getParameter("orderSize");
 			String progress = req.getParameter("progress");
-
+			
 			OrdersDTO dto = dao.getReadData(orderNum);
+			
+			if (dao.repetition(userId, dto.getProductNum(), progress) && progress.equals("cartList")) {
+				out.print("<script>");
+				out.print("alert('이미 존재하는 상품입니다.');");
+				out.print("history.back()");
+				out.print("</script>");
+				return;
+			}
 			
 			if (orderQuantity != null && !orderQuantity.equals(""))
 				dto.setOrderQuantity(Integer.parseInt(orderQuantity));
@@ -217,7 +232,7 @@ public class OrdersServlet extends HttpServlet {
 			String[] deliveryAddr = req.getParameterValues("deliveryAddr");
 			String deliveryTel = req.getParameter("deliveryTel");
 			String deliveryEmail = req.getParameter("deliveryEmail");
-			int totalPrice = Integer.parseInt(req.getParameter("totalPrice"));
+			int totalPrice = Integer.parseInt(req.getParameter("tot"));
 			String progress = "orderList";
 			
 			OrdersDTO dto = new OrdersDTO();

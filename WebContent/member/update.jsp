@@ -37,29 +37,54 @@
 		
 		
 		
-		if(!f.userGender.value){
-			alert("성별을 입력해 주세요.");
-			f.userGender.focus();
+		
+		
+		
+		
+		if(!f.userAddr[0].value){
+			alert("0주소을 입력해 주세요.");
+			f.userAddr[0].focus();
 			return;
 		}
-		if(!f.userBirth[0].value){
-			alert("생년월일을 입력해 주세요.");
-			f.userBirth[0].focus();
+		
+		if(!f.userAddr[1].value){
+			alert("1주소을 입력해 주세요.");
+			f.userAddr[1].focus();
 			return;
 		}
-		 if(!f.userBirth[1].value){
-			alert("월을 입력해 주세요.");
-			f.userBirth[1].focus();
+		
+		if(!f.userAddr[2].value){
+			alert("2주소을 입력해 주세요.");
+			f.userAddr[2].focus();
 			return;
 		}
-		if(!f.userBirth[2].value){
-			alert("일을 입력해 주세요.");
-			f.userBirth[2].focus();
+		
+		if(!f.userAddr[3].value){
+			alert("3주소을 입력해 주세요.");
+			f.userAddr[3].focus();
 			return;
 		}
+		
+		
+		
+		
+		if(!f.userTel.value){
+			alert("전화번호를 입력해 주세요.");
+			f.userTel.focus();
+			return;
+		}
+		
+		
+		if(!f.userEmail.value){
+			alert("이메일를 입력해 주세요.");
+			f.userEmail.focus();
+			return;
+		}
+		
+		
 	
 			
-		f.action = "<%=cp%>/shop/member/update_ok.do";
+		f.action = "<%=cp%>/shop/member/update_ok.do"
 		f.submit();
 	}
 	
@@ -159,10 +184,14 @@
    <div id="content" align="center" >
    
       
+   	<form action="" method="post" name="myForm">
+   	
+
    
+   	
 
 
-<form action="" method="post" name="myForm" style="height: " >
+			
 
 		<div id="left_area" style="display: inline-block; width: 400px;padding-bottom: 25px;">
 	               <div id="update_area">
@@ -181,7 +210,7 @@
 		                        <label for="userName"><span>PASSWORD</span><br><a>(선택가능)</a></label>
 		                     </div>
 		                     <div class="box input">
-		                        <input type="password" name="userPwd" class="inputStyle" placeholder="비밀번호"/>
+		                        <input type="password" name="userPwd" class="inputStyle" placeholder="비밀번호"/ value="${dto.userPwd }">
 		                     </div>
 	             		</div>
 	                   
@@ -212,11 +241,11 @@
 		                     <div class="box input">
 		                     <span style="float: left;vertical-align: middle;">
 		                  		<input readonly="readonly"  maxlength="4" style="width: 100px;" type="text" 
-		                  		name="userBirth" class="inputStyle"  value="${dto.userBirth[0]} 년 ${dto.userBirth[1]} 월 ${dto.userBirth[2]} 일 " />
-		                  		<%-- <input readonly="readonly" maxlength="4" style="width: 50px;" type="text" 
-		                  		name="userBirth" class="inputStyle"  value="${dto.userBirth[1]}" /><a>월</a>
-			                	<input readonly="readonly"  maxlength="4" style="width: 50px;" type="text" 
-		                  		name="userBirth" class="inputStyle"  value="${dto.userBirth[2]} + ${dto.userBirth[0]}" /><a>일</a> --%>
+		                  		name="userBirth" class="inputStyle"  value="${dto.userBirth[0] } ${dto.userBirth[1] } ${dto.userBirth[2] } " />
+		                  		
+		                  		
+		                  		
+		                  		
 			                 </span>
 			                 
 			                 
@@ -279,11 +308,12 @@
 	                     </div>
 	                  </div>
 	                </div>
+	                </form>
 	            </div>
 
 	<div align="center">
-
-
+	
+	
 		<button
 			style="cursor: pointer; border: 1px solid #BDBDBD; background-color: #FFFFFF; width: 200px; line-height: 48px;"
 			type="button" onclick="javascript:history.back();"
@@ -305,7 +335,7 @@
 			<a style="font-size: 8px; color: #484848;">회원탈퇴</a>
 		</button>
 
-
+	
 		<!-- 	<button
 			style="cursor: pointer; border: 0.5; background-color: white; width: 200px; height: 50px;"
 			type="button" onclick="javascript:history.back();"
@@ -344,10 +374,9 @@
 
 
 
-	</form>
- 
-</div>
 
+</div>
+	
 
 <jsp:include page="../main/footer.jsp"/>
 </body>

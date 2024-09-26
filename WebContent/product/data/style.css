@@ -40,6 +40,7 @@ ul{
 
 li{
 	margin-right: 10pt;
+	
 }
 
 #content{
@@ -130,7 +131,7 @@ li{
 
 .detail_wrap{
 	width: 80%;
-	margin: 106px auto 0;
+	margin: 60px auto 0;
 	
 }
 
@@ -248,9 +249,12 @@ tbody{
 }
 
 input{
-	font: 11px 'S-CoreDream-3Light','NeueHaasDisplay','Roboto','Noto Sans KR','Helvetica','Malgun Gothic',sans-serif;
+	font: 8px 'S-CoreDream-3Light','NeueHaasDisplay','Roboto','Noto Sans KR','Helvetica','Malgun Gothic',sans-serif;
 	color: #555;
+	font-size: 8px;
 }
+
+
 
 .orderQuantity{
 	border: none;
@@ -275,9 +279,14 @@ input{
 }
 
 /* 장바구니 */
+.button_wrap{
+	width: 100%;
+	display: inline-block;
+}
+
 .add_button{
 	text-align: center;
-    width: 100%;
+    width: 45%;
     box-sizing: border-box;
     height: 30px;
     line-height: 28px;
@@ -291,6 +300,12 @@ input{
     margin-bottom: 10px;
     display: block;
     text-decoration: none;
+    float: left;
+    margin-left: 5px;
+}
+
+.descriptions{
+	text-align: left;
 }
 
 .bagImage{
@@ -323,14 +338,18 @@ input{
 }
 
 .boardContent{
-	border-top: 0.5px solid;
+	/* border-top: 0.5px solid;
 	border-bottom: 0.5px solid;
-	border-color: #484848;
+	border-color: #484848; */
+	border: 0.5px solid #dfdfdf;
+    padding: 20px 30px 30px;
+    width: 600px;
+    color: #484848;
 }
 
 .boardContent tr{
-	border-bottom: 0.5px solid;
-	border-color: #484848;
+	border-bottom: 0.5px solid #dfdfdf;
+	/* border-color: #484848; */
 }
 
 .boardContent th{
@@ -342,3 +361,20 @@ input{
 	text-align: center;
 }
 
+.commentContent{
+	text-align: left;
+	padding: 10px 10px 10px 10px;
+}
+
+.elementRight{
+	float: right;
+	padding: 0px 10px 10px 0px;
+}
+
+.btn{
+	float: right;
+}
+
+.boardComment{
+	float: right;
+}

@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>게 시 판</title>
+<title>QNA WRITE</title>
 
 <link rel="stylesheet" type="text/css"href="<%=cp%>/css/shopStyle.css" />
 <link rel="stylesheet" type="text/css"href="<%=cp%>/boards/css/writeStyle.css" />
@@ -19,6 +19,11 @@
 	function sendIt(){
 		
 		var f = document.myForm;
+		
+		if (${empty productDTO }) {
+			alert("qna를 작성할 상품을 선택하세요.");
+			return;
+		}
 		
 		str = f.subject.value;
 		str = str.trim();
@@ -42,7 +47,19 @@
 		f.submit();
 		
 	}
+	
+	function searchList() {
+		
+		var f = document.myForm;
+		
+		window.open('', '상품정보 선택','width=600, height=500, top=100, left=100');
 
+		f.action = '/sub/shop/boards/qnaSearchList.do';
+		f.method = "post";
+		f.target = "상품정보 선택";
+		f.submit();
+		
+	}
 </script>
 
 </head>
@@ -56,7 +73,7 @@
 							<img alt="noimage" src="<%=cp %>/boards/img/noimage.png" style="margin: 10px; display: inline;">
 							<div class="box">
 								<div style="border: 1px solid; width: 100px; padding: 5px;">
-									<a href="javascript:window.open('<%=cp %>/shop/boards/qnaSearchList.do','상품정보 선택','width=600, height=800, status=yes, top=100, left=100')">상품정보 선택</a>
+									<a href="javascript:searchList()">상품정보 선택</a>
 								</div>
 							</div>
 						</c:if>
@@ -73,7 +90,7 @@
 										<a href="<%=cp %>/shop/product/detail.do?productNum=${productDTO.productNum }">상품정보 보기</a>
 									</div>
 									<div style="border: 1px solid; width: 80px; padding: 5px; display: inline-block;">
-										<a href="javascript:window.open('<%=cp %>/shop/boards/qnaSearchList.do','상품정보 선택','width=600, height=500, status=yes, top=100, left=100')">상품정보 선택</a>
+										<a href="javascript:searchList()">상품정보 선택</a>
 									</div>
 								</div>
 							</div>
@@ -81,7 +98,7 @@
 					</div>
 					<div class="box row" style="margin: 0px;">
 						<div class="box label"><label for="subject">SUBJECT</label></div>
-						<div class="box input"><input type="text" name="subject"></div>
+						<div class="box input"><input type="text" name="subject" value="${subject }"></div>
 					</div>
 					<div class="box row" style="margin: 0px;">
 						<div class="box label"><label for="userId">ID</label></div>
@@ -90,7 +107,7 @@
 					<div class="box row">
 						<label for="content">CONTENT</label><br/>
 						<div class="box input">
-							<textarea name="content"></textarea>
+							<textarea name="content">${content }</textarea>
 						</div>
 					</div>
 					<div class="box row" align="center">

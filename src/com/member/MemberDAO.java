@@ -66,7 +66,8 @@ public class MemberDAO {
 			pstmt.setString(2, dto.getUserName());
 			pstmt.setString(3, dto.getUserGender());
 			pstmt.setString(4, String.join(",", dto.getUserBirth()));
-			pstmt.setString(5, String.join("/", dto.getUserAddr()));			
+			pstmt.setString(5, String.join("/", dto.getUserAddr()));
+		/*	pstmt.setString(6, String.join("/", dto.getUserAddr()));	*/		
 			pstmt.setString(6,  dto.getUserEmail());
 			pstmt.setString(7, dto.getUserTel());
 			pstmt.setString(8, dto.getUserId());
@@ -143,7 +144,7 @@ public class MemberDAO {
 				dto.setUserPwd(rs.getString("userPwd"));
 				dto.setUserName(rs.getString("userName"));
 				dto.setUserGender(rs.getString("userGender"));
-				dto.setUserBirth(rs.getString("userBirth").split(","));
+				dto.setUserBirth(rs.getString(5).split(","));
 				dto.setUserAddr(rs.getString("userAddr").split("/"));
 				dto.setUserEmail(rs.getString("userEmail"));
 				dto.setUserTel(rs.getString("userTel"));				
@@ -171,7 +172,7 @@ public class MemberDAO {
 		String sql;
 
 		try {
-			sql = "select userId,userPwd,userName,userGender,to_char(userBirth,'YYYY,MM,DD') userBirth,";
+			sql = "select userId,userPwd,userName,userGender,to_char(userBirth,'YYYY-MM-DD') userBirth,";
 			sql+= "userAddr,userEmail,userTel from member where userId=? and registration = 1";
 
 			pstmt=conn.prepareStatement(sql);
@@ -187,11 +188,13 @@ public class MemberDAO {
 				dto.setUserPwd(rs.getString("userPwd"));
 				dto.setUserName(rs.getString("userName"));
 				dto.setUserGender(rs.getString("userGender"));
+				
 				dto.setUserBirth(rs.getString(5).split(","));
 				dto.setUserAddr(rs.getString("userAddr").split("/"));
 				dto.setUserEmail(rs.getString("userEmail"));
 				dto.setUserTel(rs.getString("userTel"));				
 			}
+			
 
 			rs.close();
 			pstmt.close();
@@ -205,6 +208,72 @@ public class MemberDAO {
 
 
 	}
+	
+	
+	// 아이디 검증
+		public boolean idcheck(String userId) {
+
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = null;
+			boolean result = false;
+			try {
+
+				sql = "select count(userId) from member where userId = ?";
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, userId);
+				rs = pstmt.executeQuery();
+					
+				
+				if (rs.next()) {
+					if(rs.getInt(1) != 0) {
+						result = true;//중복
+					}
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
+			return result;
+		}
+	
+		
+	
+		public boolean confirmId(String userId) {
+			PreparedStatement pstmt;
+			ResultSet rs;
+			String sql;
+
+			boolean result = false;
+			try {
+				
+				sql="select userId from member where userId=?";
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, userId);
+				rs=pstmt.executeQuery();
+				
+				if(rs.next()) {
+					result = true;
+					
+				}
+				rs.close();
+				pstmt.close();
+				
+				
+			} catch (Exception e) {
+				System.out.println(e.toString());
+			}
+			
+			return result;
+					
+		}
+
+	
+	
+	
+	
 
 	/*public boolean confirmId(String userId) {
 		PreparedStatement pstmt;

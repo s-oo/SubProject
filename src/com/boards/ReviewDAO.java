@@ -6,8 +6,11 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.comments.CommentsDAO;
 import com.orders.OrdersDAO;
 import com.orders.OrdersDTO;
+import com.product.ProductDAO;
+import com.product.ProductDTO;
 
 public class ReviewDAO {
 
@@ -128,6 +131,8 @@ public class ReviewDAO {
 				dto.setProductCategory(ordersDTO.getProductCategory());
 				dto.setSaveFileName(ordersDTO.getSaveFileName());
 
+				dto.setCommentsDTO(new CommentsDAO(conn).getReadData(dto.getBoardNum(), "reivew"));
+				
 				lists.add(dto);
 
 			}
@@ -142,8 +147,9 @@ public class ReviewDAO {
 		return lists;
 
 	}
+	
 
-	public List<ReviewDTO> getLists(int productNum) {
+	public List<ReviewDTO> getLists(int productNum) {//관리자(KRISTAL)인 경우
 
 		List<ReviewDTO> lists = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -152,10 +158,11 @@ public class ReviewDAO {
 
 		try {
 
-			sql = "SELECT BOARDNUM, USERID, ORDERNUM, SUBJECT, CONTENT, POSTDATE, HITS ";
-			sql += "FROM REVIEW WHERE ORDERNUM IN (";
-			sql += "SELECT ORDERNUM FROM ORDERS O, PRODUCT P WHERE O.PRODUCTNUM = P.PRODUCTNUM AND O.PRODUCTNUM = ?)";
-
+			sql = "SELECT * FROM (SELECT BOARDNUM, USERID, ORDERNUM, SUBJECT, CONTENT, POSTDATE, HITS, ROWNUM RNUM ";
+			sql+= "FROM REVIEW WHERE ORDERNUM IN (";
+			sql+= "SELECT ORDERNUM FROM ORDERS O, PRODUCT P WHERE O.PRODUCTNUM = P.PRODUCTNUM AND O.PRODUCTNUM = ?) ";
+			sql+= "ORDER BY BOARDNUM) ORDER BY RNUM DESC";
+			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, productNum);
 
@@ -169,9 +176,10 @@ public class ReviewDAO {
 				dto.setUserId(rs.getString("userId"));
 				dto.setOrderNum(rs.getInt("orderNum"));
 				dto.setSubject(rs.getString("subject"));
-				dto.setContent(rs.getString("CONTENT"));
+				dto.setContent(rs.getString("content"));
 				dto.setHits(rs.getInt("hits"));
 				dto.setPostDate(rs.getString("postDate"));
+				dto.setRnum(rs.getInt("rnum"));
 
 				OrdersDTO ordersDTO = new OrdersDAO(conn).getReadData(rs.getInt("orderNum"));
 
@@ -179,6 +187,65 @@ public class ReviewDAO {
 				dto.setProductName(ordersDTO.getProductName());
 				dto.setProductCategory(ordersDTO.getProductCategory());
 				dto.setSaveFileName(ordersDTO.getSaveFileName());
+				
+				dto.setCommentsDTO(new CommentsDAO(conn).getReadData(dto.getBoardNum(), "review"));
+
+				lists.add(dto);
+
+			}
+
+			rs.close();
+			pstmt.close();
+
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+
+		return lists;
+
+	}
+	
+	public List<ReviewDTO> getLists(int productNum, String userId) {//일반 회원인 경우
+
+		List<ReviewDTO> lists = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql;
+
+		try {
+			
+			sql = "SELECT * FROM (SELECT BOARDNUM, USERID, ORDERNUM, SUBJECT, CONTENT, POSTDATE, HITS, ROWNUM RNUM ";
+			sql+= "FROM REVIEW WHERE ORDERNUM IN (";
+			sql+= "SELECT ORDERNUM FROM ORDERS O, PRODUCT P WHERE O.PRODUCTNUM = P.PRODUCTNUM AND O.PRODUCTNUM = ? ";
+			sql+= "AND USERID = ?) ORDER BY BOARDNUM) ORDER BY RNUM DESC";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, productNum);
+			pstmt.setString(2, userId);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				
+				ReviewDTO dto = new ReviewDTO();
+
+				dto.setBoardNum(rs.getInt("boardNum"));
+				dto.setUserId(rs.getString("userId"));
+				dto.setOrderNum(rs.getInt("orderNum"));
+				dto.setSubject(rs.getString("subject"));
+				dto.setContent(rs.getString("content"));
+				dto.setHits(rs.getInt("hits"));
+				dto.setPostDate(rs.getString("postDate"));
+				dto.setRnum(rs.getInt("rnum"));
+
+				OrdersDTO ordersDTO = new OrdersDAO(conn).getReadData(rs.getInt("orderNum"));
+
+				dto.setOrdersDTO(ordersDTO);
+				dto.setProductName(ordersDTO.getProductName());
+				dto.setProductCategory(ordersDTO.getProductCategory());
+				dto.setSaveFileName(ordersDTO.getSaveFileName());
+				
+				dto.setCommentsDTO(new CommentsDAO(conn).getReadData(dto.getBoardNum(), "review"));
 
 				lists.add(dto);
 
@@ -314,7 +381,7 @@ public class ReviewDAO {
 
 		try {
 
-			sql = "UPDATE REVIEW SET SUBJECT = ?, CONTENT = ?, POSTDATE = SYSDATE ";
+			sql = "UPDATE REVIEW SET SUBJECT = ?, CONTENT = ? ";
 			sql += "WHERE BOARDNUM = ?";
 
 			pstmt = conn.prepareStatement(sql);

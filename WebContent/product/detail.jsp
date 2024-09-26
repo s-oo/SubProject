@@ -17,6 +17,7 @@
 <script type="text/javascript" src="<%=cp%>/product/script.js"></script>
 
 <script type="text/javascript">
+
 	function sendItCartList() {
 		var f = document.detailForm;
 		
@@ -43,32 +44,25 @@
 	
 	function sendItWishList() {
 		var f = document.detailForm;
-		
-		/*
+
 		if(f.option1.value=="*"){
 			alert("컬러를 입력해 주세요.");
 			f.option1.focus();
 			return;
-		}*/
+		}
 		
-		if(f.vlaue=="wishlist"){
-			alert("바보");
-			f.focus();
+		if(f.option2.value=="*"){
+			alert("사이즈를 입력해 주세요.");
+			f.option2.focus();
 			return;
 		
-		} 
-		
+		}
 		
 		f.productNum
 		
 		f.action = "<%=cp%>/shop/orders/addOrder_ok.do?progress=wishList";
 		f.submit();
 	}
-	
-	
-	
-	
-	
 	
 </script>
 
@@ -92,16 +86,13 @@
 				
 				<!-- product detail -->
 				<div class="productMenu" align="center">
-				
 					<div class="productInfo">
-					<img alt="wishlist" src="<%=cp %>/product/image/wishlist/wishlistSc.PNG"  name="progress" onclick="sendItWishList()"
-				style="float: right; width:30px; height:25px; margin-top: -5px;"/>
 						<!-- product name, price  -->
 						<div class="productName">
 							<span>${dto.productName }</span> 
 						</div>
 						<div>
-							<h2>${dto.productPrice }KRW</h2>
+							<h3>${dto.productPrice }KRW</h3>
 						</div>
 						<!-- choose option(color,size) -->
 						<form name="detailForm" method="post">
@@ -161,7 +152,7 @@
 											<!-- choose quantity -->
 											<td>
 												<span>
-													<input type=hidden name="productPrice" value="${dto.productPrice }">
+													<input type=hidden name="productPrice"  value="${dto.productPrice }">
 													<input type="text" name="orderQuantity" class="orderQuantity" value="1" size="3" >
 													<a>
 														<img src="//img.echosting.cafe24.com/design/skin/default/product/btn_count_up.gif"
@@ -196,18 +187,22 @@
 								</div>
 							</div>
 						</form>
-
+						
 						<!-- add bag -->
 						<div class="addBag">
-							<div>
-								<a href="#none" class="add_button"  onclick="sendItCartList();">ADD TO BAG</a>
+						 	<div class="button_wrap">
+								<div class="add_button">
+									<a href="#none" onclick="sendItCartList();">ADD TO BAG</a>
+								</div>
+								<div class="add_button">
+									<a href="#none" name="progress" onclick="sendItWishList()">WISHLIST</a>
+									<%-- <img alt="wishlist" src="<%=cp %>/product/image/wishlist/wishlistSc.PNG" 
+									name="progress" onclick="sendItWishList()"
+									style="float: right; width:30px; height:25px; margin-top: -5px;"/> --%>
+								</div>
 							</div>
-							
-							<div>
-							<br/>
-							<br/>
-					<%-- 		<p>${dto.description }</p> --%>
-							<p align="left">${fn:replace(dto.description, replaceChar, "<br/>")}</p>
+							<div class="descriptions">
+							<p>${fn:replace(dto.description, replaceChar, "<br/>")}</p>
 							</div>
 							
 						</div>

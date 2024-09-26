@@ -89,9 +89,11 @@ public class DeliveryDAO {
 		try {
 			
 			String str = "";
-			if (dto.getProgress() == "orderList") {
+			if (dto.getProgress().equals("orderList")) {
 				str = " DELIVERYDATE = SYSDATE, ARRIVEDATE = ROUND(SYSDATE + 3),";
-			}
+			} else if (dto.getProgress().equals("cancelList")) {
+				str = " ARRIVEDATE = SYSDATE,";
+			} 
 			
 			sql = "UPDATE DELIVERY SET DELIVERYNAME = ?, DELIVERYTEL = ?, DELIVERYADDR = ?, DELIVERYEMAIL = ?," + str + " PROGRESS = ? ";
 			sql += "WHERE DELIVERYNUM = ?";
@@ -134,8 +136,15 @@ public class DeliveryDAO {
 
 		try {
 
+			String str = "";
+			if (progress.equals("cancelList")) {
+				str = " TO_CHAR(ARRIVEDATE, 'YYYY-MM-DD HH24:MI'),";
+			} else {
+				str = " TO_CHAR(ARRIVEDATE, 'YYYY-MM-DD'),";
+			}
+			
 			sql = "SELECT DELIVERYNUM, USERID, ORDERNUM, DELIVERYNAME, DELIVERYTEL, DELIVERYADDR, DELIVERYEMAIL, ";
-			sql += "TOTALPRICE, TO_CHAR(DELIVERYDATE, 'YYYY-MM-DD HH24:MI'), TO_CHAR(ARRIVEDATE, 'YYYY-MM-DD'), PROGRESS ";
+			sql += "TOTALPRICE, TO_CHAR(DELIVERYDATE, 'YYYY-MM-DD HH24:MI')," + str +" PROGRESS ";
 			sql += "FROM DELIVERY WHERE USERID = ? AND PROGRESS = ? ORDER BY DELIVERYNUM DESC";
 
 			pstmt = conn.prepareStatement(sql);
